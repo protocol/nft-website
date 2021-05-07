@@ -101,7 +101,7 @@ if [[ $DO_PAGE_CHECKS -eq 1 ]]; then
 - No markdown files were changed, so no page checks were run!"
   else
     for md in $MDS_CHANGED; do
-      LANGCHECK=$(python docs/page-checker.py $md $LANGUAGETOOLS_USERNAME $LANGUAGETOOLS_API_KEY)
+      LANGCHECK=$(python scripts/page-checker.py $md $LANGUAGETOOLS_USERNAME $LANGUAGETOOLS_API_KEY)
       echo $LANGCHECK
       COMMENT="$COMMENT
 $LANGCHECK"
