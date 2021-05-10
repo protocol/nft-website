@@ -1,8 +1,10 @@
 ---
-title: NFTutor
+title: Minting app
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # Minting app
 
- Placeholder text.
+Content TK
+
+

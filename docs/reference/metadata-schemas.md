@@ -1,8 +1,8 @@
 ---
-title: NFTutor
+title: Metadata schemas
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # Metadata schemas (MVP)
 
- Placeholder text.
+Content TK

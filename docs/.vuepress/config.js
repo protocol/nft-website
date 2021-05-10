@@ -70,21 +70,56 @@ module.exports = {
         nav: require('./nav/en'),
         sidebar: [
           {
-            title: 'Community',
-            path: '/community/',
-
+            title: 'Concepts',
+            path: '/concepts/',
             children: [
-              {
-                title: 'Contribute',
-                sidebarDepth: 1,
-                collapsable: false,
-                children: [
-                  '/community/contribute/ways-to-contribute',
-                  '/community/contribute/grammar-formatting-and-style',
-                  '/community/contribute/writing-guide',
-                  '/community/contribute/contribution-tutorial'
-                ]
-              }
+              '/concepts/blockchains',
+              '/concepts/non-fungible-tokens',
+              '/concepts/distributed-web',
+              '/concepts/content-addressing',
+              '/concepts/content-persistence'
+            ]
+          },
+          {
+            title: 'Tutorials',
+            path: '/tutorial/',
+            children: [
+              '/tutorial/first-steps',
+              '/tutorial/end-to-end-experience',
+              '/tutorial/gallery-app',
+              '/tutorial/minting-app',
+              '/tutorial/using-nfts-in-games'
+            ]
+          },
+          {
+            title: 'How-tos',
+            path: '/how-to/',
+            children: [
+              '/how-to/creating-nfts',
+              '/how-to/managing-nfts',
+              '/how-to/auditing-nfts'
+            ]
+          },
+          {
+            title: 'Reference',
+            path: '/reference/',
+            children: 
+            [
+              '/reference/metadata-schemas',
+              '/reference/recommended-tools',
+              '/reference/featured-sites',
+              '/reference/nft-marketplaces',
+              '/reference/example-apps-code-samples'
+            ]
+          },
+          {
+            title: 'Contribute',
+            path: '/contribute/',
+            children: [
+              '/contribute/ways-to-contribute',
+              '/contribute/grammar-formatting-and-style',
+              '/contribute/writing-guide',
+              '/contribute/contribution-tutorial'
             ]
           }
         ]

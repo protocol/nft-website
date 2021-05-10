@@ -1,8 +1,8 @@
 ---
-title: NFTutor
+title: Non-fungible tokens (NFTs)
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # NFTs (MVP)
 
- Placeholder text.
+Content TK

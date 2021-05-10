@@ -1,8 +1,8 @@
 ---
-title: NFTutor
+title: Gallery app
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # Gallery app
 
- Placeholder text.
+(MVP) Content TK

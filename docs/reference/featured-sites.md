@@ -1,8 +1,8 @@
 ---
-title: NFTutor
+title: Featured sites
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # Featured sites
 
- Placeholder text.
+Content TK

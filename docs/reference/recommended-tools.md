@@ -1,8 +1,8 @@
 ---
-title: NFTutor
+title: Recommended tools
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+# Recommended tools
 
- Placeholder text.
+Content TK

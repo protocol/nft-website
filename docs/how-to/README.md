@@ -3,6 +3,6 @@ title: NFTutor
 legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
- # TBD
+ # TBD (How-To)
 
- Placeholder text.
+ Placeholder text for `how-to`.
