@@ -10,8 +10,8 @@ module.exports = {
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'IPFS Docs',
-      description: 'IPFS Documentation'
+      title: 'NFTutor',
+      description: 'NFT Developer Resources'
     }
   },
   markdown: {
@@ -35,18 +35,18 @@ module.exports = {
     },
     defaultImage: '/images/social-card.png',
     author: {
-      name: 'IPFS Team',
-      twitter: '@ipfsbot'
+      name: 'NFTutor',
+      twitter: '@protocollabs'
     },
     keywords:
-      'IPFS, dweb, protocol, libp2p, ipld, multiformats, bitswap, decentralized web, InterPlanetary File System, dapp, documentation, docs, Protocol Labs',
+      'NFT, non-fungible token, nonfungible token, Filecoin, IPFS, dweb, protocol, decentralized web, InterPlanetary File System, dapp, documentation, docs, tutorial, how-to, Protocol Labs',
     // edit links
     domain: DEPLOY_DOMAIN,
-    docsRepo: 'ipfs/ipfs-docs',
+    docsRepo: 'protocol/nft-website',
     docsDir: 'docs',
     docsBranch: 'main',
     feedbackWidget: {
-      docsRepoIssue: 'ipfs/ipfs-docs'
+      docsRepoIssue: 'protocol/nft-website'
     },
     editLinks: false,
     // page nav
@@ -75,7 +75,7 @@ module.exports = {
 
             children: [
               {
-                title: 'Write the docs',
+                title: 'Contribute',
                 sidebarDepth: 1,
                 collapsable: false,
                 children: [
