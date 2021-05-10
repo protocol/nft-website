@@ -1,6 +1,6 @@
 ---
 title: Contribution tutorial
-description: Learn how to contribute through finding issues, fixing them, and submitting them to the project.
+description: Learn how to contribute to NFTutor and make the NFT developer community better for everyone.
 ---
 
 # Contribution tutorial

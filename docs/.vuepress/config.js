@@ -72,6 +72,7 @@ module.exports = {
           {
             title: 'Concepts',
             path: '/concepts/',
+            collapsable: false,
             children: [
               '/concepts/non-fungible-tokens',
               '/concepts/content-addressing',
@@ -83,6 +84,7 @@ module.exports = {
           {
             title: 'Tutorials',
             path: '/tutorial/',
+            collapsable: false,
             children: [
               '/tutorial/first-steps',
               '/tutorial/end-to-end-experience',
@@ -94,6 +96,7 @@ module.exports = {
           {
             title: 'How-tos',
             path: '/how-to/',
+            collapsable: false,
             children: [
               '/how-to/creating-nfts',
               '/how-to/managing-nfts',
@@ -103,6 +106,7 @@ module.exports = {
           {
             title: 'Reference',
             path: '/reference/',
+            collapsable: false,
             children: 
             [
               '/reference/metadata-schemas',
@@ -115,6 +119,7 @@ module.exports = {
           {
             title: 'Contribute',
             path: '/contribute/',
+            collapsable: false,
             children: [
               '/contribute/grammar-formatting-and-style',
               '/contribute/writing-guide',
