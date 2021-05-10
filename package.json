@@ -1,7 +1,7 @@
 {
-  "name": "ipfs-docs",
+  "name": "nftutor-docs",
   "version": "2.0.0",
-  "description": "IPFS Docs platform",
+  "description": "NFT Developer Lessons and Tutorials",
   "author": "cwaring",
   "license": "MIT",
   "devDependencies": {

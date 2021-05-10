@@ -53,7 +53,7 @@ module.exports = {
     nextLinks: false,
     prevLinks: false,
     // ui/ux
-    logo: '/images/ipfs-logo.svg',
+    logo: '/images/nftutor-logo.svg',
     locales: {
       '/': {
         label: 'English',
