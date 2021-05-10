@@ -20,9 +20,29 @@
     <div v-if="voteSubmitted" class="feedback-result">
       <p>{{ thanksTxt }}</p>
     </div>
-    <div v-if="editOrIssueLinks" class="feedback-edit-or-issue">
+    
+  
+  
+  <div>
+    <p>
+      <b>Help us improve this site!</b>
+    </p>
+    <div v-if="editOrIssueLinks">
       <EditOrIssue />
     </div>
+    <div>
+          <a
+            href="https://github.com/protocol/nft-website/issues/new?assignees=&labels=need%2Ftriage&template=content-or-feature-suggestion.md&title=%5BCONTENT+REQUEST%5D+%28add+your+title+here%21%29"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Suggest new content</a
+          >
+    </div>
+  </div>
+
+
+
+
   </div>
 </template>
 
@@ -103,11 +123,10 @@ export default {
   }
 }
 
-.feedback-edit-or-issue {
-  padding: 1em 0;
-}
-
 .feedback {
+  background-color: lighten($badgeTipColor, 95%);
+  color: lighten($textColor, 20%);
+  border-color: $badgeTipColor;
   &-result {
     animation: fadein 0.5s;
     min-height: 38px;
@@ -129,6 +148,10 @@ export default {
   }
 }
 
+.local-page-edit {
+  margin-bottom: 1rem;
+}
+
 @media (min-width: $MQMobile) {
   .illustration {
     width: 40%;
@@ -137,6 +160,46 @@ export default {
 
   .feedback-actions {
     display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.legacy-links a {
+  font-weight: 400;
+}
+
+section {
+  margin: 1rem 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+      line-height: 2em;
+      padding: 0;
+    }
+  }
+}
+
+@media (min-width: $MQNarrow) {
+  section {
+    display: flex;
+
+    .block {
+      flex: 1;
+    }
   }
 }
 </style>

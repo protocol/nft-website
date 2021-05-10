@@ -8,7 +8,8 @@
         on GitHub or
         <a :href="openIssueLink" target="_blank" rel="noopener noreferrer"
           >open an issue</a
-        >
+        > 
+        for it
       </span>
     </div>
   </div>
@@ -36,14 +37,14 @@ export default {
 
     openIssueLink() {
       const { docsRepoIssue } = this.$site.themeConfig.feedbackWidget
-      return `https://github.com/${docsRepoIssue}/issues/new?assignees=&labels=need%2Ftriage&template=open_an_issue.md&title=${this.$page.title}`
+      return `https://github.com/${docsRepoIssue}/issues/new?assignees=&labels=need%2Ftriage&template=open-an-issue.md&title=%5BPAGE+ISSUE%5D+${this.$page.title}`
     },
 
     editLink() {
       const {
         repo,
         docsDir = '',
-        docsBranch = 'master',
+        docsBranch = 'main',
         docsRepo = repo
       } = this.$site.themeConfig
 

@@ -10,7 +10,6 @@
         evtYes="information_helpful"
         evtNo="information_not_helpful"
       />
-      <LegacyCallout />
       <PageEdit />
       <PageNav v-bind="{ sidebarItems }" />
     </div>
@@ -27,7 +26,6 @@ import PageEdit from '@parent-theme/components/PageEdit.vue'
 import PageNav from '@parent-theme/components/PageNav.vue'
 
 import Feedback from './Feedback.vue'
-import LegacyCallout from './LegacyCallout.vue'
 import Analytics from './Analytics.vue'
 import ScrollPatch from './ScrollPatch.vue'
 
@@ -37,7 +35,6 @@ export default {
     PageEdit,
     PageNav,
     Feedback,
-    LegacyCallout,
     Analytics,
     ScrollPatch
   },
@@ -82,18 +79,13 @@ export default {
 }
 
 .content-feedback {
-  padding: 0 2rem;
+  padding: 1rem 2rem 2rem 2rem;
 }
 
 @media (min-width: $MQMobile) {
   .content-footer {
     padding: 0 2.5rem;
     padding-top: 0;
-  }
-
-  .content-feedback {
-    padding: 0;
-    margin: 0;
   }
 
   .page-edit {
