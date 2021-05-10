@@ -1,6 +1,5 @@
 ---
 title: End-to-end experience
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # End-to-end experience

@@ -1,6 +1,5 @@
 ---
 title: Tutorials
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # TBD (Tutorials)

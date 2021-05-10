@@ -1,6 +1,5 @@
 ---
 title: Creating NFTs
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # Creating NFTs

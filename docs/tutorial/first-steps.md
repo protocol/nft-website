@@ -1,6 +1,5 @@
 ---
 title: First steps
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # First steps

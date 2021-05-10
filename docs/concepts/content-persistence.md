@@ -1,6 +1,5 @@
 ---
 title: Content persistence
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # Content persistence (MVP)

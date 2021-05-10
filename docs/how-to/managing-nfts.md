@@ -1,6 +1,5 @@
 ---
 title: Managing NFTs
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # Managing NFTs

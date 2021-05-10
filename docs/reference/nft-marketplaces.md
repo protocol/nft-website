@@ -1,6 +1,5 @@
 ---
 title: NFT marketplaces
-legacyUrl: https://NFTutor.io/
 description: NFTutor
 ---
  # NFT marketplaces following best practices (MVP)
