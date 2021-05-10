@@ -1,6 +1,6 @@
 ---
 title: Grammar, formatting, and style
-description: Learn the syntax and formatting rules for writing documentation for the IPFS project.
+description: Learn syntax and formatting best practices for writing content for NFTutor.
 ---
 
 # Grammar, formatting, and style

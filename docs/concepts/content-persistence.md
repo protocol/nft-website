@@ -1,6 +1,6 @@
 ---
 title: Content persistence
-description: NFTutor
+description: Learn the basics of content persistence and how decentralized storage and pinning services fit into the NFT developer lifecycle.
 ---
  # (MVP) Content persistence
 

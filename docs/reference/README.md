@@ -1,7 +1,9 @@
 ---
-title: NFTutor
-description: NFTutor
+title: Reference
+description: Helpful reference material for NFT developers.
 ---
- # TBD (Reference)
+ # NFT developer reference
 
- Placeholder text for `reference`.
+ Landing-page text for `reference`.
+
+ Helpful reference material for NFT developers. Information-oriented content to serve you when you need it.

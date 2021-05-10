@@ -1,6 +1,6 @@
 ---
 title: Creating NFTs
-description: NFTutor
+description: Learn the basics of creating NFTs in this developer-focused guide, including minting best practices and how to store NFTs persistently.
 ---
  # Creating NFTs
 

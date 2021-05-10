@@ -1,6 +1,6 @@
 ---
 title: NFT marketplaces
-description: NFTutor
+description: A developer-focused guide to NFT marketplaces following best practices.
 ---
  # (MVP) NFT marketplaces
 

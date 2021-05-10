@@ -1,7 +1,9 @@
 ---
-title: NFTutor
-description: NFTutor
+title: How-tos
+description: Helpful how-tos for creating, managing, and auditing NFTs.
 ---
- # TBD (How-To)
+ # NFT how-to guides
 
- Placeholder text for `how-to`.
+ Landing-page text for `how-to`.
+
+ Helpful how-tos for creating, managing, and auditing NFTs. Problem-oriented guides and recipes to get you started easily and quickly.

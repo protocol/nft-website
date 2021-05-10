@@ -1,6 +1,6 @@
 ---
 title: End-to-end experience
-description: NFTutor
+description: Understand the end-to-end experience of storing and using NFTs in this developer-focused guide.
 ---
  # (MVP) End-to-end experience
 

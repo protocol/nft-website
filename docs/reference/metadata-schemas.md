@@ -1,6 +1,6 @@
 ---
 title: Metadata schemas
-description: NFTutor
+description: A helpful, handy guide to metadata schemas for NFT developers.
 ---
  # (MVP) Metadata schemas
 

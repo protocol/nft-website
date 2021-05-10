@@ -1,7 +1,9 @@
 ---
 title: Tutorials
-description: NFTutor
+description: Step-by-step guides to help you understand the world of NFTs and get started building.
 ---
- # TBD (Tutorials)
+ # NFT tutorials
 
- Placeholder text for `tutorial`.
+ Landing-page text for `tutorial`.
+
+ Learning-oriented content and step-by-step guides to help you understand the world of NFTs and get started building. 

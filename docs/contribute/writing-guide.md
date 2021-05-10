@@ -1,6 +1,6 @@
 ---
 title: Writing guide
-description: Learn the specifics of how to write documentation for the IPFS project.
+description: Learn the specifics of how to write content for NFTutor.
 ---
 
 # Writing guide

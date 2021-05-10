@@ -116,7 +116,6 @@ module.exports = {
             title: 'Contribute',
             path: '/contribute/',
             children: [
-              '/contribute/ways-to-contribute',
               '/contribute/grammar-formatting-and-style',
               '/contribute/writing-guide',
               '/contribute/contribution-tutorial'
