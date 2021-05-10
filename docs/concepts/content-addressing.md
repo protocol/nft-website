@@ -2,6 +2,6 @@
 title: Content addressing
 description: NFTutor
 ---
- # Content addressing (MVP)
+ # (MVP) Content addressing
 
 Content TK

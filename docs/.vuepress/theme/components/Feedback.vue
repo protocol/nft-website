@@ -23,11 +23,11 @@
     
   
   
-  <div>
+  <div v-if="editOrIssueLinks">
     <p>
       <b>Help us improve this site!</b>
     </p>
-    <div v-if="editOrIssueLinks">
+    <div>
       <EditOrIssue />
     </div>
     <div>
@@ -123,7 +123,7 @@ export default {
   }
 }
 
-.feedback {
+.content-feedback {
   background-color: lighten($badgeTipColor, 95%);
   color: lighten($textColor, 20%);
   border-color: $badgeTipColor;

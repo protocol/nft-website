@@ -2,12 +2,15 @@
 title: End-to-end experience
 description: NFTutor
 ---
- # End-to-end experience
+ # (MVP) End-to-end experience
 
 (Excerpt from main outline to be used for generating content)
-## Manually
 
-## With nft.storage (MVP)
+## With nft.storage
 
 ### In browser
+
+## Manually
+This section might not be included in MVP.
+
 

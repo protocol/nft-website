@@ -1,7 +1,8 @@
 ---
-title: Minting app
+title: Building a minting app
 description: NFTutor
+issueUrl: https://github.com/protocol/nft-website/issues/29
 ---
- # Minting app
+ # Building a minting app
 
-Content TK
+<ContentStatus />

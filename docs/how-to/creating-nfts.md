@@ -5,9 +5,13 @@ description: NFTutor
  # Creating NFTs
 
 (Excerpt from main outline to be used for generating content)
-## Creating NFTs
-## Storing NFTs persistently (MVP)
+## Storing NFTs persistently
+
 ## Minting on-chain
+This section might not be included in MVP.
+
 ## Lazy minting
-## Metadata/deterministic JSON (MVP)
+This section might not be included in MVP.
+
+## Metadata/deterministic JSON
 

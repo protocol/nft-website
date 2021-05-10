@@ -2,7 +2,7 @@
 title: Content persistence
 description: NFTutor
 ---
- # Content persistence (MVP)
+ # (MVP) Content persistence
 
 (Excerpt from main outline to be used for generating content)
 ## Decentralized storage networks

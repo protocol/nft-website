@@ -1,7 +1,7 @@
 ---
-title: Non-fungible tokens (NFTs)
+title: NFT basics
 description: NFTutor
 ---
- # NFTs (MVP)
+ # (MVP) NFT basics
 
 Content TK

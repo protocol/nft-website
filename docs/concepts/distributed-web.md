@@ -1,7 +1,8 @@
 ---
-title: Distributed web (dweb)
+title: NFTs and the distributed web
 description: NFTutor
+issueUrl: https://github.com/protocol/nft-website/issues/28
 ---
- # Distributed web (dweb)
+ # NFTs and the distributed web
 
-Content TK
+<ContentStatus />

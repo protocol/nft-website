@@ -1,7 +1,7 @@
 ---
-title: Gallery app
+title: Building a gallery app
 description: NFTutor
 ---
- # Gallery app
+ # (MVP) Building a gallery app
 
-(MVP) Content TK
+Content TK

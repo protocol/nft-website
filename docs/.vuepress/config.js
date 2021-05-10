@@ -73,11 +73,11 @@ module.exports = {
             title: 'Concepts',
             path: '/concepts/',
             children: [
-              '/concepts/blockchains',
               '/concepts/non-fungible-tokens',
-              '/concepts/distributed-web',
               '/concepts/content-addressing',
-              '/concepts/content-persistence'
+              '/concepts/content-persistence',
+              '/concepts/blockchains',
+              '/concepts/distributed-web'
             ]
           },
           {
@@ -106,10 +106,10 @@ module.exports = {
             children: 
             [
               '/reference/metadata-schemas',
-              '/reference/recommended-tools',
-              '/reference/featured-sites',
               '/reference/nft-marketplaces',
-              '/reference/example-apps-code-samples'
+              '/reference/example-apps-code-samples',
+              '/reference/recommended-tools',
+              '/reference/featured-sites'
             ]
           },
           {

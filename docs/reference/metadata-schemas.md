@@ -2,6 +2,6 @@
 title: Metadata schemas
 description: NFTutor
 ---
- # Metadata schemas (MVP)
+ # (MVP) Metadata schemas
 
 Content TK

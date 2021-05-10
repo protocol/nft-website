@@ -2,10 +2,10 @@
 title: First steps
 description: NFTutor
 ---
- # First steps
+ # (MVP) First steps
 
 (Excerpt from main outline to be used for generating content)
-## Setting up your eth dev environment (MVP)
+## Setting up your eth dev environment
 
 ### Local testnet
 

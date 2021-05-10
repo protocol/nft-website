@@ -7,8 +7,9 @@
 
       <h2>{{ title }}</h2>
       <div v-if="issueUrl" class="content-status-status">
-        <a target="_blank" :href="issueUrl">Check the status</a>
-        of this page on GitHub.
+        <p>
+          <a target="_blank" :href="issueUrl">Check the status</a> of this page on GitHub to see how it's coming along. Are you a technical writer who'd like to make the global NFT community better for everyone? <a target="_blank" :href="issueUrl">Help write this page!</a>
+        </p>
       </div>
       <div class="section content-status-vote">
         <Feedback
@@ -19,14 +20,6 @@
           yesTxt="Yes"
           :editOrIssueLinks="false"
         />
-      </div>
-      <div class="section content-status-info">
-        <h3>Give us a hand</h3>
-        <ul>
-          <li v-if="issueUrl">
-            <a target="_blank" :href="issueUrl">Help write this page</a>
-          </li>
-        </ul>
       </div>
     </div>
 
@@ -68,7 +61,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'This content is still preparing for liftoff!'
+      default: 'This content is coming soon!'
     }
   },
   components: { Feedback }
