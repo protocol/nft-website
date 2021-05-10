@@ -153,29 +153,12 @@ export default {
 }
 
 @media (min-width: $MQMobile) {
-  .illustration {
-    width: 40%;
-    float: right;
-  }
 
   .feedback-actions {
     display: block;
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-.legacy-links a {
-  font-weight: 400;
-}
 
 section {
   margin: 1rem 0;

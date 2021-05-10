@@ -2,7 +2,7 @@
   <main class="content-status">
     <div>
       <div class="illustration">
-        <img src="../assets/pencil-rocket.svg" />
+        <img src="../assets/under-construction.svg" />
       </div>
 
       <h2>{{ title }}</h2>
@@ -92,6 +92,7 @@ ul {
 .illustration {
   width: 20%;
   float: right;
+  margin-left: 2em;
 }
 
 // TODO: make global
@@ -101,8 +102,9 @@ ul {
 
 @media (min-width: $MQNarrow) {
   .illustration {
-    width: 40%;
+    width: 25%;
     float: right;
+    margin-left: 3em;
   }
 }
 </style>
