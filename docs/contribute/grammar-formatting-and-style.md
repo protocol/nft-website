@@ -5,36 +5,35 @@ description: Learn syntax and formatting best practices for writing content for 
 
 # Grammar, formatting, and style
 
-This page details the syntax and formatting rules for writing IPFS documentation. For more conceptual ideas of writing, check out the [writing guide](/community/contribute/writing-guide/).
+This page details the syntax and formatting rules for writing content for NFTutor. For more conceptual ideas of writing, check the [writing guide](/contribute/writing-guide/).
 
 ## Grammar and spelling
 
-Here are some language-specific rules that the IPFS documentation follows. If you use a writing service like [Grammarly](https://www.grammarly.com/), most of these rules are turned on by default.
+Here are some language-specific rules that NFTutor follows. If you use a writing service like [Grammarly](https://www.grammarly.com/), most of these rules are turned on by default.
 
 ### American English
 
-While IPFS is a global project, the fact is that American English is the most commonly used _style_ of English used today. With that in mind, when writing content for the IPFS project, use American English spelling. The basic rules for converting other styles of English into American English are:
+While NFTs are a global phenomenon, the fact is that American English is the most commonly used _style_ of English used today. With that in mind, when writing content for NFTutor, use American English spelling. The basic rules for converting other styles of English into American English are:
 
 1. Swap the `s` for a `z` in words like _categorize_ and _pluralize_.
 2. Remove the `u` from words like _color_ and _honor_.
 3. Swap `tre` for `ter` in words like _center_.
 
 ### The Oxford comma
-
 Follow each list of three or more items with a comma `,`:
 
-| Use                           | Don't use                    |
+| Use                           | Do not use                    |
 | ----------------------------- | ---------------------------- |
 | One, two, three, and four.    | One, two, three and four.    |
 | Henry, Elizabeth, and George. | Henry, Elizabeth and George. |
 
 ### Acronyms
 
-If you have to use an acronym, spell the full phrase first and include the acronym in parentheses `()` the first time it is used in each document. Exception: This generally isn't necessary for commonly-encountered acronyms like _IPFS_, unless writing for a stand-alone article that may not be presented alongside [docs.ipfs.io](https://docs.ipfs.io).
+If you have to use an acronym, spell the full phrase first and include the acronym in parentheses `()` the first time it is used in each document. Exception: This generally isn't necessary for commonly encountered acronyms like _NFT_.
 
 > Virtual Machine (VM), Decentralized Web (DWeb).
 
-### Project specific titles
+### Project-specific titles
 
 When referring to projects by name, use proper noun capitalization: Go-IPFS and JS-IPFS.
 
@@ -54,13 +53,13 @@ How the Markdown syntax looks, and code formatting rules to follow.
 
 ### Syntax
 
-The IPFS Docs project follows the _GitHub Flavored Markdown_ syntax for markdown. This way, all articles display properly within GitHub itself. This gives readers the option to view articles on [the docs website](https://docs.ipfs.io) or [its GitHub repo](https://github.com/ipfs/ipfs-docs).
+NFTutor follows the _GitHub Flavored Markdown_ syntax for Markdown. This way, all articles display properly within GitHub itself. This gives readers the option to view articles on either the main NFTutor website or [its GitHub repo](https://github.com/protocol/nft-website).
 
 ### Rules
 
 We use the rules set out in the [VSCode Markdownlint](https://github.com/DavidAnson/vscode-markdownlint) extension. You can import these rules into any text editor like Vim or Sublime. All rules are listed [within the Markdownlint repository](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md).
 
-We highly recommend installing [VSCode](https://code.visualstudio.com/) with the [Markdownlint](https://github.com/DavidAnson/vscode-markdownlint) extension to help with your writing. The extension shows warnings within your markdown whenever your copy doesn't conform to a rule.
+We highly recommend installing [VSCode](https://code.visualstudio.com/) with the [Markdownlint](https://github.com/DavidAnson/vscode-markdownlint) extension to help with your writing. The extension shows warnings within your Markdown whenever your copy doesn't conform to a rule.
 
 ![Screenshot of some Markdown in VSCode showing an error.](./images/grammar-formatting-and-style/no-empty-links-error.png =740x155)
 
@@ -185,7 +184,6 @@ Command-line examples can be truncated with three periods `...` to remove extran
 ````
 
 #### Inline code tags
-
 Surround directories, file names, and version numbers between inline code tags `` ` ``.
 
 ```markdown
@@ -212,8 +210,7 @@ List items end with a period `.`, or a colon `:` if the list item has a sub-list
    3. Letters from Father Christmas.
 
 ##### Unordered lists
-
-Use the dash character `-` for un-numbered list items:
+Use the dash character `-` for non-numbered list items:
 
 ```markdown
 - An apple.
@@ -238,7 +235,7 @@ When instructing the reader to use a keyboard shortcut, surround individual keys
 Press `ctrl` + `c` to copy the highlighted text.
 ```
 
-The plus symbol `+` stays outside of the code tags.
+The plus symbol `+` stays outside the code tags.
 
 ### Images
 

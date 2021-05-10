@@ -4,7 +4,6 @@ description: Learn how to contribute to NFTutor and make the NFT developer commu
 ---
 
 # Contribution tutorial
-
 While the [grammar, formatting, and style](/community/contribute/grammar-formatting-and-style/) and the [writing guide](/community/contribute/writing-guide/) can both help you write good content, they don't delve into _how_ you can submit your content changes. This guide will walk you through finding an issue, fixing it, and then submitting your fix to the `protocol/nft-website` project.
 
 There are plenty of small-sized issues that make for easy, helpful contributions. Here, we'll walk through:
@@ -16,17 +15,15 @@ There are plenty of small-sized issues that make for easy, helpful contributions
 5. Waiting for a review.
 6. Merging your fix.
 
-This may look like a lot of steps for a small issue fix, but they're all necessary to make sure we keep the docs in this project up to standard. Plus, you're not on your own — half these steps can be completed by the repo maintainers.
+This may look like many steps for a small issue fix, but they're all necessary to make sure we keep the docs in this project up to standard. Plus, you're not on your own — half these steps can be completed by the repo maintainers.
 
 ## Finding an issue
 
-The project is hosted in GitHub. There's a bunch of reasons for this, one of them being that GitHub comes with an issue tracker, which enables the core team to field problems from the community. All community issues can read the docs, find issues, and raise issues in the docs repository (called a _repo_ for short).
-
-All issues involving the site itself can be found in the [`protocol/nft-website` repo](https://github.com/protocol/nft-website/) under the [**Issues** tab](https://github.com/protocol/nft-website/issues/). Here you can see all the issues that are currently open. We try to tag each issue with relevant descriptive tags. Tags like _difficulty_ and _size_ can give a sense of the amount of effort a task will take to complete.
+All issues involving the site itself can be found in the [`protocol/nft-website` repo](https://github.com/protocol/nft-website/) under the [**Issues** tab](https://github.com/protocol/nft-website/issues/). Here you can see all the issues that are currently open. We try to tag each issue with relevant descriptive tags. Tags like _dif_ (difficulty) and _effort_ can give a sense of the amount of effort a task will take to complete.
 
 Let's jump into finding an issue.
 
-1. Go to the repository at [github.com/protocol/nft-website(https://github.com/protocol/nft-website).
+1. Go to the repository at [github.com/protocol/nft-website](https://github.com/protocol/nft-website).
 2. Select the **Issues** tab.
 3. Click the **Label** dropdown and select the **help wanted** tag.
 4. Select an issue that interests you.
@@ -49,7 +46,7 @@ Once you've claimed ownership of an issue, a member of the core team will assign
 
 ## Creating a fix
 
-If you've got this far, then you should have an issue in hand and a basic idea of how to fix it. Next up is implementing your fix! The process goes something like this:
+If you've got this far, then you should have an issue in hand and a basic idea of how to fix it. Next is implementing your fix! The process goes something like this:
 
 1. Create a _fork_.
 2. Make changes locally on your machine.
