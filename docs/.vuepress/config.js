@@ -116,9 +116,7 @@ module.exports = {
             title: 'Contribute',
             collapsable: false,
             children: [
-              '/contribute/grammar-formatting-and-style',
-              '/contribute/writing-guide',
-              '/contribute/contribution-tutorial'
+              '/contribute/'
             ]
           }
         ]
