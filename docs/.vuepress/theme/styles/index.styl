@@ -1,0 +1,72 @@
+@import 'util';
+@import 'buttons';
+@import 'layout-center';
+@import 'header';
+@import 'sidebar';
+@import 'video';
+@import 'alert-panels';
+
+// apply scrolling by default excluding firefox due to trigger issues
+html.smooth-scroll {
+	scroll-behavior: smooth;
+}
+
+@supports (-moz-appearance: none) {
+	html.smooth-scroll {
+		scroll-behavior: auto;
+	}
+}
+
+img[loading] {
+	height: auto;
+}
+
+#app {
+	.navbar {
+		position: sticky;
+	}
+
+	.navbar .logo {
+		height: 2.5rem;
+		margin: 0;
+		padding: 1px 3px 0px 0;
+		vertical-align: top;
+	}
+
+	.site-name {
+		font-size: 1.5rem;
+		letter-spacing: -0.05rem;
+		background: url('/images/nftschool-logo-text-black.svg') no-repeat;
+		background-position-y: -2px;
+		text-indent: -99999px;
+		min-width: 180px;
+		min-height: 47px;
+		background-size: contain;
+	}
+}
+
+.custom-block.callout {
+	background-color: lighten($accentColor, 80%);
+	padding: 0.1rem 1.5rem;
+	border-color: $accentColor;
+	border-left-width: 0.5rem;
+	border-left-style: solid;
+}
+
+.custom-block.right {
+	float: right;
+	padding: 1em 0 1em 1em;
+}
+
+.custom-block.left {
+	float: left;
+	padding: 1em 1em 1em 0em;
+}
+
+:root {
+	--accent-color: $accentColor;
+	--text-color: $textColor;
+	--border-color: $borderColor;
+	--code-bg-color: $codeBgColor;
+	--highlight-color: $highlightColor;
+}

@@ -1,0 +1,66 @@
+{
+  "name": "nft-school",
+  "version": "2.0.0",
+  "description": "NFT Developer Lessons and Tutorials",
+  "author": "cwaring",
+  "license": "MIT",
+  "devDependencies": {
+    "@centerforopenscience/markdown-it-video": "^1.0.0",
+    "@vuepress/plugin-active-header-links": "^1.8.2",
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "@vuepress/plugin-google-analytics": "^1.8.2",
+    "@vuepress/plugin-html-redirect": "^0.1.2",
+    "@vuepress/plugin-last-updated": "^1.8.2",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "markdown-it-deflist": "^2.1.0",
+    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-image-lazy-loading": "^1.0.2",
+    "markdown-it-imsize": "^2.0.1",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-video": "^0.6.3",
+    "prettier": "^2.2.1",
+    "stylus-supremacy": "^2.15.0",
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-canonical": "^1.0.0",
+    "vuepress-plugin-chunkload-redirect": "^1.0.3",
+    "vuepress-plugin-clean-urls": "^1.1.2",
+    "vuepress-plugin-ipfs": "^1.0.2",
+    "vuepress-plugin-robots": "^1.0.1",
+    "vuepress-plugin-seo": "^0.1.4",
+    "vuepress-plugin-sitemap": "^2.3.1"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "quoteProps": "as-needed",
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "lint-staged": {
+    "*.{js,json,css,less,scss,html,md,vue}": [
+      "prettier --write"
+    ],
+    "*.styl": [
+      "stylus-supremacy format --replace"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "scripts": {
+    "start": "npm run docs:dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format:styles": "stylus-supremacy format ./docs/.vuepress/**/*.styl --replace",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}

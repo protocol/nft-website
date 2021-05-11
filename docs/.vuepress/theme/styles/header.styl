@@ -1,0 +1,36 @@
+@media (min-width: $MQNarrow) {
+	header.navbar .links {
+		display: flex;
+		flex-direction: row-reverse;
+
+		input, .suggestions {
+			width: 10em;
+		}
+
+		input:focus, .suggestions {
+			width: 20em;
+		}
+	}
+}
+
+@media (max-width: $MQMobile) {
+	header.navbar .links {
+		input {
+			// prevent zooming on iOS
+			box-sizing: border-box;
+			font-size: 1rem;
+
+			&:focus {
+				width: 87.5vw;
+			}
+		}
+	}
+}
+
+@media (max-width: $MQMobile) {
+	.home-link {
+		position: absolute;
+		width: 45px;
+		left: calc(50% - 45px / 2);
+	}
+}

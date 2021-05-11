@@ -1,0 +1,65 @@
+ul > li > a.sidebar-link {
+	color: $sidebarTextColor;
+	font-weight: 500;
+}
+
+ul.sidebar-links > li > a {
+	color: inherit;
+}
+
+.sidebar {
+	.sidebar-heading {
+		font-weight: 700 !important;
+	}
+
+	.sidebar-group .arrow {
+		display: none;
+	}
+
+	.sidebar-group.is-sub-group a.sidebar-link {
+		margin-bottom: 0.2rem;
+	}
+
+	.sidebar-group.is-sub-group {
+		margin-bottom: 0.5rem;
+	}
+
+	.sidebar-links.sidebar-group-items li:last-child .sidebar-group.is-sub-group {
+		margin-bottom: 0;
+	}
+
+	.sidebar-group.is-sub-group > .sidebar-heading:not(.clickable) {
+		opacity: 1;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		letter-spacing: 0.05em;
+		line-height: 2em;
+	}
+}
+
+.icon.outbound {
+	padding-left: 0.15rem;
+}
+
+// sidebar scrollbar style
+.sidebar::-webkit-scrollbar {
+	width: 5px;
+	position: fixed;
+	right: 0;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background: transparent;
+	transition: background-color 2s;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover, .sidebar:hover::-webkit-scrollbar-thumb {
+	background: $borderColor;
+}
+
+@media (max-width: $MQMobile) {
+	.sidebar {
+		width: 80vw;
+	}
+}
