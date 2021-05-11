@@ -10,7 +10,7 @@ module.exports = {
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'NFTutor',
+      title: 'NFT School',
       description: 'NFT Developer Resources'
     }
   },
@@ -35,7 +35,7 @@ module.exports = {
     },
     defaultImage: '/images/social-card.png',
     author: {
-      name: 'NFTutor',
+      name: 'NFT School',
       twitter: '@protocollabs'
     },
     keywords:
@@ -53,7 +53,7 @@ module.exports = {
     nextLinks: false,
     prevLinks: false,
     // ui/ux
-    logo: '/images/nftutor-logo.svg',
+    logo: '/images/nftschool-logo.svg',
     locales: {
       '/': {
         label: 'English',
