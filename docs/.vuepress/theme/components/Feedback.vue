@@ -83,7 +83,7 @@ export default {
     },
     thanksTxt: {
       type: String,
-      default: 'Thank you for the feedback.'
+      default: 'Thank you for the feedback!'
     },
     evtYes: {
       type: String,
