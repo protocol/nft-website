@@ -71,7 +71,6 @@ module.exports = {
         sidebar: [
           {
             title: 'Concepts',
-            path: '/concepts/',
             collapsable: false,
             children: [
               '/concepts/non-fungible-tokens',
@@ -83,7 +82,6 @@ module.exports = {
           },
           {
             title: 'Tutorials',
-            path: '/tutorial/',
             collapsable: false,
             children: [
               '/tutorial/first-steps',
@@ -95,7 +93,6 @@ module.exports = {
           },
           {
             title: 'How-tos',
-            path: '/how-to/',
             collapsable: false,
             children: [
               '/how-to/creating-nfts',
@@ -105,7 +102,6 @@ module.exports = {
           },
           {
             title: 'Reference',
-            path: '/reference/',
             collapsable: false,
             children: 
             [
@@ -118,7 +114,6 @@ module.exports = {
           },
           {
             title: 'Contribute',
-            path: '/contribute/',
             collapsable: false,
             children: [
               '/contribute/grammar-formatting-and-style',
