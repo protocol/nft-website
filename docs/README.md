@@ -4,7 +4,7 @@ description: NFT School
 ---
  # Welcome to NFT School
 
-[ART TO COME]
+![Illustration of people engaged in creative endeavors.](./images/welcome/welcome-to-nft-school.svg)
 
 Some welcoming MVP messaging to make the reader feel reassured and engaged that they're in a place that will help them start their NFT developer journey.
 
