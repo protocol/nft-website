@@ -1,4 +1,12 @@
-## Project set up
+# NFT School
+
+https://nft-school.on.fleek.co/
+
+https://nft-school-staging.on.fleek.co/
+
+Real domain coming soon.
+
+## Project setup
 
 If you want to build this site locally, run the following:
 
