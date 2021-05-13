@@ -68,10 +68,10 @@ if [ -z "$(git status --porcelain)" ]; then
 else
   # Uncommitted changes
   git add .
-  git commit -m "Automatically optimized images."
+  git commit -m "Automatically optimized images [ci skip]."
   git push
   COMMENT="$COMMENT
-- I optimized some images for you! See the commit with the comment \`Automatically optimized images.\` in this PR for details."
+- I optimized some images for you! See the commit with the comment \`Automatically optimized images [ci skip].\` in this PR for details."
 fi
 
 echo "Run npm install"
