@@ -52,7 +52,7 @@ if [ -z "$SVGS_CHANGED" ]; then
 else
   echo "Compressing SVGs..."
   for svg in $SVGS_CHANGED; do
-    scour -i "$svg" -o "$svg-opt"
+    scour -i "$svg" -o "$svg-opt" --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --indent=none
     mv "$svg-opt" "$svg"
   done
 fi
