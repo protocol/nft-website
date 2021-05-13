@@ -63,7 +63,7 @@ if [ -z "$(git status --porcelain)" ]; then
 - Image optimization came back clean!"
 else
   # Uncommitted changes
-  git remote add fdocs https://${GH_USER_NAME}:${GH_TOKEN}@github.com/protocol/nft-website.git > /dev/null 2>&1
+  git remote add fdocs https://${GH_USERNAME}:${GH_TOKEN}@github.com/protocol/nft-website.git > /dev/null 2>&1
   git add .
   git commit -m "Automatically optimized images. [ciskip]"
   git push
