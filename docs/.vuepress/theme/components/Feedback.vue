@@ -20,33 +20,28 @@
     <div v-if="voteSubmitted" class="feedback-result">
       <p>{{ thanksTxt }}</p>
     </div>
-    
-  
-  
-  <div v-if="editOrIssueLinks">
-    <p>
-      <b>Help us improve this site!</b>
-    </p>
-    <div>
-      <EditOrIssue />
+    <div v-if="editOrIssueLinks">
+      <p>
+        <b>Help us improve this site!</b>
+      </p>
+      <div>
+        <EditOrIssue />
+      </div>
+      <div>
+        <a
+          href="https://github.com/protocol/nft-website/issues/new?assignees=&labels=need%2Ftriage&template=content-or-feature-suggestion.md&title=%5BCONTENT+REQUEST%5D+%28add+your+title+here%21%29"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Suggest new content
+        </a>
+      </div>
     </div>
-    <div>
-          <a
-            href="https://github.com/protocol/nft-website/issues/new?assignees=&labels=need%2Ftriage&template=content-or-feature-suggestion.md&title=%5BCONTENT+REQUEST%5D+%28add+your+title+here%21%29"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Suggest new content</a
-          >
-    </div>
-  </div>
-
-
-
-
   </div>
 </template>
 
 <script>
+import countly from '@theme/utils/countly'
 import EditOrIssue from './EditOrIssue.vue'
 
 export default {
@@ -57,16 +52,26 @@ export default {
     }
   },
   methods: {
-    sendFeedback: function (evtType) {
+    sendFeedback: function (answer) {
       this.voteSubmitted = true
 
-      // bail if ga is not enabled
-      if (!window.ga) return
+      let event
+      
+      switch (this.evtYes) {
+        case 'information_helpful':
+          event = countly.events.FEEDBACK_HELPFUL
+          break;
+        case 'topic_important':
+          event = countly.events.FEEDBACK_IMPORTANT
+          break;
+        default:
+          event = countly.events.FEEDBACK_GENERAL
+      }
 
-      window.ga('send', 'event', {
-        eventCategory: evtType,
-        eventAction: 'click',
-        eventLabel: this.currentPath
+      countly.trackEvent(event, {
+        path: this.$route.path,
+        question: this.titleTxt,
+        answer,
       })
     }
   },

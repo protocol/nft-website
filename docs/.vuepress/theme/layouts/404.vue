@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import countly from '@theme/utils/countly'
 import Navbar from '@theme/components/Navbar.vue'
 
 export default {
@@ -35,13 +36,9 @@ export default {
   },
 
   mounted() {
-    // bail if ga is not enabled
-    if (!window.ga) return
-
-    window.ga('send', 'event', {
-      eventCategory: '404',
-      eventAction: this.$route.path,
-      eventLabel: document.referrer
+    countly.trackEvent(countly.events.NOT_FOUND, {
+      path: this.$route.path,
+      referrer: typeof window !== 'undefined' ? document.referrer : null,
     })
   },
   methods: {

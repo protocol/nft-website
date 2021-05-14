@@ -5,7 +5,6 @@
 module.exports = () => {
   if (
     DOMAIN && COUNTLY_KEY &&
-    process.env.NODE_ENV === 'production' &&
     typeof window !== 'undefined'
   ) {
     ;(function () {
