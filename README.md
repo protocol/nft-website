@@ -4,9 +4,6 @@
 [![](https://img.shields.io/badge/platform-VuePress-green.svg)](https://vuepress.vuejs.org/)
 [![](https://img.shields.io/badge/deployed%20on-Fleek-ff69b4.svg)](http://fleek.co/)
 
-⚠️⚠️  **PRE-RELEASE FLEEK LINKS!**
-- https://nft-school.on.fleek.co/ - this deploy will be DNS'd to the production site
-- https://nft-school-staging.on.fleek.co/ - staging sandbox for major changes (e.g. visual design)
 
 This repository contains code and content for the [NFT School](https://nftschool.dev) website, an open-source community education platform devoted to best practices, concept guides, tutorials, and how-tos for developers in the non-fungible token (NFT) space. 
 
@@ -55,6 +52,10 @@ All PRs against `main` automatically generate Fleek previews to make it easier t
 ![image](https://user-images.githubusercontent.com/1507828/110034382-9dbb5b80-7cf7-11eb-89a4-7772970677d3.png)
 
 A reviewer will be by shortly to have a look!
+
+Additional preview links:
+- https://nft-school.on.fleek.co/ - `main`
+- https://nft-school-staging.on.fleek.co/ - `staging`
 
 ## Maintainers
 
