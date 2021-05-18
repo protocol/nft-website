@@ -4,84 +4,133 @@ description: A step-by-step guide to getting started as an NFT developer.
 ---
  # First steps
 
-Before we start interacting with NFTs, lets get familiar with some basic smart contract development concepts and tooling. 
+## Pre-requisites
 
-This tutorial will guide you through setting up a local development environment for Ethereum and interacting with a simple smart contract. While many alternative blockchains have emerged in recent years that can be used to create NFTs, starting with Ethereum lets us benefit from the mature ecosystem of tooling, tutorials, and reference material produced by the Ethereum community.
+Readers should:
 
-A vast ecosystem of tooling and reference material can be great, but it can also be overwhelming, especially if you're just getting started. This guide will focus on a few tools that are modern, well-tested, and easy to get started with. As you get more familiar with smart contract development, you may want to try other combinations of tools, libraries, and so on. The [More Resources](#more-resources) section has links to some alternatives for each of the tools we'll be using here.
+- Know how to read and write JavaScript (ES2017+)
+- Understand the fundamentals of how Ethereum smart contracts work
+  - TODO(yusef): add links to background info here
 
-Decentralized app development is broadly split into two "domains" or focus areas.
+Nice to have, but not strictly required:
+- Familiarity with Solidity
 
-First are the smart contracts themselves, which are written in a special-purpose language and are executed by the nodes that make up the peer-to-peer blockchain network. In the [Working with Solidity](#working-with-solidity) section below, we'll show how to set up a development environment for Ethereum's main smart contract language, Solidity.
+## Setting up your environment
 
-Once the contract is written, you need a way to interact with it. In the second part of this tutorial, [Ethereum Web Development](#ethereum-web-development), we'll show how to call smart contract functions from JavaScript or TypeScript as part of a decentralized web application. 
+We'll be interacting with a contract that's been deployed to the Ropsten testnet. 
+This means that you won't need to set a smart contract development framework or a local blockchain for development.
+If you'd rather run the contract locally, clone [this repo][example-contract-repo] and follow the instructions in the README.
 
-## Working with Solidity
+To get ready to work with the testnet contract, you'll need to install a few things. You'll also need to get some free test Eth, to
+pay for smart contract interactions.
 
-Ethereum smart contracts run on the Ethereum Virtual Machine (or **EVM**), a distributed runtime environment maintained by Ethereum miners. The most popular and mature language that runs on the EVM is [Solidity][solidity-docs], which compiles down into a compact bytecode form that is stored on the blockchain and executed.
-
-### Setting up an editor / IDE
-
-There's a good chance your favorite text editor has a plugin for Solidity.
-
-TK: list of editor plugins (see https://github.com/ConsenSys/ethereum-developer-tools-list#ides)
-
-Maybe: link to [Remix](https://remix.ethereum.org/) as a way to play around with Solidity without installing anything locally.
-
-### Using a development framework
-
-Frameworks like [HardHat](https://hardhat.org/) and [Truffle](https://www.trufflesuite.com/truffle) help manage the complexity of Solidity development by providing conventions and tooling for contract compilation, deployment, and testing.
-
-#### Creating a project with HardHat
-
-This guide will use HardHat to compile and deploy contracts.
-
-TK: cover how to create a new npm project and install and setup hardhat. (https://hardhat.org/getting-started/#installation)
-
-### Compiling your first contract
-
-TK: 
-
-- have reader copy/paste a hello world contract and compile it using `npx hardhat compile`
-- show that the compiled artifact is created in `./artifacts/contracts/<contract-name>.sol/<contract-name>.json`
-- explain that the artifact json contains the info needed to interact with the contract from javascript, etc
-
-### Deploying to a development blockchain
-
-- Show how to run a standalone instance of the [HardHat network](https://hardhat.org/hardhat-network/) by running `npx hardhat node`.
-  - explain that you can use this instance in future `hardhat` commands by using the `--network localhost` flag
-- Have the reader copy paste a deployment script into `scripts/deploy.js` (see example at https://hardhat.org/guides/deploying.html)
-- Run deployment script with `npx hardhat run --network localhost scripts/deploy.js`
-- Show screenshot of HardHat network console output to show effect of deployment script
-
-## Ethereum Web Development
-
-### Connect to Ethereum using MetaMask
+### Install MetaMask
 
 [MetaMask](https://metamask.io/) is a browser extension that connects web applications to Ethereum and other blockchain networks. 
 
-TK:
-  - how to install metamask
-  - how to configure metamask to use the localhost HardHat network at `http://localhost:8545`
+TODO:
+  - how to install metamask & create a wallet
+  - how to switch to the Ropsten network in Metamask
+  - warn that if readers have any mainnet Eth, they should create a new wallet for testnet. 
+    - This makes it harder to accidentally send mainnet Eth to a testnet address / contract, which burns the mainnet Eth forever.
+
+### Get some testnet Eth
+
+TODO: 
+- how to request test Eth from the MetaMask faucet for the ropsten network
+  - https://faucet.metamask.io/
+    - seems to only support Ropsten - switching MetaMask to another network changes the address of the faucet in the web UI, but the transactions are always on Ropsten
+  - https://faucet.ropsten.be/
+    - alternative faucet, can paste in wallet address from metamask to get test eth
+  - should note that it may take a few minutes for the transaction to finalize and the Eth to show up
+
+### Create an NPM project
+
+- create a directory for the project and enter it
+- `npm init` and answer the prompts
+- install dependencies:
+  - `npm install --save ethers`
 
 ### Interacting with smart contracts
 
-TK:
 - introduce ethers.js
 - show how to connect ethers to MetaMask
-- show some example smart contract function calls
+  - https://docs.ethers.io/v5/getting-started/#getting-started--connecting
+
+- show how to connect to a deployed "Greeter" contract on Ropsten
+  - default sample from new HardHat project, Greeter.sol
+    - source is here: https://hardhat.org/getting-started/#compiling-your-contracts
+
+- reader needs some info about the contract, in order to connect to it:
+  - address on Ropsten: `0xa0292C79201F0a6F67ae47F6760AEC26B1913Bc6`
+  - contract ABI (see json below). We can save to a json file and have them download to somewhere we can read it from javascript.
+
+```json
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_greeting",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "greet",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_greeting",
+          "type": "string"
+        }
+      ],
+      "name": "setGreeting",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
+```
+
+Once you have those, you can get an ethers `Contract` instance:
+
+```javascript
+async function getGreeting() {
+  const { abi } = await hre.artifacts.readArtifact("Greeter")
+  const greeter = new hre.ethers.Contract(ROPSTEN_ADDR, abi, hre.ethers.provider)
+
+  const greeting = await greeter.greet();
+
+  console.log("Greetings: ", greeting);
+}
+```
 
 ## More Resources
 
 ### Solidity documentation and tutorials
 
-TK: link to other tutorials of similar scope + reference materials for more depth
+TODO(yusef): link to other tutorials of similar scope + reference materials for more depth
 
-### Alternative tools
 
-TK: 
-- link to Truffle Suite as alternative to HardHat
-- web3.js as alternative to ethers.js
-- vyper as alternative to Solidity (pretty niche, but probably worth a link)
 
 [solidity-docs]: https://docs.soliditylang.org/en/latest/
+
+<!-- FIXME: fix link once repo exists -->
+[example-contract-repo]: https://example.com/fixme
