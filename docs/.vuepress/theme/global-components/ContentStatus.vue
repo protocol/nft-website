@@ -1,11 +1,10 @@
 <template>
   <main class="content-status">
     <div>
+      <h2>{{ title }}</h2>
       <div class="illustration">
         <img src="../assets/under-construction.svg" />
       </div>
-
-      <h2>{{ title }}</h2>
       <div v-if="issueUrl" class="content-status-status">
         <p>
           <a target="_blank" :href="issueUrl">Check the status</a> of this page on GitHub to see how it's coming along. Are you a technical writer who'd like to make the global NFT community better for everyone? <a target="_blank" :href="issueUrl">Help write this page!</a>
@@ -69,11 +68,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-h2, h3 {
-  border-bottom: none;
-  margin: 0.5rem 0; // TODO: make global
-}
-
 ul {
   list-style: none;
   margin: 0;

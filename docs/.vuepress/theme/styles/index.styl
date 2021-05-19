@@ -22,7 +22,8 @@ img[loading] {
 }
 
 #app {
-	font-family: 'Archivo', sans-serif;
+	font-family: 'Ubuntu', sans-serif;
+	background-color: $primaryColor;
 
 	.navbar {
 		position: sticky;
@@ -45,19 +46,60 @@ img[loading] {
 		min-height: 47px;
 		background-size: contain;
 	}
+
+	.sidebar {
+		background-color: $reverseTextColor;
+	}
+
+	.page {
+		background-color: #fff;
+	}
+}
+
+a {
+	color: $accentTextColor;
 }
 
 h1, h2, h3, h4 {
-	font-family: 'DM Serif Text', serif;
+	font-family: 'VT323', monospace;
 	font-weight: 400;
+	color: $accentTextColor;
 }
 
 h1 {
-	color: $headerColor;
+	font-size: 3rem;
+	padding-top: 2rem !important;
+	padding-bottom: 0.5rem;
+	line-height: 2.5rem;
 }
 
-h2, h3, h4 {
-	color: $subHeaderColor;
+h2 {
+	font-size: 2rem;
+	line-height: 1.2rem;
+	border-bottom: 3px solid $secondaryColor;
+    box-shadow:  3px 6px 0 -3px $tertiaryColor;
+}
+
+h3 {
+	font-size: 1.75rem;
+	line-height: 1.75rem;
+}
+
+h4 {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+}
+
+.content-footer {
+	h3, a {
+		color: $secondaryColor;
+	}
+}
+
+.page-edit {
+	font-family: 'VT323', monospace;
+	font-size: 1.25rem;
+	padding-bottom: 0 !important;
 }
 
 .custom-block.callout {

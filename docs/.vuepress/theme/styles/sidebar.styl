@@ -8,13 +8,21 @@ ul.sidebar-links > li > a {
 }
 
 .sidebar {
+	color: #fff;
+
 	.sidebar-heading {
-		font-family: 'DM Serif Text', serif;
-		font-size: 1.5em;
-		font-weight: 400 !important;
-		line-height: 1.1;
+		font-family: 'VT323', monospace;
+		font-size: 1.6em;
+		text-transform: uppercase;
+		line-height: 1.4;
 		margin-top: 0.25em;
-		color: $subHeaderColor !important;
+		color: $secondaryColor !important;
+		letter-spacing: 0.2rem;
+
+		span {
+			border-bottom: 2px solid $secondaryColor;
+    		box-shadow:  2px 4px 0 -2px $tertiaryColor;
+		}
 	}
 
 	.sidebar-group .arrow {
@@ -49,9 +57,10 @@ ul.sidebar-links > li > a {
 
 // sidebar scrollbar style
 .sidebar::-webkit-scrollbar {
-	width: 5px;
+	width: 12px;
 	position: fixed;
 	right: 0;
+	border-left: 2px solid $secondaryColor;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
