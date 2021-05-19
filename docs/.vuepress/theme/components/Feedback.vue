@@ -124,9 +124,9 @@ export default {
 }
 
 .content-feedback {
-  background-color: lighten($badgeTipColor, 95%);
-  color: lighten($textColor, 20%);
-  border-color: $badgeTipColor;
+  background-color: lighten($secondaryColor, 95%);
+  border-right: 4px solid lighten($secondaryColor, 40%);
+  border-bottom: 4px solid $secondaryColor;
   &-result {
     animation: fadein 0.5s;
     min-height: 38px;
