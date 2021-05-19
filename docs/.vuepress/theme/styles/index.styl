@@ -48,7 +48,7 @@ img[loading] {
 	}
 
 	.sidebar {
-		background-color: #140d2e;
+		background-color: $reverseTextColor;
 	}
 
 	.page {
@@ -64,11 +64,13 @@ h1, h2, h3, h4 {
 	font-family: 'VT323', monospace;
 	font-weight: 400;
 	color: $accentTextColor;
-	line-height: 1rem;
 }
 
 h1 {
 	font-size: 3rem;
+	padding-top: 2rem !important;
+	padding-bottom: 0.5rem;
+	line-height: 2.5rem;
 }
 
 h2 {
@@ -80,12 +82,24 @@ h2 {
 
 h3 {
 	font-size: 1.75rem;
+	line-height: 1.75rem;
+}
+
+h4 {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
 }
 
 .content-footer {
 	h3, a {
 		color: $secondaryColor;
 	}
+}
+
+.page-edit {
+	font-family: 'VT323', monospace;
+	font-size: 1.25rem;
+	padding-bottom: 0 !important;
 }
 
 .custom-block.callout {

@@ -78,10 +78,6 @@ export default {
   padding: 2rem 2rem;
 }
 
-.content-feedback {
-  padding: 1rem 2rem 2rem 2rem;
-}
-
 @media (min-width: $MQMobile) {
   .content-footer {
     padding: 0 2.5rem;
