@@ -79,10 +79,6 @@ ul {
   }
 }
 
-.content-status-vote {
-  margin-top: 3rem;
-}
-
 .illustration {
   width: 20%;
   float: right;
