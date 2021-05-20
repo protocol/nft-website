@@ -75,6 +75,7 @@ export default {
 .page-edit {
   max-width: 100%;
   padding: 2rem 2rem;
+  float: left;
 }
 
 @media (min-width: $MQMobile) {
