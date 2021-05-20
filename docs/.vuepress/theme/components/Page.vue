@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.page {
+  padding-bottom: 2rem;
+}
+
 .content-footer {
   padding-top: 0;
   max-width: $contentWidth;
