@@ -85,7 +85,6 @@ body {
 
 #app {
 	font-family: 'Ubuntu', sans-serif;
-	background-color: $primaryColor;
 
 	.navbar {
 		position: sticky;
@@ -121,15 +120,25 @@ body {
 
 	.sidebar-button {
 		color: $secondaryColor;
+
+		.icon {
+			width: 1.75rem;
+			height: 1.75rem;
+		}
 	}
 
 	.page {
-		background-color: #fff;
+		background-color: $offWhiteColor;
+		padding-bottom: 2rem;
+	}
+
+	.icon.outbound {
+		color: $linkColor;
 	}
 }
 
 a {
-	color: $accentTextColor;
+	color: $linkColor;
 }
 
 h1, h2, h3, h4 {
