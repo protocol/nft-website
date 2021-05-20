@@ -21,7 +21,7 @@ ul.sidebar-links > li > a {
 
 		span {
 			border-bottom: 2px solid $secondaryColor;
-    		box-shadow: 2px 4px 0 -2px $tertiaryColor;
+   		box-shadow: 2px 4px 0 -2px $tertiaryColor;
 		}
 	}
 
@@ -61,6 +61,23 @@ ul.sidebar-links > li > a {
 
 .icon.outbound {
 	padding-left: 0.15rem;
+}
+
+// sidebar scrollbar style
+.sidebar::-webkit-scrollbar {
+	width: 12px;
+	position: fixed;
+	right: 0;
+	border-left: 2px solid $secondaryColor;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background: transparent;
+	transition: background-color 2s;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover, .sidebar:hover::-webkit-scrollbar-thumb {
+	background: $borderColor;
 }
 
 @media (max-width: $MQMobile) {
