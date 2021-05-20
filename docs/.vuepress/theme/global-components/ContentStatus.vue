@@ -14,7 +14,7 @@
               titleTxt="Is this topic important to you?"
               evtYes="topic_important"
               evtNo="topic_not_important"
-              noTxt="Not really"
+              noTxt="No"
               yesTxt="Yes"
               :editOrIssueLinks="false"
             />
