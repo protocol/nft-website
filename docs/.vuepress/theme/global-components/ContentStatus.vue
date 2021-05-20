@@ -2,23 +2,27 @@
   <main class="content-status">
     <div>
       <h2>{{ title }}</h2>
-      <div class="illustration">
-        <img src="../assets/under-construction.svg" />
-      </div>
-      <div v-if="issueUrl" class="content-status-status">
-        <p>
-          <a target="_blank" :href="issueUrl">Check the status</a> of this page on GitHub to see how it's coming along. Are you a technical writer who'd like to make the global NFT community better for everyone? <a target="_blank" :href="issueUrl">Help write this page!</a>
-        </p>
-      </div>
-      <div class="section content-status-vote">
-        <Feedback
-          titleTxt="Is this topic important to you?"
-          evtYes="topic_important"
-          evtNo="topic_not_important"
-          noTxt="Not really"
-          yesTxt="Yes"
-          :editOrIssueLinks="false"
-        />
+      <div class="content-status-all">
+        <div>
+          <div v-if="issueUrl" class="content-status-status">
+            <p>
+              <a target="_blank" :href="issueUrl">Check the status</a> of this page on GitHub to see how it's coming along. Are you a technical writer who'd like to make the global NFT community better for everyone? <a target="_blank" :href="issueUrl">Help write this page!</a>
+            </p>
+          </div>
+          <div class="section content-status-vote">
+            <Feedback
+              titleTxt="Is this topic important to you?"
+              evtYes="topic_important"
+              evtNo="topic_not_important"
+              noTxt="No"
+              yesTxt="Yes"
+              :editOrIssueLinks="false"
+            />
+          </div>
+        </div>
+        <div class="illustration">
+          <img src="../assets/under-construction.svg" />
+        </div>
       </div>
     </div>
 
@@ -68,6 +72,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.content-status-all {
+  display: flex;
+}
+
+.content-status-status {
+  padding-bottom: 2rem;
+}
+
 ul {
   list-style: none;
   margin: 0;
@@ -79,13 +91,10 @@ ul {
   }
 }
 
-.content-status-vote {
-  margin-top: 3rem;
-}
-
 .illustration {
-  width: 20%;
-  float: right;
+  padding-top: 1.3em;
+  width: 25%;
+  min-width: 120px;
   margin-left: 2em;
 }
 
@@ -96,8 +105,9 @@ ul {
 
 @media (min-width: $MQNarrow) {
   .illustration {
-    width: 25%;
-    float: right;
+    width: 45%;
+    min-width: 120px;
+    max-width: 140px;
     margin-left: 3em;
   }
 }
