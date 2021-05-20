@@ -124,11 +124,11 @@ export default {
 }
 
 .content-feedback {
-  background-color: lighten($secondaryColor, 95%);
-  padding: 0.5rem 2rem 2rem 2rem;
-  border: 3px solid $accentTextColor;
-  box-shadow:  -1px -1px 0 1px $tertiaryColor,
-    1px 1px 0 1px $secondaryColor;
+  background-color: lighten($tertiaryColor, 80%);
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  border: 2px solid white;
+  box-shadow:  -2px -2px 0 1px $tertiaryColor,
+    2px 2px 0 1px $secondaryColor;
 
   h3 {
     margin-bottom: 1rem;
