@@ -65,7 +65,6 @@ export default {
 <style lang="stylus" scoped>
 .page {
   padding-bottom: 2rem;
-  display: block;
 }
 
 .content-footer {

@@ -1,10 +1,64 @@
 @import 'util';
+@import 'scrollbar';
 @import 'buttons';
 @import 'layout-center';
 @import 'header';
 @import 'sidebar';
 @import 'video';
 @import 'alert-panels';
+
+/*
+	Root elements styles to force them to use 100% of the viewport
+*/
+html {
+    height: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    overflow-y: scroll;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+#app {
+	height: 100%;
+}
+
+.theme-container {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+header.navbar {
+	width: 100%;
+}
+
+main.page {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+}
+
+.theme-default-content {
+	flex: 1 0 auto;
+}
+
+.content-footer {
+	flex: 0 0 auto;
+}
+
+/*
+	Scroll Bar
+*/
+
+html {
+	{scrollbar};
+}
 
 // apply scrolling by default excluding firefox due to trigger issues
 html.smooth-scroll {
@@ -21,9 +75,16 @@ img[loading] {
 	height: auto;
 }
 
+html {
+	background-color: $primaryColor;
+}
+
+body {
+	background-color: transparent;
+}
+
 #app {
 	font-family: 'Ubuntu', sans-serif;
-	background-color: $primaryColor;
 
 	.navbar {
 		position: sticky;

@@ -49,27 +49,12 @@ ul.sidebar-links > li > a {
 		letter-spacing: 0.05em;
 		line-height: 2em;
 	}
+
+	{scrollbar};
 }
 
 .icon.outbound {
 	padding-left: 0.15rem;
-}
-
-// sidebar scrollbar style
-.sidebar::-webkit-scrollbar {
-	width: 12px;
-	position: fixed;
-	right: 0;
-	border-left: 2px solid $secondaryColor;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-	background: transparent;
-	transition: background-color 2s;
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover, .sidebar:hover::-webkit-scrollbar-thumb {
-	background: $borderColor;
 }
 
 @media (max-width: $MQMobile) {

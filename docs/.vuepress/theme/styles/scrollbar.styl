@@ -1,0 +1,28 @@
+scrollbar = @block {
+    &::-webkit-scrollbar {
+        width: 12px;
+        position: fixed;
+        right: 0;
+        border-left: 2px solid $secondaryColor;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        transition: background-color 0.5s;
+    }
+
+    &::-webkit-scrollbar-thumb:hover,
+    &::-webkit-scrollbar-thumb:active,
+    &::-webkit-scrollbar-thumb:focus,
+    &::-webkit-scrollbar-thumb:focus-within {
+        background-color: $borderColor;
+    }
+
+    &:hover::-webkit-scrollbar-thumb,
+    &:active::-webkit-scrollbar-thumb,
+    &:focus::-webkit-scrollbar-thumb,
+    &:focus-within::-webkit-scrollbar-thumb {
+        background-color: $borderColor;
+    }
+}
+
