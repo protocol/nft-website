@@ -3,7 +3,7 @@
     <Navbar />
     <div class="theme-default-content">
       <h1>😯 404</h1>
-      <h3>Oops, this page has moved or no longer exists</h3>
+      <h3>Oops! This page has moved or no longer exists</h3>
 
       <p>
         We've logged this issue and invite you to choose your next adventure
