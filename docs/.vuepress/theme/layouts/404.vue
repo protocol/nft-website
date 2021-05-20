@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-container">
+  <div class="theme-container page-nosidebar">
     <Navbar />
     <div class="theme-default-content">
       <h1>😯 404</h1>
@@ -13,7 +13,7 @@
         <RouterLink to="/">
           Return home
         </RouterLink>
-        or <a href="#" @click="searchFocus">try our superb search</a>
+        or <a href="#" @click="searchFocus">try a search</a>
       </p>
     </div>
   </div>
