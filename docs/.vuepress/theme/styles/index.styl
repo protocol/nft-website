@@ -88,6 +88,8 @@ body {
 
 	.navbar {
 		position: sticky;
+		background-color: $reverseTextColor;
+		border-bottom: none;
 	}
 
 	.navbar .logo {
@@ -97,19 +99,27 @@ body {
 		vertical-align: top;
 	}
 
+	.navbar .links {
+		background-color: $reverseTextColor;
+	}
+
 	.site-name {
 		font-size: 1.5rem;
 		letter-spacing: -0.05rem;
 		background: url('/images/nftschool-logo-text.svg') no-repeat;
-		background-position-y: -2px;
+		background-position: 8px 5px;
 		text-indent: -99999px;
-		min-width: 180px;
+		min-width: 220px;
 		min-height: 47px;
 		background-size: contain;
 	}
 
 	.sidebar {
 		background-color: $reverseTextColor;
+	}
+
+	.sidebar-button {
+		color: $secondaryColor;
 	}
 
 	.page {

@@ -21,7 +21,7 @@ ul.sidebar-links > li > a {
 
 		span {
 			border-bottom: 2px solid $secondaryColor;
-    		box-shadow:  2px 4px 0 -2px $tertiaryColor;
+    		box-shadow: 2px 4px 0 -2px $tertiaryColor;
 		}
 	}
 
@@ -32,6 +32,12 @@ ul.sidebar-links > li > a {
 	.sidebar-group.is-sub-group a.sidebar-link {
 		margin-bottom: 0.2rem;
 	}
+
+	a.sidebar-link.active {
+		border-left: 3px solid $secondaryColor;
+		box-shadow:  inset 3px 1px 0 -1px $tertiaryColor;
+		margin-left: 2px;
+	} 
 
 	.sidebar-group.is-sub-group {
 		margin-bottom: 0.5rem;
