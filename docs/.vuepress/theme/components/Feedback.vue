@@ -72,6 +72,7 @@ export default {
         path: this.$route.path,
         question: this.titleTxt,
         answer,
+        answerText: !answer.includes('not') ? this.yesTxt : this.noTxt,
       })
     }
   },
