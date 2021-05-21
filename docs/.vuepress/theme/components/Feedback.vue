@@ -89,7 +89,7 @@ export default {
     },
     thanksTxt: {
       type: String,
-      default: 'Thank you for the feedback!'
+      default: 'Thanks! We will use your feedback to prioritize future work.'
     },
     evtYes: {
       type: String,
