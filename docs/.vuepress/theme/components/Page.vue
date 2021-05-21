@@ -64,6 +64,7 @@ export default {
 
 <style lang="stylus" scoped>
 .page {
+  background-color: $offWhiteColor;
   padding-bottom: 2rem;
 }
 
@@ -73,8 +74,10 @@ export default {
 }
 
 .page-edit {
+  font-family: 'VT323', monospace;
+	font-size: 1.25rem;
   max-width: 100%;
-  padding: 2rem 2rem;
+  padding: 2rem 2rem 0 2rem;
   float: left;
 }
 
@@ -85,7 +88,7 @@ export default {
   }
 
   .page-edit {
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 0 0;
   }
 
   section {
