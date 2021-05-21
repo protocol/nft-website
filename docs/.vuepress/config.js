@@ -1,6 +1,6 @@
 // .vuepress/config.js
 
-const DEPLOY_DOMAIN = 'https://docs.ipfs.io'
+const DEPLOY_DOMAIN = 'https://nftschool.dev'
 const SPEEDCURVE_ID = process.env.SPEEDCURVE_ID || ''
 const pageSuffix = '/'
 
