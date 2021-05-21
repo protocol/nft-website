@@ -82,9 +82,9 @@ svg.icon.outbound {
 	color: $linkColor;
 }
 
-.header-anchor {
-	padding-right: 0 !important;
-	margin-left: -0.5em !important;
+a.header-anchor {
+	padding-right: 0;
+	margin-left: -0.5em;
 }
 
 h1, h2, h3, h4 {
@@ -95,9 +95,14 @@ h1, h2, h3, h4 {
 
 h1 {
 	font-size: 3rem;
-	padding-top: 2rem !important;
 	padding-bottom: 0.5rem;
 	line-height: 2.5rem;
+}
+
+.theme-default-content:not(.custom) {
+	& > h1 {
+		padding-top: 2rem;
+	}
 }
 
 h2 {
