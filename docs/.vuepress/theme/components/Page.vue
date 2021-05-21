@@ -15,9 +15,7 @@
     </div>
 
     <BackToTop />
-    <Analytics />
     <ScrollPatch />
-    
 
     <slot name="bottom" />
   </main>
@@ -29,7 +27,6 @@ import PageNav from '@parent-theme/components/PageNav.vue'
 
 import Feedback from './Feedback.vue'
 import BackToTop from './BackToTop.vue'
-import Analytics from './Analytics.vue'
 import ScrollPatch from './ScrollPatch.vue'
 
 export default {
@@ -39,7 +36,6 @@ export default {
     PageNav,
     Feedback,
     BackToTop,
-    Analytics,
     ScrollPatch
   },
   props: ['sidebarItems'],
