@@ -14,8 +14,10 @@
       <PageNav v-bind="{ sidebarItems }" />
     </div>
 
+    <BackToTop />
     <Analytics />
     <ScrollPatch />
+    
 
     <slot name="bottom" />
   </main>
@@ -26,6 +28,7 @@ import PageEdit from '@parent-theme/components/PageEdit.vue'
 import PageNav from '@parent-theme/components/PageNav.vue'
 
 import Feedback from './Feedback.vue'
+import BackToTop from './BackToTop.vue'
 import Analytics from './Analytics.vue'
 import ScrollPatch from './ScrollPatch.vue'
 
@@ -35,6 +38,7 @@ export default {
     PageEdit,
     PageNav,
     Feedback,
+    BackToTop,
     Analytics,
     ScrollPatch
   },
