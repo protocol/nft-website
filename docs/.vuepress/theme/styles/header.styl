@@ -2,7 +2,30 @@
 	border-radius: 0;
 	border-left: 3px solid $tertiaryColor;
   	border-top: 3px solid $tertiaryColor;
-  	box-shadow:  4px 4px 0 -2px $secondaryColor;
+  	box-shadow: 4px 4px 0 -2px $secondaryColor;
+}
+
+header.navbar .links input {
+	border-radius: 0;
+	border-left: 3px solid $tertiaryColor;
+  	border-top: 3px solid $tertiaryColor;
+  	box-shadow: 4px 4px 0 -2px $secondaryColor;
+	color: $textColor;
+}
+
+header.navbar .links ul {
+	border-radius: 0;
+	padding: 0;
+	border: 2px solid $tertiaryColor;
+	li {
+		border-radius: 0;
+	}
+	.focused, li:active {
+		background-color: $reverseTextColor;
+	}
+	a {
+		color: $linkColor;
+	}
 }
 
 @media (min-width: $MQNarrow) {
