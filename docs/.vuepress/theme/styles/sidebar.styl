@@ -7,12 +7,13 @@ ul.sidebar-links > li > a {
 	color: inherit;
 }
 
-.sidebar > .sidebar-links {
-    padding-top: 1rem !important;
-}
-
 .sidebar {
+	background-color: $reverseTextColor;
 	color: #fff;
+
+	.sidebar-group:not(.collapsable) .sidebar-heading:not(.clickable) {
+		color: $tertiaryColor;
+	}
 
 	.sidebar-heading {
 		font-family: 'VT323', monospace;
@@ -20,7 +21,6 @@ ul.sidebar-links > li > a {
 		text-transform: uppercase;
 		line-height: 1.4;
 		margin-top: 0.25em;
-		color: $tertiaryColor !important;
 		letter-spacing: 0.2rem;
 
 		span {

@@ -98,7 +98,6 @@ ul {
   margin-left: 2em;
 }
 
-// TODO: make global
 .section {
   margin-bottom: 3rem;
 }

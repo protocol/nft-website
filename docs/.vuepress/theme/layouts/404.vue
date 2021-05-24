@@ -49,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.page-nosidebar {
+	background-color: $offWhiteColor;
+}
+</style>
