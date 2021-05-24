@@ -92,18 +92,16 @@ ul {
 }
 
 .illustration {
-  padding-top: 1.3em;
-  width: 25%;
-  min-width: 120px;
-  margin-left: 2em;
+  display:none;
 }
 
 .section {
   margin-bottom: 3rem;
 }
 
-@media (min-width: $MQNarrow) {
+@media (min-width: $MQMobile) {
   .illustration {
+    display: block;
     width: 45%;
     min-width: 120px;
     max-width: 140px;

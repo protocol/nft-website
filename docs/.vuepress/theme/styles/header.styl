@@ -15,15 +15,16 @@
 		font-size: 1.5rem;
 		letter-spacing: -0.05rem;
 		background: url('/images/nftschool-logo-text.svg') no-repeat;
-		background-position: 0 5px;
+		background-position: 0 2px;
 		text-indent: -99999px;
-		min-width: 226px;
+		min-width: 220px;
 		min-height: 50px;
 		background-size: contain;
 	}
 
 	.sidebar-button {
 		color: $secondaryColor;
+		padding: 0.4rem;
 
 		.icon {
 			width: 1.75rem;
@@ -51,6 +52,7 @@ header.navbar .links input {
 		1px 1px 0px 1px $secondaryColor,
 		-1px -1px 0px 1px $tertiaryColor;
 	color: $textColor;
+	margin-top: 0.1em;
 }
 
 header.navbar .links ul {
@@ -86,6 +88,8 @@ header.navbar .links ul {
 @media (max-width: $MQMobile) {
 	header.navbar .links {
 		input {
+			margin-right: 0.4em;
+
 			// prevent zooming on iOS
 			box-sizing: border-box;
 			font-size: 1rem;
@@ -95,9 +99,7 @@ header.navbar .links ul {
 			}
 		}
 	}
-}
 
-@media (max-width: $MQMobile) {
 	.home-link {
 		position: absolute;
 		width: 45px;
