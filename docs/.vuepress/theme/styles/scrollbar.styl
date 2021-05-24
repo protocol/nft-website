@@ -1,0 +1,31 @@
+scrollbar = @block {
+    &::-webkit-scrollbar {
+        width: 8px;
+        position: fixed;
+        right: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        transition: background-color 0.3s;
+    }
+
+    &:hover::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $tertiaryColor;
+    }
+
+    // Firefox
+    & {
+        scrollbar-color: transparent transparent;
+        scrollbar-width: thin;
+
+        transition: scrollbar-color 0.3s;
+    }
+
+    &:hover {
+        scrollbar-color: $tertiaryColor transparent;
+    }
+
+}
+

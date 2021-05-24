@@ -1,3 +1,75 @@
+.navbar {
+	width: 100%;
+	position: sticky;
+	background-color: $reverseTextColor;
+	border-bottom: none;
+
+	.logo {
+		height: 2.5rem;
+		margin: 0;
+		padding: 1px 3px 0px 0;
+		vertical-align: top;
+	}
+
+	.site-name {
+		font-size: 1.5rem;
+		letter-spacing: -0.05rem;
+		background: url('/images/nftschool-logo-text.svg') no-repeat;
+		background-position: 0 2px;
+		text-indent: -99999px;
+		min-width: 220px;
+		min-height: 50px;
+		background-size: contain;
+	}
+
+	.sidebar-button {
+		color: $secondaryColor;
+		padding: 0.4rem;
+
+		.icon {
+			width: 1.75rem;
+			height: 1.75rem;
+		}
+	}
+}
+
+header.navbar .links {
+	background-color: $reverseTextColor;
+}
+
+#algolia-search-input {
+	border-radius: 0;
+	border: none;
+  	box-shadow:
+		1px 1px 0px 1px $secondaryColor,
+		-1px -1px 0px 1px $tertiaryColor;
+}
+
+header.navbar .links input {
+	border-radius: 0;
+	border: none;
+  	box-shadow:
+		1px 1px 0px 1px $secondaryColor,
+		-1px -1px 0px 1px $tertiaryColor;
+	color: $textColor;
+	margin-top: 0.1em;
+}
+
+header.navbar .links ul {
+	border-radius: 0;
+	padding: 0;
+	border: 2px solid $tertiaryColor;
+	li {
+		border-radius: 0;
+	}
+	.focused, li:active {
+		background-color: $reverseTextColor;
+	}
+	a {
+		color: $linkColor;
+	}
+}
+
 @media (min-width: $MQNarrow) {
 	header.navbar .links {
 		display: flex;
@@ -16,6 +88,8 @@
 @media (max-width: $MQMobile) {
 	header.navbar .links {
 		input {
+			margin-right: 0.4em;
+
 			// prevent zooming on iOS
 			box-sizing: border-box;
 			font-size: 1rem;
@@ -25,9 +99,7 @@
 			}
 		}
 	}
-}
 
-@media (max-width: $MQMobile) {
 	.home-link {
 		position: absolute;
 		width: 45px;

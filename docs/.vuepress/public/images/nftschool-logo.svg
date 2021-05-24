@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 602.86 700" xmlns="http://www.w3.org/2000/svg">
- <defs>
-  <clipPath id="a">
-   <path d="M66.5 486.2V231.23l33.46-19.38 42.72 146.65V179.27l38.75-22.46v395.01l-26.86-14.97-55.93-210.94v178.35L66.5 486.2z" fill="none"/>
-  </clipPath>
-  <clipPath id="c">
-   <path d="M213.14 570.31V133.47l90.27-53.72 109.21 64.73-21.57 33.91-87.64-53.73-54.16 29.07v174.38h132.99v43.6H248.81l1.32 222.38-36.99-23.78z" fill="none"/>
-  </clipPath>
-  <clipPath id="d">
-   <path d="M457.98 539.05V218.46l-47.56-30.83 19.82-30.82 117.58 74.42v44.92l-49.77-35.23v274.79l-40.07 23.34z" fill="none"/>
-  </clipPath>
-  <radialGradient id="b" cx="243.56" cy="345.73" r="263.95" gradientTransform="matrix(.89 0 0 1 89.84 -7.63)" gradientUnits="userSpaceOnUse">
-   <stop stop-color="#42cba6" offset="0"/>
-   <stop stop-color="#22a7c0" offset="1"/>
-  </radialGradient>
- </defs>
- <g clip-path="url(#a)">
-  <path d="M66.5 79.75h481.32V594.1H66.5z" fill="url(#b)"/>
- </g>
- <g clip-path="url(#c)">
-  <path d="M66.5 79.75h481.32V594.1H66.5z" fill="url(#b)"/>
- </g>
- <g clip-path="url(#d)">
-  <path d="M66.5 79.75h481.32V594.1H66.5z" fill="url(#b)"/>
- </g>
- <path d="M302.53 0L0 176.19V525l302.53 175 300.33-174.6V175.75zm264.66 504.7L301.43 658.39 35.67 504.7V195.56L301.43 43.64l265.76 152.8z" fill="#20a4c3"/>
+<svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+<path d="M90 5v85H5v-5h80V5h5z" fill="#fb0d41"/>
+<path d="M85 0v5H5v80H0V0h85z" fill="#0dccf1"/>
+<path d="M5 5v80h80V5zm70 70H65V25H25v50H15V15h60zm-20 0H35V55h10V45H35V35h20z" fill="#fff"/>
 </svg>

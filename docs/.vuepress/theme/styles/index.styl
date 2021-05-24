@@ -1,10 +1,60 @@
+@import 'layout';
 @import 'util';
+@import 'scrollbar';
 @import 'buttons';
 @import 'layout-center';
 @import 'header';
 @import 'sidebar';
 @import 'video';
 @import 'alert-panels';
+
+/*
+	Root elements styles to force them to use 100% of the viewport
+*/
+html {
+	background-color: $primaryColor;
+    height: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+	background-color: transparent;
+    overflow-y: scroll;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.theme-container {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+main.page {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+}
+
+.theme-default-content {
+	flex: 1 0 auto;
+}
+
+.content-footer {
+	flex: 0 0 auto;
+}
+
+/*
+	Scroll Bar
+*/
+
+html {
+	{scrollbar};
+}
 
 // apply scrolling by default excluding firefox due to trigger issues
 html.smooth-scroll {
@@ -22,45 +72,55 @@ img[loading] {
 }
 
 #app {
-	.navbar {
-		position: sticky;
-	}
+	height: 100%;
+}
 
-	.navbar .logo {
-		height: 2.5rem;
-		margin: 0;
-		padding: 1px 3px 0px 0;
-		vertical-align: top;
-	}
+a {
+	color: $linkColor;
+}
 
-	.site-name {
-		font-size: 1.5rem;
-		letter-spacing: -0.05rem;
-		background: url('/images/nftschool-logo-text-black.svg') no-repeat;
-		background-position-y: -2px;
-		text-indent: -99999px;
-		min-width: 180px;
-		min-height: 47px;
-		background-size: contain;
+svg.icon.outbound {
+	color: $linkColor;
+}
+
+a.header-anchor {
+	padding-right: 0;
+	margin-left: -0.5em;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'VT323', monospace;
+	font-weight: 400;
+	color: $primaryColor;
+}
+
+h1 {
+	font-size: 3rem;
+	padding-bottom: 0.5rem;
+	line-height: 2.5rem;
+}
+
+.theme-default-content:not(.custom) {
+	& > h1 {
+		padding-top: 2rem;
 	}
 }
 
-.custom-block.callout {
-	background-color: lighten($accentColor, 80%);
-	padding: 0.1rem 1.5rem;
-	border-color: $accentColor;
-	border-left-width: 0.5rem;
-	border-left-style: solid;
+h2 {
+	font-size: 2rem;
+	line-height: 1.6rem;
+	border-bottom: 3px solid $tertiaryColor;
+    box-shadow:  2px 5px 0 -2px $secondaryColor;
 }
 
-.custom-block.right {
-	float: right;
-	padding: 1em 0 1em 1em;
+h3 {
+	font-size: 1.75rem;
+	line-height: 1.75rem;
 }
 
-.custom-block.left {
-	float: left;
-	padding: 1em 1em 1em 0em;
+h4 {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
 }
 
 :root {

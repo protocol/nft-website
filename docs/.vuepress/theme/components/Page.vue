@@ -14,7 +14,7 @@
       <PageNav v-bind="{ sidebarItems }" />
     </div>
 
-    <Analytics />
+    <BackToTop />
     <ScrollPatch />
 
     <slot name="bottom" />
@@ -26,7 +26,7 @@ import PageEdit from '@parent-theme/components/PageEdit.vue'
 import PageNav from '@parent-theme/components/PageNav.vue'
 
 import Feedback from './Feedback.vue'
-import Analytics from './Analytics.vue'
+import BackToTop from './BackToTop.vue'
 import ScrollPatch from './ScrollPatch.vue'
 
 export default {
@@ -35,7 +35,7 @@ export default {
     PageEdit,
     PageNav,
     Feedback,
-    Analytics,
+    BackToTop,
     ScrollPatch
   },
   props: ['sidebarItems'],
@@ -64,22 +64,20 @@ export default {
 
 <style lang="stylus" scoped>
 .page {
+  background-color: $offWhiteColor;
   padding-bottom: 2rem;
-  display: block;
 }
 
 .content-footer {
   padding-top: 0;
-  max-width: $contentWidth;
 }
 
 .page-edit {
+  font-family: 'VT323', monospace;
+	font-size: 1.25rem;
   max-width: 100%;
-  padding: 2rem 2rem;
-}
-
-.content-feedback {
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 2rem 2rem 0 2rem;
+  float: left;
 }
 
 @media (min-width: $MQMobile) {
@@ -89,7 +87,7 @@ export default {
   }
 
   .page-edit {
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 0 0;
   }
 
   section {

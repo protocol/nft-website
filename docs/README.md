@@ -1,10 +1,10 @@
 ---
-title: Welcome
-description: NFT School
+title: Welcome to NFT School
+description: NFT School is open-source community education on best practices and how-tos for developers in the non-fungible token space.
 ---
  # Welcome to NFT School
 
-[ART TO COME]
+![Illustration of people engaged in creative endeavors.](./images/welcome/welcome-to-nft-school.svg)
 
 Some welcoming MVP messaging to make the reader feel reassured and engaged that they're in a place that will help them start their NFT developer journey.
 

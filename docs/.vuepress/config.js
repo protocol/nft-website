@@ -1,7 +1,8 @@
 // .vuepress/config.js
 
-const DEPLOY_DOMAIN = 'https://docs.ipfs.io'
+const DEPLOY_DOMAIN = 'https://nftschool.dev'
 const SPEEDCURVE_ID = process.env.SPEEDCURVE_ID || ''
+const COUNTLY_KEY = process.env.COUNTLY_KEY || ''
 const pageSuffix = '/'
 
 module.exports = {
@@ -24,15 +25,11 @@ module.exports = {
       md.use(require('markdown-it-footnote'))
       md.use(require('markdown-it-task-lists'))
       md.use(require('markdown-it-deflist')),
-        md.use(require('markdown-it-imsize')),
-        md.use(require('markdown-it-image-lazy-loading'))
+      md.use(require('markdown-it-imsize')),
+      md.use(require('markdown-it-image-lazy-loading'))
     }
   },
   themeConfig: {
-    algolia: {
-      apiKey: 'e56fc7c611806522df45191e22ed15ac',
-      indexName: 'ipfs-docs'
-    },
     defaultImage: '/images/social-card.png',
     author: {
       name: 'NFT School',
@@ -125,13 +122,10 @@ module.exports = {
   },
   plugins: [
     [require('./plugins/vuepress-plugin-speedcurve'), { id: SPEEDCURVE_ID }],
-    '@vuepress/plugin-back-to-top',
-    [
-      '@vuepress/google-analytics',
-      {
-        ga: 'UA-96910779-15'
-      }
-    ],
+    [require('./plugins/vuepress-plugin-countly'), {
+      domain: DEPLOY_DOMAIN,
+      key: COUNTLY_KEY
+    }],
     [
       'vuepress-plugin-clean-urls',
       {

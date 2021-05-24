@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 544 80" xmlns="http://www.w3.org/2000/svg">
+<path d="m200 16h8v16h-8zm32-16h8v16h-8zm0 32h8v48h-8zm32-16h8v48h-8zm16-16h8v16h-8zm32 0h8v32h-8zm0 48h8v32h-8zm32-48h8v80h-8zm32 16v48h8v-48zm32-16v80h8v-80zm32 16v48h8v-48zm32-16v80h8v-80zm32 0h8v64h-8zm32 64h8v16h-8z" fill="#fb0d41"/>
+<path d="M0 0h8v80H0zM32 16h8v64h-8zM64 0h8v80h-8zM128 16h8v64h-8z" fill="#0dccf1"/>
+<path d="M24 0H8v80h16V16h16v64h16V0H24zM136 0H72v80h16V48h32V32H88V16h48v64h16V16h16V0h-32zM200 0h-16v48h32v16h-32v16h48V32h-32V16h32V0h-32zM328 16v16h-16V0h-16v64h-32V16h16V0h-32v80h64V48h16v32h16V0h-16v16zM376 0h-16v80h48V0h-32zm16 32v32h-16V16h16zM440 0h-16v80h48V0h-32zm16 32v32h-16V16h16zM520 64h-16V0h-16v80h48V64h-16z" fill="#fff"/>
+</svg>

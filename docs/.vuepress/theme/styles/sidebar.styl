@@ -8,8 +8,25 @@ ul.sidebar-links > li > a {
 }
 
 .sidebar {
+	background-color: $reverseTextColor;
+	color: #fff;
+
+	.sidebar-group:not(.collapsable) .sidebar-heading:not(.clickable) {
+		color: $tertiaryColor;
+	}
+
 	.sidebar-heading {
-		font-weight: 700 !important;
+		font-family: 'VT323', monospace;
+		font-size: 1.6em;
+		text-transform: uppercase;
+		line-height: 1.4;
+		margin-top: 0.25em;
+		letter-spacing: 0.2rem;
+
+		span {
+			border-bottom: 3px solid $tertiaryColor;
+   			box-shadow: 2px 5px 0 -2px $secondaryColor;
+		}
 	}
 
 	.sidebar-group .arrow {
@@ -19,6 +36,12 @@ ul.sidebar-links > li > a {
 	.sidebar-group.is-sub-group a.sidebar-link {
 		margin-bottom: 0.2rem;
 	}
+
+	a.sidebar-link.active {
+		border-left: 4px solid $tertiaryColor;
+		box-shadow:  inset 5px 0 0 -1px $secondaryColor;
+		margin-left: 2px;
+	} 
 
 	.sidebar-group.is-sub-group {
 		margin-bottom: 0.5rem;
@@ -36,15 +59,18 @@ ul.sidebar-links > li > a {
 		letter-spacing: 0.05em;
 		line-height: 2em;
 	}
+
+	{scrollbar};
 }
 
 .icon.outbound {
 	padding-left: 0.15rem;
+	color: $linkColor;
 }
 
 // sidebar scrollbar style
 .sidebar::-webkit-scrollbar {
-	width: 5px;
+	width: 8px;
 	position: fixed;
 	right: 0;
 }
