@@ -44,6 +44,30 @@ header.navbar .links {
 		-1px -1px 0px 1px $tertiaryColor;
 }
 
+header.navbar .links input {
+	border-radius: 0;
+	border: none;
+  	box-shadow:
+		1px 1px 0px 1px $secondaryColor,
+		-1px -1px 0px 1px $tertiaryColor;
+	color: $textColor;
+}
+
+header.navbar .links ul {
+	border-radius: 0;
+	padding: 0;
+	border: 2px solid $tertiaryColor;
+	li {
+		border-radius: 0;
+	}
+	.focused, li:active {
+		background-color: $reverseTextColor;
+	}
+	a {
+		color: $linkColor;
+	}
+}
+
 @media (min-width: $MQNarrow) {
 	header.navbar .links {
 		display: flex;

@@ -30,10 +30,6 @@ module.exports = {
     }
   },
   themeConfig: {
-    algolia: {
-      apiKey: 'e56fc7c611806522df45191e22ed15ac',
-      indexName: 'ipfs-docs'
-    },
     defaultImage: '/images/social-card.png',
     author: {
       name: 'NFT School',
