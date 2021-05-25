@@ -2,6 +2,10 @@
 
 git config --global user.name "$GH_USERNAME"
 git config --global user.email "$GH_USER_EMAIL"
+git remote add fdocs https://$${GH_TOKEN}@github.com/protocol/nft-website.git > /dev/null 2>&1
+git fetch fdocs
+git checkout --track origin/$PR_HEAD_REF
+git pull
 
 BRANCHNAME='$PR_HEAD_REF'
 echo "Testing on commit range: $FIRST_COMMIT..$LAST_COMMIT"
@@ -52,7 +56,7 @@ if [ -z "$SVGS_CHANGED" ]; then
 else
   echo "Compressing SVGs..."
   for svg in $SVGS_CHANGED; do
-    scour -i "$svg" -o "$svg-opt"
+    scour -i "$svg" -o "$svg-opt" --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --indent=none
     mv "$svg-opt" "$svg"
   done
 fi
@@ -63,15 +67,11 @@ if [ -z "$(git status --porcelain)" ]; then
 - Image optimization came back clean!"
 else
   # Uncommitted changes
-  git remote add fdocs https://$${GH_TOKEN}@github.com/protocol/nft-website.git > /dev/null 2>&1
-  git fetch fdocs
-  git checkout --track origin/$PR_HEAD_REF
-  git pull
   git add .
-  git commit -m "Automatically optimized images. [ciskip]"
+  git commit -m "Automatically optimized images [ci skip]."
   git push
   COMMENT="$COMMENT
-- I optimized some images for you! See the commit with the comment \`Automatically optimized images [ciskip]\` in this PR for details."
+- I optimized some images for you! See the commit with the comment \`Automatically optimized images [ci skip].\` in this PR for details."
 fi
 
 echo "Run npm install"
