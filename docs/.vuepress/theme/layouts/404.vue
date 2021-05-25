@@ -1,9 +1,9 @@
 <template>
-  <div class="theme-container">
+  <div class="theme-container page-nosidebar">
     <Navbar />
     <div class="theme-default-content">
       <h1>😯 404</h1>
-      <h3>Oops, this page has moved or no longer exists</h3>
+      <h3>Oops! This page has moved or no longer exists</h3>
 
       <p>
         We've logged this issue and invite you to choose your next adventure
@@ -13,13 +13,14 @@
         <RouterLink to="/">
           Return home
         </RouterLink>
-        or <a href="#" @click="searchFocus">try our superb search</a>
+        or <a href="#" @click="searchFocus">try a search</a>
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import countly from '@theme/utils/countly'
 import Navbar from '@theme/components/Navbar.vue'
 
 export default {
@@ -35,13 +36,9 @@ export default {
   },
 
   mounted() {
-    // bail if ga is not enabled
-    if (!window.ga) return
-
-    window.ga('send', 'event', {
-      eventCategory: '404',
-      eventAction: this.$route.path,
-      eventLabel: document.referrer
+    countly.trackEvent(countly.events.NOT_FOUND, {
+      path: this.$route.path,
+      referrer: typeof window !== 'undefined' ? document.referrer : null,
     })
   },
   methods: {
@@ -52,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.page-nosidebar {
+	background-color: $offWhiteColor;
+}
+</style>

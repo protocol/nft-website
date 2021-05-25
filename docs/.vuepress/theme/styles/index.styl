@@ -1,3 +1,4 @@
+@import 'layout';
 @import 'util';
 @import 'scrollbar';
 @import 'buttons';
@@ -11,6 +12,7 @@
 	Root elements styles to force them to use 100% of the viewport
 */
 html {
+	background-color: $primaryColor;
     height: 0;
     min-height: 100%;
     display: flex;
@@ -18,24 +20,18 @@ html {
 }
 
 body {
+	background-color: transparent;
     overflow-y: scroll;
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
-}
-
-#app {
-	height: 100%;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 .theme-container {
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
-}
-
-header.navbar {
-	width: 100%;
 }
 
 main.page {
@@ -75,95 +71,46 @@ img[loading] {
 	height: auto;
 }
 
-html {
-	background-color: $primaryColor;
-}
-
-body {
-	background-color: transparent;
-}
-
 #app {
-	font-family: 'Ubuntu', sans-serif;
-
-	.navbar {
-		position: sticky;
-		background-color: $reverseTextColor;
-		border-bottom: none;
-	}
-
-	.navbar .logo {
-		height: 2.5rem;
-		margin: 0;
-		padding: 1px 3px 0px 0;
-		vertical-align: top;
-	}
-
-	.navbar .links {
-		background-color: $reverseTextColor;
-	}
-
-	.site-name {
-		font-size: 1.5rem;
-		letter-spacing: -0.05rem;
-		background: url('/images/nftschool-logo-text.svg') no-repeat;
-		background-position: 8px 5px;
-		text-indent: -99999px;
-		min-width: 220px;
-		min-height: 47px;
-		background-size: contain;
-	}
-
-	.sidebar {
-		background-color: $reverseTextColor;
-	}
-
-	.sidebar-button {
-		color: $secondaryColor;
-
-		.icon {
-			width: 1.75rem;
-			height: 1.75rem;
-		}
-	}
-
-	.page {
-		background-color: $offWhiteColor;
-		padding-bottom: 2rem;
-	}
-
-	.icon.outbound {
-		color: $linkColor;
-	}
+	height: 100%;
 }
 
 a {
 	color: $linkColor;
 }
 
-.header-anchor {
-	padding-right: 0 !important;
-	margin-left: -0.5em !important;
+svg.icon.outbound {
+	color: $linkColor;
+}
+
+a.header-anchor {
+	padding-right: 0;
+	margin-left: -0.5em;
 }
 
 h1, h2, h3, h4 {
 	font-family: 'VT323', monospace;
 	font-weight: 400;
-	color: $accentTextColor;
+	color: $primaryColor;
 }
 
 h1 {
 	font-size: 3rem;
-	padding-top: 2rem !important;
 	padding-bottom: 0.5rem;
 	line-height: 2.5rem;
 }
 
+.theme-default-content:not(.custom) {
+	& > h1 {
+		padding-top: 2rem;
+	}
+}
+
 h2 {
 	font-size: 2rem;
-	line-height: 1.2rem;
-	border-bottom: 3px solid $secondaryColor;
-    box-shadow:  3px 6px 0 -3px $tertiaryColor;
+	line-height: 1.6rem;
+	border-bottom: 3px solid $tertiaryColor;
+    box-shadow:  2px 5px 0 -2px $secondaryColor;
 }
 
 h3 {
@@ -174,36 +121,6 @@ h3 {
 h4 {
 	font-size: 1.5rem;
 	line-height: 1.5rem;
-}
-
-.content-footer {
-	h3, a {
-		color: $secondaryColor;
-	}
-}
-
-.page-edit {
-	font-family: 'VT323', monospace;
-	font-size: 1.25rem;
-	padding-bottom: 0 !important;
-}
-
-.custom-block.callout {
-	background-color: lighten($accentColor, 80%);
-	padding: 0.1rem 1.5rem;
-	border-color: $accentColor;
-	border-left-width: 0.5rem;
-	border-left-style: solid;
-}
-
-.custom-block.right {
-	float: right;
-	padding: 1em 0 1em 1em;
-}
-
-.custom-block.left {
-	float: left;
-	padding: 1em 1em 1em 0em;
 }
 
 :root {

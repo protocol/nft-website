@@ -2,6 +2,7 @@
 title: First steps
 description: A step-by-step guide to getting started as an NFT developer.
 ---
+
 # First steps
 
 Developing apps and experiences for NFTs requires a bit of background knowledge and experience with blockchain smart contracts. This guide will walk through interacting with a very simple "hello world" smart contract from JavaScript, just to get acquainted with the tooling and libraries we'll use in later guides.
