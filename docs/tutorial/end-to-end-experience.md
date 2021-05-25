@@ -2,7 +2,7 @@
 title: End-to-end experience
 description: Understand the end-to-end experience of storing and using NFTs in this developer-focused guide.
 ---
- # (MVP) End-to-end experience
+ # End-to-end experience
 
 (Excerpt from main outline to be used for generating content)
 

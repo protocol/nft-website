@@ -1,5 +1,5 @@
 ---
-title: Using NFTs in games
+title: Using NFTs in games 🚧
 description: Get an overview of best practices for using NFTs in games in this developer-focused guide.
 issueUrl: https://github.com/protocol/nft-website/issues/26
 related:

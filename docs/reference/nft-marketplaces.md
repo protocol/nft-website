@@ -2,7 +2,7 @@
 title: NFT marketplaces
 description: A developer-focused guide to NFT marketplaces following best practices.
 ---
- # (MVP) NFT marketplaces
+ # NFT marketplaces
 
 (Excerpt from main outline to be used for generating content)
 ## Marketplaces following best practices
