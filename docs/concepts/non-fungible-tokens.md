@@ -28,15 +28,35 @@ However, a dollar bill that's been sketched on by Picasso is unique in a way tha
 
 In the same way, by allowing each token to contain a small amount of arbitrary data, NFTs become a medium for creative expression, as well as a unit of exchange and account. The value of an NFT is thus highly dependent on the data it contains and represents. The same NFT may be valued completely differently by different people, based on factors like aesthetic taste or the identity of the creator.
 
-### What are NFTs good for?
+Of course, there's a good reason we don't conduct business by swapping priceless Picasso sketches around! Without fungibility, an NFT isn't much good as currency. However, by existing on the same networks that enable digital currency, NFTs can leverage the payment and account infrastructure for transactions and benefit from the security guarantees of the blockchain.
 
-There's a good reason we don't conduct business by swapping priceless Picasso sketches around! Without fungibility, an NFT isn't much good as currency. 
+### How are NFTs special?
 
-So what are NFTs used for, and what makes them different from other digital records? 
+What makes an NFT different from a PNG file on someone's website, or from other kinds of digital records like a spreadsheet?
 
-TODO: use cases.
+The differences hinge on a few core properties of the blockchain design. The primary function of a blockchain network is to get all the participants to agree on a single shared "state of the world". For Bitcoin, the shared state is the balance of every account, while for Ethereum it is the inputs and outputs of smart contract interactions. Because the members of the network are spread out across the world, it takes time for everyone to converge on the same state, and there are special rules to prevent cheating or malicious behavior. Once everyone has agreed on the state, it becomes part of the canonical history of the blockchain.
 
-### Who is using NFTs?
+As new blocks are added to the chain, earlier blocks become harder and more expensive to modify. Soon (generally within a few blocks), the cost to "change history" becomes so great that it is effectively impossible, and the information recorded in the blockchain can be considered permanent.
 
-TODO: broad overview of the state of NFT "ecosystem". Link to a few examples of marketplaces, gaming platforms, etc. Not exhaustive - should just give a few examples for each primary use case.
+By contrast, the traditional web is famously impermanent and dynamic. A web server may serve different content based on the time of day or the IP address of the visitor, and content disappears from the web nearly as often as it arrives. 
 
+This property of permanence and stability is central to the NFT value proposition. By using a blockchain as a durable shared data storage medium, NFTs can be trusted to endure as long as the blockchain itself remains operational. Which brings up another interesting property of blockchains. By rewarding node operators with cryptocurrency in exchange for keeping the network alive, a blockchain incentivizes its own survival. As long there are people attracted to the economic reward, there will be someone motivated to keep the network online. This ensures the survival of all historical data as well, including NFTs.
+
+::: tip Side Note
+As we'll see in our discussion of [Content Persistence](/concepts/content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever! NFTs often link to data outside the blockchain, which also needs to be kept online.
+:::
+
+
+### What are NFTs used for?
+
+Among the first NFT experiments were [CryptoPunks](https://www.larvalabs.com/cryptopunks), a set of 10,000 pixel art characters that can be collected and traded on Ethereum. Although anyone can view the artwork for any punk, each character can have a single official "owner" on the Ethereum blockchain at a given time. CryptoPunks proved to be a huge success, with rare punks trading hands for huge sums of Ether worth millions of US Dollars.
+
+Digital collectibles like CryptoPunks remain one of the most popular and compelling use cases for NFTs, and the successors to CryptoPunks helped define the earliest [standards for interoperability and metadata](/reference/metadata-schemas.md) for NFTs.
+
+In the years since CryptoPunks debut, NFTs have become a vehicle for all kinds of creative projects. Much of the excitement has come from artists looking to engage directly with fans and find new ways to make a living from their creations. This has been supported by a growing ecosystem of [NFT marketplaces](/reference/nft-marketplaces.md) that bridge the gap between the familiar web and the cryptic world of crytocurrencies and has resulted in millions of dollars worth of direct payments to artists for their digital creations.
+
+Outside of digital art and collectibles, NFTs have been finding use cases in gaming, where they can represent plots of virtual "land," avatars and skins for game characters, in-game items, and more. By putting a player's "inventory" on a shared blockchain, NFT-powered games can enable new mechanics and allow players to use their custom items across many potential games and experiences. They also give players a way to buy, sell, and trade items among themselves without locking their purchases into a single company's storefront or marketplace.
+
+### Looking ahead
+
+It's still early days for NFTs, and it's very likely that we'll see a new crop of NFT experiences that are outside any of today's use cases. It's hard to predict what the future will bring, but if you're here at NFT School you have a better chance than most. As they say, the best way to predict the future is to invent it yourself!
