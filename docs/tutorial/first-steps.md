@@ -14,122 +14,136 @@ To follow along, you should be familiar with modern `async`/`await` style JavaSc
 
 If you've never heard the words "Solidity", "EVM", or "smart contract" before, it might be best to [learn about the basics](https://ethereum.org/en/developers/docs/intro-to-ethereum/) before diving in. That said, we won't be writing any smart contracts in this tutorial, so you should be able to follow along without needing to learn a new programming language.
 
-## Connecting to Ethereum
+## Smart contracts
 
-There are generally three main execution environments for a blockchain network. 
+A "smart contract" is any program that runs on a blockchain, and uses a blockchain's ability to track state, process transactions, and interact with addresses. In the case of Ethereum, smart contracts can be written in Solidity or Vyper. In other topics we will cover smart contract development with Solidity. But in this tutorial, we'll be focused on interacting with smart contracts that already exist.
 
-The "mainnet" is the official production network, which is considered the source of truth, and whose tokens can be exchanged for "real world" money in various ways. As you might imagine, using the mainnet for development and testing is an expensive proposition. 
+## Blockchain environments
 
-To make smart contract development practical, you can run a local development network ("devnet"), which is usually a kind of lightweight simulator that has the same API as the mainnet but runs on your development machine for fast feedback and iteration. The most popular devnets are bundled into blockchain development frameworks and provide quality-of-life features like console logs and stack traces. For Ethereum, the main devnets are [Ganache](https://www.trufflesuite.com/ganache), which is part of the [Truffle Suite](https://www.trufflesuite.com), and the [HardHat network](https://hardhat.org/hardhat-network/), which is integrated into the [HardHat framework](https://hardhat.org/hardhat-network/).
+There are three environments for a blockchain network.
 
-Because devnets are a simplified simulation of the real network, they don't always behave in quite the same way. This is a good thing when you want fast development cycles, but not so great when you want to know how your contract will actually work on mainnet. For that, you can deploy and run your contract on a test network (or "testnet"). These networks generally run the same code as the mainnet, but they have separate blockchain states and may be configured differently in various ways.
+### mainnet
+
+The "mainnet" is the official production network, which is considered the source of truth, and whose tokens can be exchanged for "real world" money in various ways. As you might imagine, using the mainnet for development and testing is an expensive proposition.
+
+### devnet
+
+To make smart contract development practical, you can run a local development network ("devnet"), which is usually a kind of lightweight simulator that has the same API as the mainnet but runs on your development machine for fast feedback and iteration. The most popular devnets are bundled into blockchain development frameworks and provide quality-of-life features like console logs and stack traces. For Ethereum, the main devnets are [Ganache](https://www.trufflesuite.com/ganache), which is part of the [Truffle Suite](https://www.trufflesuite.com), and the [Hardhat network](https://hardhat.org/hardhat-network/), which is integrated into the [Hardhat framework](https://hardhat.org/hardhat-network/).
+
+### testnet
+
+Because devnets are a simplified simulation of the real network, they don't always behave in quite the same way. This is a good thing when you want fast development cycles, but not so great when you want to know how your contract will actually work on mainnet.
+
+For that, you can deploy and run your contract on a test network (or "testnet"). These networks generally run the same code as the mainnet, but they have separate blockchain states and may be configured differently in various ways.
+
+## Building our app
 
 For this guide, we'll be interacting with a contract that's been deployed to the Ropsten testnet. This lets us skip choosing and installing a devnet, but we will still need to do a little bit of setup.
 
-### Install MetaMask
+### Get some testnet ETH with MetaMask for Chrome
 
-[MetaMask](https://metamask.io/) is a browser extension that connects web applications to Ethereum and other blockchain networks. It's also an Ethereum _wallet_, meaning that it manages the private keys used to authorize Ethereum transactions. 
+[MetaMask](https://metamask.io/) is a browser extension that connects web applications to Ethereum and other blockchain networks. It's also an Ethereum _wallet_, meaning that it manages the private keys used to authorize Ethereum transactions, and can store Ethereum tokens (ETH).
 
-TODO:
-  - how to install metamask & create a wallet
-  - how to switch to the Ropsten network in Metamask
-  - warn that if readers have any mainnet Eth, they should create a new wallet for testnet. 
-    - This makes it harder to accidentally send mainnet Eth to a testnet address / contract, which burns the mainnet Eth forever.
+1) Go to [https://metamask.io/download.html](https://metamask.io/download.html) and install MetaMask for Chrome.
+2) Create an account, and save your seed phrase, which will give you access to your Ropsten testnet wallet address.
+3) In Chrome, open the MetaMask extension. Click the drop-down in the top-right to switch networks and select the Ropsten network.
+4) Click the **Buy** button and scroll down. Under the **Test Faucet** heading, click the **Get Ether** button. This will take you to the ETH testnet faucet where you can request free testnet ETH tokens. These do not have monetary value as they can not be traded on an exchange, but functionally they behave the same as ETH tokens on the mainnet, allowing us to develop blockchain programs that will work on mainnet without spending any money.
 
-### Get some testnet Eth
+::: tip
+If you have an existing ETH wallet on mainnet, it's a good idea to create a new wallet for testnet. This makes it harder to accidentally send mainnet ETH to a testnet wallet address, which burns the mainnet ETH forever.
+:::
 
-TODO: 
-- how to request test Eth from the MetaMask faucet for the ropsten network
-  - https://faucet.metamask.io/
-    - seems to only support Ropsten - switching MetaMask to another network changes the address of the faucet in the web UI, but the transactions are always on Ropsten
-  - https://faucet.ropsten.be/
-    - alternative faucet, can paste in wallet address from metamask to get test eth
-  - should note that it may take a few minutes for the transaction to finalize and the Eth to show up
-    - they can view the pending tx on https://ropsten.etherscan.io if they want to see the progress
+After following these steps, a transaction is generated that will mint a testnet ETH token and send it to your wallet. This might take a few minutes to complete. You can monitor the transaction progress by clicking the link to the transaction ID on the faucet homepage, which will take you to [the blockchain explorer for Ropsten testnet on etherscan.io](https://ropsten.etherscan.io).
 
-### Create an NPM project
+### Download Ethers
 
-First make an empty NPM project:
+With a testnet wallet created and full of test ETH ready to fuel transactions on the blockchain, we are ready to do some development.
+
+First make an empty directory named `hello-eth`:
 
 ```shell
 mkdir hello-eth
 cd hello-eth
-npm init
 ```
 
-NPM will ask you some questions about the project - you can just accept the defaults.
+To interact with Ethereum, we need a JavaScript library that makes [JSON-RPC API](https://ethereum.org/en/developers/docs/apis/json-rpc/) calls. For smart contract interactions, the two main contenders are [web3.js](https://web3js.readthedocs.io/en/v1.3.4/) and [Ethers](https://docs.ethers.io/v5/). We're using Ethers for this guide, since it's a bit easier to get started with.
 
-Next install the dependencies:
+On [the getting started page for Ethers](https://docs.ethers.io/v5/getting-started/#getting-started--importing--web-browser), download the Ethers library as a `.js` file. For this tutorial, we'll be using the ES6 version of the library, which should have a filename like `ethers-5.1.esm.min.js`. Place this file in the `hello-eth` directory.
+
+### Gather needed details
+
+For this tutorial, we're going to connect to a smart contract called `Greeter` that's included with a new [Hardhat](https://hardhat.io) project. It's been deployed to the Ropsten testnet at the address `0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd`, and you can find details about it on the [EtherScan Ropsten block explorer](https://ropsten.etherscan.io) by searching for that address, which should take you to [the address detail view](https://ropsten.etherscan.io/address/0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd).
+
+Ethers has a [Contract API](https://docs.ethers.io/v5/api/contract/contract/) that abstracts over the details of the blockchain and lets us interact with smart contracts as if they were regular JavaScript objects named `Contract`.
+
+To wire up a JavaScript object to a deployed smart contract with Ethers, we need two things: the address of the contract, and its Application Binary Interface (ABI).
+
+To get the ABI for a contract, look at the contract source code on the blockchain explorer. Here is [the source code for `Greeter`](https://ropsten.etherscan.io/address/0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd#code). You can find the ABI, which is expressed as a condensed chunk of JSON code, by scrolling down.
+
+### Create index.html
+
+In the `hello-eth` folder, next to `ethers-5.1.esm.min.js`, create a file called `index.html` and enter the following code. You'll see the ABI value from Etherscan and the address for the deployed Greeter smart contract declared as `const` values, and MetaMask providing access to the Ethereum blockchain via the `window.ethereum` object. That's all Ethers needs to provide a Web3 layer for you to make smart contract calls with JavaScript.
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+  <title>Hello, Ethers!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module">
+      import { ethers } from "./ethers-5.1.esm.min.js";
+      //const ethers = require('ethers')
+
+      const GREETER_ADDRESS = '0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd'
+      const GREETER_ABI = `[{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"greet","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}]`
+
+      async function getGreeting() {
+        // Wrap the window.ethereum object injected by MetaMask with the ethers API
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+        // Connect to the greeter contract.
+        const greeterContract = new ethers.Contract(GREETER_ADDRESS, GREETER_ABI, provider);
+
+        // Call the greet() smart contract function.
+        const greeting = await greeterContract.greet();
+
+        // Write the greeting result to the DOM.
+        document.getElementById('output').innerHTML = greeting;
+      }
+      getGreeting();
+  </script>
+  </head>
+  <body>
+    <div id="output" />
+  </body>
+</html>
+```
+
+### Install and run http-server
+
+Now you'll need to run a webserver. If you haven't already, [install Node.js](https://nodejs.org/en/download/). Then you can install and run [`http-server`](https://www.npmjs.com/package/http-server) to serve what we've created:
 
 ```shell
-npm install --save ethers
+npm install --global http-server
+http-server .
 ```
 
-TODO(yusef): create index.js / index.html
+The webserver should provide URLs for you to copy/paste into your browser:
 
-### Interacting with smart contracts
-
-To interact with Ethereum, we need two things: a connection to an Ethereum node's [JSON-RPC API][docs-eth-json-rpc], and a JavaScript library to save the pain of crafting raw JSON-RPC calls. 
-
-The JSON-RPC connection is provided by MetaMask, which connects to hosted Ethereum nodes for mainnet or any of the public testnets. You can also configure MetaMask to connect to a devnet running on your local machine or network.
-
-For smart contract interactions, the two main contenders are [web3.js](https://web3js.readthedocs.io/en/v1.3.4/) and [ethers.js](https://docs.ethers.io/v5/). We're using ethers.js for this guide, since it's a bit easier to get started with.
-
-#### Connecting to MetaMask
-
-MetaMask injects an `ethereum` object into the `window` global, which we can use to connect to the network.
-
-Here's an example pulled from the [ethers.js documentation](https://docs.ethers.io/v5/getting-started/#getting-started--connecting):
-
-```js
-// A Web3Provider wraps a standard Web3 provider, which is
-// what Metamask injects as window.ethereum into each page
-const provider = new ethers.providers.Web3Provider(window.ethereum)
-
-// The Metamask plugin also allows signing transactions to
-// send ether and pay to change state within the blockchain.
-// For this, you need the account signer...
-const signer = provider.getSigner()
+```
+Starting up http-server, serving .
+Available on:
+  http://127.0.0.1:8081
+  http://192.168.2.10:8081
+  http://192.168.86.24:8081
 ```
 
-#### Connecting to a contract
+Visiting any of these URLs in your browser will produce the message `Hello, Hardhat!` which means that ethers has made a call to the Greeting smart contract that Hardhat deployed to the Ropsten test network.
 
-ethers.js gives us a [Contract API](https://docs.ethers.io/v5/api/contract/contract/) that abstracts over the details of the blockchain and lets us interact with smart contracts as if they were regular JavaScript objects.
+## Conclusion
 
-To wire up a `Contract` object to a deployed smart contract, we need two things: the address of the contract, and its ABI, or Application Binary Interface.
-
-For this tutorial, we're using the default `Greeter` contract that's included with a new [HardHat](https://hardhat.io) project. 
-It's been deployed to the Ropsten testnet at the address `0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd`, and you can find details about it on the [EtherScan Ropsten block explorer](https://ropsten.etherscan.io) by searching for the address, which should take you to [the address detail view](https://ropsten.etherscan.io/address/0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd).
-
-Clicking on the **Contract** tab on EtherScan, you can see the contract source code and other information, including the ABI, which you can export to a JSON file or copy to your clipboard.
-
-::: tip
-You can get the ABI for any deployed contract by searching the address on EtherScan!
-:::
-
-Here's the code you'll need to connect to the deployed contract:
-
-```js
-const ethers = require('ethers')
-
-const GREETER_ADDRESS = '0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd'
-const GREETER_ABI = `[{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"greet","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}]`
-
-async function getGreeting() {
-  // Wrap the window.ethereum object injected by MetaMask with the ethers API
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-
-  // Connect to the greeter contract.
-  const greeterContract = new ethers.Contract(GREETER_ADDRESS, GREETER_ABI, provider)
-
-  // Call the greet() smart contract function.
-  const greeting = await greeterContract.greet()
-
-  console.log(greeting)
-}
-```
-
-TODO(yusef): walk through adding code to index.js and running the example
+Great work! Now you have an easy route to interacting with smart contracts with JavaScript right in your browser, a Ropsten Testnet account loaded with ETH for fuel, and a general outline for building apps on top of Ethereum. After this crash course, you're ready to start getting into minting NFTs in our [End-to-end tutorial](end-to-end-experience.md).
 
 ## More Resources
 
@@ -138,6 +152,4 @@ Here are a few resources to learn more about Ethereum development.
 - The official [Intro to Ethereum](https://ethereum.org/en/developers/docs/intro-to-ethereum/) guide.
 - [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) - a batteries-included starter kit for full-stack dApp development.
 - [Solidity Documentation](https://docs.soliditylang.org/en/latest/)
-
-
-[docs-eth-json-rpc]: https://eth.wiki/json-rpc/API
+- [Ethers' Ethereum Basics](https://docs.ethers.io/v5/concepts/)
