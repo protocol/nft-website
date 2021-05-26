@@ -4,7 +4,7 @@ description: Understand how content addressing is key to NFT best practices in t
 ---
  # Content addressing
 
- Content addressing is a technique for organizing and locating data in an information system, where the key used to locate content is derived from the content itself.
+ Content addressing is a technique for organizing and locating data in an information system, where the key used to locate content is derived from the content itself. This article will describe what content addressing is and why it's important for NFTs.
 
  ## The basic problem
 
@@ -43,6 +43,35 @@ Both components of an address like `nftschool.dev/concepts/content-addressing` a
 
 In the context of the web, where _everything_ is mutable and dynamic, this is just the way it's always been. The web has never promised any kind of "permanence" either in content or the "meta-structure" of links between content. As a result, [link rot](https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php) is just something we've all learned to live with.
 
-## A more stable key
+For a digital artifact that's meant to actually be permanent, like an NFT, link rot is an existential concern. Link rot affects NFTs because most NFTs are actually links in disguise. Data storage on most blockchain networks is much, much more expensive than traditional online storage systems. For example, to store one megabyte of data directly on Ethereum would cost approximately 21.5 Ether using current [gas prices](https://ethgasstation.info), which works out to about $56,000 USD at the time of writing.
 
+To make NFTs representing digital art practical, the artwork itself needs to be stored "off-chain," where storage costs are manageable, while limiting "on-chain" storage as much as possible. The simplest way to do this is by only storing a link to the off-chain data inside the NFT itself. However, the permanence of the blockchain only applies to the on-chain data. If you store an NFT with a link that later rots, the value of the NFT is compromised, even though the blockchain record remains unchanged.
 
+## A stronger link
+
+To safely link from an NFT to off-chain assets like images and metadata, we need links that can stand up to the onslaught of time. The ideal link would always resolve to exactly the same piece of content that was originally referenced in the permanent blockchain record, and it would not be tied to a single server owner or "domain."
+
+Content addressing gives us exactly the kind of links we need. A content-addressed system works just like our key/value store, with one significant difference: you no longer get to choose the keys. Instead, the keys are derived directly from the values that are stored, using a deterministic function that will always generate the same key for the same content.
+
+Now our interface looks like this:
+
+```typescript
+interface ContentStore {
+  put(value: Value): Promise<Key>;
+  get(key: Key): Promise<Value>;
+}
+```
+
+Instead of accepting a key and a value, our `put` method just takes a value and returns the key to the caller. In exchange for not being able to choose your own keys, you get some valuable properties.
+
+First, we no longer need to coordinate among multiple writers to our store by splitting the key space into "domains." There's now one universal domain, the domain of all possible values. If multiple people add the same value, there's no collision in the key space. They just each get the same key back from the `put` method. 
+
+This change also gives our values _location independence_. In our original K/V store with multiple domains, we had to include the domain inside the key to prevent name collisions. As a consequence, in order to retrieve a value, you need to know which domain it belongs to, as well as the specific location within that domain's piece of the key space. If we store a "location based" key on the blockchain, our ability to retrieve the data depends on the one domain that's "baked in" to our key. Even if the same content is stored in a thousand other domains, our lookup will fail if the one we depend on disappears or changes its naming conventions.
+
+## Enough theory. What should I use?
+
+So far, we've been talking about content addressing in the abstract, but the point of NFT School is to build things! How can we actually leverage content addressing to make NFTs with durable links?
+
+The simplest way is to use [IPFS](https://ipfs.io), the InterPlanetary File System. 
+
+TODO: more about IPFS and how to use it for NFTs, link to NFT "best practices" on docs.ipfs.io, etc
