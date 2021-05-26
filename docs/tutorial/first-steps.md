@@ -5,7 +5,7 @@ description: A step-by-step guide to getting started as an NFT developer.
 
 # First steps
 
-Developing apps and experiences for NFTs requires a bit of background knowledge and experience with blockchain smart contracts. This guide will walk through interacting with a very simple "hello world" smart contract from JavaScript, just to get acquainted with the tooling and libraries we'll use in later guides.
+Developing apps and experiences for NFTs requires a bit of background knowledge and experience with blockchain smart contracts. This guide will walk through interacting with a simple "hello world" smart contract from JavaScript, just to get acquainted with the tooling and libraries we'll use in later guides.
 
 If you're already familiar with the basics of interacting with smart contracts, you can skip this guide and jump into [developing an end-to-end experience](./end-to-end-experience.md).
 
@@ -39,7 +39,7 @@ For that, you can deploy and run your contract on a test network (or "testnet").
 
 ## Building our app
 
-For this guide, we'll be interacting with a contract that's been deployed to the Ropsten testnet. This lets us skip choosing and installing a devnet, but we will still need to do a little bit of setup.
+For this guide, we'll be interacting with a contract that's been deployed to the Ropsten testnet. This lets us skip choosing and installing a devnet, but we will still need to do a bit of setup.
 
 ### Get some testnet ETH with MetaMask for Chrome
 
@@ -48,7 +48,7 @@ For this guide, we'll be interacting with a contract that's been deployed to the
 1) Go to [https://metamask.io/download.html](https://metamask.io/download.html) and install MetaMask for Chrome.
 2) Create an account, and save your seed phrase, which will give you access to your Ropsten testnet wallet address.
 3) In Chrome, open the MetaMask extension. Click the drop-down in the top-right to switch networks and select the Ropsten network.
-4) Click the **Buy** button and scroll down. Under the **Test Faucet** heading, click the **Get Ether** button. This will take you to the ETH testnet faucet where you can request free testnet ETH tokens. These do not have monetary value as they can not be traded on an exchange, but functionally they behave the same as ETH tokens on the mainnet, allowing us to develop blockchain programs that will work on mainnet without spending any money.
+4) Click the **Buy** button and scroll down. Under the **Test Faucet** heading, click the **Get Ether** button. This will take you to the ETH testnet faucet where you can request free testnet ETH tokens. These do not have monetary value as they cannot be traded on an exchange, but functionally they behave the same as ETH tokens on the mainnet, allowing us to develop blockchain programs that will work on mainnet without spending any money.
 
 ::: tip
 If you have an existing ETH wallet on mainnet, it's a good idea to create a new wallet for testnet. This makes it harder to accidentally send mainnet ETH to a testnet wallet address, which burns the mainnet ETH forever.
@@ -151,6 +151,6 @@ Great work! Now you have an easy route to interacting with smart contracts with 
 Here are a few resources to learn more about Ethereum development.
 
 - The official [Intro to Ethereum](https://ethereum.org/en/developers/docs/intro-to-ethereum/) guide.
-- [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) - a batteries-included starter kit for full-stack dApp development.
+- [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) — a batteries-included starter kit for full-stack dApp development.
 - [Solidity Documentation](https://docs.soliditylang.org/en/latest/)
 - [Ethers' Ethereum Basics](https://docs.ethers.io/v5/concepts/)
