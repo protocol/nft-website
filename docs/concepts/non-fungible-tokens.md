@@ -8,7 +8,7 @@ description: Learn the basics of NFTs in this developer-focused guide - what the
 
 First, let's break down the name. Before we get into "non-fungible," what do we mean by "token"? For our purposes, a token is a kind of record in an information system called a blockchain. We won't get into all the details of how blockchains work here; check out [Blockchains and NFTs](./blockchains.md) for that. To understand what an NFT is, we just need a little background knowledge.
 
-### A bit of history
+## A bit of history
 
 The most famous blockchain is the one that coined the term. Bitcoin's [white paper](https://bitcoin.org/bitcoin.pdf) introduced a "chain of blocks" to track and secure the history of the system over time, and the term "blockchain" caught on as new networks built on the idea. The Bitcoin network has a single token, named "Bitcoin." 
 
@@ -20,7 +20,7 @@ Ethereum has a "native" token called Ether, which is used as both a store of val
 
 Most early smart contracts defined fungible tokens similar to Ether, but people quickly began experimenting with using tokens to contain data, making each token unique and distinguishable from the rest. The result is a token that can't easily be exchanged with another arbitrary token of the same type, or a non-fungible token. 
 
-### What makes a token non-fungible?
+## What makes a token non-fungible?
 
 Earlier we mentioned serial numbers as a way to distinguish one dollar bill from another. Even though you can tell them apart, two dollar bills are still fungible, because they each have the same value as currency. A unique identifier alone is not enough to make something non-fungible.
 
@@ -30,7 +30,7 @@ In the same way, by allowing each token to contain a small amount of arbitrary d
 
 Of course, there's a good reason we don't conduct business by swapping priceless Picasso sketches around! Without fungibility, an NFT isn't much good as currency. However, by existing on the same networks that enable digital currency, NFTs can leverage the payment and account infrastructure for transactions and benefit from the security guarantees of the blockchain.
 
-### How are NFTs special?
+## How are NFTs special?
 
 What makes an NFT different from a PNG file on someone's website, or from other kinds of digital records like a spreadsheet?
 
@@ -46,8 +46,7 @@ This property of permanence and stability is central to the NFT value propositio
 As we'll see in our discussion of [Content Persistence](/concepts/content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever! NFTs often link to data outside the blockchain, which also needs to be kept online.
 :::
 
-
-### What are NFTs used for?
+## What are NFTs used for?
 
 Among the first NFT experiments were [CryptoPunks](https://www.larvalabs.com/cryptopunks), a set of 10,000 pixel art characters that can be collected and traded on Ethereum. Although anyone can view the artwork for any punk, each character can have a single official "owner" on the Ethereum blockchain at a given time. CryptoPunks proved to be a huge success, with rare punks trading hands for huge sums of Ether worth millions of US Dollars.
 
@@ -57,6 +56,6 @@ In the years since CryptoPunks debut, NFTs have become a vehicle for all kinds o
 
 Outside of digital art and collectibles, NFTs have been finding use cases in gaming, where they can represent plots of virtual "land," avatars and skins for game characters, in-game items, and more. By putting a player's "inventory" on a shared blockchain, NFT-powered games can enable new mechanics and allow players to use their custom items across many potential games and experiences. They also give players a way to buy, sell, and trade items among themselves without locking their purchases into a single company's storefront or marketplace.
 
-### Looking ahead
+## Looking ahead
 
 It's still early days for NFTs, and it's very likely that we'll see a new crop of NFT experiences that are outside any of today's use cases. It's hard to predict what the future will bring, but if you're here at NFT School you have a better chance than most. As they say, the best way to predict the future is to invent it yourself!
