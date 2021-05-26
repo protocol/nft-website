@@ -1,9 +1,8 @@
 ---
-title: NFT marketplaces
+title: NFT marketplaces 🚧
 description: A developer-focused guide to NFT marketplaces following best practices.
+issueUrl: https://github.com/protocol/nft-website/issues/45
 ---
- # (MVP) NFT marketplaces
+ # NFT marketplaces
 
-(Excerpt from main outline to be used for generating content)
-## Marketplaces following best practices
-Check out this chart for a guide to NFT marketplaces that are following best practices.
+<ContentStatus />

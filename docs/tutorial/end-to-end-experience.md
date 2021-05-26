@@ -1,16 +1,10 @@
 ---
-title: End-to-end experience
+title: End-to-end experience 🚧
 description: Understand the end-to-end experience of storing and using NFTs in this developer-focused guide.
+issueUrl: https://github.com/protocol/nft-website/issues/39
 ---
- # (MVP) End-to-end experience
+ # End-to-end experience
 
-(Excerpt from main outline to be used for generating content)
-
-## With nft.storage
-
-### In browser
-
-## Manually
-This section might not be included in MVP.
+<ContentStatus />
 
 

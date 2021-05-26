@@ -1,13 +1,9 @@
 ---
-title: Content persistence
+title: Content persistence 🚧
 description: Learn the basics of content persistence and how decentralized storage and pinning services fit into the NFT developer lifecycle.
+issueUrl: https://github.com/protocol/nft-website/issues/24
 ---
- # (MVP) Content persistence
+ # Content persistence
 
-(Excerpt from main outline to be used for generating content)
-## Decentralized storage networks
-
-## Pinning services
-
-## Cloud storage
+<ContentStatus />
 
