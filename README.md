@@ -1,7 +1,5 @@
 # NFT School
 
-## Project setup
-
 [![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg)](https://protocol.ai)
 [![](https://img.shields.io/badge/platform-VuePress-green.svg)](https://vuepress.vuejs.org/)
 [![](https://img.shields.io/badge/deployed%20on-Fleek-ff69b4.svg)](http://fleek.co/)
