@@ -1,7 +1,9 @@
 ---
-title: End-to-end experience
+title: End-to-end experience 🚧
 description: Understand the end-to-end experience of storing and using NFTs in this developer-focused guide.
+issueUrl: https://github.com/protocol/nft-website/issues/39
 ---
+
 # End-to-end experience
 
 In this tutorial you will go from nothing to creating a freshly-minted NFT token and storing it on IPFS with the help of services like [Pinata](https://pinata.cloud) and [nft.storage](https://nft.storage).
@@ -11,6 +13,7 @@ Since IPFS isn't a blockchain, we'll be leveraging the power of the Ethereum blo
 ### How IPFS helps
 
 When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is very important. There are a few reasons why traditional HTTP links aren't a great fit.
+
 
 With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpeg`, anyone can fetch the contents of `my-nft.jpeg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpeg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpeg` with something completely different at any time, causing the NFT to change its meaning.
 
