@@ -6,7 +6,7 @@ description: Learn the basics of NFTs in this developer-focused guide - what the
 
 **NFT** stands for _non-fungible token_, which doesn't explain very much. This page defines what an NFT actually is in the abstract, while also looking at a few specific examples of NFT applications and use cases.
 
-First, let's break down the name. Before we get into "non-fungible," what do we mean by "token"? For our purposes, a token is a kind of record in an information system called a blockchain. We won't get into all the details of how blockchains work here; check out [Blockchains and NFTs](./blockchains.md) for that. To understand what an NFT is, we just need a little background knowledge.
+First, let's break down the name. Before we get into "non-fungible," what do we mean by "token"? For our purposes, a token is a kind of record in an information system called a blockchain. We won't get into all the details of how blockchains work here; check out [Blockchains and NFTs](./blockchains.md) for that. To understand what an NFT is, we just need a bit of background knowledge.
 
 ## A bit of history
 
@@ -22,7 +22,7 @@ Most early smart contracts defined fungible tokens similar to Ether, but people 
 
 ## What makes a token non-fungible?
 
-Earlier we mentioned serial numbers as a way to distinguish one dollar bill from another. Even though you can tell them apart, two dollar bills are still fungible, because they each have the same value as currency. A unique identifier alone is not enough to make something non-fungible.
+Earlier we mentioned serial numbers as a way to distinguish one dollar bill from another. Even though you can tell them apart, two dollar bills are still fungible because they each have the same value as currency. A unique identifier alone is not enough to make something non-fungible.
 
 However, a dollar bill that's been sketched on by Picasso is unique in a way that has nothing to do with serial numbers. By using it as a medium for artwork, our imaginary Picasso has made the bill less fungible. While you could technically redeem it for a dollar's worth of snacks, the exchange value of the bill is now far greater than one dollar.
 
@@ -34,7 +34,7 @@ Of course, there's a good reason we don't conduct business by swapping priceless
 
 What makes an NFT different from an animated GIF file on someone's website, or from other kinds of digital records like a spreadsheet?
 
-The differences hinge on a few core properties of the blockchain design. The primary function of a blockchain network is to get all the participants to agree on a single shared "state of the world". For Bitcoin, the shared state is the balance of every account, while for Ethereum that shared state is the inputs and outputs of smart-contract interactions. Because the members of the network are spread out across the world, it takes time for everyone to converge on the same state, and there are special rules to prevent cheating or malicious behavior. Once everyone has agreed on the state, it becomes part of the canonical history of the blockchain.
+The differences hinge on a few core properties of the blockchain design. The primary function of a blockchain network is to get all the participants to agree on a single shared "state of the world". For Bitcoin, the shared state is the balance of every account, while for Ethereum, that shared state is the inputs and outputs of smart-contract interactions. Because the members of the network are spread out across the world, it takes time for everyone to converge on the same state, and there are special rules to prevent cheating or malicious behavior. Once everyone has agreed on the state, it becomes part of the canonical history of the blockchain.
 
 As new blocks are added to the chain, earlier blocks become harder and more expensive to modify. Soon — generally within a few blocks — the cost to "change history" becomes so great that it is effectively impossible, and the information recorded in the blockchain can be considered permanent.
 
@@ -54,7 +54,7 @@ Digital collectibles like CryptoPunks remain one of the most popular and compell
 
 In the years since CryptoPunks debuted, NFTs have become a vehicle for all kinds of creative projects. Much of the excitement has come from artists looking to engage directly with fans and find new ways to make a living from their creations. This has been supported by a growing ecosystem of [NFT marketplaces](/reference/nft-marketplaces.md) that bridge the gap between the familiar web and the cryptic world of crytocurrencies, and has also resulted in millions of dollars' worth of direct payments to artists for their digital creations.
 
-Outside of digital art and collectibles, NFTs have found use cases in gaming, where they can represent plots of virtual land, avatars and skins for game characters, in-game items, and more. By putting a player's "inventory" of these items on a shared blockchain, NFT-powered games can enable new mechanics and allow players to use their custom items across multiple potential games and experiences. They also give players a way to buy, sell, and trade items among themselves without locking their purchases into a single company's storefront or marketplace.
+Outside digital art and collectibles, NFTs have found use cases in gaming, where they can represent plots of virtual land, avatars and skins for game characters, in-game items, and more. By putting a player's "inventory" of these items on a shared blockchain, NFT-powered games can enable new mechanics and allow players to use their custom items across multiple potential games and experiences. They also give players a way to buy, sell, and trade items among themselves without locking their purchases into a single company's storefront or marketplace.
 
 ## Looking ahead
 
