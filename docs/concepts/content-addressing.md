@@ -41,7 +41,7 @@ The real problem is time.
 
 Both components of an address like `nftschool.dev/concepts/content-addressing` are _mutable_, meaning they can change over time. If we forget to pay our bills, the domain can expire and be bought by the highest bidder. Or, if we decide to play fast and loose with our site structure and forget to add redirects, the path `/concepts/content-addressing` may return a 404 instead of this article.
 
-In the context of the web, where _everything_ is mutable and dynamic, this is just the way it's always been. The web has never promised any kind of "permanence" either in content or the "meta-structure" of links between content. As a result, [link rot](https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php) is just something we've all learned to live with.
+In the context of the web, where _everything_ is mutable and dynamic, this is just the way it's always been. The web has never promised any kind of "permanence" either in content or the "meta-structure" of links between content. As a result, [link rot](https://en.wikipedia-on-ipfs.org/wiki/Link_rot) is just something we've all learned to live with.
 
 For a digital artifact that's meant to actually be permanent, like an NFT, link rot is an existential concern. Link rot affects NFTs because most NFTs are actually links in disguise. Data storage on most blockchain networks is much, much more expensive than traditional online storage systems. For example, to store one megabyte of data directly on Ethereum would cost approximately 21.5 Ether using current [gas prices](https://ethgasstation.info), which works out to about $56,000 USD at the time of writing.
 
