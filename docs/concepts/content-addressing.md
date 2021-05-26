@@ -25,17 +25,17 @@ interface KVStore {
 
 This basic interface is pretty common for key/value stores. Using `put`, we can associate any `Value` with a `Key`, and later when we need it, we can look the key up with `get` and hopefully get our value back.
 
-When you start to use an interface like this, one of the most important decisions is what to use for the keys. If you're building an application where you control the access patterns, you can use whatever keys you like and keep track of them all in your code, or come up with some rules to map out which keys should be used for which kind data.
+When you start to use an interface like this, one of the most important decisions is what to use for the keys. If you're building an application where you control the access patterns, you can use whatever keys you like and keep track of them all in your code, or come up with some rules to map out which keys should be used for which kind of data.
 
-Things get more complicated when many uncoordinated parties are all writing to the store at once. With one global key space, either everybody needs to agree on the same rules, or the space needs to be split into many separate "domains" or "name spaces." 
+Things get more complicated when many uncoordinated parties are all writing to the store at once. With one global key space, either everybody needs to agree on the same rules, or the space needs to be split into many "domains" or "name spaces." 
 
-Let's say we have one big K/V store that's shared by thousands or even millions of people, each with their own "domain" in the key space. That mostly solves the write problem - everybody can manage their own keys without needing to coordinate with everyone else.
+Let's say we have one big K/V store that's shared by thousands or even millions of people, each with their own "domain" in the key space. That mostly solves the writing problem — everybody can manage their own keys without needing to coordinate with everyone else.
 
 However, now it's less clear where to look for data when we want to `get` it out again. With each domain following its own rules, it's hard to know what key to use to retrieve things. Also, without coordination between the different domains, you may end up with the same value stored multiple times in different domains, with no easy way to tell that many keys are all pointing to the same value.
 
 If this sounds familiar, consider what happens when you resolve a link like `nftschool.dev/concepts/content-addressing`. First, your operating system will query a global shared key/value store, split into many domains: the Domain Name System. DNS will return an IP address that your network card can use to send HTTP requests over the network, where our site's naming conventions turn the key `/concepts/content-addressing` into a response payload.
 
-The web is basically the definition of "internet scale," so clearly this system works pretty well. So what's the problem?
+The web is basically the definition of "internet scale," so clearly this system works pretty well. So, what's the problem?
 
 The real problem is time.
 
@@ -66,7 +66,7 @@ Instead of accepting a key and a value, our `put` method just takes a value and 
 
 First, we no longer need to coordinate among multiple writers to our store by splitting the key space into "domains." There's now one universal domain, the domain of all possible values. If multiple people add the same value, there's no collision in the key space. They just each get the same key back from the `put` method. 
 
-This change also gives our values _location independence_. In our original K/V store with multiple domains, we had to include the domain inside the key to prevent name collisions. As a consequence, in order to retrieve a value, you need to know which domain it belongs to, as well as the specific location within that domain's piece of the key space. If we store a "location based" key on the blockchain, our ability to retrieve the data depends on the one domain that's "baked in" to our key. Even if the same content is stored in a thousand other domains, our lookup will fail if the one we depend on disappears or changes its naming conventions.
+This change also gives our values _location independence_. In our original K/V store with multiple domains, we had to include the domain inside the key to prevent name collisions. To retrieve a value, you need to know which domain it belongs to, as well as the specific location within that domain's piece of the key space. If we store a "location based" key on the blockchain, our ability to retrieve the data depends on the one domain that's "baked in" to our key. Even if the same content is stored in a thousand other domains, our lookup will fail if the one we depend on disappears or changes its naming conventions.
 
 ## Enough theory. What should I use?
 
