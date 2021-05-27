@@ -13,9 +13,9 @@ If you've never worked with Ethereum or another smart contract platform before, 
 
 ## Why IPFS and nft.storage?
 
-Our example uses a free service called [nft.storage](https://nft.storage) to add an image file and our NFT's metadata to [IPFS](https://ipfs.io), the InterPlanetary File System. We go deeper into why IPFS is a good fit for NFTs in our discussion of [content addressing][docs-cid], but for now we'll just give an overview.
+Our example uses a free service called [nft.storage](https://nft.storage) to add an image file and our NFT's metadata to [IPFS](https://ipfs.io), the InterPlanetary File System. We go deeper into why IPFS is a good fit for NFTs in our discussion of [content addressing][docs-cid], but for now, we'll just give an overview.
 
-When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is extremely  important. There are a few reasons why traditional HTTP links aren't a great fit for the demands of NFTs.
+When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is critical. There are a few reasons why traditional HTTP links aren't a great fit for the demands of NFTs.
 
 With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpg`, anyone can fetch the contents of `my-nft.jpg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpg` with something different at any time, causing the NFT to change its meaning.
 
@@ -84,7 +84,7 @@ Let's check out the example repository so we can start playing with NFTs!
 
     This command will keep running, so keep the terminal open while you play with the app. 
     
-    Once the server has started, it will print the URL of the front end. By default, the URL is [http://localhost:3000](http://localhost:3000), but you may see a different URL if you've already got something listening on port 3000.
+    Once the server has started, it will print the URL of the front end. By default, the URL is `http://localhost:3000`, but you may see a different URL if you've already got something listening on port 3000.
 
 1. If your browser doesn't open automatically, navigate to the URL shown in the last command's output.
 
@@ -94,7 +94,7 @@ Let's check out the example repository so we can start playing with NFTs!
 
 1. Get some fake Ether (ETH) to play with.
 
-    To mint an NFT, we need to pay a little bit of ETH in [_gas_](https://ethereum.org/en/developers/docs/gas/), which is a fee charged by miners for operations that change the blockchain's state.
+    To mint an NFT, we need to pay a small amount of ETH in [_gas_](https://ethereum.org/en/developers/docs/gas/), which is a fee charged by miners for operations that change the blockchain's state.
 
     Thanks to `scaffold-eth`, getting some fake ETH to play with on our local devnet is simple. Out of the box, `scaffold-eth` creates a new "burner account" with an empty balance, so you don't need to connect to a wallet such as [MetaMask][metamask] just to load the app.
 
