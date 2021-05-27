@@ -5,36 +5,36 @@ description: Understand the end-to-end experience of storing and using NFTs in t
 
 # End-to-end experience
 
-In this tutorial you will go from nothing to creating a freshly-minted NFT token and storing it on IPFS with the help of services like [Pinata](https://pinata.cloud) and [nft.storage](https://nft.storage).
+In this tutorial, you will go from zero to creating a freshly minted NFT token and storing it on IPFS with the help of services like [nft.storage](https://nft.storage) and [Pinata](https://pinata.cloud).
 
 Since IPFS isn't a blockchain, we'll be leveraging the power of the Ethereum blockchain for this guide. However, the steps described here can just as easily be applied to other blockchains.
 
 ## How IPFS helps
 
-When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is very important. There are a few reasons why traditional HTTP links aren't a great fit.
+When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is very important. There are a few reasons why traditional HTTP links aren't a great fit for the demands of NFTs.
 
 
-With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpeg`, anyone can fetch the contents of `my-nft.jpeg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpeg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpeg` with something completely different at any time, causing the NFT to change its meaning.
+With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpg`, anyone can fetch the contents of `my-nft.jpg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpg` with something completely different at any time, causing the NFT to change its meaning.
 
-This problem was demonstrated by an artist who [_pulled the rug_](https://cointelegraph.com/news/opensea-collector-pulls-the-rug-on-nfts-to-highlight-arbitrary-value) on NFTs he created by changing their images after they were minted and sold to others.
+This problem was demonstrated by an artist who [pulled the rug](https://cointelegraph.com/news/opensea-collector-pulls-the-rug-on-nfts-to-highlight-arbitrary-value) on NFTs he created by changing their images after they were minted and sold to others.
 
-IPFS solves this problem thanks to [Content Addressing][docs-cid]. Adding data to IPFS produces a content identifier (CID) that's directly derived from the data itself and links to the data in the IPFS network. Because a CID can only _ever_ refer to one piece of content, we know that nobody can replace or alter the content without breaking the link.
+IPFS solves this potentially catastrophic problem thanks to its use of [_content addressing_][docs-cid]. Adding data to IPFS produces a _content identifier_ (CID) that is directly derived from the data itself, and links to the data in the IPFS network. Because a CID can only _ever_ refer to one piece of content, we know that nobody can replace or alter the content without breaking the link.
 
-Using the CID, anyone can fetch a copy of the data from the IPFS network as long as at least one copy exists on the network, even if the original provider has disappeared. This makes CIDs perfect for NFT storage. All we need to do is put the CID into an `ipfs://` URI like `ipfs://bafybeidlkqhddsjrdue7y3dy27pu5d7ydyemcls4z24szlyik3we7vqvam/nft-image.png`, and we have an immutable link from the blockchain to the data for our token.
+Using that CID, anyone can fetch a copy of its data from the IPFS network as long as at least one copy exists on the network — even if the original provider has disappeared. This makes CIDs perfect for NFT storage. All we need to do is put the CID into an `ipfs://` URI such as `ipfs://bafybeidlkqhddsjrdue7y3dy27pu5d7ydyemcls4z24szlyik3we7vqvam/nft-image.png`, and we have an immutable link from the blockchain to our token's data.
 
-Of course, there may be some cases in which you do want to change the metadata for an NFT after it's been published. That's no problem! You'll just need to add support to your smart contract for updating the URI for a token after it's been issued. That will let you change the URI to a new IPFS URI while still leaving a record of the initial version in the blockchain's transaction history. This provides accountability and makes it clear to everyone what was changed, when, and by whom.
+Of course, there may be some cases in which you _do_ want to change the metadata for an NFT after it's been published. That's no problem! You'll just need to add support to your smart contract for updating the URI for a token after it's been issued. That will let you change the original URI to a new IPFS URI while still leaving a record of the initial version in the blockchain's transaction history. This provides accountability by making it clear to everyone what was changed, when, and by whom.
 
 ## Minty
 
-To help explain how NFTs and IPFS can work together, we've created Minty - a simple command-line application to automatically _mint_ an NFT and pin it to IPFS using [Pinata](https://pinata.cloud) or [nft.storage](https://nft.storage).
+To help explain how NFTs and IPFS work together, we've created **Minty** — a simple command-line application to automatically _mint_ an NFT and pin it to IPFS using [nft.storage](https://nft.storage) or [Pinata](https://pinata.cloud).
 
-Production NFT platforms are a fairly complex thing. As with any modern web application, there are lots of decisions to make surrounding the tech stack, user interface conventions, API design, and so on. Blockchain-enabled d-apps also need to interact with user wallets such as [Metamask](https://metamask.io), further increasing their complexity.
+Production NFT platforms are a fairly complex thing. As with any modern web application, there are lots of decisions to make surrounding the tech stack, user interface conventions, API design, and so on. Blockchain-enabled dApps also need to interact with user wallets such as [Metamask](https://metamask.io), further increasing their complexity.
 
-Since Minty was written to demonstrate the concepts and process of minting IPFS-backed NFTs, we don't need to get caught up in all the details of modern d-app development. Instead, Minty is a simple command-line app written in Javascript.
+Since Minty was written to demonstrate the concepts and process of minting IPFS-backed NFTs, we don't need to get caught up in all the details of modern dApp development. Instead, Minty is a simple command-line app written in JavaScript.
 
 ### Install Minty
 
-Let's get Minty installed so we can start playing around with NFTs! To install and run Minty, you must have NPM installed. Windows is not currently supported. Installation of Minty is fairly simple. Just download the GitHub repository, install the NPM dependencies, and start the local testnet environment.
+Let's get Minty installed so we can start playing with NFTs! To install and run Minty, you must have NPM installed. Windows is not currently supported. Installing Minty is fairly simple: Just download the GitHub repository, install the NPM dependencies, and start the local [testnet](/tutorial/first-steps/#testnet) environment.
 
 1.  Clone [the Minty repository][minty-repo] and move into the `minty` directory:
 
@@ -65,7 +65,7 @@ Let's get Minty installed so we can start playing around with NFTs! To install a
     > ...
     ```
 
-    This command continues to run. All further commands must be entered in another terminal window.
+    Because this command continues to run, all further commands must be entered in another terminal window.
 
 ### Deploy the contract
 
@@ -86,11 +86,11 @@ When this contract is deployed, the address and other information about the depl
 
 ### Mint an NFT
 
-Once you have the local Ethereum network and IPFS daemon running, minting an NFT is incredibly simple. Just specify what you want to _tokenize_, the name of the NFT, then add a description to tell users what the NFT is for.
+Once you have the local Ethereum network and IPFS daemon running, minting an NFT is incredibly simple. Just specify what you want to _tokenize_, give the NFT a name, and add a description to tell users what the NFT is for.
 
 #### Create something to mint
 
-First, let's create something to mint. NFTs have a huge range of use-cases, and you can mint whatever you want! For this example, we're going to create a ticket for a flight to the moon!
+First, let's create something to mint. NFTs have a huge range of use cases, and you can mint whatever you want! For this example, we're going to create a ticket for a flight to the moon.
 
 1. Create a file called `flight-to-the-moon.txt`:
 
@@ -116,29 +116,64 @@ First, let's create something to mint. NFTs have a huge range of use-cases, and 
 
 Now we're going to tokenize our ticket into an NFT. This process is often called _minting_.
 
-1.  Call the `mint` command and supply the file we want to mint, the name of our NFT, and a description:
+1.  Call the `mint` command and supply the location of the file we want to mint, the name of our NFT, and a description:
 
     ```shell
     minty mint ~/ticket.txt --name "Moon Flight #1" --description "This ticket serves as proof-of-ownership of a first-class seat on a flight to the moon."
     ```
 
-    The `minty mint` command returns the id of the new token, some metadata containing the `name` and `description` we provided, and an IPFS URI to the file we used for our NFT asset. The `Metadata URI` in the output above is the IPFS URI for the NFT Metadata JSON object that's stored on IPFS.
+    The `minty mint` command returns the ID of the new token, some metadata containing the `name` and `description` we provided, and an IPFS URI for the file we used for our NFT asset. The `Metadata URI` in the output above is the IPFS URI for the NFT Metadata JSON object that's stored on IPFS.
 
-Great! You've created your NFT, but it's only available to other people as long as you have your IPFS node running. If you shut down your computer or you lose your internet connection, then no one else will be able to view your NFT! To get around this issue, you should pin it to a pinning service.
+Great work so far — you've created your NFT! **However, it's only available to other people as long as you have your IPFS node running.** If you shut down your computer or you lose your internet connection, then no one else will be able to view your NFT. To get around this issue, you should "pin" it to a _pinning service_.
 
 ### Pin your NFT
 
-To make the data highly available without needing to run a local IPFS daemon 24/7, you can request that a remote pinning service store a copy of your IPFS data on their IPFS nodes.
+To make your NFT's data highly available without needing to run your own IPFS node 24/7, you can request that a remote [pinning service](https://docs.ipfs.io/how-to/work-with-pinning-services/) store a copy of your data on their IPFS nodes.
 
 Any pinning service that supports the [IPFS Remote Pinning API](https://ipfs.github.io/pinning-services-api-spec) can be used with Minty.
 
-Below we'll show how to configure Minty to two different pinning services. Either one will work, so you'll only need to sign up to one service to try things out.
+Below, we'll explain how to configure Minty with two different pinning services. Either one will work, so you'll only need to sign up for one service to try things out.
 
-#### Option 1: Pinata
+#### Option 1: nft.storage
+
+[nft.storage](https://nft.storage) is a new service offered by [Protocol Labs](https://protocol.ai) to store public NFT data. It's currently a free public beta, so it's easy to sign up and try it out.
+
+##### Sign up for nft.storage
+
+To use nft.storage for your NFT data, you'll need to sign up for an account. You'll also need a GitHub account for logging in, if you don't already have one.
+
+1. Head over to [nft.storage](https://nft.storage).
+1. Click **Register** and use your GitHub account to register.
+
+##### Get an API Key
+
+You need to copy an API key from the nft.storage site and put it where Minty can find it.
+
+1. Log into nft.storage and select **Manage API Keys** from the top menu.
+1. Click **New Key**.
+1. The new key should show up in the list. Copy the key to your clipboard. It should be a long string starting with `ey...`.
+
+We need to put the key into a file where Minty can find it.
+
+1.  Copy the `config/nft.storage.env.example` file to `config/.env`:
+
+    ```shell
+    cp config/nft.storage.env.example config/.env
+    ```
+
+1.  Inside `config/.env` add your API key to the `PINNING_SERVICE_KEY` line _between_ the double quotes `"`:
+
+    ```shell
+    PINNING_SERVICE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsia..."
+    ```
+
+1. Minty can now connect to nft.storage and pin NFT data to your account!
+
+#### Option 2: Pinata
 
 [Pinata](https://pinata.cloud) is one of the oldest and most popular IPFS pinning services, and their free storage tier makes it easy to sign up and experiment.
 
-##### Sign up to Pinata
+##### Sign up for Pinata
 
 To use Pinata to pin your data, you need to sign up for an account.
 
@@ -181,55 +216,19 @@ You need to grab an API key from Pinata. Your API key allows Minty to interact w
 
 1. Minty can now connect to Pinata and pin NFT data to your account!
 
-#### Option 2: nft.storage
-
-[nft.storage](https://nft.storage) is a new service offered by Protocol Labs to store public NFT data. It's currently a free public beta, so it's super easy to sign up and try it out.
-
-##### Sign up to nft.storage
-
-To use nft.storage for your NFT data, you'll need to sign up for an account. You'll also need a GitHub account for logging in, if you don't already have one.
-
-1. Head over to [nft.storage](https://nft.storage).
-1. Click **Register** and use your GitHub account to register.
-
-##### Get an API Key
-
-You need to copy an API key from the nft.storage site and put it where Minty can find it.
-
-1. Log into nft.storage and select **Manage API Keys** from the top menu.
-1. Click **New Key**.
-1. The new key should show up in the list. Copy the key to your clipboard. It should be a long string starting with `ey...`.
-
-We need to put the key into a file where Minty can find it.
-
-1.  Copy the `config/nft.storage.env.example` file to `config/.env`:
-
-    ```shell
-    cp config/nft.storage.env.example config/.env
-    ```
-
-1.  Inside `config/.env` add your API key to the `PINNING_SERVICE_KEY` line _between_ the double quotes `"`:
-
-    ```shell
-    PINNING_SERVICE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsia..."
-    ```
-
-1. Minty can now connect to nft.storage and pin NFT data to your account!
-
-
 ### Deploying to a testnet
 
 Take a look at the [Hardhat configuration docs](https://hardhat.org/config/) to learn how to configure a JSON-RPC node and deploy this contract to a testnet. Once you've added a new network to the Hardhat configuration, you can use it by setting the `HARDHAT_NETWORK` environment variable to the name of the new network when you run `minty` commands. Alternatively, you can change the `defaultNetwork` in `hardhat.config.js` to always prefer the new network.
 
-Deploying this contract to the Ethereum mainnet is a bad idea since the contract itself lacks any access control. See the [Open Zeppelin article](https://docs.openzeppelin.com/contracts/3.x/access-control) about what access control is and why it's important to have.
+Deploying this contract to the Ethereum mainnet is a bad idea since the contract itself lacks any access control. See the [OpenZeppelin article](https://docs.openzeppelin.com/contracts/3.x/access-control) about what access control is and why it's important to have.
 
 ## How Minty works
 
 So we minted an NFT, added it to an Ethereum blockchain, and hosted it on IPFS. Now we're going to dive into _exactly_ what the contract does and why. We're also going to explore the IPFS side of things and how the NFT itself is stored.
 
-### The Minty smart-contract
+### The Minty smart contract
 
-Minty uses a smart-contract written in [Solidity](https://soliditylang.org), the most popular language for Ethereum development. The contract implements the [ERC-721 Ethereum NFT standard][eip-721], by virtue of inheriting from the very convenient and fully featured [OpenZeppelin ERC721 base contract](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#ERC721).
+Minty uses a smart contract written in [Solidity](https://soliditylang.org), the most popular language for Ethereum development. The contract implements the [ERC-721 Ethereum NFT standard][eip-721], by virtue of inheriting from the very convenient and fully featured [OpenZeppelin ERC721 base contract](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#ERC721).
 
 Because the OpenZeppelin base contract provides so much of the core functionality, the Minty contract is quite simple:
 
@@ -263,17 +262,17 @@ contract Minty is ERC721 {
 }
 ```
 
-If you read the [OpenZeppelin ERC721 guide](https://docs.openzeppelin.com/contracts/3.x/erc721), you'll see that the Minty contract is extremely similar. The `mintToken` function simply increments a counter to issue token ids, and it uses the `_setTokenURI` function provided by the base contract to associate the metadata URI with the new token id.
+If you read the [OpenZeppelin ERC721 guide](https://docs.openzeppelin.com/contracts/3.x/erc721), you'll see that the Minty contract is extremely similar. The `mintToken` function simply increments a counter to issue token IDs, and it uses the `_setTokenURI` function provided by the base contract to associate the metadata URI with the new token ID.
 
 One thing to notice is that we set the base URI prefix to `ipfs://` in the constructor. When we set a metadata URI for each token in the `mintToken` function, we don't need to store the prefix since the base contract's `tokenURI` accessor function will apply it to each token's URI.
 
-It's important to note that this contract is **not production-ready**. It doesn't include any [access controls][docs-openzeppelin-access-control] that limit which accounts are allowed to call the `mintToken` function. If you decide to develop a production platform based on Minty, please explore the access control patterns that are available and consider which should apply to your platform's access model.
+It's important to note that **this contract is not production-ready**. It doesn't include any [access controls][docs-openzeppelin-access-control] to limit which accounts are allowed to call the `mintToken` function. If you decide to develop a production platform based on Minty, please explore the access control patterns that are available, and consider which should apply to your platform's access model.
 
-#### Deploying the Contract
+#### Deploying the contract
 
 Before you can mint new NFTs, you need to deploy the contract to a blockchain network. Minty uses [HardHat](https://hardhat.org) to manage contract deployment. By default, Minty deploys to an instance of the [HardHat development network](https://hardhat.org/hardhat-network) that's been [configured to run on your machine's localhost network](https://hardhat.org/hardhat-network/#connecting-to-hardhat-network-from-wallets-and-other-software).
 
-It's also possible to deploy the contract to an [Ethereum test network](https://ethereum.org/en/developers/docs/networks/) by editing the `hardhat.config.js` file in the minty repo. See the [HardHat documentation](https://hardhat.org/config/#json-rpc-based-networks) to learn how to configure HardHat to deploy to a node connected to a testnet, either running locally or hosted by a provider such as [Infura](https://infura.io). Because deployment consumes `ETH` as gas, you'll need to obtain some test `ETH` for your chosen network and configure hardhat to use the correct wallet.
+It's also possible to deploy the contract to an [Ethereum test network](https://ethereum.org/en/developers/docs/networks/) by editing the `hardhat.config.js` file in the Minty repo. See the [HardHat documentation](https://hardhat.org/config/#json-rpc-based-networks) to learn how to configure HardHat to deploy to a node connected to a testnet, either running locally or hosted by a provider such as [Infura](https://infura.io). Because deployment consumes `ETH` as gas, you'll need to obtain some test `ETH` for your chosen network and configure hardhat to use the correct wallet.
 
 #### Calling the `mintToken` smart-contract function
 
