@@ -24,6 +24,12 @@
 	        color: $textColorDark;
         }
 
+        // Alert panels
+        // FIXME: I can't seem to override the background-color. For now just use the light-mode text color so it will show up on the default light background.
+        .custom-block {
+          color: $textColor;
+        }
+
         h1, h2, h3, h4, h5
         a.header-anchor {
 	        color: $headingColorDark;
@@ -77,4 +83,5 @@
             color darken($textColorDark, 70%);
         }
     }
+
 }
