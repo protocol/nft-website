@@ -5,16 +5,16 @@ description: Understand the end-to-end experience of storing and using NFTs in t
 
 # End-to-end experience
 
-In this tutorial, you will go from zero to creating a freshly minted NFT token and storing it on IPFS with the help of services like [nft.storage](https://nft.storage) and [Pinata](https://pinata.cloud).
+In this tutorial, you will go from zero to creating a freshly minted NFT token and storing it on IPFS using services like [nft.storage](https://nft.storage) and [Pinata](https://pinata.cloud).
 
 Since IPFS isn't a blockchain, we'll be leveraging the power of the Ethereum blockchain for this guide. However, the steps described here can just as easily be applied to other blockchains.
 
 ## How IPFS helps
 
-When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is very important. There are a few reasons why traditional HTTP links aren't a great fit for the demands of NFTs.
+When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is extremely  important. There are a few reasons why traditional HTTP links aren't a great fit for the demands of NFTs.
 
 
-With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpg`, anyone can fetch the contents of `my-nft.jpg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpg` with something completely different at any time, causing the NFT to change its meaning.
+With an HTTP address like `https://cloud-bucket.provider.com/my-nft.jpg`, anyone can fetch the contents of `my-nft.jpg`, as long as the owner of the server pays their bills. However, there's no way to guarantee that the _contents_ of `my-nft.jpg` are the same as they were when the NFT was created. The server owner can easily replace `my-nft.jpg` with something different at any time, causing the NFT to change its meaning.
 
 This problem was demonstrated by an artist who [pulled the rug](https://cointelegraph.com/news/opensea-collector-pulls-the-rug-on-nfts-to-highlight-arbitrary-value) on NFTs he created by changing their images after they were minted and sold to others.
 
@@ -180,7 +180,7 @@ To use Pinata to pin your data, you need to sign up for an account.
 1. Head over to [pinata.cloud](https://pinata.cloud/).
 1. Click **Sign up** and use your email address to create an account.
 
-Pinata gives each user 1GB of free storage space, which is plenty for storing a few NFTs.
+Pinata gives each user 1 GB of free storage space, which is plenty for storing a few NFTs.
 
 ##### Get an API key
 
@@ -232,7 +232,7 @@ So far we've minted an NFT, added it to an Ethereum blockchain, and hosted it on
 
 Minty uses a smart contract written in [Solidity](https://soliditylang.org), the most popular language for Ethereum development. The contract implements the [ERC-721 Ethereum NFT standard][eip-721] by virtue of inheriting from the very convenient and fully featured [OpenZeppelin ERC721 base contract](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#ERC721).
 
-Because the OpenZeppelin base contract provides so much of the core functionality, the Minty contract is quite simple:
+Because the OpenZeppelin base contract provides so much of the core functionality, the Minty contract is simple:
 
 ```solidity
 pragma solidity ^0.7.0;
@@ -419,7 +419,7 @@ You can also try using a public gateway like the one at [https://ipfs.io](https:
 
 ### Pinning NFT data to a remote service
 
-When you add data to IPFS, it first gets added to your local IPFS node, which advertises the CID of the data to the IPFS network. This lets anyone request the data by looking up the CID and connecting to your node directly. Once they've done so, their IPFS node will hold onto a copy temporarily, which helps speed up access to the data if another node requests it. However, by default these extra copies will eventually expire and be "garbage collected" so that people running IPFS nodes don't use up all of their storage space.
+When you add data to IPFS, it first gets added to your local IPFS node, which advertises the CID of the data to the IPFS network. This lets anyone request the data by looking up the CID and connecting to your node directly. Once they've done so, their IPFS node will hold on to a copy temporarily, which helps speed up access to the data if another node requests it. However, by default these extra copies will eventually expire and be "garbage collected" so that people running IPFS nodes don't use up all of their storage space.
 
 When minting NFTs, we generally want our data to be at least as _durable_ as the blockchain platform the token was minted on, and we want it to be available all the time and across the globe.
 
@@ -505,7 +505,7 @@ That was quite a lot to cover! We've seen how to add assets to IPFS and create N
 
 At this point, you might be wondering how to take these techniques and use them to build a production NFT minting platform. Of course, there are many decisions involved in any new product or marketplace, so we can't think of everything here. **But there are a few places where Minty is clearly not production-ready**, and by looking at them, we can get a good idea of what technical work might be involved in building your own platform.
 
-As a command-line app, `minty` is a pretty big departure from the rich, interactive web applications that power NFT minting platforms. If you want to build a web platform based on the techniques shown in Minty, you will either need to expose Minty's functionality via an HTTP API or go the _fully decentralized_ route and interact with the NFT contract directly in the user's Ethereum-enabled web browser. The good news is that all of the concepts we've learned so far are applicable to either environment.
+As a command-line app, `minty` is a pretty big departure from the rich, interactive web applications that power NFT minting platforms. If you want to build a web platform based on the techniques shown in Minty, you will either need to expose Minty's functionality via an HTTP API or go the _fully decentralized_ route and interact with the NFT contract directly in the user's Ethereum-enabled web browser. The good news is that all the concepts we've learned so far are applicable to either environment.
 
 Since Minty currently runs on Node.js, it's straightforward to add an API server using one of the many Node HTTP frameworks like [Express][express-js] or [Koa][koa-js]. However, it can be difficult to allow users to sign Ethereum transactions with their own private keys if the code is running on a back-end server. As such, you may want to put some blockchain logic in the front end so that users can use [MetaMask][metamask] or a similar wallet to authorize token transfers.
 
@@ -513,7 +513,7 @@ Work is also underway to [support the IPFS Pinning Service API][js-ipfs-remote-p
 
 If you're building a dApp without a back-end server today and just can't wait, you could also use an HTTP API provided by a pinning service to send and pin content using traditional HTTP requests, instead of embedding `js-ipfs` into your dApp. See [Pinata's documentation][pinata-docs] for an example. This makes your dApp code a little less generic, since it's tied to one provider's API, but it may be a good way to get started. Doing everything in the browser also means you'll need to carefully manage the API tokens for the pinning services you support, perhaps by allowing users to add their own credentials and storing the tokens in the browser's local storage.
 
-Finally, please remember that the Minty smart contract is intentionally very simple and is not tailored to the needs of a production platform. In particular, it lacks [access controls][docs-openzeppelin-access-control] and is not [upgradable][docs-openzeppelin-upgrade] without re-deploying the contract. Chances are you'll want your contract to include features that are unique to your platform as well, beyond the base ERC-721 functionality.
+Finally, please remember that the Minty smart contract is intentionally simple and is not tailored to the needs of a production platform. In particular, it lacks [access controls][docs-openzeppelin-access-control] and is not [upgradable][docs-openzeppelin-upgrade] without re-deploying the contract. Chances are you'll want your contract to include features that are unique to your platform as well, beyond the base ERC-721 functionality.
 
 Thanks for following along! We can't wait to see what you'll build.
 
