@@ -9,7 +9,7 @@ In this tutorial you will go from nothing to creating a freshly-minted NFT token
 
 Since IPFS isn't a blockchain, we'll be leveraging the power of the Ethereum blockchain for this guide. However, the steps described here can just as easily be applied to other blockchains.
 
-### How IPFS helps
+## How IPFS helps
 
 When an NFT is created and linked to a digital file that lives on some other system, _how_ the data is linked is very important. There are a few reasons why traditional HTTP links aren't a great fit.
 
