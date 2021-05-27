@@ -2,15 +2,16 @@
 title: Content addressing
 description: Understand how content addressing is key to NFT best practices in this developer-focused guide.
 ---
- # Content addressing
 
- Content addressing is a technique for organizing and locating data in an information system, where the key used to locate content is derived from the content itself. This article will describe what content addressing is and why it's important for NFTs.
+# Content addressing
 
- ## The basic problem
+Content addressing is a technique for organizing and locating data in an information system, where the key used to locate content is derived from the content itself. This article will describe what content addressing is and why it's important for NFTs.
 
- Imagine a key/value store with an interface like the one below:
+## The basic problem
 
- ```typescript
+Imagine a key/value store with an interface like the one below:
+
+```typescript
 // This example uses TypeScript to annotate the parameters and return types of our methods.
 // We won't do any fancy type manipulation though, so don't worry if you're not into TypeScript.
 type Key = string;
@@ -21,7 +22,7 @@ interface KVStore {
 
   get(key: Key): Promise<Value>;
 }
- ```
+```
 
 This basic interface is pretty common for key/value stores. Using `put`, we can associate any `Value` with a `Key`, and later when we need it, we can look the key up with `get` and hopefully get our value back.
 
@@ -81,3 +82,4 @@ To use IPFS with NFTs, use a service from Protocol Labs called [nft.storage](htt
 - [nft.storage documentation](https://nft.storage/#docs)
 - [Best Practices for Storing NFT Data using IPFS](https://docs.ipfs.io/how-to/best-practices-for-nft-data/)
 - [ProtoSchool lesson on Content Addressing](https://proto.school/content-addressing/)
+

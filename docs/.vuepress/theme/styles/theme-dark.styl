@@ -1,0 +1,80 @@
+@media (prefers-color-scheme: dark) {
+    .theme-container {
+        // Layout
+        header.navbar .links .search-box input {
+            color: $textColorDark;
+            background-color: $inputSearchBgColorDark;
+        }
+        
+        header.navbar .links .search-box .suggestions {
+            background-color: $inputSearchBgColorDark;
+
+            .suggestion a {
+                color: $headingColorDark;
+            }
+            .suggestion.focused a {
+                color: $accentColor;
+            }
+            
+        }
+        
+        // Content
+        main.page {
+            background-color: $contentBgColorDark;
+	        color: $textColorDark;
+        }
+
+        h1, h2, h3, h4, h5
+        a.header-anchor {
+	        color: $headingColorDark;
+        }
+
+        a {
+            color: $linkColorDark;
+        }
+
+        svg.icon.outbound {
+            color: $linkColorDark;
+        }
+
+        code {
+            color: $textColorDark;
+            background: lighten($contentBgColorDark, 20%);
+        }
+
+        td, tr, th {
+            border-color: lighten($contentBgColorDark, 20%);
+            background: $contentBgColorDark;
+        }
+
+        // Custom
+        .feedback.feedback {
+            background-color: $feedbackBgColorDark;
+            border-color: $feedbackBgColorDark;
+
+            h3 {
+                color: $headingColorDark;
+            }
+        }
+    }
+
+    .btn-primary.btn-primary {
+        background-color: darken($tertiaryColor, 55%);
+        color: $textColorDark;
+
+        &:hover {
+            background-color: darken($secondaryColor, 40%);
+        }
+    }
+
+    .page-edit {
+        .edit-link.edit-link {
+            a {
+                color darken($textColorDark, 70%);
+            }
+        }
+        .last-updated .prefix.prefix {
+            color darken($textColorDark, 70%);
+        }
+    }
+}

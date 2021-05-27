@@ -1,7 +1,7 @@
 .navbar {
 	width: 100%;
 	position: sticky;
-	background-color: $reverseTextColor;
+	background-color: $layoutBgColor;
 	border-bottom: none;
 
 	.logo {
@@ -34,7 +34,7 @@
 }
 
 header.navbar .links {
-	background-color: $reverseTextColor;
+	background-color: $layoutBgColor;
 }
 
 #algolia-search-input {
@@ -46,6 +46,7 @@ header.navbar .links {
 }
 
 header.navbar .links input {
+	font-family: inherit;
 	border-radius: 0;
 	border: none;
   	box-shadow:
@@ -63,7 +64,7 @@ header.navbar .links ul {
 		border-radius: 0;
 	}
 	.focused, li:active {
-		background-color: $reverseTextColor;
+		background-color: $layoutBgColor;
 	}
 	a {
 		color: $linkColor;

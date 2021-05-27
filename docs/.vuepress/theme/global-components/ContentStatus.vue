@@ -102,10 +102,9 @@ ul {
 @media (min-width: $MQMobile) {
   .illustration {
     display: block;
-    width: 45%;
-    min-width: 120px;
-    max-width: 140px;
-    margin-left: 3em;
+    width: 50%;
+    min-width: 170px;
+    margin-left: 2em;
   }
 }
 </style>
