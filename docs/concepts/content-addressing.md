@@ -81,7 +81,7 @@ To use IPFS with your NFTs, try [nft.storage](https://nft.storage/). It makes it
 
 For more information, try the following:
 
-- [nft.storage documentation](https://nft.storage/#docs)
+- [Official nft.storage documentation](https://nft.storage/#docs)
 - [Best practices for storing NFT data using IPFS](https://docs.ipfs.io/how-to/best-practices-for-nft-data/)
 - [ProtoSchool lesson on content addressing](https://proto.school/content-addressing/)
 
