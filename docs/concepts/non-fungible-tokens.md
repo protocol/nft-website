@@ -42,7 +42,7 @@ By contrast, the traditional web is famously impermanent and dynamic. A web serv
 
 This property of permanence and stability is central to the NFT value proposition. By using a blockchain as a durable shared data storage medium, NFTs can be trusted to endure as long as the blockchain itself remains operational — which brings up another interesting property of blockchains. By rewarding node operators with cryptocurrency in exchange for keeping the network alive, a blockchain incentivizes its own survival. As long there are people attracted to the economic reward, there will be someone motivated to keep the network online. This ensures the survival of all historical data, including NFTs.
 
-::: tip Important note
+::: tip IMPORTANT NOTE
 As we'll see in our discussion of [content persistence](/concepts/content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever. NFTs often link to data outside the blockchain, which also needs to be kept online.
 :::
 

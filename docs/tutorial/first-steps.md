@@ -50,7 +50,7 @@ For this guide, we'll be interacting with a contract that's been deployed to the
 3) In Chrome, open the MetaMask extension. Click the drop-down in the top right to switch networks and select the Ropsten network.
 4) Click the **Buy** button and scroll down. Under the **Test Faucet** heading, click the **Get Ether** button. This will take you to the ETH testnet faucet, where you can request free testnet ETH tokens. These do not have monetary value, since they cannot be traded on an exchange, but functionally they behave the same as ETH tokens on the mainnet. This allows us to develop blockchain programs that will work on mainnet without spending any money.
 
-::: tip Helpful hint
+::: tip
 If you have an existing ETH wallet on mainnet, it's a good idea to create a new wallet for testnet. This makes it harder to accidentally send mainnet ETH to a testnet wallet address, which burns the mainnet ETH forever.
 :::
 
