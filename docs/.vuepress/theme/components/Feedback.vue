@@ -130,7 +130,7 @@ export default {
 }
 
 .feedback {
-  background-color: lighten($tertiaryColor, 80%);
+  background-color: $feedbackBgColor;
   padding: 0 1.5rem 2rem 1.5rem;
   border: 2px solid #fff;
   box-shadow:  -2px -2px 0 1px $tertiaryColor,
