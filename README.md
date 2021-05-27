@@ -55,10 +55,6 @@ All PRs against `main` automatically generate Fleek previews to make it easier t
 
 A reviewer will be by shortly to have a look!
 
-Additional preview links:
-- https://nft-school.on.fleek.co/ - `main`
-- https://nft-school-staging.on.fleek.co/ - `staging`
-
 ## Maintainers
 
 This site's codebase is under active maintenance by members of the core team at [Protocol Labs](https://protocol.ai/).
