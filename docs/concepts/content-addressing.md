@@ -11,7 +11,7 @@ description: Understand how content addressing is key to NFT best practices in t
  Imagine a key/value store with an interface like the one below:
 
  ```typescript
-// This example uses TypeScript to annotate the parameters and return types of our methods. 
+// This example uses TypeScript to annotate the parameters and return types of our methods.
 // We won't do any fancy type manipulation though, so don't worry if you're not into TypeScript.
 type Key = string;
 type Value = string;
@@ -27,7 +27,7 @@ This basic interface is pretty common for key/value stores. Using `put`, we can 
 
 When you start to use an interface like this, one of the most important decisions is what to use for the keys. If you're building an application where you control the access patterns, you can use whatever keys you like and keep track of them all in your code, or come up with some rules to map out which keys should be used for which kind of data.
 
-Things get more complicated when many uncoordinated parties are all writing to the store at once. With one global key space, either everybody needs to agree on the same rules, or the space needs to be split into many "domains" or "name spaces." 
+Things get more complicated when many uncoordinated parties are all writing to the store at once. With one global key space, either everybody needs to agree on the same rules, or the space needs to be split into many "domains" or "name spaces."
 
 Let's say we have one big K/V store that's shared by thousands or even millions of people, each with their own "domain" in the key space. That mostly solves the writing problem — everybody can manage their own keys without needing to coordinate with everyone else.
 
@@ -64,7 +64,7 @@ interface ContentStore {
 
 Instead of accepting a key and a value, our `put` method just takes a value and returns the key to the caller. In exchange for not being able to choose your own keys, you get some valuable properties.
 
-First, we no longer need to coordinate among multiple writers to our store by splitting the key space into "domains." There's now one universal domain, the domain of all possible values. If multiple people add the same value, there's no collision in the key space. They just each get the same key back from the `put` method. 
+First, we no longer need to coordinate among multiple writers to our store by splitting the key space into "domains." There's now one universal domain, the domain of all possible values. If multiple people add the same value, there's no collision in the key space. They just each get the same key back from the `put` method.
 
 This change also gives our values _location independence_. In our original K/V store with multiple domains, we had to include the domain inside the key to prevent name collisions. To retrieve a value, you need to know which domain it belongs to, as well as the specific location within that domain's piece of the key space. If we store a "location based" key on the blockchain, our ability to retrieve the data depends on the one domain that's "baked in" to our key. Even if the same content is stored in a thousand other domains, our lookup will fail if the one we depend on disappears or changes its naming conventions.
 
@@ -72,6 +72,12 @@ This change also gives our values _location independence_. In our original K/V s
 
 So far, we've been talking about content addressing in the abstract, but the point of NFT School is to build things! How can we actually leverage content addressing to make NFTs with durable links?
 
-The simplest way is to use [IPFS](https://ipfs.io), the InterPlanetary File System. 
+The simplest way is to use [IPFS](https://ipfs.io), the InterPlanetary File System. When your data is stored on IPFS, users can fetch it from any IPFS node that has a copy, which can make data transfers more efficient and reduce the load on any single server. As each user fetches a piece of data, they keep a local copy around to help other users who might request it later.
 
-TODO: more about IPFS and how to use it for NFTs, link to NFT "best practices" on docs.ipfs.io, etc
+To use IPFS with NFTs, use a service from Protocol Labs called [nft.storage](https://nft.storage/) to get your data into IPFS, with long-term persistence backed by the decentralized [Filecoin](https://filecoin.io/) storage network. To help foster the growth of the NFT ecosystem and preserve the new digital commons of cultural artifacts that NFTs represent, nft.storage provides free storage and bandwidth for public NFT data. [Sign up for a free account at nft.storage](https://nft.storage/login) and try it out!
+
+## For more information
+
+- [nft.storage documentation](https://nft.storage/#docs)
+- [Best Practices for Storing NFT Data using IPFS](https://docs.ipfs.io/how-to/best-practices-for-nft-data/)
+- [ProtoSchool lesson on Content Addressing](https://proto.school/content-addressing/)
