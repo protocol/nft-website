@@ -1,3 +1,4 @@
+@import 'theme-dark';
 @import 'layout';
 @import 'util';
 @import 'scrollbar';
@@ -12,7 +13,7 @@
 	Root elements styles to force them to use 100% of the viewport
 */
 html {
-	background-color: $primaryColor;
+	background-color: $mainBgColor;
     height: 0;
     min-height: 100%;
     display: flex;
@@ -52,7 +53,7 @@ main.page {
 	Scroll Bar
 */
 
-html {
+html, pre {
 	{scrollbar};
 }
 
@@ -91,7 +92,7 @@ a.header-anchor {
 h1, h2, h3, h4 {
 	font-family: 'VT323', monospace;
 	font-weight: 400;
-	color: $primaryColor;
+	color: $headingColor;
 }
 
 h1 {

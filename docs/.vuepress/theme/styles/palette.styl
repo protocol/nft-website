@@ -1,21 +1,35 @@
-// color overrides
-$accentColor = $tertiaryColor;
-$textColor = #123;
-$sidebarTextColor = $secondaryColor;
-$borderColor = $tertiaryColor;
-$codeBgColor = $reverseTextColor;
-$arrowBgColor = #ccc;
-$badgeTipColor = $accentColor;
-$badgeWarningColor = darken(#ffe564, 35%);
-$badgeErrorColor = #DA5961;
-$highlightColor = #ffffa0;
-// https://github.com/vuejs/vuepress/blob/master/packages/@vuepress/core/lib/client/style/config.styl
+$primaryColor = #281857
+$secondaryColor = #fb0d41
+$tertiaryColor = #0dccf1
+$offWhiteColor = #f9ffff
 
-// NFT School colors
-$primaryColor = #281857;
-$secondaryColor = #fb0d41;
-$tertiaryColor = #0dccf1;
-$accentTextColor = #3f298f;
-$linkColor = #612EA8;
-$reverseTextColor = #140d2e;
-$offWhiteColor = #f9ffff;
+
+// custom colors
+$mainBgColor = $primaryColor
+$layoutBgColor = #140d2e
+$contentBgColor = $offWhiteColor
+$contentBgColorDark = #25272a
+$accentTextColor = #3f298f
+$sidebarTextColor = $secondaryColor
+$arrowBgColor = $accentColor // (for custom BackToTop component)
+$headingColor = $primaryColor
+$headingColorDark = $tertiaryColor
+$highlightColor = #ffffa0
+$highlightColorDark = #ffffa0
+$feedbackBgColor = lighten($tertiaryColor, 80%)
+$feedbackBgColorDark = darken($tertiaryColor, 80%)
+
+
+// color overrides + dark theme overrides (see theme.styl)
+// https://github.com/vuejs/vuepress/blob/master/packages/@vuepress/core/lib/client/style/config.styl
+$accentColor = $tertiaryColor
+$textColor = #123
+$textColorDark = $offWhiteColor
+$borderColor = $tertiaryColor
+$codeBgColor = $layoutBgColor
+$badgeTipColor = $accentColor
+$badgeWarningColor = darken(#ffe564, 35%)
+$badgeErrorColor = #da5961
+$linkColor = #612ea8
+$linkColorDark = lighten(#612ea8, 60%)
+$inputSearchBgColorDark = $contentBgColorDark

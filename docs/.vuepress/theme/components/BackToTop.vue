@@ -67,7 +67,7 @@ export default {
   margin-right: 1.5rem;
   margin-bottom: -1rem;
   width: 2rem;
-  color: $accentColor;
+  color: $arrowBgColor;
   z-index: 1;
   padding: 1rem;
   filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
@@ -76,7 +76,7 @@ export default {
 }
 
 .go-to-top:hover {
-  color: lighten($accentColor, 30%);
+  color: lighten($arrowBgColor, 30%);
 }
 
 @media (max-width: 959px) {
