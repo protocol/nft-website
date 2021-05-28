@@ -5,7 +5,7 @@ issueUrl: https://github.com/protocol/nft-website/issues/45
 ---
  # NFT marketplaces
 
-While we're working on this page, here are some links to the some of most active NFT marketplaces today.
+While we're working on this page, here are some links to the some of the most active NFT marketplaces today.
 
 ### Visual artwork
 
