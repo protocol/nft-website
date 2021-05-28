@@ -1,11 +1,12 @@
 ---
-title: NFT marketplaces 🚧
+title: NFT marketplaces
 description: A developer-focused guide to NFT marketplaces following best practices.
-issueUrl: https://github.com/protocol/nft-website/issues/45
 ---
  # NFT marketplaces
 
-While we're working on this page, here are some links to the some of the most active NFT marketplaces today.
+ This page aims to be a guide to NFT marketplaces that make use of the best practices we've outlined on NFT School.
+
+**We're still working on this content, so in the meantime, here are links to some of the most active NFT marketplaces today. Please [check the status of this page](https://github.com/protocol/nft-website/issues/45) and suggest improvements!**
 
 ### Visual artwork
 
@@ -28,5 +29,3 @@ While we're working on this page, here are some links to the some of the most ac
 
 - [Enjin Marketplace](https://enjin.io/software/marketplace)
 - [Hoard Exchange](https://hoard.exchange/)
-
-<ContentStatus />

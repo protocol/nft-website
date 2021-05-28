@@ -1,13 +1,12 @@
 ---
-title: Metadata schemas 🚧
+title: Metadata schemas
 description: A helpful, handy guide to metadata schemas for NFT developers.
-issueUrl: https://github.com/protocol/nft-website/issues/44
 ---
  # Metadata schemas
 
-This page aims to be a comprehensive guide to the metadata schemas and "best practices" used in various NFT platforms and use cases.
+This page aims to be a comprehensive guide to the metadata schemas and best practices used in various NFT platforms and use cases.
 
-We're still developing this page, so we're not quite as comprehensive as we'd like yet. Please [check the status of this page](https://github.com/protocol/nft-website/issues/44) and suggest improvements!
+**We're still developing this page, so we're not quite as comprehensive as we'd like yet. Please [check the status of this page](https://github.com/protocol/nft-website/issues/44) and suggest improvements!**
 
 ## Ethereum and EVM-compatible chains
 
@@ -39,11 +38,11 @@ NFTs grew out of the Ethereum community, and the [ERC-721](https://eips.ethereum
 
 This schema is deliberately minimal, and does not cover everything that you might want to put in your NFT metadata. However, because it's a convenient baseline, the ERC-721 schema has been widely adopted and extended by many marketplaces and NFT smart contracts.
 
-Many ERC-721 compatible contracts have adopted the [OpenSea metadata recommendations](https://docs.opensea.io/docs/metadata-standards), which suggests conventions for some additional fields that are broadly useful for common types of NFTs.
+Many ERC-721 compatible contracts have adopted the [OpenSea metadata recommendations](https://docs.opensea.io/docs/metadata-standards), which suggest conventions for additional fields that are broadly useful for common types of NFTs.
 
 ### ERC-1155
 
-The [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155) "Multi-token standard" extends ERC-721 to support issuing many different types of token from the same smart contract. This allows more efficient creation of distinct token types, which has helped make NFTs practical for gaming use cases.
+The [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155) multi-token standard extends ERC-721 to support issuing many types of token from the same smart contract. This allows for more efficient creation of distinct token types, which has helped make NFTs practical for gaming use cases.
 
 The ERC-1155 metadata schema is very similar to the one proposed in ERC-721. Since it only adds a few additional properties, tools supporting ERC-721 should support ERC-1155 metadata as well, though they may ignore the extra fields.
 
