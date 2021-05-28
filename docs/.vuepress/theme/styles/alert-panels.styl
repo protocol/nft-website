@@ -2,6 +2,7 @@
 	.custom-block {
 		.custom-block-title {
 			letter-spacing: 0.5px;
+			color: $textColor;
 		}
 	}
 
@@ -10,22 +11,22 @@
 		background-color: lighten($accentColor, 80%);
 	}
 
-	.info {
-		border-left: 4px solid #0e74aa;
-		background-color: #e6f6ff;
-		color: #34373f;
-	}
-
 	.warning {
 		border-left: 4px solid #e7c000;
 		background-color: #fff7d2;
-		color: #34373f;
+		color: $textColor;
+		a {
+			color: $linkColor;
+		}
 	}
 
 	.danger {
 		border-left: 4px solid #a93e3e;
 		background-color: #ffe6e6;
-		color: #a93e3e;
+		color: $textColor;
+		a {
+			color: $linkColor;
+		}
 	}
 }
 

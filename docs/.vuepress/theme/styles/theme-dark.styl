@@ -24,6 +24,42 @@
 	        color: $textColorDark;
         }
 
+        // Alert panels
+        .theme-default-content {
+
+            .tip {
+                background-color: darken($accentColor, 75%);
+                .custom-block-title {
+                    color: $textColorDark;
+                }
+                color: $textColorDark;
+            }
+
+            .warning {
+                border-left: 4px solid #e7c000;
+                background-color: darken(#fff7d2, 87%);
+                .custom-block-title {
+                    color: $textColorDark;
+                }
+                color: $textColorDark;
+                a {
+			        color: $linkColorDark;
+		        }
+            }
+
+            .danger {
+                border-left: 4px solid #a93e3e;
+                background-color: darken(#ffe6e6, 90%);
+                .custom-block-title {
+                    color: $textColorDark;
+                }
+                color: $textColorDark;
+                a {
+			        color: $linkColorDark;
+		        }
+            }
+        }
+
         h1, h2, h3, h4, h5
         a.header-anchor {
 	        color: $headingColorDark;
@@ -77,4 +113,5 @@
             color darken($textColorDark, 70%);
         }
     }
+
 }

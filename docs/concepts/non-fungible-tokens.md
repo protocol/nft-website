@@ -40,9 +40,9 @@ As new blocks are added to the chain, earlier blocks become harder and more expe
 
 By contrast, the traditional web is famously impermanent and dynamic. A web server may serve different content based on, for example, the time of day or the geolocation of the visitor's IP address. And as anyone who's been frustrated by an outdated link can testify, content disappears from the web nearly as often as it arrives. 
 
-This property of permanence and stability is central to the NFT value proposition. By using a blockchain as a durable shared data storage medium, NFTs can be trusted to endure as long as the blockchain itself remains operational — which brings up another interesting property of blockchains. By rewarding node operators with cryptocurrency in exchange for keeping the network alive, a blockchain incentivizes its own survival. As long there are people attracted to the economic reward, there will be someone motivated to keep the network online. This ensures the survival of all historical data, including NFTs.
+This property of permanence and stability is central to the NFT value proposition. By using a blockchain as a durable shared data storage medium, NFTs can be trusted to endure as long as the blockchain itself remains operational — which brings up another interesting property of blockchains. By rewarding node operators with cryptocurrency in exchange for keeping the network alive, a blockchain incentivizes its own survival. As long as there are people attracted to the economic reward, there will be someone motivated to keep the network online. This ensures the survival of all historical data, including NFTs.
 
-::: tip Important note
+::: tip IMPORTANT
 As we'll see in our discussion of [content persistence](/concepts/content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever. NFTs often link to data outside the blockchain, which also needs to be kept online.
 :::
 
