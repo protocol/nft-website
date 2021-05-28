@@ -104,6 +104,16 @@ Let's check out the example repository so we can start playing with NFTs!
     The faucet button will only show up when using a local devnet. If you deploy the contract to a testnet or mainnet, your users will need to use the **Connect** button to sign in with a wallet like [MetaMask][metamask].
     :::
 
+1. Get an API key for nft.storage
+
+    To make requests to nft.storage, you need an API key.
+
+    [Login or sign up for a free account](https://nft.storage/login), then [create an API key](https://nft.storage/manage/).
+
+    Copy the key to your clipboard, and edit the file `end-to-end/packages/react-app/src/constants.js`.
+
+    Near the top of the file, replace the value of the `NFT_STORAGE_KEY` constant with the token you copied earlier.
+
 ## Mint an NFT
 
 To mint an NFT in our example, all you need to do is select a file (we'll use an image), give it a name and optional description, and hit the **Mint** button! This will upload your image and metadata to [nft.storage](https://nft.storage), which will give us an IPFS URI we can store on the blockchain. Then we call a function on the smart contract to mint the token. Once the transaction is confirmed, we're done!
