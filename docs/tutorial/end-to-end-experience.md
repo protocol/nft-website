@@ -202,7 +202,7 @@ Let's look at how our code interacts with the smart contract's `mintToken` funct
 
 ```javascript
   // our smart contract already prefixes URIs with "ipfs://", so we remove it before calling the `mintToken` function
-  const metadataURI = metadata.url.replace(/^ipfs:\/\//, "");
+  const metadataURI = metadata.url.href.replace(/^ipfs:\/\//, "");
 
   // scaffold-eth's Transactor helper gives us a nice UI popup when a transaction is sent
   const transactor = Transactor(provider, gasPrice);
