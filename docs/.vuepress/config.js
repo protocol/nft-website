@@ -118,7 +118,11 @@ module.exports = {
           }
         ]
       }
-    }
+    },
+    algolia: {
+      apiKey: '13321c2a92ae47463cda952cb6d5f332',
+      indexName: 'nftschool'
+    },
   },
   plugins: [
     [require('./plugins/vuepress-plugin-speedcurve'), { id: SPEEDCURVE_ID }],
