@@ -71,6 +71,23 @@ header.navbar .links ul {
 	}
 }
 
+// DocSearch
+// See https://docsearch.algolia.com/docs/styling/
+header.navbar .algolia-autocomplete {
+	.algolia-docsearch-suggestion--highlight {
+		color: $linkColor;
+		box-shadow: inset 0 -2px 0 0 alpha($linkColor, 80%);
+	}
+
+	.algolia-docsearch-suggestion--title .aa-suggestion-title-separator {
+		padding: 0 0.312rem;
+	}
+
+	.algolia-docsearch-suggestion--no-results {
+		padding-left: 8px;
+	}
+}
+
 @media (min-width: $MQNarrow) {
 	header.navbar .links {
 		display: flex;
