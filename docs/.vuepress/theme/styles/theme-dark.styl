@@ -1,6 +1,13 @@
 @media (prefers-color-scheme: dark) {
     .theme-container {
-        // Layout
+    
+        // Content
+        main.page {
+            background-color: $contentBgColorDark;
+	        color: $textColorDark;
+        }
+
+        // Search
         header.navbar .links .search-box input {
             color: $textColorDark;
             background-color: $inputSearchBgColorDark;
@@ -17,11 +24,81 @@
             }
             
         }
-        
-        // Content
-        main.page {
-            background-color: $contentBgColorDark;
-	        color: $textColorDark;
+
+        // DocSearch
+        // See https://docsearch.algolia.com/docs/styling/
+        header.navbar .algolia-autocomplete {
+            /* Main dropdown wrapper */
+             .ds-dropdown-menu {
+                background-color: $contentBgColorDark;
+                border-color: lighten($contentBgColorDark, 20%);
+
+                &::before {
+                    background-color: $contentBgColorDark;
+                    border-color: lighten($contentBgColorDark, 20%);
+                }
+            }
+
+            .algolia-docsearch-suggestion {
+                background-color: $contentBgColorDark;
+            }
+
+            /* Main category (eg. Getting Started) */
+            .algolia-docsearch-suggestion--category-header {
+                color: $textColorDark;
+                background-color: $primaryColor;
+                border-color: lighten($contentBgColorDark, 10%);
+            }
+
+            /* Category (eg. Downloads) */
+            .algolia-docsearch-suggestion--subcategory-column {
+                background-color: lighten($contentBgColorDark, 7%) !important;
+                color: $textColorDark;
+
+                &::before {
+                    background: lighten($contentBgColorDark, 10%);
+                }
+            }
+
+            .algolia-docsearch-suggestion--subcategory-column-text {
+                color: $textColorDark;
+            }
+
+            .algolia-docsearch-suggestion--content {
+                background-color: $contentBgColorDark;
+
+                &::before {
+                    background: none;
+                }
+            }
+
+            /* Title (eg. Bootstrap CDN) */
+            .algolia-docsearch-suggestion--title {
+                color: $textColorDark;
+            }
+
+            /* Description description (eg. Bootstrap currently works...) */
+            .algolia-docsearch-suggestion--text {
+                color: $textColorDark;
+            }
+
+            /* Highlighted text */
+            .algolia-docsearch-suggestion--highlight {
+                color: $linkColorDark;
+                box-shadow: inset 0 -2px 0 0 alpha($linkColorDark, 80%);
+            }
+
+            .ds-cursor .algolia-docsearch-suggestion--content {
+                background-color: lighten($contentBgColorDark, 15%) !important;
+            }
+
+            .ds-dataset-1 {
+                background-color: $contentBgColorDark;
+            }
+
+            .ds-suggestion {
+                border-color: lighten($contentBgColorDark, 10%);
+            }
         }
 
         // Alert panels
