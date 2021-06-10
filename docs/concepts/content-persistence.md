@@ -44,7 +44,7 @@ Protocol Labs recently launched [nft.storage](https://nft.storage/) to make hand
 
 NFTs stored via nft.storage are not only available via the IPFS network, they are also protected from disappearing by Filecoin, which incentivizes storage providers around the world to continue storing the NFT content and metadata long-term.
 
-![Diagram of storage network](../images/diagram-storage-network.png)
+![Diagram of storage network](./images/content-persistence/diagram-storage-network.png)
 
 ## Evolving network participants in content persistence
 
@@ -54,4 +54,4 @@ A wave of other ecosystem partners will continue to emerge to incentivize the pe
 
 ## Conclusion
 
-The internet today, though immensely powerful, has long exposed critical weaknesses in the way it stores and maintains data. Content addressing and persistence are at the root of this issue; specifically, centralized content addressing and persistence. Only through decentralized, verifiable solutions can we ensure that our online information remains secure and available indefinitely. Together, IPFS and Filecoin solve the issues of addressing and persistence, exemplified most recently by nft.storage – a solution that demonstrates an elegant technical stack and a sustainable economic model.
+The internet today, though immensely powerful, has long exposed critical weaknesses in the way it stores and maintains data. Content addressing and persistence are at the root of this issue; specifically, centralized content addressing and persistence. Only through decentralized, verifiable solutions can we ensure that our online information remains secure and available indefinitely. Together, IPFS and Filecoin solve the issues of addressing and persistence, exemplified most recently by nft.storage — a solution that demonstrates an elegant technical stack and a sustainable economic model.

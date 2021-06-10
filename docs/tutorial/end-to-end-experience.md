@@ -74,7 +74,7 @@ Let's check out the example repository so we can start playing with NFTs!
 
     You should see something like this:
 
-    ![Screenshot showing of yarn deploy command](./images/e2e-yarn-deploy.png)
+    ![Screenshot showing of yarn deploy command](./images/end-to-end-experience/e2e-yarn-deploy.png)
 
 1. Start the development server for the React web app:
 
@@ -90,7 +90,7 @@ Let's check out the example repository so we can start playing with NFTs!
 
     You should see a page that looks something like this:
 
-    ![Screenshot of minting example after first launch](./images/e2e-first-launch.png)
+    ![Screenshot of minting example after first launch](./images/end-to-end-experience/e2e-first-launch.png)
 
 1. Get some fake Ether (ETH) to play with.
 
@@ -120,7 +120,7 @@ To mint an NFT in our example, all you need to do is select a file (we'll use an
 
 Below is an animated-GIF example of the whole process:
 
-![Screen recording showing the process of minting an NFT using the example app](./images/e2e-minting-animated.gif)
+![Screen recording showing the process of minting an NFT using the example app](./images/end-to-end-experience/e2e-minting-animated.gif)
 
 ## How minting works
 
