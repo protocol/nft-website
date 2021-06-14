@@ -10,11 +10,12 @@ description: A developer-focused guide to NFT marketplaces following best practi
 
 ### Visual artwork
 
+- [Foundation](https://foundation.app/)
+- [KodaDot](https://nft.kodadot.xyz/)
+- [Nifty Gateway](https://niftygateway.com/)
 - [OpenSea](https://opensea.io/)
 - [Rarible](https://rarible.com/)
-- [Nifty Gateway](https://niftygateway.com/)
 - [SuperRare](https://superrare.co/)
-- [Foundation](https://foundation.app/)
 
 ### Music
 
