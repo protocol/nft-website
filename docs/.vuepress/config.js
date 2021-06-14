@@ -222,7 +222,8 @@ module.exports = {
       }
     ],
     'vuepress-plugin-chunkload-redirect',
-    'vuepress-plugin-ipfs'
+    'vuepress-plugin-ipfs',
+    require('./plugins/vuepress-plugin-last-updated'),
   ],
   extraWatchFiles: ['.vuepress/nav/en.js']
 }
