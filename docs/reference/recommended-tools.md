@@ -1,7 +1,6 @@
 ---
-title: Recommended tools 🚧
+title: Recommended tools
 description: A helpful, handy guide to recommended tools for NFT developers.
-issueUrl: https://github.com/protocol/nft-website/issues/32
 ---
 # Recommended tools
 
@@ -36,6 +35,3 @@ issueUrl: https://github.com/protocol/nft-website/issues/32
 * [Light.js](https://github.com/openethereum/js-libs/tree/master/packages/light.js)
 * [Alchemy-web3.js](https://github.com/alchemyplatform/alchemy-web3)
 * [Rust-web3](https://github.com/tomusdrw/rust-web3)
-
-
-<ContentStatus />
