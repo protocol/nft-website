@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import PageEdit from '@parent-theme/components/PageEdit.vue'
+import PageEdit from '@theme/components/PageEdit.vue'
 import PageNav from '@parent-theme/components/PageNav.vue'
 
 import Feedback from './Feedback.vue'
