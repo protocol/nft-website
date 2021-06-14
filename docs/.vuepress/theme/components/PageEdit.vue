@@ -19,7 +19,7 @@
       <span class="prefix">{{ lastUpdatedText }}:</span>
       <span class="time">{{ lastUpdated }}</span>
       <a
-        href="https://github.com/protocol/nft-website/edit/main/docs/reference/nft-marketplaces.md"
+        href="https://github.com/protocol/nft-website/blob/main/docs/reference/nft-marketplaces.md"
         target="_blank"
         rel="noopener noreferrer"
       >
