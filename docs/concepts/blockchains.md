@@ -12,5 +12,3 @@ related:
  # Blockchains and NFTs
 
 <ContentStatus />
-
-## Useful Links

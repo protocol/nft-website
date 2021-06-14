@@ -10,5 +10,3 @@ related:
  # Creating NFTs
 
 <ContentStatus />
-
-## References
