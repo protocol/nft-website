@@ -92,7 +92,8 @@ module.exports = {
             title: 'How-tos',
             collapsable: false,
             children: [
-              '/how-to/creating-nfts',
+              '/how-to/lazy-minting',
+              '/how-to/minting-on-different-blockchains',
               '/how-to/managing-nfts',
               '/how-to/auditing-nfts'
             ]
