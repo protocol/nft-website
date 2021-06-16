@@ -1,0 +1,8 @@
+{
+ "build": {
+   "image": "node:lts",
+   "command": "npm ci && npm run docs:build",
+   "publicDir": "dist",
+   "baseDir": ""
+ }
+}

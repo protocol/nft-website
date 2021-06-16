@@ -60,6 +60,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:styles": "stylus-supremacy format ./docs/.vuepress/**/*.styl --replace",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs -d ./dist"
   }
 }
