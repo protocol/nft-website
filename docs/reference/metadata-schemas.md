@@ -8,7 +8,7 @@ As described in the [NFT basics concept guide](/concepts/non-fungible-tokens.md)
 
 [Metadata](https://wikipedia.org/wiki/Metadata) is data that provides information about other data; in the case of an NFT, it describes that NFT's essential properties, including its name, description, and anything else its creator feels is important. In many cases, an NFT's metadata also contains links to the images and other "primary" digital assets that give an NFT its value.
 
-Because [NFT marketplaces](/reference/nft-marketplaces.md) leverage metadata to display NFTs to buyers and sellers, it's important for that metadata to be in a format that marketplaces can understand. To make your NFTs compatible with as much of the ecosystem of marketplaces, wallets, and other NFT tooling as possible, you should adopt an existing metadata standard, and if need be extend it with your specific needs.
+Because [NFT marketplaces](/reference/nft-marketplaces.md) leverage metadata to display NFTs to buyers and sellers, it's important for that metadata to be in a format that marketplaces can understand. To make your NFTs compatible with as much of the ecosystem of marketplaces, wallets, and other NFT tooling as possible, you should adopt an existing metadata standard, and if need be, extend it with your specific needs.
 
 This reference guide shows some of the most common and useful metadata formats used by NFTs today. If your favorite standard isn't included, please [open an issue](https://github.com/protocol/nft-website/issues/new?assignees=&labels=need%2Ftriage&template=open-an-issue.md&title=%5BPAGE+ISSUE%5D+Metadata%20schemas).
 
