@@ -27,7 +27,7 @@ Using that CID, anyone can fetch a copy of its data from the IPFS network as lon
 
 Of course, there may be some cases in which you _do_ want to change the metadata for an NFT after it's been published. That's no problem! You'll just need to add support to your smart contract for updating the URI for a token after it's been issued. That will let you change the original URI to a new IPFS URI while still leaving a record of the initial version in the blockchain's transaction history. This provides accountability by making it clear to everyone what was changed, when, and by whom.
 
-Using nft.storage, we can make our NFT data available on IPFS for free, with [content persistence](../concepts/content-persistence) automatically taken care of! Notably, nft.storage includes both long-term "cold storage" in the decentralized [Filecoin](https://filecoin.io) network, as well as "hot storage" using [IPFS Cluster](https://cluster.ipfs.io/). As a nice bonus, you also get a JavaScript [client library][nft-storage-js-client] that helps you upload data to IPFS and generate NFT metadata all in one line of code.
+Using nft.storage, we can make our NFT data available on IPFS for free, with [content persistence](../concepts/content-persistence.md) automatically taken care of! Notably, nft.storage includes both long-term "cold storage" in the decentralized [Filecoin](https://filecoin.io) network, as well as "hot storage" using [IPFS Cluster](https://cluster.ipfs.io/). As a nice bonus, you also get a JavaScript [client library][nft-storage-js-client] that helps you upload data to IPFS and generate NFT metadata all in one line of code.
 
 ## Getting set up
 
