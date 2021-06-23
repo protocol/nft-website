@@ -88,6 +88,10 @@ NFT School follows the _GitHub Flavored Markdown_ syntax. This way, readers have
 
 We use the rules set out in the [VSCode Markdownlint](https://github.com/DavidAnson/vscode-markdownlint) extension. You can import these rules into any text editor like Vim or Sublime. All rules are listed [within the Markdownlint repository](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md).
 
+#### Relative links
+
+If you include internal (relative) links to other content on NFT School, please link to them using full relative paths (e.g. use `../` for climbing a directory) and specifying the file's full name (e.g. `awesome-tutorial.md#subheading`). This ensures that users who read NFT School content directly in-repo on GitHub's web UI are able to follow relative links correctly.
+
 ### Text style
 
 In addition to the [rules](https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md) found within the [Markdownlinter extension](https://github.com/DavidAnson/vscode-markdownlint), NFT School also observes the following style guidelines.
