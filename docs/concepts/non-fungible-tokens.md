@@ -43,16 +43,16 @@ By contrast, the traditional web is famously impermanent and dynamic. A web serv
 This property of permanence and stability is central to the NFT value proposition. By using a blockchain as a durable shared data storage medium, NFTs can be trusted to endure as long as the blockchain itself remains operational — which brings up another interesting property of blockchains. By rewarding node operators with cryptocurrency in exchange for keeping the network alive, a blockchain incentivizes its own survival. As long as there are people attracted to the economic reward, there will be someone motivated to keep the network online. This ensures the survival of all historical data, including NFTs.
 
 ::: tip IMPORTANT
-As we'll see in our discussion of [content persistence](/concepts/content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever. NFTs often link to data outside the blockchain, which also needs to be kept online.
+As we'll see in our discussion of [content persistence](content-persistence.md), a blockchain isn't always enough to keep your NFTs alive forever. NFTs often link to data outside the blockchain, which also needs to be kept online.
 :::
 
 ## What are NFTs used for?
 
 Among the earliest NFT experiments is [CryptoPunks](https://www.larvalabs.com/cryptopunks), a set of 10,000 pixel art characters that can be collected and traded on Ethereum. Although anyone can view the artwork for any punk, each character can only have a single official "owner" on the Ethereum blockchain at a given time. CryptoPunks proved to be a huge success, with rare punks trading hands for huge sums of Ether worth millions of US dollars.
 
-Digital collectibles like CryptoPunks remain one of the most popular and compelling use cases for NFTs, and the successors to CryptoPunks helped define the earliest [standards for interoperability and metadata](/reference/metadata-schemas.md) for NFTs.
+Digital collectibles like CryptoPunks remain one of the most popular and compelling use cases for NFTs, and the successors to CryptoPunks helped define the earliest [standards for interoperability and metadata](../reference/metadata-schemas.md) for NFTs.
 
-In the years since CryptoPunks debuted, NFTs have become a vehicle for all kinds of creative projects. Much of the excitement has come from artists looking to engage directly with fans and find new ways to make a living from their creations. This has been supported by a growing ecosystem of [NFT marketplaces](/reference/nft-marketplaces.md) that bridge the gap between the familiar web and the cryptic world of crytocurrencies, and has also resulted in millions of dollars' worth of direct payments to artists for their digital creations.
+In the years since CryptoPunks debuted, NFTs have become a vehicle for all kinds of creative projects. Much of the excitement has come from artists looking to engage directly with fans and find new ways to make a living from their creations. This has been supported by a growing ecosystem of [NFT marketplaces](../reference/nft-marketplaces.md) that bridge the gap between the familiar web and the cryptic world of crytocurrencies, and has also resulted in millions of dollars' worth of direct payments to artists for their digital creations.
 
 Outside digital art and collectibles, NFTs have found use cases in gaming, where they can represent plots of virtual land, avatars and skins for game characters, in-game items, and more. By putting a player's "inventory" of these items on a shared blockchain, NFT-powered games can enable new mechanics and allow players to use their custom items across multiple potential games and experiences. They also give players a way to buy, sell, and trade items among themselves without locking their purchases into a single company's storefront or marketplace.
 

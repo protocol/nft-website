@@ -4,11 +4,11 @@ description: A helpful, handy guide to metadata schemas for NFT developers.
 ---
  # Metadata schemas
 
-As described in the [NFT basics concept guide](/concepts/non-fungible-tokens.md), an NFT is a digital asset that can be bought and sold on a blockchain network. The value of an NFT is based on what it _represents_ — for example, an image, video, or game asset. To make an NFT represent something, we use _metadata_.
+As described in the [NFT basics concept guide](../concepts/non-fungible-tokens.md), an NFT is a digital asset that can be bought and sold on a blockchain network. The value of an NFT is based on what it _represents_ — for example, an image, video, or game asset. To make an NFT represent something, we use _metadata_.
 
 [Metadata](https://wikipedia.org/wiki/Metadata) is data that provides information about other data; in the case of an NFT, it describes that NFT's essential properties, including its name, description, and anything else its creator feels is important. In many cases, an NFT's metadata also contains links to the images and other "primary" digital assets that give an NFT its value.
 
-Because [NFT marketplaces](/reference/nft-marketplaces.md) leverage metadata to display NFTs to buyers and sellers, it's important for that metadata to be in a format that marketplaces can understand. To make your NFTs compatible with as much of the ecosystem of marketplaces, wallets, and other NFT tooling as possible, you should adopt an existing metadata standard, and if need be, extend it with your specific needs.
+Because [NFT marketplaces](nft-marketplaces.md) leverage metadata to display NFTs to buyers and sellers, it's important for that metadata to be in a format that marketplaces can understand. To make your NFTs compatible with as much of the ecosystem of marketplaces, wallets, and other NFT tooling as possible, you should adopt an existing metadata standard, and if need be, extend it with your specific needs.
 
 This reference guide shows some of the most common and useful metadata formats used by NFTs today. If your favorite standard isn't included, please [open an issue](https://github.com/protocol/nft-website/issues/new?assignees=&labels=need%2Ftriage&template=open-an-issue.md&title=%5BPAGE+ISSUE%5D+Metadata%20schemas).
 
@@ -22,7 +22,7 @@ Since JSON is a lightweight format, it doesn't impose any constraints on the str
 
 ## Linking to NFT assets
 
-In our [concept guide to content addressing](/concepts/content-addressing.md), we explain how [IPFS](https://ipfs.io) helps make NFTs resilient to changes over time and protects users from NFTs that are tied to centralized servers and brittle URL conventions.
+In our [concept guide to content addressing](../concepts/content-addressing.md), we explain how [IPFS](https://ipfs.io) helps make NFTs resilient to changes over time and protects users from NFTs that are tied to centralized servers and brittle URL conventions.
 
 When linking from your metadata to another digital asset like an image file, we recommend storing the asset on IPFS and using an IPFS [Uniform Resource Identifier](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) (URI) to reference the asset. An IPFS URI is just the string `ipfs://` followed by an IPFS [CID](https://docs.ipfs.io/concepts/content-addressing/), for example: `ipfs://bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi`.
 
