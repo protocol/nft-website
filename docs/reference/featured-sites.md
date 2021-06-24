@@ -4,7 +4,7 @@ description: Helpful sites and other resources for NFT developers.
 ---
  # Featured NFT dev sites
 
-Below you'll find a growing list of sites with useful information and resources for NFT developers. This isn't an exhaustive inventory, so if you've got a favorite resource that's been valuable along your NFT development journey, please share it! [Add it to this page](https://github.com/protocol/nft-website/blob/main/docs/reference/featured-sites.md) to contribute to the global community of NFT developers.
+Below you'll find a growing list of sites with useful information and resources for NFT developers. This isn't an exhaustive inventory, so **if you've got a favorite resource that's been valuable along your NFT development journey, please share it! [Add it to this page](https://github.com/protocol/nft-website/blob/main/docs/reference/featured-sites.md) to contribute to the global community of NFT developers.**
  
  ## Conceptual overviews
 
