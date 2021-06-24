@@ -4,9 +4,9 @@ description: A developer-focused guide to NFT marketplaces following best practi
 ---
  # NFT marketplaces
 
- This page aims to be a guide to NFT marketplaces that make use of the best practices we've outlined on NFT School.
+Below you'll find a basic list of some of the most active NFT marketplaces today. While this isn't a guarantee that all of these sites make the most of NFT best practices, they can be a good place to start when you're seeking ideas and inspiration for your own NFT development endeavors.
 
-**We're still working on this content, so in the meantime, here are links to some of the most active NFT marketplaces today. Please [check the status of this page](https://github.com/protocol/nft-website/issues/45) and suggest improvements!**
+**If you've got recommendations for marketplaces that observe NFT best practices, please share them here! [Add your nominations to this page](https://github.com/protocol/nft-website/blob/main/docs/reference/nft-marketplaces.md) to contribute to the global community of NFT developers.**
 
 ### Visual artwork
 
