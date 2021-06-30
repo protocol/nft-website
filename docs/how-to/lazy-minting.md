@@ -11,7 +11,7 @@ Using a few advanced techniques, it's possible to defer the cost of minting an N
 
 Minting "just in time" at the moment of purchase is often called _lazy minting_, and it has been [adopted by marketplaces like OpenSea](https://opensea.io/blog/announcements/introducing-the-collection-manager/) to lower the barrier to entry for NFT creators by making it possible to create NFTs without any up-front costs.
 
-This guide will show an example of lazy minting on Ethereum, using some helper libraries and base contracts from [OpenZeppelin](https://openzeppelin.org). If you're new to minting NFTs in general, our [end-to-end experience tutorial](../../tutorial/end-to-end-experience/) is a great place to get up to speed on the basics.
+This guide will show an example of lazy minting on Ethereum, using some helper libraries and base contracts from [OpenZeppelin](https://openzeppelin.org/contracts). If you're new to minting NFTs in general, our [end-to-end experience tutorial](../../tutorial/end-to-end-experience/) is a great place to get up to speed on the basics.
 
 Throughout the guide, we'll be referring to an example project, which lives in the [NFT School examples repository](https://github.com/ipfs-shipyard/nft-school-examples). If you want to dig in, clone the repo and open the example in your favorite editor:
 
@@ -45,7 +45,7 @@ The voucher contains two pieces of information that will be recorded into the bl
 The `signature` field in our struct contains a signature prepared by the NFT creator as described [below](#creating-a-signed-voucher)
 
 ::: tip
-Setting a purchase price inside the voucher isn't always necessary, but you will probably need some kind of condition. Otherwise anyone who has the voucher could claim the NFT for just the gas cost! 
+Setting a purchase price inside the voucher isn't always necessary, but you will probably need some kind of condition. Otherwise, anyone who has the voucher could claim the NFT for just the gas cost! 
 
 For example, if you're "air dropping" NFTs to specific accounts and know the recipient addresses up front, your voucher could include an `address recipient` field instead of a `minPrice`, and your `redeem` function could check to make sure that `msg.sender == voucher.recipient`.
 :::
@@ -130,7 +130,7 @@ We also make sure that the buyer has sent enough Eth to cover the `minPrice`. If
 
 Finally, we tuck the payment into a mapping called `pendingWithdrawals`, so the NFT creator can get their Eth out later.
 
-That's it! If you're curious about the signature verification, check out the [contract source](https://github.com/ipfs-shipyard/nft-school-examples/blob/main/lazy-minting/contracts/LazyNFT.sol) and the [docs for the OpenZeppelin EIP-712 base contract](https://docs.openzeppelin.com/contracts/4.x/api/utils#EIP712).
+That's it! If you're curious about the signature verification, see the [contract source](https://github.com/ipfs-shipyard/nft-school-examples/blob/main/lazy-minting/contracts/LazyNFT.sol) and the [docs for the OpenZeppelin EIP-712 base contract](https://docs.openzeppelin.com/contracts/4.x/api/utils#EIP712).
 
 ## Conclusion
 
