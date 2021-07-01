@@ -198,7 +198,7 @@ module.exports = {
     [
       '@vuepress/html-redirect',
       {
-        duration: 0
+        countdown: 0
       }
     ],
     [
