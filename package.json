@@ -11,7 +11,7 @@
     "@vuepress/plugin-html-redirect": "^0.1.2",
     "@vuepress/plugin-last-updated": "^1.8.2",
     "husky": "^7.0.0",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^11.0.0",
     "markdown-it-deflist": "^2.1.0",
     "markdown-it-footnote": "^3.0.2",
     "markdown-it-image-lazy-loading": "^1.0.2",
