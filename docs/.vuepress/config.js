@@ -83,8 +83,8 @@ module.exports = {
             children: [
               '/tutorial/first-steps',
               '/tutorial/end-to-end-experience',
-              '/tutorial/gallery-app',
               '/tutorial/minting-app',
+              '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games'
             ]
           },
