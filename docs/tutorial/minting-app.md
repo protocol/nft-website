@@ -7,7 +7,7 @@ description: Explore the problem space of minting NFTs in this high-level archit
 
  Our [end-to-end experience tutorial](../../tutorial/end-to-end-experience.md) shows how to create a simple web app that mints NFTs on Ethereum, building on a great open-source starter repository called [scaffold-eth](https://github.com/austintgriffith/scaffold-eth).
 
- In this guide, we'll take a slightly different approach: In order to help you more holistically explore the problem space of minting NFTs, we'll zoom out from the _basic mechanics_ of minting an NFT to instead consider _all the pieces that need to come together_ to build a successful minting platform. If you're considering building your own minting app from scratch, this high-level architectural overview is here to help you along the decision-making process.
+ In this guide, we'll take a slightly different approach: To help you more holistically explore the problem space of minting NFTs, we'll zoom out from the _basic mechanics_ of minting an NFT to instead consider _all the pieces that need to come together_ to build a successful minting platform. If you're considering building your own minting app from scratch, this high-level architectural overview is here to help you along the decision-making process.
 
 ## Big decisions
 
@@ -17,8 +17,8 @@ One of the most important things you can do in the early design phase of any dev
 Before you can even get started building your minting app, you'll need to decide which [blockchain platform](../../concepts/blockchains.md) to build upon. This is a complex decision with technical, social, and business considerations that all need to be weighed out before your design can start to get specific. When you're deciding upon a platform, here are some key questions to ask yourself:
 
 * **Is the platform active and growing?** This isn't just a popularity contest; an active, growing developer community can be crucial in helping you solve roadblocks you encounter as you build.
-* **Do you believe in the long-term prospects of the platform?** There's not much point in spending your time and energy developing for a platform that won't be relevant in the long run.
-* **How easily can new users be onboarded to the platform?** If a platform is easy to build on but the user experience is less than ideal, you may be causing yourself more grief than you might initially think.
+* **Do you believe in the long-term prospects of the platform?** There's not much point in spending your time and energy developing for a platform that won't be relevant over time.
+* **How easily can new users be onboarded to the platform?** If a platform is easy to build on, but the user experience is less than ideal, you may be causing yourself more grief than you might initially think.
 * **Can the technical limits of the platform support your idea, both now and in the long term?** For example, many of the examples here on NFT School use Ethereum, but the transaction limits and gas fees may be a deal-breaker for your use case.
 
 ### Do you need a back end? 
@@ -47,7 +47,7 @@ By capturing the read and write components of state modification in a single con
 
 ### Upgradability
 
-Most successful web applications evolve over time, but smart contracts are immutable by default and difficult to change. **Before you deploy to mainnet, consider making your contracts upgradeable** using something akin to the [OpenZeppelin Upgrades plugin](https://docs.openzeppelin.com/upgrades-plugins/1.x/). This adds a layer of indirection that allows you to push updates to a deployed contract without requiring all users to connect to a new contract address. Although this adds some complexity and costs a bit more gas, _not_ having the ability to upgrade may prove much more expensive in the long run!
+Most successful web applications evolve over time, but smart contracts are immutable by default and difficult to change. **Before you deploy to mainnet, consider making your contracts upgradeable** using something akin to the [OpenZeppelin Upgrades plugin](https://docs.openzeppelin.com/upgrades-plugins/1.x/). This adds a layer of indirection that allows you to push updates to a deployed contract without requiring all users to connect to a new contract address. Although this adds some complexity and costs a bit more gas, _not_ having the ability to upgrade may prove much more expensive over time!
 
 ## User authentication
 
