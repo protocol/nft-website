@@ -17,7 +17,7 @@ If you've never heard the words "Solidity", "EVM", or "smart contract" before, i
 
 ## Smart contracts
 
-A _smart contract_ is any program that runs on a blockchain and uses a blockchain's ability to track state, process transactions, and interact with addresses. In the case of Ethereum, smart contracts can be written in Solidity or Vyper. We'll cover cover smart contract development with Solidity in other topics on NFT School, but in this tutorial, we'll focus on interacting with smart contracts that already exist.
+A _smart contract_ is any program that runs on a blockchain and uses a blockchain's ability to track state, process transactions, and interact with addresses. In the case of Ethereum, smart contracts can be written in Solidity or Vyper. We'll cover smart contract development with Solidity in other topics on NFT School, but in this tutorial, we'll focus on interacting with smart contracts that already exist.
 
 ## Blockchain environments
 
