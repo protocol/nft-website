@@ -84,7 +84,7 @@ export default {
         : `https://github.com/${docsRepo}`
       return (
         base.replace(endingSlashRE, '')
-        + '/edit'
+        + '/blob'
         + `/${docsBranch}/`
         + (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '')
         + path
