@@ -1,25 +1,13 @@
 <template>
   <footer class="page-edit">
     <div
-      v-if="editLink"
-      class="edit-link"
-    >
-      <a
-        :href="editLink"
-        target="_blank"
-        rel="noopener noreferrer"
-      >{{ editLinkText }}</a>
-      <OutboundLink />
-    </div>
-
-    <div
       v-if="lastUpdated"
       class="last-updated"
     >
       <span class="prefix">{{ lastUpdatedText }}:</span>
       <span class="time">{{ lastUpdated }}</span>
       <a
-        href="https://github.com/protocol/nft-website/blob/main/docs/reference/nft-marketplaces.md"
+        :href="editLink"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -30,7 +18,6 @@
 </template>
 
 <script>
-import isNil from 'lodash/isNil'
 import { endingSlashRE, outboundRE } from '@parent-theme/util'
 
 export default {
@@ -49,16 +36,13 @@ export default {
       return 'Last Updated'
     },
     editLink () {
-      const showEditLink = isNil(this.$page.frontmatter.editLink)
-        ? this.$site.themeConfig.editLinks
-        : this.$page.frontmatter.editLink
       const {
         repo,
         docsDir = '',
-        docsBranch = 'master',
+        docsBranch = 'main',
         docsRepo = repo
       } = this.$site.themeConfig
-      if (showEditLink && docsRepo && this.$page.relativePath) {
+      if (docsRepo && this.$page.relativePath) {
         return this.createEditLink(
           repo,
           docsRepo,
@@ -68,13 +52,6 @@ export default {
         )
       }
       return null
-    },
-    editLinkText () {
-      return (
-        this.$themeLocaleConfig.editLinkText
-        || this.$site.themeConfig.editLinkText
-        || `Edit this page`
-      )
     }
   },
   methods: {
