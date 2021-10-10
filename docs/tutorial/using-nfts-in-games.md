@@ -6,7 +6,7 @@ related:
   'NFTs: The Next Gaming Revolution? (Ledger)': https://www.ledger.com/academy/nfts-the-next-gaming-revolution
 ---
 
-In this tutorial we will be working creating an NFT game from the start to finish. The initial parts will focus on solidity and hardhat for developing our smart contracts and writing tests, yes, lots of tests. 
+In this tutorial we will be working creating an NFT game from the start to finish. The initial parts will focus on solidity and hardhat for developing our smart contracts and writing tests, yes, lots of tests.
 
 I know that doesn't sound super fun, you want to be creating all sorts of ape images and making millions on OpenSea but we have to crawl before we can bound like an Ape.
 
