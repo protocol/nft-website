@@ -73,8 +73,6 @@ module.exports = {
               '/concepts/non-fungible-tokens',
               '/concepts/content-addressing',
               '/concepts/content-persistence',
-              '/concepts/blockchains',
-              '/concepts/distributed-web'
             ]
           },
           {
@@ -93,7 +91,6 @@ module.exports = {
             collapsable: false,
             children: [
               '/how-to/lazy-minting',
-              '/how-to/minting-on-different-blockchains',
               '/how-to/managing-nfts',
               '/how-to/auditing-nfts'
             ]
@@ -105,7 +102,6 @@ module.exports = {
             [
               '/reference/metadata-schemas',
               '/reference/nft-marketplaces',
-              '/reference/example-apps-code-samples',
               '/reference/recommended-tools',
               '/reference/featured-sites'
             ]

@@ -6,7 +6,7 @@ description: Learn the basics of NFTs in this developer-focused guide - what the
 
 **NFT** stands for _non-fungible token_, which doesn't explain very much. This page defines what an NFT actually is in the abstract, while also looking at a few specific examples of NFT applications and use cases.
 
-First, let's break down the name. Before we get into "non-fungible," what do we mean by "token"? For our purposes, a token is a kind of record in an information system called a blockchain. We won't get into all the details of how blockchains work here; check out [Blockchains and NFTs](./blockchains.md) for that. To understand what an NFT is, we just need a bit of background knowledge.
+First, let's break down the name. Before we get into "non-fungible," what do we mean by "token"? For our purposes, a token is a kind of record in an information system called a blockchain. We won't get into all the details of how blockchains work here. To understand what an NFT is, we just need a bit of background knowledge.
 
 ## A bit of history
 
