@@ -5,7 +5,7 @@ description: Explore the problem space of minting NFTs in this high-level archit
 ---
  # Designing a minting app
 
- Our [end-to-end experience tutorial](../../tutorial/end-to-end-experience.md) shows how to create a simple web app that mints NFTs on Ethereum, building on a great open-source starter repository called [scaffold-eth](https://github.com/austintgriffith/scaffold-eth).
+ Our [minting service tutorial](../../tutorial/minting-service.md) shows how to create a simple web app that mints NFTs on Ethereum, building on a great open-source starter repository called [scaffold-eth](https://github.com/austintgriffith/scaffold-eth).
 
  In this guide, we'll take a slightly different approach: To help you more holistically explore the problem space of minting NFTs, we'll zoom out from the _basic mechanics_ of minting an NFT to instead consider _all the pieces that need to come together_ to build a successful minting platform. If you're considering building your own minting app from scratch, this high-level architectural overview is here to help you along the decision-making process.
 

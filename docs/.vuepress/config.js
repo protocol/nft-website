@@ -73,6 +73,7 @@ module.exports = {
               '/concepts/non-fungible-tokens',
               '/concepts/content-addressing',
               '/concepts/content-persistence',
+              '/concepts/minting-app',
             ]
           },
           {
@@ -80,8 +81,7 @@ module.exports = {
             collapsable: false,
             children: [
               '/tutorial/first-steps',
-              '/tutorial/end-to-end-experience',
-              '/tutorial/minting-app',
+              '/tutorial/minting-service',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games'
             ]
