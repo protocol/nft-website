@@ -82,6 +82,7 @@ module.exports = {
             children: [
               '/tutorial/first-steps',
               '/tutorial/minting-service',
+              '/tutorial/lazy-minting',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games'
             ]
@@ -90,7 +91,6 @@ module.exports = {
             title: 'How-tos',
             collapsable: false,
             children: [
-              '/how-to/lazy-minting',
               '/how-to/managing-nfts',
               '/how-to/auditing-nfts'
             ]
