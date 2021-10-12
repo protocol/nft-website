@@ -74,6 +74,8 @@ module.exports = {
               '/concepts/content-addressing',
               '/concepts/content-persistence',
               '/concepts/minting-app',
+              '/concepts/managing-nfts',
+              '/concepts/auditing-nfts',
             ]
           },
           {
@@ -85,14 +87,6 @@ module.exports = {
               '/tutorial/lazy-minting',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games'
-            ]
-          },
-          {
-            title: 'How-tos',
-            collapsable: false,
-            children: [
-              '/how-to/managing-nfts',
-              '/how-to/auditing-nfts'
             ]
           },
           {
