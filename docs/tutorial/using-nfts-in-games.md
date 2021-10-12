@@ -10,7 +10,64 @@ In this tutorial we will be working creating an NFT game from the start to finis
 
 I know that doesn't sound super fun, you want to be creating all sorts of ape images and making millions on OpenSea but we have to crawl before we can bound like an Ape.
 
-## Requirements for you, the developer
+Table Of Contents
+
+* What this is all about - The Squid Royale!
+  * General Overview
+  * Overview of Part 1
+  * Whats to come
+* The Battle Field - What are we doing here exactly in Solidity?
+  * Creating a game
+  * Making NFTs
+  * Buying things
+  * Playing the game
+* The Battle Rules - What can we do in a game on-chain
+  * Making a game with no graphics? Thats weird!
+  * Randomness or Not
+  * Pros & Cons of NFTs
+  * Working within the boundaries of Web 3.0
+* Even Rocky had a montage - The initial project to get you started
+  * Get Ready - Starter repo
+  * Weapon Up - Tools
+  * Practice, Practice - The skills
+* Dramatis Personae - The parts of the game
+  * The rules
+  * The general design
+  * The cards
+  * The store
+  * The game
+* Gearing Up - Getting Started
+  * Enter the Dojo
+  * How we will design this project: Evolving Architecture
+* Red Light, Green Light - Testing
+  * TDD in a nutshell  
+* Some Dalgona Cookies Please - Creating the NFTs & Contracts
+  * Cards
+  * Card Packs
+  * Store
+  * Minting the cards - Randomness
+  * Playing the game
+* The invigilators arrive - Setting up the game
+  * How we configure the contracts for play
+  * Card packs
+  * Game Store
+  * Game Contract
+* A Game of Marbles - Buying the Packs
+  * How we test this
+* Tug of War - Opening the Pack
+  * We got some cards!
+* Squid Royale! - Playing a game
+  * Selecting the arena
+  * Creating your loadout
+  * Win/Lose!
+* Season 2 - Always end on a cliffhanger
+  * Whats next?
+
+---
+
+## Revise this Structure :: _Old content needing cleaned up_
+
+## Getting Started
 
 You need to have somewhat of a grasp on javascript, hardhat and solidity. The code should explain a lot but if you get stuck or aren't sure about what the codes doing exactly looking at references on the respective sites should help you. There are also excellent discord servers for most things as well to help you upskill.
 
