@@ -1,13 +1,13 @@
 ---
-title: End-to-end experience
-description: Understand the end-to-end experience of storing and using NFTs in this developer-focused guide.
+title: Build a minting service
+description: Learn how to build a simple NFT minting web app in this developer-focused guide.
 ---
 
-# End-to-end experience
+# Build a minting service
 
 In this tutorial, you will go from zero to creating a freshly minted NFT token and storing it on IPFS and Filecoin using [nft.storage](https://nft.storage), all in a decentralized web app built using JavaScript, the [ethers.js](https://docs.ethers.io/) library, and React.
 
-We'll be minting NFTs on the Ethereum blockchain for this guide. However, the concepts described here can just as easily be applied to other blockchains. If you're curious, see [Blockchains and NFTs](../concepts/blockchains.md) for an overview of some of the blockchain networks that can be used for NFT projects and how they differ from Ethereum.
+We'll be minting NFTs on the Ethereum blockchain for this guide. However, the concepts described here can just as easily be applied to other blockchains.
 
 If you've never worked with Ethereum or another smart contract platform before, our [first steps guide](../tutorial/first-steps.md) will walk you through a quick "hello world" example using an Ethereum testnet.
 

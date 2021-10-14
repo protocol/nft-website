@@ -5,7 +5,7 @@ description: Explore the problem space of minting NFTs in this high-level archit
 ---
  # Designing a minting app
 
- Our [end-to-end experience tutorial](../../tutorial/end-to-end-experience.md) shows how to create a simple web app that mints NFTs on Ethereum, building on a great open-source starter repository called [scaffold-eth](https://github.com/austintgriffith/scaffold-eth).
+ Our [minting service tutorial](../../tutorial/minting-service.md) shows how to create a simple web app that mints NFTs on Ethereum, building on a great open-source starter repository called [scaffold-eth](https://github.com/austintgriffith/scaffold-eth).
 
  In this guide, we'll take a slightly different approach: To help you more holistically explore the problem space of minting NFTs, we'll zoom out from the _basic mechanics_ of minting an NFT to instead consider _all the pieces that need to come together_ to build a successful minting platform. If you're considering building your own minting app from scratch, this high-level architectural overview is here to help you along the decision-making process.
 
@@ -14,7 +14,7 @@ description: Explore the problem space of minting NFTs in this high-level archit
 One of the most important things you can do in the early design phase of any development project is to identify the pieces of your design that are going to be the hardest to change your mind about later. This is especially true for blockchain projects, where long-lived immutable data is the norm and it's often expensive or impossible to update data once it's published.
 
 ### What platform to use?
-Before you can even get started building your minting app, you'll need to decide which [blockchain platform](../../concepts/blockchains.md) to build upon. This is a complex decision with technical, social, and business considerations that all need to be weighed out before your design can start to get specific. When you're deciding upon a platform, here are some key questions to ask yourself:
+Before you can even get started building your minting app, you'll need to decide which blockchain platform to build upon. This is a complex decision with technical, social, and business considerations that all need to be weighed out before your design can start to get specific. When you're deciding upon a platform, here are some key questions to ask yourself:
 
 * **Is the platform active and growing?** This isn't just a popularity contest; an active, growing developer community can be crucial in helping you solve roadblocks you encounter as you build.
 * **Do you believe in the long-term prospects of the platform?** There's not much point in spending your time and energy developing for a platform that won't be relevant over time.

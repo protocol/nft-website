@@ -73,8 +73,9 @@ module.exports = {
               '/concepts/non-fungible-tokens',
               '/concepts/content-addressing',
               '/concepts/content-persistence',
-              '/concepts/blockchains',
-              '/concepts/distributed-web'
+              '/concepts/minting-app',
+              '/concepts/managing-nfts',
+              '/concepts/auditing-nfts',
             ]
           },
           {
@@ -82,20 +83,10 @@ module.exports = {
             collapsable: false,
             children: [
               '/tutorial/first-steps',
-              '/tutorial/end-to-end-experience',
-              '/tutorial/minting-app',
+              '/tutorial/minting-service',
+              '/tutorial/lazy-minting',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games'
-            ]
-          },
-          {
-            title: 'How-tos',
-            collapsable: false,
-            children: [
-              '/how-to/lazy-minting',
-              '/how-to/minting-on-different-blockchains',
-              '/how-to/managing-nfts',
-              '/how-to/auditing-nfts'
             ]
           },
           {
@@ -105,7 +96,6 @@ module.exports = {
             [
               '/reference/metadata-schemas',
               '/reference/nft-marketplaces',
-              '/reference/example-apps-code-samples',
               '/reference/recommended-tools',
               '/reference/featured-sites'
             ]

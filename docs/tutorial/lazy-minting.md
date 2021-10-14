@@ -11,7 +11,7 @@ Using a few advanced techniques, it's possible to defer the cost of minting an N
 
 Minting "just in time" at the moment of purchase is often called _lazy minting_, and it has been [adopted by marketplaces like OpenSea](https://opensea.io/blog/announcements/introducing-the-collection-manager/) to lower the barrier to entry for NFT creators by making it possible to create NFTs without any up-front costs.
 
-This guide will show an example of lazy minting on Ethereum, using some helper libraries and base contracts from [OpenZeppelin](https://openzeppelin.com/contracts/). If you're new to minting NFTs in general, our [end-to-end experience tutorial](../../tutorial/end-to-end-experience/) is a great place to get up to speed on the basics.
+This guide will show an example of lazy minting on Ethereum, using some helper libraries and base contracts from [OpenZeppelin](https://openzeppelin.com/contracts/). If you're new to minting NFTs in general, our [minting service tutorial](../../tutorial/minting-service.md) is a great place to get up to speed on the basics.
 
 Throughout the guide, we'll be referring to an example project, which lives in the [NFT School examples repository](https://github.com/ipfs-shipyard/nft-school-examples). If you want to dig in, clone the repo and open the example in your favorite editor:
 

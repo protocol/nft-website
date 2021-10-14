@@ -20,7 +20,7 @@ We'll be building on a background of modern web development, with a focus on Jav
 
 - [**NFT Basics**](./concepts/non-fungible-tokens.md) is a high-level overview of just what an NFT is exactly, and what they're being used for.
 - Our [**First Steps Tutorial**](./tutorial/first-steps.md) helps you get set up to interact with smart contracts on Ethereum, before we get into the specifics of NFTs themselves.
-- In the [**End-to-end Experience Tutorial**](./tutorial/end-to-end-experience.md), we examine a simple NFT minting app to see exactly how the process works — from storing images on IPFS to creating tokens on Ethereum.
+- In the [**Minting Service Tutorial**](./tutorial/minting-service.md), we examine a simple NFT minting app to see exactly how the process works — from storing images on IPFS to creating tokens on Ethereum.
 
  ## Contribute to NFT School
 
