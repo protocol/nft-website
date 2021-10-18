@@ -2,3 +2,8 @@
 /tutorial/ /index.html
 /how-to/ /index.html
 /reference/ /index.html
+/tutorial/end-to-end-experience/ /tutorial/minting-service/
+/tutorial/minting-app/ /concepts/minting-app/
+/how-to/lazy-minting/ /tutorial/lazy-minting/
+/how-to/managing-nfts/ /concepts/managing-nfts/
+/how-to/auditing-nfts/ /concepts/auditing-nfts/
