@@ -34,13 +34,13 @@ You will need to install [Node.js][nodejs] and npm (comes with Node.js), [Flow c
 > or framework if you are happy to take on the additional work of
 > taking the [road less travelled][robert-frost-poem] approach.
 
-If you are not familiar with the concept of smart contract and NFTs, it is worth zipping through [blockchain][blockchain-basic] and [NFT][nft-basic] basics before diving in.
+If you are not familiar with the concept of smart contracts and NFTs, it is worth zipping through [blockchain][blockchain-basic] and [NFT][nft-basic] basics before diving in.
 
 ## What you will learn
 
 You will learn the basic NFT building blocks from the ground up, such as:
 
- - Smart contract and the [Cadence language][cadence]
+ - Smart contracts and the [Cadence language][cadence]
  - User authentication
  - Minting and storing tokens' metadata on [Filecoin/IPFS][nft-storage]
  - Transferring tokens
@@ -66,7 +66,7 @@ Each account owns a ledger of its own to keep track of the spending (transferrin
 ### Contract
 The contract is a rule governing how this "game" is played. Accounts that break the contract can be punished in some way. Normally, it is the authority like the bank who creates this contract for all accounts.
 
-Because these ledgers are owned and managed by trusted agents like your bank, when you transfer the ownership of a few dollars (`-$4.00`) to buy a cup of coffee, the bank needs to be consistent and update its ledger with new money that the cafe owner now owns (`+$4.00`). Because both your and the cafe owner's ledgers are not visible to both of you and the `$4.00` money is purely digital, there is nothing to gaurantee that the bank to mistakenly update the ledger with the incorrect value.
+Because these ledgers are owned and managed by trusted agents like your bank, when you transfer the ownership of a few dollars (`-$4.00`) to buy a cup of coffee, the bank needs to be consistent and update its ledger with new money that the cafe owner now owns (`+$4.00`). Because both your and the cafe owner's ledgers are not visible to both of you and the `$4.00` money is purely digital, there is nothing to guarantee that the bank to mistakenly update the ledger with the incorrect value.
 
 > **💡 Your bank owes you**    
 > If you have a saving account with some money in it, you might be loaning
@@ -75,19 +75,19 @@ Because these ledgers are owned and managed by trusted agents like your bank, wh
 > your bank is free to do anything with. If you had a billion dollars in your
 > bank and you want to withdraw tomorrow, your teller might freak out.
 
-What is novel about blockchain is the distributed part. Because the ledger is *decentralized*, there is central authority like a bank for you to trust with the bookkeeping. You are simply trusting other people running the same ledger software as you to keep track of everyone's book. Think of it as a sport game without the referee or empire where any dispute is distributed to all the audience to judge. The only difference is these audience are also playing in the arena, with the stake that makes it extremely bad for them to cheat. This way, any small inconsistencies are likely caught and rejected fair and square. You are no longer trusting your bank. The eternal flow of ownerships hence becomes *trustless* because everyone is doing what's best for themselves.
+What is novel about blockchain is the distributed part. Because the ledger is *decentralized*, there is no central authority like a bank for you to trust with the bookkeeping. You are simply trusting other people running the same ledger software as you to keep track of everyone's book. Think of it as a sport game without the referee or umpire where any dispute is distributed to all the audience to judge. The only difference is these audience members are also playing in the arena, with the stake that makes it extremely bad for them to cheat. This way, any small inconsistencies are likely caught and rejected fair and square. You are no longer trusting your bank. The eternal flow of ownerships hence becomes *trustless* because everyone is doing what's best for themselves.
 
-"Why such emphasis on ownership?" You asked. This is because Flow had baked the concept of resource ownership right into the smart contract core. In fact, it is why Flow is one of the easiest blockchain for building NFT apps, which you shall see very soon.
+"Why such emphasis on ownership?" you may ask. This is because Flow has the concept of resource ownership baked right into the smart contract core. In fact, it is why Flow is one of the easiest blockchains for building NFT apps, which you shall see very soon.
 
 ## Cadence
 
-Like Solidity for Ethereum, we use [Cadence][cadence] to code smart contracts, transactions, and scripts for Flow. Cadence's design is inspired by [Rust][rust] and the *move semantic*. Basically, the runtime tracks when a resource is being *moved* from a variable to another variable and make sure it can never be used twice in the program.
+Like Solidity for Ethereum, we use [Cadence][cadence] to code smart contracts, transactions, and scripts for Flow. Cadence's design is inspired by [Rust][rust] and the *move semantic*. Basically, the runtime tracks when a resource is being *moved* from a variable to another variable and makes sure it can never be used twice in the program.
 
-Three types of Cadence program you will be writing are [contracts](contract), [transactions][transaction], and [scripts][script].
+The three types of Cadence program you will be writing are [contracts](contract), [transactions][transaction], and [scripts][script].
 
 ### Contract
 
-A contract is an initial program that gets deployed to the blockchain, initiating the logic for your app and allow access to resources you create and the capabilities that come with them.
+A contract is an initial program that gets deployed to the blockchain, initiating the logic for your app and allowing access to resources you create and the capabilities that come with them.
 
 Two most common constructs in a contract are resources and interfaces.
 
@@ -142,7 +142,7 @@ Note the access modifier `pub` before the definition of `contract`, `resource`, 
 
 ### Transaction
 
-Transactions tell the on-chain contract to change the state of the chain. Because the change is synchronized throughout the peers and cannot be undone, like Ethereum, a transaction is considered a *write* operation that incurs a network gas fee. They also require one or more account to sign and authorize.
+Transactions tell the on-chain contract to change the state of the chain. Because the change is synchronized throughout the peers and cannot be undone, like Ethereum, a transaction is considered a *write* operation that incurs a network gas fee. They also require one or more accounts to sign and authorize.
 Minting and transferring tokens are transactions.
 
 Here is an example of a transaction, requiring a current account who owns the `NFT` resource to authorize a certain action (in this case, just logging `"Hello, transaction"`).
