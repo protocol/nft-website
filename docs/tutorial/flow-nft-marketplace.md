@@ -194,13 +194,100 @@ Both transactions and scripts are invoked on the client side.
 > In Cadence, a resource is similar to a class or struct
 > and an interface is the same as those in Java or Rust.
 
-## Getting started
+## NFT Pet Store
 
 Now that we have a basic understanding of how to think in Flow's way, we are ready to start building the mini NFT pet store!
 
 If you have [cloned the structured tutorial][mini-petstore], in your shell, type `cd 1_getting_started` and run `npm install` to get started.
 
-Otherwise, create a new React app with `npx create-react-app petstore`.
+Otherwise, create a new React app by typing `npx create-react-app petstore` on your shell, then enter the directory with `cd petstore`.
+
+### Project structure
+
+If you are working on the cloned project, you can skip this section.
+
+Because `create-react-app` forbids importing code from outside of the `src` directory, the majority of the code we write will be inside this directory.
+
+Create a directory named `flow` inside `src` directory, and create three more named `contract`, `transaction`, and `script` under `flow`. This can be combined into one command:
+
+```shell
+$ mkdir -p src/flow/{contract,transaction,script}
+```
+
+As you might have guessed, each directory will contain the corresponding Cadence code for each type of interaction.
+
+Now, in each of these directories, create a Cadence file with the following names: `contract/PetStore.cdc`, `transaction/MintToken.cdc`, and `script/GetTokenIds.cdc`.
+
+The structure of the `src` directory should now look like this:
+
+```shell
+.
+|-- flow
+|   |-- contract
+|   |   |
+|   |   `-- PetStore.cdc
+|   |-- script
+|   |   |
+|   |   `-- GetTokenIds.cdc
+|   `-- transaction
+|       |
+|       `-- MintToken.cdc
+|
+...
+
+```
+
+### `PetStore` contract
+
+We will be taking some time to write the contract while also learn Cadence. Once you have grasped it, writing transactions and scripts will be relatively easy.
+
+First, create the contract structure and define an `NFT` resource:
+
+```cadence
+
+pub contract PetStore {
+
+    // A map recording owners of NFTs
+    pub var owners: [Address?]
+
+    pub resource NFT {
+
+        // Unique id for each NFT.
+        pub let id: UInt64
+
+        // Constructor method.
+        init(initId: UInt64) {
+            self.id = initId
+        }
+    }
+}
+
+```
+
+Note that we have also declared a variable named `owners` of type [Variable-sized Array][cdc-array-type] which contains [Optional][cdc-optional-type] type that either is an [Address][cdc-address-type] or `nil`. We will use `owners` to keep track of all the current owners of NFTs that will be minted on this contract globally. And because each `NFT` has an `id` of type [UInt64][cdc-integer-type], an `Array` is perfect for keeping track of the owners' `Addresses`. 
+
+However, because we start the NFT id from 1 instead of 0, we want a way to store a `nil` Address in the first position of `owners` Array. We decide to make our Array to store an Optional Address type (`Address?`).
+
+> **💡 The Billion-dollar mistake**    
+> In language like Python, JavaScript, and Java, an empty
+> value is represented by `None`, `null` or `undefined`, and
+> `null`, respectively. However, this value is *not* a type,
+> and any data can be empty at any time, making it extremely
+> risky. For example, the `NullPointerException` is infamous for
+> crashing Java programs.
+>
+> Some strongly-typed language such as Ocaml, Haskell, Rust, and
+> Cadence have a class of type called `Optional` (or `Maybe` in
+> Haskell) to represent a value that may be empty. This means it
+> is impossible to have a `null` value if the type isn't Optional.
+
+
+
+
+
+
+
+
 
 ## TBC
 
@@ -219,6 +306,10 @@ Otherwise, create a new React app with `npx create-react-app petstore`.
  [rust]: https://rust-lang.org/
  [diem]: https://diem.org/
  [erc-721]: https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
-
+ [cdc-array-type]: https://docs.onflow.org/cadence/language/values-and-types/#array-types
+ [cdc-optional-type]: https://docs.onflow.org/cadence/language/values-and-types/#optionals
+ [cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
+ [cdc-integer-type]: 
+https://docs.onflow.org/cadence/language/values-and-types/#integers
 
 <ContentStatus />
