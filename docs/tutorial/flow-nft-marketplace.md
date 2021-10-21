@@ -304,7 +304,7 @@ pub contract PetStore {
         pub fun withdraw(id: UInt64): @NFT
 
         // Deposit an NFT to this NFTReceiver instance.
-        pub fun deposit(token: @NFT, metadata: {String: String})
+        pub fun deposit(token: @NFT)
 
         // Get all NFT IDs belonging to this NFTReceiver instance.
         pub fun getTokenIds(): [UInt64]
@@ -340,7 +340,7 @@ pub contract PetStore {
     pub resource NFTCollection: NFTReceiver {
 
         // Keeps track of NFTs this collection.
-        pub var ownedNFTs: @{UInt64: NFT}
+        access(account) var ownedNFTs: @{UInt64: NFT}
 
         // Constructor
         init() {
@@ -354,7 +354,7 @@ pub contract PetStore {
 
         // Withdraws and return an NFT token.
         pub fun withdraw(id: UInt64): @NFT {
-            let token <- self.ownedNFTs.remove(at: id)
+            let token <- self.ownedNFTs.remove(key: id)
             return <- token!
         }
 
@@ -370,55 +370,64 @@ pub contract PetStore {
 
         // Returns the metadata of an NFT based on the ID.
         pub fun getTokenMetadata(id: UInt64): {String : String} {
-            let token <- self.ownedNFTs[id]!
-            return token.metadata
+            let metadata = self.ownedNFTs[id]?.metadata
+            return metadata!
         }
 
         // Updates the metadata of an NFT based on the ID.
         pub fun updateTokenMetadata(id: UInt64, metadata: {String: String}) {
-            self.metadataObjs[id] = metadata
-            let token <- self.ownedNFTs[id]!
-            token.metadata = metadata
+            for key in metadata.keys {
+                self.ownedNFTs[id]?.metadata?.insert(key: key,  metadata[key]!)
+            }
         }
     }
 }
 
 ```
 
-First we declare a mutable dictionary and store it in a variable named `ownedNFTs`. This dictionary stores the NFTs for this collection by mapping the ID to NFT resource. Note that because the dictionary stores `@NFT` resource, we prepend the type with `@`, making itself a resource too.
+That's a handful of new code. It will soon become natural to you with patience.
 
-In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty dictionary. We also need a `destroy()` destructor method to destroy the dictionary.
+First we declare a mutable dictionary and store it in a variable named `ownedNFTs`. Note the new access modifier `pub(set)`, which gives public write access to the users.
+
+This dictionary stores the NFTs for this collection by mapping the ID to NFT resource. Note that because the dictionary stores `@NFT` resources, we prepend the type with `@`, making itself a resource too.
+
+In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty dictionary. A resource also need a `destroy()` destructor method to make sure it is being freed.
+
+> **💡 Nested Resource**    
+> A [composite structure][cdc-comp-type] including a dictionary
+> can store resources, but when they do they will be treated as
+> resources. Which means they need to be *moved* rather than
+> *assigned* and their type will be annotated with `@`.
 
 The `withdraw(id: UInt64): @NFT` method remove an NFT from the collection's `ownedNFTs` array and return it.
 
+The left-pointing arrow character is knowned as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
+
+Note the `!` symbol after the `token` variable. It [force-unwraps][cdc-force-unwrap] the `Optional` value. If the value turns out to be `nil`, the program panics and crashes.
+
+Because resources are core to Cadence, their types are annotated with a `@` to make them explicit. For instance, `@NFT` and `@NFTCollection` are two resource types.
+
+The `deposit(token: @NFT)` function takes the `@NFT` resource as a parameter and store it in the `ownedNFTs` array in this `@NFTCollection` instance.
+
+The `!` symbol reappears here, but now it's after the move arrow `<-!`. This is called a [force-move or force-assign][cdc-force-assign] operator, which only move a resource to a variable if the variable is `nil`. Otherwise, the program panics.
+
+The `getTokenIds(): [UInt64]` method simply reads all the `UInt64` keys of the `ownedNFTs` dictionary and returns them as an array.
+
+The `getTokenMetadata(id: UInt64): {String : String}` method reads the `metadata` field of an `@NFT` stored by its ID in the `ownedNFTs` dictionary and returns it.
+
+The `updateTokenMetadata(id: UInt64, metadata: {String: String})` method is a bit more involved.
+
 ```cadence
 
-pub fun withdraw(id: UInt64): @NFT {
-    // Remove an NFT from the array and "move" it into a variable.
-    // Then return the NFT stored in the token variable.
-    let token <- self.ownedNFTs.remove(at: id)
-    return <- token!
+for key in metadata.keys {
+    self.ownedNFTs[id]?.metadata?.insert(key: key,  metadata[key]!)
 }
 
 ```
 
-Note the left-pointing arrow character. It is  knowned as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
+In the body of the method, we loop over all the keys of the given metadata, inserting into the current metadata dictionary the new value. Note the `?` in the call chain. It is used with `Optional`s values to keep going down the call chain only if the value is not `nil`.
 
-Here is an example:
-
-```cadence
-
-let token <- create NFT(id: 1)
-let nft <- token
-
-// Error: cannot access token any longer
-log(token)
-
-```
-
-Because resources are core to Cadence, their types are annotated with a `@` to make them explicit. For instance, `@NFT` and `@NFTCollection` are two resource types.
-
-
+Now we have implemented the `@NFTReceiver` interface for the `@NFTCollection` resource.
 
 ## TBC
 
@@ -438,9 +447,12 @@ Because resources are core to Cadence, their types are annotated with a `@` to m
  [diem]: https://diem.org/
  [erc-721]: https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
  [cdc-dict-type]: https://docs.onflow.org/cadence/language/values-and-types/#dictionaries
+ [cdc-force-unwrap]: https://docs.onflow.org/cadence/language/values-and-types/#force-unwrap-
  [cdc-array-type]: https://docs.onflow.org/cadence/language/values-and-types/#array-types
  [cdc-optional-type]: https://docs.onflow.org/cadence/language/values-and-types/#optionals
  [cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
+ [cdc-comp-type]: https://docs.onflow.org/cadence/language/composite-types/
  [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
-
+ [cdc-force-assign]: 
+https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
 <ContentStatus />
