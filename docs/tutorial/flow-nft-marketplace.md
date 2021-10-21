@@ -96,6 +96,8 @@ Two most common constructs in a contract are resources and interfaces.
 Resources are items stored in user accounts that are accessible
 through access control measures defined in the contract. They are usually the assets being tracked. They are akin to classes or structs in some languages.
 
+Resources can only be in one place at a time, and they are said to be *moved* rather than *assigned*.
+
 #### Interfaces
 
 Interfaces define the behaviors or capabilities of resources. They are akin to interfaces in some languages. They are usually implemented by resources.
@@ -247,45 +249,174 @@ First, create the contract structure and define an `NFT` resource:
 
 pub contract PetStore {
 
-    // A map recording owners of NFTs
-    pub var owners: [Address?]
+    // An array that stores NFT owners
+    pub var owners: {UInt64: Address}
+
+    // Constructor method
+    init() {
+        self.owners = {}
+    }
 
     pub resource NFT {
 
-        // Unique id for each NFT.
+        // Unique ID for each NFT
         pub let id: UInt64
 
-        // Constructor method.
-        init(initId: UInt64) {
-            self.id = initId
+        // String mapping to hold metadata
+        pub var metadata: {String: String}
+
+        // Constructor method
+        init(id: UInt64) {
+            self.id = id
+            self.metadata = {}
         }
     }
 }
 
 ```
 
-Note that we have also declared a variable named `owners` of type [Variable-sized Array][cdc-array-type] which contains [Optional][cdc-optional-type] type that either is an [Address][cdc-address-type] or `nil`. We will use `owners` to keep track of all the current owners of NFTs that will be minted on this contract globally. And because each `NFT` has an `id` of type [UInt64][cdc-integer-type], an `Array` is perfect for keeping track of the owners' `Addresses`. 
+Note that we have declared a [Dictionary][cdc-dict-type] and store in a variable named `owners`. This dictionary has the type `{UInt64: Address}` which maps [unsigned 64-bit integers][cdc-integer-type] to users' [Addresses][cdc-address-type]. We will use `owners` to keep track of all the current owners of NFTs globally.
 
-However, because we start the NFT id from 1 instead of 0, we want a way to store a `nil` Address in the first position of `owners` Array. We decide to make our Array to store an Optional Address type (`Address?`).
+Next, we instantialize the array with a `nil` stored as the first element in the `init()` constructor method. In Cadence, it is an error
 
-> **💡 The Billion-dollar mistake**    
-> In language like Python, JavaScript, and Java, an empty
-> value is represented by `None`, `null` or `undefined`, and
-> `null`, respectively. However, this value is *not* a type,
-> and any data can be empty at any time, making it extremely
-> risky. For example, the `NullPointerException` is infamous for
-> crashing Java programs.
->
-> Some strongly-typed language such as Ocaml, Haskell, Rust, and
-> Cadence have a class of type called `Optional` (or `Maybe` in
-> Haskell) to represent a value that may be empty. This means it
-> is impossible to have a `null` value if the type isn't Optional.
+Also note that the `owners` variable is prepended by a `var` keyword, while the `id` variable is prepended by a `let` keyword. In Cadence, a mutable variable is defined using `var` while an immutable one is defined with `let`.
 
+> **💡 Immutable vs mutable**    
+> In Cadence, a variable stores a mutable variable that can be changed
+> later in the program while a *binding* binds an immutable value that
+> cannot be changed.
 
+In the body of `NFT` resource, we declare `id` field and a constructor method to assign the `id` to the `NFT` instance.
 
+Next, we create an `NFTReceiver` interface that defines the capabilities or methods of a receiver of NFTs, or the rest of the users who are not the contract user.
 
+To reiterate, an interface is *not* an instance of an object, like a user account. It is a set of behaviors, or capabilities in Cadence's speak, that a resource can implement to become capable of certain actions, like withdrawing and depositing tokens.
 
+```cadence
 
+pub contract PetStore {
+
+    // ... The previous code ...
+
+    pub resource interface NFTReceiver {
+
+        // Withdraw a token by its ID and returns the token.
+        pub fun withdraw(id: UInt64): @NFT
+
+        // Deposit an NFT to this NFTReceiver instance.
+        pub fun deposit(token: @NFT, metadata: {String: String})
+
+        // Get all NFT IDs belonging to this NFTReceiver instance.
+        pub fun getTokenIds(): [UInt64]
+
+        // Get the metadata of an NFT instance by its ID.
+        pub fun getTokenMetadata(id: UInt64) : {String: String}
+
+        // Update the metadata of an NFT.
+        pub fun updateTokenMetadata(id: UInt64, metadata: {String: String})
+    }
+}
+
+```
+
+Let's not get over ourselves and go through the `NFTReceiver` interface line-by-line.
+
+The `withdraw(id: UInt64): @NFT` method takes an NFT's `id`, withdraws a token, or an *instance* of `NFT` resource, which is prepended with a `@` to mean reference to a resource.
+
+The `deposit(token: @NFT, metadata: {String : String})` method takes a token reference type and the metadata dictionary with a `String` key and `String` value, and deposits or transfers the `@NFT` to the current instance of `NFTReceiver`.
+
+The `getTokenIds(): [UInt64]` method access all tokens' IDs owned by the instance of the `NFTReceiver`.
+
+The `getTokenMetadata(id: UInt64) : {String : String}` method takes an ID of an `NFT`, read the metadata, and return the it as a dictionary.
+
+Now let's create an `NFTCollection` resource to implement the `NFTReceiver` interface. Think of this as a "vault" where NFTs are deposited to and withdrawn from.
+
+```cadence
+
+pub contract PetStore {
+
+    // ... The previous code ...
+
+    pub resource NFTCollection: NFTReceiver {
+
+        // Keeps track of NFTs this collection.
+        pub var ownedNFTs: @{UInt64: NFT}
+
+        // Constructor
+        init() {
+            self.ownedNFTs <- {}
+        }
+
+        // Destructor
+        destroy() {
+            destroy self.ownedNFTs
+        }
+
+        // Withdraws and return an NFT token.
+        pub fun withdraw(id: UInt64): @NFT {
+            let token <- self.ownedNFTs.remove(at: id)
+            return <- token!
+        }
+
+        // Deposits a token to this NFTCollection instance.
+        pub fun deposit(token: @NFT) {
+            self.ownedNFTs[token.id] <-! token
+        }
+
+        // Returns an array of the IDs that are in this collection.
+        pub fun getTokenIds(): [UInt64] {
+            return self.ownedNFTs.keys
+        }
+
+        // Returns the metadata of an NFT based on the ID.
+        pub fun getTokenMetadata(id: UInt64): {String : String} {
+            let token <- self.ownedNFTs[id]!
+            return token.metadata
+        }
+
+        // Updates the metadata of an NFT based on the ID.
+        pub fun updateTokenMetadata(id: UInt64, metadata: {String: String}) {
+            self.metadataObjs[id] = metadata
+            let token <- self.ownedNFTs[id]!
+            token.metadata = metadata
+        }
+    }
+}
+
+```
+
+First we declare a mutable dictionary and store it in a variable named `ownedNFTs`. This dictionary stores the NFTs for this collection by mapping the ID to NFT resource. Note that because the dictionary stores `@NFT` resource, we prepend the type with `@`, making itself a resource too.
+
+In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty dictionary. We also need a `destroy()` destructor method to destroy the dictionary.
+
+The `withdraw(id: UInt64): @NFT` method remove an NFT from the collection's `ownedNFTs` array and return it.
+
+```cadence
+
+pub fun withdraw(id: UInt64): @NFT {
+    // Remove an NFT from the array and "move" it into a variable.
+    // Then return the NFT stored in the token variable.
+    let token <- self.ownedNFTs.remove(at: id)
+    return <- token!
+}
+
+```
+
+Note the left-pointing arrow character. It is  knowned as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
+
+Here is an example:
+
+```cadence
+
+let token <- create NFT(id: 1)
+let nft <- token
+
+// Error: cannot access token any longer
+log(token)
+
+```
+
+Because resources are core to Cadence, their types are annotated with a `@` to make them explicit. For instance, `@NFT` and `@NFTCollection` are two resource types.
 
 
 
@@ -306,10 +437,10 @@ However, because we start the NFT id from 1 instead of 0, we want a way to store
  [rust]: https://rust-lang.org/
  [diem]: https://diem.org/
  [erc-721]: https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
+ [cdc-dict-type]: https://docs.onflow.org/cadence/language/values-and-types/#dictionaries
  [cdc-array-type]: https://docs.onflow.org/cadence/language/values-and-types/#array-types
  [cdc-optional-type]: https://docs.onflow.org/cadence/language/values-and-types/#optionals
  [cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
- [cdc-integer-type]: 
-https://docs.onflow.org/cadence/language/values-and-types/#integers
+ [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
 
 <ContentStatus />
