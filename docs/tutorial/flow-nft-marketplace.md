@@ -288,6 +288,8 @@ Also note that the `owners` variable is prepended by a `var` keyword, while the 
 
 In the body of `NFT` resource, we declare `id` field and a constructor method to assign the `id` to the `NFT` instance.
 
+### `NFTReceiver`
+
 Next, we create an `NFTReceiver` interface that defines the capabilities or methods of a receiver of NFTs, or the rest of the users who are not the contract user.
 
 To reiterate, an interface is *not* an instance of an object, like a user account. It is a set of behaviors, or capabilities in Cadence's speak, that a resource can implement to become capable of certain actions, like withdrawing and depositing tokens.
@@ -296,7 +298,7 @@ To reiterate, an interface is *not* an instance of an object, like a user accoun
 
 pub contract PetStore {
 
-    // ... The previous code ...
+    // ... The @NFT code ...
 
     pub resource interface NFTReceiver {
 
@@ -329,13 +331,17 @@ The `getTokenIds(): [UInt64]` method access all tokens' IDs owned by the instanc
 
 The `getTokenMetadata(id: UInt64) : {String : String}` method takes an ID of an `NFT`, read the metadata, and return the it as a dictionary.
 
+### `NFTCollection`
+
 Now let's create an `NFTCollection` resource to implement the `NFTReceiver` interface. Think of this as a "vault" where NFTs are deposited to and withdrawn from.
 
 ```cadence
 
 pub contract PetStore {
 
-    // ... The previous code ...
+    // ... The @NFT code ...
+
+    // ... The @NFTReceiver code ...
 
     pub resource NFTCollection: NFTReceiver {
 
@@ -427,7 +433,149 @@ for key in metadata.keys {
 
 In the body of the method, we loop over all the keys of the given metadata, inserting into the current metadata dictionary the new value. Note the `?` in the call chain. It is used with `Optional`s values to keep going down the call chain only if the value is not `nil`.
 
-Now we have implemented the `@NFTReceiver` interface for the `@NFTCollection` resource.
+We have successfully implemented the `@NFTReceiver` interface for the `@NFTCollection` resource.
+
+### `NFTMinter`
+
+The last and very important component for our `PetStore` contract is `@NFTMinter` resource, which will contain an exclusive code for the contract owner to mint all the tokens. Without it, our store will not be able to mint any pet for the users. It is very simplistic though, since we have already blaze through the more complex components. Its only `mint(): @NFT` method creates an `@NFT` resource, give it an ID, save the address of the first owner to the contract (which is the address of the contract owner, although you could change it to mint and transfer to the creator's address in one step), increment the universal ID counter, and return the new token.
+
+
+```cadence
+
+pub contract PetStore {
+
+    // ... NFT code ...
+
+    // ... NFTReceiver code ...
+
+    // ... NFTCollection code ...
+
+    access(self) resource NFTMinter {
+
+        // Declare a global variable to count ID.
+        pub var idCount: UInt64
+
+        init() {
+            // Instantialize the ID counter.
+            self.idCount = 1
+        }
+
+        pub fun mint(): @NFT {
+
+            // Create a new @NFT resource with the current ID.
+            let token <- create NFT(id: self.idCount)
+
+            // Save the current owner's address to the dictionary.
+            PetStore.owners[self.idCount] = PetStore.account.address
+
+            // Increment the ID
+            self.idCount = self.idCount + 1 as UInt64
+
+            return <-token
+        }
+    }
+}
+
+```
+
+By now, we have all the bolts and nuts we need for the contract. The only thing that is missing is a way to initialize this contract once during the deployment. Let's create a constructor method to create an empty `@NFTCollection` instance for the deployer of the contract (you) so it is possible for the contract owner to mint and store NFTs from the contract. As we go over this last hurdle, we will also learn about the last important concept Cadence: [Storage and domains][cdc-domain].
+
+
+```cadence
+
+pub contract PetStore {
+
+    // ... @NFT code ...
+
+    // ... @NFTReceiver code ...
+
+    // ... @NFTCollection code ...
+
+    // This contract constructor is called once when the  contract is deployed.
+    // It does the following:
+    //
+    // - Creating an empty Collection for the deployer of the collection so
+    //   the owner of the contract can mint and own NFTs from that contract.
+    //
+    // - The `Collection` resource is published in a public location with reference
+    //   to the `NFTReceiver` interface. This is how we tell the contract that the functions defined
+    //   on the `NFTReceiver` can be called by anyone.
+    //
+    // - The `NFTMinter` resource is saved in the account storage for the creator of
+    //   the contract. Only the creator can mint tokens.
+    init() {
+        // Set `owners` to an empty dictionary.
+        self.owners = {}
+
+        // Create a new `@NFTCollection` instance and save it in `/storage/NFTCollection` domain,
+        // which is only accessible by the contract owner's account.
+        self.account.save(<-create NFTCollection(), to: /storage/NFTCollection)
+
+        // "Link" only the `@NFTReceiver` interface from the `@NFTCollection` stored at `/storage/NFTCollection` domain to the `/public/NFTReceiver` domain, which is accessible to any user.
+        self.account.link<&{NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)
+
+        // Create a new `@NFTMinter` instance and save it in `/storage/NFTMinter` domain, accesible
+        // only by the contract owner's account.
+        self.account.save(<-create NFTMinter(), to: /storage/NFTMinter)
+    }
+}
+
+```
+
+Hopefully, the high-level steps are clear to you after you have followed through the comments. We will talk about domains briefly here. Domains are general-purpose storages accessible to Flow accounts common used for storing resources. Intuitively, they are similar to common filesystems. There are three domain namespaces in Cadence:
+
+#### `/storage`
+
+This namespace can only be accessed by the owner of the account.
+
+#### `/private`
+
+This namespace is used to stored private objects and [capabilities](https://docs.onflow.org/cadence/language/capability-based-access-control/) whose access can be granted to selected accounts.
+
+#### `/public`
+
+This namespace is accessible by all accounts that interact with the contract.
+
+In our previous code, we created an `@NFTCollection` instance for our own account and saved it to the `/storage/NFTCollection` namespace. The path following the first namespace is arbitrary, so we could have named it `/storage/my/nft/collection`. Then, something odd happened as we "link" a *reference* to the `@NFTReceiver` capability from the `/storage` domain to `/public`. The caret pair `<` and `>` was used to explicitly annotate the type of the reference being linked, `&{NFTReceiver}`, with the `&` and the wrapping brackets `{` and `}` to define the reference type. Last but not least, we created the `@NFTMinter` instance and saved it to our account's `/storage/NFTMinter` domain.
+
+> For a deep dive into storages, check out [Account Storage][cdc-domain].
+
+As we wrap up writing our `PetStore` contract, you can try to deploy it to Flow emulator (local net) to verify that the contract is correct. Check `flow.json` file and verify that the following two fields are set as the following:
+
+```
+{
+    // ...
+
+    "contracts": {
+        "PetShopContract": "./src/flow/contracts/PetStore.cdc"
+    },
+
+    "deployments": {
+		"emulator": {
+			"emulator-account": ["PetStore"]
+		}
+	},
+
+    // ...
+}
+
+```
+
+Then, run the Flow cli command to start the emulator and deploy your first contract!
+
+```shell
+
+# Start the emulator
+$ flow emulator
+
+# In another shell, deploy the contract
+$ flow project deploy
+
+```
+
+If all went well, you should receive a nice happy message informing you that your contract was deployed.
+
+### `MintToken` transaction
 
 ## TBC
 
@@ -453,6 +601,6 @@ Now we have implemented the `@NFTReceiver` interface for the `@NFTCollection` re
  [cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
  [cdc-comp-type]: https://docs.onflow.org/cadence/language/composite-types/
  [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
- [cdc-force-assign]: 
-https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
+ [cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
+ [cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
 <ContentStatus />
