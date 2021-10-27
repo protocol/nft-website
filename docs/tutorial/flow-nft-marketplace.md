@@ -266,9 +266,9 @@ pub contract PetStore {
         pub var metadata: {String: String}
 
         // Constructor method
-        init(id: UInt64) {
+        init(id: UInt64, metadata: {String: String}) {
             self.id = id
-            self.metadata = {}
+            self.metadata = metadata
         }
     }
 }
@@ -460,10 +460,10 @@ pub contract PetStore {
             self.idCount = 1
         }
 
-        pub fun mint(): @NFT {
+        pub fun mint(_ metadata: {String: String}): @NFT {
 
             // Create a new @NFT resource with the current ID.
-            let token <- create NFT(id: self.idCount)
+            let token <- create NFT(id: self.idCount, metadata: metadata)
 
             // Save the current owner's address to the dictionary.
             PetStore.owners[self.idCount] = PetStore.account.address
@@ -536,7 +536,7 @@ This namespace is used to stored private objects and [capabilities](https://docs
 
 This namespace is accessible by all accounts that interact with the contract.
 
-In our previous code, we created an `@NFTCollection` instance for our own account and saved it to the `/storage/NFTCollection` namespace. The path following the first namespace is arbitrary, so we could have named it `/storage/my/nft/collection`. Then, something odd happened as we "link" a *reference* to the `@NFTReceiver` capability from the `/storage` domain to `/public`. The caret pair `<` and `>` was used to explicitly annotate the type of the reference being linked, `&{NFTReceiver}`, with the `&` and the wrapping brackets `{` and `}` to define the reference type. Last but not least, we created the `@NFTMinter` instance and saved it to our account's `/storage/NFTMinter` domain.
+In our previous code, we created an `@NFTCollection` instance for our own account and saved it to the `/storage/NFTCollection` namespace. The path following the first namespace is arbitrary, so we could have named it `/storage/my/nft/collection`. Then, something odd happened as we "link" a [reference][cdc-reference] to the `@NFTReceiver` capability from the `/storage` domain to `/public`. The caret pair `<` and `>` was used to explicitly annotate the type of the reference being linked, `&{NFTReceiver}`, with the `&` and the wrapping brackets `{` and `}` to define the *unauthorized reference* type (see [References][cdc-reference] to learn more). Last but not least, we created the `@NFTMinter` instance and saved it to our account's `/storage/NFTMinter` domain.
 
 > For a deep dive into storages, check out [Account Storage][cdc-domain].
 
@@ -577,6 +577,69 @@ If all went well, you should receive a nice happy message informing you that you
 
 ### `MintToken` transaction
 
+The first and most important transaction for *any* NFT app is perhaps the one that mints tokens into existence! Without it there won't be any cute tokens to sell and trade. So let's start coding:
+
+```cadence
+
+// Import the `PetStore` contract instance from the master account address.
+// This is a fixed address for used with the emulator only.
+import PetStore from 0xf8d6e0586b0a20c7
+
+transaction(metadata: {String: String}) {
+
+    // Declare an "unauthorized" reference to `NFTReceiver` interface.
+    let receiverRef: &{PetStore.NFTReceiver}
+
+    // Declare an "authorized" reference to the `NFTMinter` interface.
+    let minterRef: &PetStore.NFTMinter
+
+    // `prepare` block always take one or more `AuthAccount` parameter(s) to indicate
+    // who are signing the transaction.
+    // It takes the account info of the user trying to execute the transaction and
+    // validate. In this case, the contract owner's account.
+    // Here we try to "borrow" the capabilities available on `NFTMinter` and `NFTReceiver`
+    // resources, and will fail if the user executing this transaction does not have access
+    // to these resources.
+    prepare(acct: AuthAccount) {
+
+        // Note that we have to call `getCapability(_ domain: Domain)` on the account
+        // object before we can `borrow()`.
+        self.receiverRef = acct.getCapability<&{PetStore.NFTReceiver}>(/public/NFTReceiver)
+            .borrow()
+            ?? panic("Could not borrow receiver reference")
+
+        // With an authorized reference, we can just `borrow()` it.
+        // Note that `NFTMinter` is borrowed from `/storage` domain namespace, which
+        // means it is only accessible to this account.
+        self.minterRef = acct.borrow<&PetStore.NFTMinter>(from: /storage/NFTMinter)
+            ?? panic("Could not borrow minter reference")
+    }
+
+    // `execute` block executes after the `prepare` block is signed and validated.
+    execute {
+        // Mint the token by calling `mint(metadata: {String: String})` on `@NFTMinter` resource, which returns an `@NFT` resource, and move it to a variable `newToken`.
+        let newToken <- self.minterRef.mint(metadata)
+
+        // Call `deposit(token: @NFT)` on the `@NFTReceiver` resource to deposit the token.
+        // Note that this is where the metadata can be changed before transferring.
+        self.receiverRef.deposit(token: <-newToken)
+    }
+}
+
+```
+
+The first line of the transaction code imports the `PetStore` contract instance.
+
+The `transaction` block takes an arbitrary number of named parameters, which will be provided by the calling program (In Flow CLI, JavaScript, Go, or other language). These parameters are the only channels for the transaction code to interact with the outside world.
+
+Next, we declare references `&{NFTReceiver}` and `&NFTMinter` (Note the first is an unauthorized reference).
+
+Now we enter the `prepare` block, which is responsible for authorizing the transaction. This block takes an argument of type `AuthAccount`. This account instance is required to sign and validate the transaction with its key. If it takes more than one `AuthAccount` parameters, then the transaction becomes a *multi-signature* transaction. This is the only place our code can access the account object.
+
+What we did was calling `getCapability(/public/NFTReceiver)` on the account instance, then `borrow()` to borrow the reference to `NFTReceiver` and gain the capability for `receiverRef` to receive tokens. We also called `borrow(from: /storage/NFTMinter)` on the account to enable `minterRef` with the superpower to mint tokens into existence.
+
+The `execute` block runs the code within after the `prepare` block succeeds. Here, we called `mint(metadata: {String: String})` on the `minterRef` reference, then moved the newly created `@NFT` instance into a `newToken` variable. After, we called `deposit(token: @NFT)` on the `receiverRef` reference, passing `<-newToken` (`@NFT` resource) as an argument. The newly minted token is now stored in our account's `receiverRef`. That concludes our minting transaction!
+
 ## TBC
 
  [flow]: https://www.onflow.org/
@@ -603,4 +666,5 @@ If all went well, you should receive a nice happy message informing you that you
  [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
  [cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
  [cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
+ [cdc-reference]: https://docs.onflow.org/cadence/language/references/
 <ContentStatus />
