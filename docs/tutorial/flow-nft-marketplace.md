@@ -202,11 +202,43 @@ Now that we have a basic understanding of how to think in Flow's way, we are rea
 
 If you have [cloned the structured tutorial][mini-petstore], in your shell, type `cd 1_getting_started` and run `npm install` to get started.
 
-Otherwise, create a new React app by typing `npx create-react-app petstore` on your shell, then enter the directory with `cd petstore`.
+Otherwise, create a new React app by typing the following commands on your shell:
+
+```shell
+
+$ npx create-react-app petstore; cd petstore
+$ flow init   # Initialize a Flow project and create a flow.json file.
+
+```
+
+You should see a new React project created with a `flow.json` configuration file inside. Let's take a closer look at the structure and configure the project.
 
 ### Project structure
 
 If you are working on the cloned project, you can skip this section.
+
+First of all, note the `flow.json` file under the root directory. This configuration file was created when we typed the command `flow init` and tells Flow that this is, indeed, a Flow project. We will leave most of the initial settings as they are, but make sure your file contains these fields by adding or changing them accordingly:
+
+```
+{
+    // ...
+
+    "contracts": {
+        "PetStore": "./src/flow/contracts/PetStore.cdc"
+    },
+
+    "deployments": {
+		"emulator": {
+			"emulator-account": ["PetStore"]
+		}
+	},
+
+    // ...
+}
+
+```
+
+These fields tell Flow where to look for the contract so we will be able to run the command line to deploy it to the Flow emulator. Now we will need to add some directories for our Cadence code.
 
 Because `create-react-app` forbids importing code from outside of the `src` directory, the majority of the code we write will be inside this directory.
 
@@ -540,46 +572,44 @@ In our previous code, we created an `@NFTCollection` instance for our own accoun
 
 > For a deep dive into storages, check out [Account Storage][cdc-domain].
 
-As we wrap up writing our `PetStore` contract, you can try to deploy it to Flow emulator (local net) to verify that the contract is correct. Check `flow.json` file and verify that the following two fields are set as the following:
-
-```
-{
-    // ...
-
-    "contracts": {
-        "PetShopContract": "./src/flow/contracts/PetStore.cdc"
-    },
-
-    "deployments": {
-		"emulator": {
-			"emulator-account": ["PetStore"]
-		}
-	},
-
-    // ...
-}
-
-```
-
-Then, run the Flow cli command to start the emulator and deploy your first contract!
+As we wrap up our `PetStore` contract, let's try to deploy it to Flow emulator to verify the contract! In your shell, start the emulator with `flow emulator`. You should see an output similar to this:
 
 ```shell
 
-# Start the emulator
-$ flow emulator
-
-# In another shell, deploy the contract
-$ flow project deploy
+INFO[0000] ⚙️   Using service account 0xf8d6e0586b0a20c7  serviceAddress=f8d6e0586b0a20c7 serviceHashAlgo=SHA3_256 servicePrivKey=bd7a891abd496c9cf933214d2eab26b2a41d614d81fc62763d2c3f65d33326b0 servicePubKey=5f5f1442afcf0c817a3b4e1ecd10c73d151aae6b6af74c0e03385fb840079c2655f4a9e200894fd40d51a27c2507a8f05695f3fba240319a8a2add1c598b5635 serviceSigAlgo=ECDSA_P256
+INFO[0000] 📜  Flow contracts                             FlowFees=0xe5a8b7f23e8b548f FlowServiceAccount=0xf8d6e0586b0a20c7 FlowStorageFees=0xf8d6e0586b0a20c7 FlowToken=0x0ae53cb6e3f42a79 FungibleToken=0xee82856bf20e2aa6
+INFO[0000] 🌱  Starting gRPC server on port 3569          port=3569
+INFO[0000] 🌱  Starting HTTP server on port 8080          port=8080
 
 ```
 
-If all went well, you should receive a nice happy message informing you that your contract was deployed.
+Take note of the `FlowServiceAccount` address, which is a base-16 number `0xf8d6e0586b0a20c7`. This is the address of the contract on the emulator.
+
+Open up a new shell, making sure you are inside the project directory, then type `flow project deploy` to deploy our first contract. You should see an output similar to this if it was successful:
+
+```shell
+
+Deploying 1 contracts for accounts: emulator-account
+
+PetShopContract -> 0xf8d6e0586b0a20c7 (a0555f1b56b28c982bf65a74f3ecdb92a9b0d2245c455fca98349ed81eb6f8b5)
+
+
+✨ All contracts deployed successfully
+
+```
+
+Congratulations! You have learned how to write and deploy your first Flow smart contract.
+
+> **⚠️ Oops, it didn't work!**    
+> Check `flow.json` configuration and make sure the [path to the contract](#project-structure) is correct.
 
 ### `MintToken` transaction
 
 The first and most important transaction for *any* NFT app is perhaps the one that mints tokens into existence! Without it there won't be any cute tokens to sell and trade. So let's start coding:
 
 ```cadence
+
+// MintToken.cdc
 
 // Import the `PetStore` contract instance from the master account address.
 // This is a fixed address for used with the emulator only.
@@ -600,18 +630,18 @@ transaction(metadata: {String: String}) {
     // Here we try to "borrow" the capabilities available on `NFTMinter` and `NFTReceiver`
     // resources, and will fail if the user executing this transaction does not have access
     // to these resources.
-    prepare(acct: AuthAccount) {
+    prepare(account: AuthAccount) {
 
         // Note that we have to call `getCapability(_ domain: Domain)` on the account
         // object before we can `borrow()`.
-        self.receiverRef = acct.getCapability<&{PetStore.NFTReceiver}>(/public/NFTReceiver)
+        self.receiverRef = account.getCapability<&{PetStore.NFTReceiver}>(/public/NFTReceiver)
             .borrow()
             ?? panic("Could not borrow receiver reference")
 
         // With an authorized reference, we can just `borrow()` it.
         // Note that `NFTMinter` is borrowed from `/storage` domain namespace, which
         // means it is only accessible to this account.
-        self.minterRef = acct.borrow<&PetStore.NFTMinter>(from: /storage/NFTMinter)
+        self.minterRef = account.borrow<&PetStore.NFTMinter>(from: /storage/NFTMinter)
             ?? panic("Could not borrow minter reference")
     }
 
@@ -638,7 +668,216 @@ Now we enter the `prepare` block, which is responsible for authorizing the trans
 
 What we did was calling `getCapability(/public/NFTReceiver)` on the account instance, then `borrow()` to borrow the reference to `NFTReceiver` and gain the capability for `receiverRef` to receive tokens. We also called `borrow(from: /storage/NFTMinter)` on the account to enable `minterRef` with the superpower to mint tokens into existence.
 
-The `execute` block runs the code within after the `prepare` block succeeds. Here, we called `mint(metadata: {String: String})` on the `minterRef` reference, then moved the newly created `@NFT` instance into a `newToken` variable. After, we called `deposit(token: @NFT)` on the `receiverRef` reference, passing `<-newToken` (`@NFT` resource) as an argument. The newly minted token is now stored in our account's `receiverRef`. That concludes our minting transaction!
+The `execute` block runs the code within after the `prepare` block succeeds. Here, we called `mint(metadata: {String: String})` on the `minterRef` reference, then moved the newly created `@NFT` instance into a `newToken` variable. After, we called `deposit(token: @NFT)` on the `receiverRef` reference, passing `<-newToken` (`@NFT` resource) as an argument. The newly minted token is now stored in our account's `receiverRef`.
+
+Let's try to send this transaction to the running emulator and mint a token! Because this transaction takes a `metadata` of type `{String: String}` (string to string dictionary), we will need to pass that argument when sending the command via Flow CLI.
+
+```shell
+
+$ flow transactions send src/flow/transactions/MintToken.cdc '{"name": "Max", "breed": "Bulldog"}'
+
+```
+
+With a bit of luck, you should get a happy output telling you that the transaction is *sealed*.
+
+```shell
+
+Transaction ID: b10a6f2a1f1d88f99e562e72b2eb4fa3ae690df591d5a9111318b07b8a72e060
+
+Status		✅ SEALED
+ID		b10a6f2a1f1d88f99e562e72b2eb4fa3ae690df591d5a9111318b07b8a72e060
+Payer		f8d6e0586b0a20c7
+Authorizers	[f8d6e0586b0a20c7]
+
+# ...
+
+```
+
+Note the transaction ID returned from the transaction. Every transaction returns an ID no matter if it succeeds or not.
+
+Congratulations on minting your first NFT pet on Flow! It does not have a face yet besides just a name and breed, but we will touch on uploading static images (and even videos) onto the IPFS/Filecoin network using [nft.storage][nft-storage] later.
+
+### `TransferToken` transaction
+
+As we, the contract owner, are able to mint Flow NFTs. The next natural step is to learn how to transfer them to different users. Since this transfer action writes to the blockchain and mutates the state, it is also a transaction.
+
+Before we can transfer a token to another user's account, we need another receiving account to deposit a token to (We could transfer a token to *our* address, but that wouldn't be very interesting, would it?). At the moment, we have been working with only our emulator account so far. So, let's create an account through the Flow CLI.
+
+First, create a public-private key pair by typing `flow keys generate`. The output should look similar to the following, while **the keys will be different**:
+
+```shell
+
+🔴️ Store private key safely and don't share with anyone!
+Private Key  f410328ecea1757efd2e30b6bc692277a51537f30d8555106a3186b3686a2de6
+Public Key 	 be393a6e522ae951ed924a88a70ae4cfa4fd59a7411168ebb8330ae47cf02aec489a7e90f6c694c4adf4c95d192fa00143ea8639ea795e306a27e7398cd57bd9
+
+```
+
+Take note of both the public and private keys, and type this command, replacing `<PUBLIC_KEY>` with your generated public key to create a new account based on the key:
+
+```shell
+
+$ flow accounts create --key <PUBLIC_KEY> --signer emulator-account
+
+```
+
+Here is the output:
+
+```
+
+Transaction ID: b19f64d3d6e05fdea5dd2ac75832d16dc61008eeacb9d290f153a7a28187d016
+
+Address	 0xf3fcd2c1a78f5eee
+Balance	 0.00100000
+Keys	 1
+
+// ...
+
+```
+
+Take note of the new address, which should be different from the one shown here. Also, you might notice there is a transaction ID returned. Creating an account is also a transaction, and it was signed by the `emulator-account` (hence, `--signer emulator-account` flag).
+
+Before we can use the new address, we need to tell the Flow project about it. Open the `flow.json` configuration file, and at the "accounts" field, add the new account name ("test-account" here, but it could be any name), address, and the private key:
+
+```
+{
+    // ...
+
+    "accounts": {
+        "emulator-account": {
+            "address": "f8d6e0586b0a20c7",
+            "key": "bd7a891abd496c9cf933214d2eab26b2a41d614d81fc62763d2c3f65d33326b0"
+        },
+        "test-account": {
+            "address": "0xf3fcd2c1a78f5eee",
+            "key": <PRIVATE_KEY>
+        }
+    }
+
+    // ...
+}
+
+```
+
+With this new account created, we are ready to move on to the next step.
+
+Before we can deposit a token to the new account, we need it to "initialize" its collection. We can do this by creating a transaction for every user to initialize an `NFTCollection` in order to receive NFTs.
+
+Inside `/transactions` directory next to `MintToken.cdc`, create a new Cadence file named `InitCollection.cdc` with the follow code:
+
+```cadence
+
+// InitCollection.cdc
+
+import PetStore from 0xf8d6e0586b0a20c7
+
+// This transaction will be signed by any user account who wants to receive tokens.
+transaction {
+    prepare(acct: AuthAccount) {
+        // Create a new empty collection for this account
+        let collection <- create PetStore.NFTCollection()
+
+        // store the empty collection in this account storage.
+        acct.save<@PetStore.Collection>(<-collection, to: /storage/NFTCollection)
+
+        // Link a public capability for the collection.
+        // This is so that the sending account can deposit the token to this account's
+        // collection by calling its `deposit(token: @NFT)` method.
+        acct.link<&{PetStore.NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)
+    }
+}
+
+```
+
+This small code will be signed by a receiving account to create an `NFTCollection` instance and save it to their own private `/storage/NFTCollection` domain (Recall that anything stored in `/storage` domain can only be accessible by the current account). In the last step, we linked the `NFTCollection` we have just stored to the public domain `/public/NFTReceiver` (and in the process, "casting" the collection up to `NFTReceiver`) so whoever is sending the token can access this and call `deposit(token: @NFT)` on it to deposit the token.
+
+Try sending this transaction by typing the command:
+
+```shell
+
+$ flow transactions send src/flow/transactions/InitCollection.cdc --signer test-account
+
+```
+
+Note that `test-account` is the name of the new account we created in the `flow.json` file. Hopefully, the new account should now have an `NFTCollection` created and ready to receive tokens!
+
+Now, create a Cadence file named `TransferToken.cdc` in the `/transactions` directory with the following code.
+
+```cadence
+
+// TransferToken.cdc
+
+import PetStore from 0xf8d6e0586b0a20c7
+
+// This transaction transfers a token from one user's
+// collection to another user's collection.
+transaction(tokenId: UInt64, recipientAddr: Address) {
+
+    // The field holds the NFT as it is being transferred to the other account.
+    let token: @PetStore.NFT
+
+    prepare(account: AuthAccount) {
+
+        // Create a reference to a borrowed `NFTCollection` capability.
+        // Note that because `NFTCollection` is publicly defined in the contract, any account can access it.
+        let collectionRef = account.borrow<&PetStore.NFTCollection>(from: /storage/NFTCollection)
+            ?? panic("Could not borrow a reference to the owner's collection")
+
+        // Call the withdraw function on the sender's Collection to move the NFT out of the collection
+        self.token <- collectionRef.withdraw(id: tokenId)
+    }
+
+    execute {
+        // Get the recipient's public account object
+        let recipient = getAccount(recipientAddr)
+
+        // This is familiar since we have done this before in the last `MintToken` transaction block.
+        let receiverRef = recipient.getCapability<&{PetStore.NFTReceiver}>(/public/NFTReceiver)
+            .borrow()
+            ?? panic("Could not borrow receiver reference")
+
+        // Deposit the NFT in the receivers collection
+        receiverRef.deposit(token: <-self.token)
+
+        // Save the new owner into the `owners` dictionary for look-ups.
+        PetStore.owners[tokenId] = recipientAddr
+    }
+}
+
+```
+
+Recall that in the last steps of our `MintToken.cdc` code, we were saving the minted token to our account's `NFTCollection` reference stored at `/storage/NFTCollection` domain.
+
+Here in `TransferToken.cdc`, we are basically creating a sequel of the minting process. The overall goal is to move the token stored in the sending source account's `NFTCollection` to the receiving destination account's `NFTCollection` by calling `withdraw(id: UInt64)` and `deposit(token: @NFT)` on the sending and receiving collections, respectively. Hopefully, by now it shouldn't be too difficult for you to follow along with the comments as you type down each line.
+
+Two new things that are worth noting are the first line of the `execute` block where we call a special built-in function `getAccount(_ addr: Address)`, which return an `AuthAccount` instance from an address passed as an argument to this transaction, and the last line, where we update the `owners` dictionary on the `PetStore` contract with the new address entry to keep track of the current NFT owners.
+
+Now, let's test out `TransferToken.cdc` by typing the command:
+
+```shell
+
+$ flow transactions send src/flow/transactions/TransferToken.cdc 1 0xf3fcd2c1a78f5eee
+
+```
+
+Recall that the `transaction` block of `TransferToken.cdc` accepts two arguments--A token ID and the recipient's address--which we passed as a list of arguments to the command. Some of you might wonder why we left out `--signer` flag for this transaction command, but not the other. Without passing the signing account's name to `--signer` flag, the contract owner's account is the signer by default (a.k.a the `AuthAccount` argument in the `prepare` block).
+
+Hopefully, you should see an output similar to this:
+
+```shell
+
+Transaction ID: 4750f983f6b39d87a1e78c84723b312c1010216ba18e233270a5dbf1e0fdd4e6
+
+Status		✅ SEALED
+ID		    4750f983f6b39d87a1e78c84723b312c1010216ba18e233270a5dbf1e0fdd4e6
+Payer		f8d6e0586b0a20c7
+Authorizers	[f8d6e0586b0a20c7]
+
+// ...
+
+```
+
+Well done! You have just withdrew and deposited your minted NFT to another account!
 
 ## TBC
 
@@ -667,4 +906,5 @@ The `execute` block runs the code within after the `prepare` block succeeds. Her
  [cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
  [cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
  [cdc-reference]: https://docs.onflow.org/cadence/language/references/
+ [nft-storage]: https://nft.storage/
 <ContentStatus />
