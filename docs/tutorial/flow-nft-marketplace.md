@@ -877,7 +877,69 @@ Authorizers	[f8d6e0586b0a20c7]
 
 ```
 
-Well done! You have just withdrew and deposited your minted NFT to another account!
+Well done! You have just withdrawn and deposited your an NFT to another account!
+
+### `GetTokenMetadata` script
+
+We have learned to write and send transactions. Now, we will learn how to create scripts to read state from the blockchain.
+
+There are many type of data we can query, but we will work on a `GetTokenMetadata.cdc` which, as the name suggests, get the metadata of an NFT based on the given ID.
+
+Recall that there is a `metadata` variable in the `NFT` resource definition in the contract which stores a `{String: String}` dictionary of that `NFT`'s metadata. Our script will have to query the right `NFT` and read the variable.
+
+One challenge here is the token we want to target might be owned by some other account. As the contract owner, it is our responsibility to keep track of the owners of every token we will ever mint so we can always access *all* tokens' metadata. This is why we included the `owners` dictionary in the [contract](#petstore-contract) in the first place.
+
+As you can see, it is straightforward after we can access the address owning the token.
+
+```cadence
+
+// GetTokenMetadata.cdc
+
+import PetStore from 0xf8d6e0586b0a20c7
+
+// All scripts start with the `main` function,
+// which can take an arbitrary number of argument and return
+// any type of data.
+//
+// This function accepts a token ID and returns a metadata dictionary.
+pub fun main(id: UInt64) : {String: String} {
+
+    // Access the address that owns the NFT with the provided ID.
+    let ownerAddress = PetStore.owners[id]!
+
+    // We encounter the `getAccount(_ addr: Address)` function again.
+    // Get the `AuthAccount` instance of the current owner.
+    let ownerAcct = getAccount(ownerAddress)
+
+    // Borrow the `NFTReceiver` capability of the owner.
+    let receiverRef = ownerAcct.getCapability<&{PetStore.NFTReceiver}>(/public/NFTReceiver)
+        .borrow()
+            ?? panic("Could not borrow receiver reference")
+
+    // Happily delegate this query to the owning collection
+    // to do the grunt work of getting its token's metadata.
+    return receiverRef.getTokenMetadata(id: id)
+}
+
+```
+
+It's worth repeating myself this: Scripts do not require any gas fee and authorization. They are just programs that reads public data on the blockchain.
+
+Executing a script with Flow CI is also pretty straightforward:
+
+```shell
+
+$ flow scripts execute src/flow/scripts/GetTokenMetadata.cdc <TOKEN_ID>
+
+```
+
+Note that `<TOKEN_ID>` is an unsigned integer token ID whose metadata we want, starting from 1. If we have minted an NFT with the metadata `{"name": "Max", "breed": "Bulldog"}` in the [previous minting step](#minttoken-transaction), then that is what you will get after running the Flow `scripts` command.
+
+Et voila! You have come very far and dare I say you are ready to start building your own Flow NFT app.
+
+However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you do. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part--building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
+
+### Front-end app
 
 ## TBC
 
