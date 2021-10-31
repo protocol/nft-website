@@ -11,7 +11,7 @@ related:
 
 This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] from scratch.
 
-## Table of content
+## Table of content (WIP)
 
 - [Prerequisites](#prerequisites)
 - [What you will learn](#what-you-will-learn)
@@ -26,6 +26,8 @@ This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] 
 Although this tutorial is built specifically for Flow, it will build up a general understanding of smart contract and NFTs. Therefore, you are expected to have a working JavaScript and [React.js][react] knowledge and a basic familiarity with blockchains, web3, and NFTs.
 
 You will need to install [Node.js][nodejs] and npm (comes with Node.js), [Flow command line tool][flow-cli], and [Docker compose][docker-compose] to follow this tutorial.
+
+You can use any code editor of your choice, but I recommend [VSCode][vscode] with [Cadence Language support][vscode-cdc-ext] for smooth sailing experience.
 
 > **💡 Why React?**    
 > React.js was chosen for this tutorial because it is the most widely-used UI library that
@@ -284,11 +286,6 @@ pub contract PetStore {
     // An array that stores NFT owners
     pub var owners: {UInt64: Address}
 
-    // Constructor method
-    init() {
-        self.owners = {}
-    }
-
     pub resource NFT {
 
         // Unique ID for each NFT
@@ -419,6 +416,12 @@ pub contract PetStore {
             }
         }
     }
+
+    // Public factory method to create a collection
+    // so it is callable from the contract scope.
+    pub fun createNFTCollection(): @NFTCollection {
+        return <- create NFTCollection()
+    }
 }
 
 ```
@@ -482,7 +485,7 @@ pub contract PetStore {
 
     // ... NFTCollection code ...
 
-    access(self) resource NFTMinter {
+    pub resource NFTMinter {
 
         // Declare a global variable to count ID.
         pub var idCount: UInt64
@@ -583,7 +586,7 @@ INFO[0000] 🌱  Starting HTTP server on port 8080          port=8080
 
 ```
 
-Take note of the `FlowServiceAccount` address, which is a base-16 number `0xf8d6e0586b0a20c7`. This is the address of the contract on the emulator.
+Take note of the `FlowServiceAccount` address, which is a base-16 hexadecimal number `0xf8d6e0586b0a20c7` (In fact, these numbers are so ubiquitous in Flow that it has its own type: an `Address` type). This is the address of the contract on the emulator.
 
 Open up a new shell, making sure you are inside the project directory, then type `flow project deploy` to deploy our first contract. You should see an output similar to this if it was successful:
 
@@ -591,7 +594,7 @@ Open up a new shell, making sure you are inside the project directory, then type
 
 Deploying 1 contracts for accounts: emulator-account
 
-PetShopContract -> 0xf8d6e0586b0a20c7 (a0555f1b56b28c982bf65a74f3ecdb92a9b0d2245c455fca98349ed81eb6f8b5)
+PetStore -> 0xf8d6e0586b0a20c7 (11e3afe90dc3a819ec9736a0a36d29d07a2f7bca856ae307dcccf4b455788710)
 
 
 ✨ All contracts deployed successfully
@@ -658,6 +661,14 @@ transaction(metadata: {String: String}) {
 
 ```
 
+> **⚠️ Ambiguous type warning**    
+> If you are using VSCode, chances are you might see the editor flagging the
+> lines referring to `PetStore.NFTReceiver` and `PetStore.NFTMinter` types
+> with an "ambiguous type <T> not found". Try to reset the running emulator
+> by pressing `Ctrl+C` in the shell where you ran the emulator to interrupt it
+> and run it again with `flow emulator` and on a different shell, don't forget
+> to redeploy the contract with `flow project deploy`.
+
 The first line of the transaction code imports the `PetStore` contract instance.
 
 The `transaction` block takes an arbitrary number of named parameters, which will be provided by the calling program (In Flow CLI, JavaScript, Go, or other language). These parameters are the only channels for the transaction code to interact with the outside world.
@@ -674,7 +685,7 @@ Let's try to send this transaction to the running emulator and mint a token! Bec
 
 ```shell
 
-$ flow transactions send src/flow/transactions/MintToken.cdc '{"name": "Max", "breed": "Bulldog"}'
+$ flow transactions send src/flow/transaction/MintToken.cdc '{"name": "Max", "breed": "Bulldog"}'
 
 ```
 
@@ -713,7 +724,18 @@ Public Key 	 be393a6e522ae951ed924a88a70ae4cfa4fd59a7411168ebb8330ae47cf02aec489
 
 ```
 
-Take note of both the public and private keys, and type this command, replacing `<PUBLIC_KEY>` with your generated public key to create a new account based on the key:
+For convenience, let's create a JSON file named `.keys.json` in the root directory next to `flow.json` so we can read them later on:
+
+```json
+
+{
+    "private": "f410328ecea1757efd2e30b6bc692277a51537f30d8555106a3186b3686a2de6",
+    "public": "be393a6e522ae951ed924a88a70ae4cfa4fd59a7411168ebb8330ae47cf02aec489a7e90f6c694c4adf4c95d192fa00143ea8639ea795e306a27e7398cd57bd9"
+}
+
+```
+
+After you have taken down the keys, type this command, replacing `<PUBLIC_KEY>` with the public key you generated to create a new account:
 
 ```shell
 
@@ -775,10 +797,10 @@ import PetStore from 0xf8d6e0586b0a20c7
 transaction {
     prepare(acct: AuthAccount) {
         // Create a new empty collection for this account
-        let collection <- create PetStore.NFTCollection()
+        let collection <- PetStore.NFTCollection.new()
 
         // store the empty collection in this account storage.
-        acct.save<@PetStore.Collection>(<-collection, to: /storage/NFTCollection)
+        acct.save<@PetStore.NFTCollection>(<-collection, to: /storage/NFTCollection)
 
         // Link a public capability for the collection.
         // This is so that the sending account can deposit the token to this account's
@@ -795,7 +817,7 @@ Try sending this transaction by typing the command:
 
 ```shell
 
-$ flow transactions send src/flow/transactions/InitCollection.cdc --signer test-account
+$ flow transactions send src/flow/transaction/InitCollection.cdc --signer test-account
 
 ```
 
@@ -856,7 +878,7 @@ Now, let's test out `TransferToken.cdc` by typing the command:
 
 ```shell
 
-$ flow transactions send src/flow/transactions/TransferToken.cdc 1 0xf3fcd2c1a78f5eee
+$ flow transactions send src/flow/transaction/TransferToken.cdc 1 0xf3fcd2c1a78f5eee
 
 ```
 
@@ -879,17 +901,59 @@ Authorizers	[f8d6e0586b0a20c7]
 
 Well done! You have just withdrawn and deposited your an NFT to another account!
 
-### `GetTokenMetadata` script
+### `GetTokenOwner` script
 
 We have learned to write and send transactions. Now, we will learn how to create scripts to read state from the blockchain.
 
-There are many type of data we can query, but we will work on a `GetTokenMetadata.cdc` which, as the name suggests, get the metadata of an NFT based on the given ID.
+There are many things we can query using a script, but since we have just transferred a token to `test-account`, it would be nice to confirm that the token was actually transferred.
+
+Let's create a script file named `GetTokenOwner.cdc` under the `script` directory. As you can see it is quite straightforward:
+
+```cadence
+
+// GetTokenOwner.cdc
+
+import PetStore from 0xf8d6e0586b0a20c7
+
+// All scripts start with the `main` function,
+// which can take an arbitrary number of argument and return
+// any type of data.
+//
+// This function accepts a token ID and returns an Address.
+pub fun main(id: UInt64): Address {
+
+    // Access the address that owns the NFT with the provided ID.
+    let ownerAddress = PetStore.owners[id]!
+    return ownerAddress
+}
+
+```
+
+All scripts have an entry function called `main`, which can take any number of arguments and return any data type.
+
+This script simply accesses the `owners` dictionary in the `PetStore` contract using the token ID and returns the address of the token's owner, or fail if the value is `nil`.
+
+It's worth repeating myself this: Scripts do not require any gas fee and authorization. They are just programs that reads public data on the blockchain.
+
+Executing a script with Flow CLI is also pretty straightforward:
+
+```shell
+
+$ flow scripts execute src/flow/script/GetTokenOwner.cdc <TOKEN_ID>
+
+```
+
+`<TOKEN_ID>` is an unsigned integer token ID starting from 1. If you have [minted an NFT](#minttoken-transaction) and [transferred it to the `test-account`](#transfertoken-transaction), then replace `<TOKEN_ID>` with the token ID. You should get back the address of the `test-account` you have created.
+
+### `GetTokenMetadata` script
+
+From `GetTokenOwner.cdc` script, it takes only a few more steps to create a script that returns a token's metadata.
+
+We will work on `GetTokenMetadata.cdc` which, as the name suggests, get the metadata of an NFT based on the given ID.
 
 Recall that there is a `metadata` variable in the `NFT` resource definition in the contract which stores a `{String: String}` dictionary of that `NFT`'s metadata. Our script will have to query the right `NFT` and read the variable.
 
-One challenge here is the token we want to target might be owned by some other account. As the contract owner, it is our responsibility to keep track of the owners of every token we will ever mint so we can always access *all* tokens' metadata. This is why we included the `owners` dictionary in the [contract](#petstore-contract) in the first place.
-
-As you can see, it is straightforward after we can access the address owning the token.
+Because we already know how to get an NFT's owner address, all we have to do is to access `NFTReceiver` capability of the owner's account and call `getTokenMetadata(id: UInt64) : {String: String}` on it to get back the NFT's metadata.
 
 ```cadence
 
@@ -923,17 +987,15 @@ pub fun main(id: UInt64) : {String: String} {
 
 ```
 
-It's worth repeating myself this: Scripts do not require any gas fee and authorization. They are just programs that reads public data on the blockchain.
-
-Executing a script with Flow CI is also pretty straightforward:
+Now, execute the script:
 
 ```shell
 
-$ flow scripts execute src/flow/scripts/GetTokenMetadata.cdc <TOKEN_ID>
+$ flow scripts execute src/flow/script/GetTokenMetadata.cdc <TOKEN_ID>
 
 ```
 
-Note that `<TOKEN_ID>` is an unsigned integer token ID whose metadata we want, starting from 1. If we have minted an NFT with the metadata `{"name": "Max", "breed": "Bulldog"}` in the [previous minting step](#minttoken-transaction), then that is what you will get after running the Flow `scripts` command.
+If we have minted an NFT with the metadata `{"name": "Max", "breed": "Bulldog"}` in the [previous minting step](#minttoken-transaction), then that is what you will get after running the script.
 
 Et voila! You have come very far and dare I say you are ready to start building your own Flow NFT app.
 
@@ -941,32 +1003,41 @@ However, user experience is a crucial part in any app. It is more than likely th
 
 ### Front-end app
 
-## TBC
+Our NFT pet store is fully functional at the command line, but without a face, it is too hard for end users to use.
 
- [flow]: https://www.onflow.org/
- [flow-cli]: https://www.onflow.org/cli/
- [docker-compose]: https://docker.com/compose/
- [blockchain-basic]: ../concepts/blockchain.md
- [nft-basic]: ../concepts/non-fungible-tokens.md
- [nodejs]: https://nodejs.org/
- [cadence]: https://docs.onflow.org/cadence/language/
- [nft-storage]: https://nft.storage/
- [flowwow]: https://github.com/jochasinga/flowwow/
- [react]: https://reactjs.org/
- [robert-frost-poem]: https://www.poetryfoundation.org/poems/44272/the-road-not-taken
- [mini-petstore]: https://github.com/jochasinga/flow-react
- [rust]: https://rust-lang.org/
- [diem]: https://diem.org/
- [erc-721]: https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
- [cdc-dict-type]: https://docs.onflow.org/cadence/language/values-and-types/#dictionaries
- [cdc-force-unwrap]: https://docs.onflow.org/cadence/language/values-and-types/#force-unwrap-
- [cdc-array-type]: https://docs.onflow.org/cadence/language/values-and-types/#array-types
- [cdc-optional-type]: https://docs.onflow.org/cadence/language/values-and-types/#optionals
- [cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
- [cdc-comp-type]: https://docs.onflow.org/cadence/language/composite-types/
- [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
- [cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
- [cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
- [cdc-reference]: https://docs.onflow.org/cadence/language/references/
- [nft-storage]: https://nft.storage/
+Very often, especially for [decentralized applications][dapps] whose back-ends rely heavily on blockchains and other decentralized technology, the user experience is what makes or breaks them. Quite often, the user-facing part *is* the only crucial part in a dapp.
+
+In this section, we will be working on the UI for the pet store app in React.js. While you're expected to have some familiarity with the library, I will do my best to use common features instead of trotting into advanced ones.
+
+## WIP
+
+[vscode]: https://code.visualstudio.com/
+[vscode-cdc-ext]: https://docs.onflow.org/vscode-extension/
+[flow]: https://www.onflow.org/
+[flow-cli]: https://www.onflow.org/cli/
+[docker-compose]: https://docker.com/compose/
+[blockchain-basic]: ../concepts/blockchain.md
+[nft-basic]: ../concepts/non-fungible-tokens.md
+[nodejs]: https://nodejs.org/
+[cadence]: https://docs.onflow.org/cadence/language/
+[nft-storage]: https://nft.storage/
+[flowwow]: https://github.com/jochasinga/flowwow/
+[react]: https://reactjs.org/
+[robert-frost-poem]: https://www.poetryfoundation.org/poems/44272/the-road-not-taken
+[mini-petstore]: https://github.com/jochasinga/flow-react
+[rust]: https://rust-lang.org/
+[diem]: https://diem.org/
+[erc-721]: https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
+[cdc-dict-type]: https://docs.onflow.org/cadence/language/values-and-types/#dictionaries
+[cdc-force-unwrap]: https://docs.onflow.org/cadence/language/values-and-types/#force-unwrap-
+[cdc-array-type]: https://docs.onflow.org/cadence/language/values-and-types/#array-types
+[cdc-optional-type]: https://docs.onflow.org/cadence/language/values-and-types/#optionals
+[cdc-address-type]: https://docs.onflow.org/cadence/language/values-and-types/#addresses
+[cdc-comp-type]: https://docs.onflow.org/cadence/language/composite-types/
+[cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
+[cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
+[cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
+[cdc-reference]: https://docs.onflow.org/cadence/language/references/
+[nft-storage]: https://nft.storage/
+[dapps]: https://ethereum.org/en/dapps/
 <ContentStatus />
