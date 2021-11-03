@@ -1003,11 +1003,221 @@ However, user experience is a crucial part in any app. It is more than likely th
 
 ### Front-end app
 
+> **💡 Do you know React?**    
+> In this part of the tutorial, we will work with React.js extensively.
+> Because learning React is unfortunately out of the scope, if you think
+> you will need some introduction or brush-up on React, please head over
+> to [Intro to React][react-intro] tutorial before returning here.
+
 Our NFT pet store is fully functional at the command line, but without a face, it is too hard for end users to use.
 
 Very often, especially for [decentralized applications][dapps] whose back-ends rely heavily on blockchains and other decentralized technology, the user experience is what makes or breaks them. Quite often, the user-facing part *is* the only crucial part in a dapp.
 
 In this section, we will be working on the UI for the pet store app in React.js. While you're expected to have some familiarity with the library, I will do my best to use common features instead of trotting into advanced ones.
+
+### Setting up
+
+Make sure you are in the project directory (next to `package.json`). Install the following packages:
+
+```shell
+
+$ npm install --save @onflow/fcl @onflow/types nft.storage
+
+```
+
+The Flow packages will help in connecting our React app to the Cadence code. The `nft.storage` package will help in uploading the image during minting and retrieving data from Filecoin/IPFS network. In order to do so, you will need to [sign up][nft-storage] and generate an API key. After you have signed up, navigate to the "API Keys" tab, and click to create a new key, as shown here:
+
+![Screenshot of NFT.Storage API Keys page](./images/flow-nft-marketplace/nft-storage-api-keys.png)
+
+Take down the key as we will need it later on when we work on the [minting logic](#minting-logic).
+
+Also, to get styling out of the way, please download [Skeleton CSS][skeleton-css-download] and unzip all the CSS files into the `src` directory. Then, in the `App.css` stylesheet, after the last line, import all the stylesheets you just unzipped with:
+
+```css
+
+/* App.css */
+
+@import "./skeleton.css";
+@import "./normalize.css";
+
+/* import all other CSS files if any */
+
+```
+
+Because we want to focus on the UI integration, I'll tell you when to just copy the code that isn't important.
+
+Run the app with `npm run start`, the React app should open in the browser on `http://localhost:3000`. Keep the browser open to see the updates as you save your progress.
+
+In your editor, open `App.js` and remove all the current HTML, leaving only the `<div className="App">` level.
+
+```jsx
+
+function App() {
+  return (
+    <div className="App">
+        {/* Remove this code */}
+    </div>
+  );
+}
+
+```
+
+After you save the file, the app in the browser should become blank.
+
+Now, create a new directory named `components` inside `src` to keep our reusable components.
+
+Inside the newly created directory, create a new file named `Form.js`. This will be a form component that will allow users to submit and mint new NFTs.
+
+```jsx
+
+// components/Form.js
+
+import FileSelector from './FileSelector';
+
+// Collect the information of a pet and manage as a state
+// and mint the NFT based on the information.
+const Form = () => {
+  const [pet, setPet] = useState({});
+
+  // Helper functions to be passed to input elements' onChange.
+
+  const setName = (event) => {
+    const name = event.target.value;
+    setPet({...pet, name});
+  }
+
+  const setBreed = (event) => {
+    const breed = event.target.value;
+    setPet({...pet, breed});
+  }
+
+  const setAge = (event) => {
+    const age = event.target.value;
+    setPet({...pet, age});
+  }
+
+  return (
+    <div style={style}>
+      <form>
+        <div className="row">
+            <FileSelector pet={pet} setPet={setPet} />
+            <div>
+            <label for="nameInput">Pet's name</label>
+            <input
+              className="u-full-width"
+              type="text"
+              placeholder="Max"
+              id="nameInput"
+              onChange={setName}
+            />
+            </div>
+            <div>
+            <label for="breedInput">Breed</label>
+            <select className="u-full-width" id="breedInput" onChange={setBreed}>
+              <option value="Labrador">Labrador</option>
+              <option value="Bulldog">Bulldog</option>
+              <option value="Poodle">Poodle</option>
+            </select>
+            </div>
+            <div>
+            <label for="ageInput">Age</label>
+            <select class="u-full-width" id="ageInput" onChange={setAge}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            </div>
+        </div>
+        <input className="button-primary" type="submit" value="Mint" />
+      </form>
+    </div>
+  );
+};
+
+const style = {
+  padding: '5rem',
+  background: 'white',
+  maxWidth: 350,
+};
+
+export default Form;
+
+```
+
+The `FileSelector.js` component we imported does not yet exist. So, next to `Form.js`, create another component named `FileSelector.js` to handle the image upload logic.
+
+```jsx
+
+// components/FileSelector.js
+
+import { useState } from 'react';
+
+// We are passing `pet` and `setPet` as props to `FileSelector` so we can
+// set the file we selected to the pet state on the `Form` outer scope
+// and keep this component stateless.
+const FileSelector = ({pet, setPet}) => {
+
+  // Read the FileList from the file input component, then
+  // set the first File object to the pet state.
+  const readFiles = (event) => {
+    const files = event.target.files;
+    if (files.length > 0) {
+      setPet({...pet, file: files[0]});
+    }
+  };
+
+  return (
+    <div className="">
+      <label for="fileInput">Image</label>
+      {/* Add readFiles as the onChange handler. */}
+      <input type="file" onChange={readFiles} />
+    </div>
+  );
+};
+
+export default FileSelector;
+
+```
+
+If you import `Form.js` component into `App.js` and insert it anywhere inside the main `App` container, you should see your form that looks similar to the one you see below:
+
+  ![Screenshot of form component](./images/flow-nft-marketplace/form.png)
+
+
+> **💡 How I write code**    
+> The way I write code is to write very small unit at a time, then
+> test that it works as intended, then if it might be reusable, wrap
+> it in a function. Then I repeat.
+>
+> This makes perfect sense. The more code we write, the harder it is 
+> to debug and go back to fix something. It is always better to write > less code in general.
+>
+> Here, I would include `console.log()` in each event handler, then
+> test clicking the form to make sure the logged values are what I
+> expected before moving on.
+
+## Minting logic
+
+Here comes the interesting part. We will hook up the `Mint` button to actually mint a token based on user's input!
+
+Switching gears here, let's head over to `/src/flow/transaction` and create a new JavaScript file named `MintToken.tx.js`.
+
+This module will send the Cadence transaction `MintToken.cdc` similarly to how we have used Flow CLI to do so previously.
+
+```js
+
+// MintToken.tx.js
+
+// Minting module here
+
+```
+
+
+
+
+
+
+
 
 ## WIP
 
@@ -1037,7 +1247,9 @@ In this section, we will be working on the UI for the pet store app in React.js.
 [cdc-integer-type]: https://docs.onflow.org/cadence/language/values-and-types/#integers
 [cdc-force-assign]: https://docs.onflow.org/cadence/language/values-and-types/#force-assignment-operator--
 [cdc-domain]: https://docs.onflow.org/cadence/tutorial/02-hello-world/#account-filesystem-domain-structure-where-can-i-store-my-stuff
+[react-intro]: https://reactjs.org/tutorial/tutorial.html
 [cdc-reference]: https://docs.onflow.org/cadence/language/references/
 [nft-storage]: https://nft.storage/
 [dapps]: https://ethereum.org/en/dapps/
+[skeleton-css-download]: https://github.com/dhg/Skeleton/releases/download/2.0.4/Skeleton-2.0.4.zip
 <ContentStatus />
