@@ -9,7 +9,7 @@ related:
 
 # Building an NFT Marketplace on Flow
 
-This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] from scratch.
+This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] from scratch and deploying it on the testnet.
 
 ## Table of content (WIP)
 
@@ -274,6 +274,13 @@ The structure of the `src` directory should now look like this:
 ```
 
 ### `PetStore` contract
+
+> **💡 Don't reinvent the wheel**    
+> As you move toward building on testnet and finally mainnet, you will want to take a
+> look at [existing interfaces](https://docs.onflow.org/dapp-development/smart-contracts/#nft-sales-and-trading-nft-sales-and-trading) and implement them.
+>
+> However, for this tutorial, we want to focus on understanding the basics. So, we will be building
+> our own version of things from the ground up.
 
 We will be taking some time to write the contract while also learn Cadence. Once you have grasped it, writing transactions and scripts will be relatively easy.
 
@@ -1015,6 +1022,10 @@ Very often, especially for [decentralized applications][dapps] whose back-ends r
 
 In this section, we will be working on the UI for the pet store app in React.js. While you're expected to have some familiarity with the library, I will do my best to use common features instead of trotting into advanced ones.
 
+After we are done, we will end up with a simple marketplace app that users can mint and query their NFTs that is similar to this:
+
+![finished-marketplace](./images/flow-nft-marketplace/flow-nft-marketplace-finish.png)
+
 ### Setting up
 
 Make sure you are in the project directory (next to `package.json`). Install the following packages:
@@ -1055,7 +1066,9 @@ In your editor, open `App.js` and remove all the current HTML, leaving only the 
 function App() {
   return (
     <div className="App">
-        {/* Remove this code */}
+
+        {/* Remove code here */}
+
     </div>
   );
 }
@@ -1121,13 +1134,17 @@ const Form = () => {
             </div>
             <div>
             <label for="ageInput">Age</label>
-            <select class="u-full-width" id="ageInput" onChange={setAge}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
+              <select
+                className="u-full-width"
+                id="ageInput"
+                onChange={setAge}
+              >
+                {
+                  [...Array(10).keys()].map(i => <option value={i}>{i}</option>)
+                }
+              </select>
             </div>
-        </div>
+          </div>
         <input className="button-primary" type="submit" value="Mint" />
       </form>
     </div>
@@ -1200,17 +1217,256 @@ If you import `Form.js` component into `App.js` and insert it anywhere inside th
 
 Here comes the interesting part. We will hook up the `Mint` button to actually mint a token based on user's input!
 
-Switching gears here, let's head over to `/src/flow/transaction` and create a new JavaScript file named `MintToken.tx.js`.
+Switching gears here, let's head over to `/src/flow/transaction` and create a new JavaScript file named `MintToken.tx.js`. This module will send the Cadence transaction `MintToken.cdc` similarly to how we have used Flow CLI to do so previously.
 
-This module will send the Cadence transaction `MintToken.cdc` similarly to how we have used Flow CLI to do so previously.
+Here I create a JavaScript module that interacts with each Cadence transaction or script and name it to reflect the Cadence code, appended by `.tx.js` or a transaction or `.sc.js` for a script. This is not a requirement and you're free to name them however you want.
+
+Since there will be quite a lot going on, we will go slowly on this one. We will create a `mintToken` function that takes a `pet` object and does the following:
+
+1. Upload the metadata and image asset to NFT.storage, and retrieve the returned metadata that includes the [CID][ipfs-cid] of the data.
+2. Send a minting transaction with the metadata to Flow (in this case, the name, age, breed, and the CID of the data stored on IPFS).
+3. If successful, return the Flow transaction ID.
+
+
+Here we sketch up some placeholder functions to reflect the steps:
 
 ```js
 
 // MintToken.tx.js
 
-// Minting module here
+async function mintToken(pet) {
+  let metadata = await uploadToStorage(pet);
+  let txId = await mintPet(metadata);
+  return txId;
+}
+
+/* We will fill in these functions next */
+
+async function uploadToStorage(pet) {
+    return {};
+}
+
+async function mintPet(metadata) {
+    return '';
+}
 
 ```
+
+Next, we will fill in the body of `uploadToStorage` function. This is where you will need your API key from NFT.Storage:
+
+```js
+
+// Import these modules from nft.storage on top of the file.
+import { NFTStorage, File } from 'nft.storage';
+
+const API_KEY = "DROP_YOUR_API_KEY_HERE";
+
+// Initialize the NFTStorage client.
+const storage = new NFTStorage({ token: API_KEY });
+
+async function uploadToStorage(pet) {
+  // Call `store(...)` on the NFTStorage client with an object
+  // containing all of pet's attributes, and required image and
+  // description attributes.
+  let metadata = await storage.store({
+    ...pet,
+    image: pet.image && new File([pet.image], `${pet.name}.jpg`, { type: 'image/jpg' }),
+    description: `${pet.name}'s metadata`,
+  });
+
+  // If all goes well, return the metadata.
+  return metadata;
+}
+
+```
+
+The step was simple. `NFTStorage.store(...)` takes an object with arbitrary attributes and two required `image` and `description` attributes. 
+
+Confusingly, `image` attribute does not necessarily take only an image file. It takes a `File` object (which means any type of assets). We used the `File` contructor imported from the library to create the object.
+
+The `description` attribute can obvious be any arbitrary text you want.
+
+Then, we return the metadata returned from the call to the caller.
+
+Once we have the metadata from uploading to NFT.storage, we will have to send a transaction to mint the token on Flow with the metadata. Let's fill up the `mintPet` function.
+
+```js
+
+import * as fcl from '@onflow/fcl';
+import * as t from '@onflow/types';
+import cdc from './MintToken.cdc';
+
+async function mintPet(metadata) {
+
+  // Convert the metadata into a {String: String} type. See below.
+  const dict = toCadenceDict(metadata);
+
+  // Build a list of arguments
+  const payload = fcl.args([
+    fcl.arg(
+      dict,
+      t.Dictionary({ key: t.String, value: t.String }),
+    )
+  ]);
+
+  // Fetch the Cadence raw code.
+  const code = await (await fetch(cdc)).text();
+
+  // Send the transaction!
+  // Note the `userAuthz` function we have not implemented.
+  const encoded = await fcl.send([
+    fcl.transaction(code),
+    fcl.payer(fcl.authz),
+    fcl.proposer(fcl.authz),
+    fcl.authorizations([fcl.authz]),
+    fcl.limit(999),
+    payload,
+  ]);
+
+  // Call `fcl.decode` to get the transaction ID.
+  let txId = await fcl.decode(encoded);
+
+  // This waits for the transaction to be sealed, which is a recommended way.
+  await fcl.tx(txId).onceSealed();
+
+  // Return the transaction ID
+  return txId;
+}
+
+// Helper function to convert `pet` object to a {String: String} type.
+function toCadenceDict(pet) {
+  // Copy the pet object so we don't mutate the original.
+  let newPet = {...pet};
+
+  // Delete the `image` attribute that contains a `File` object.
+  delete newPet.image;
+
+  // Return an array of [{key: string, value: string}].
+  return Object.keys(newPet).map((k) => ({key: k, value: pet[k]}));
+}
+
+```
+
+As you can see, our `mintPet` function is a little involved.
+
+The first step we took was to convert the `pet` data to a type our Cadence contract understand, which a dictionary of type `{String: String}`. Basically, if the object looks like this:
+
+```js
+
+{
+    name: "Max",
+    age: 3,
+    breed: "Bulldog",
+    // ...
+}
+
+```
+
+We then have to convert it to an array of `{key: string, value: string}` in JavaScript:
+
+
+```js
+
+[
+    {key: "name", value: "Max"},
+    {key: "age", value: "3"},
+    {key: "breed", value: "Bulldog"},
+]
+
+```
+
+This was what `toCadenceDict` function did, plus deleting the `image` attribute from the pet object because we didn't need it for minting on Flow.
+
+After properly converting the object, we had to build a "payload" by calling `fcl.args` and pass an array of arguments. In this case, the metadata of type `[{key: string, value: string}]`.  To facilitate this, we used types from `fcl.types` library.
+
+Next, we fetch the corresponding `MintToken.cdc` raw code. This is a standard way of fetching raw text from another module.
+
+Now comes the meaty part of this function: Sending a transaction.
+
+```js
+
+const encoded = await fcl.send([
+  fcl.transaction(code),
+  fcl.payer(fcl.authz),
+  fcl.proposer(fcl.authz),
+  fcl.authorizations([fcl.authz]),
+  fcl.limit(999),
+  payload,
+]);
+
+```
+
+There is a few ways to send a transaction, but `fcl.send([...])` is the most explicit way.
+
+We pass the Cadence `code` to `fcl.transaction`, and any integer from 0 - 999 to `fcl.limit` for the gas fee limit we are happy with. The `payload` is the metadata we converted previously.
+
+The `payer`, `proposer`, and `authorizations` are a little complicate. While we won't dig deep into them, they accept a function known as *authorization function* that decides the account (and effectively the keys) used to authorize the transaction. (If you're interested in deep-diving, check out [Authorization Function][cdc-auth-function]). Here, `fcl` provided an `authz` default authorization function to makes signing with the emulator account easier.
+
+Now all that is left to do is to return to the main `mintToken` function to complete it:
+
+```js
+
+// This is a fallible function.
+async function mintToken(pet) {
+
+  // The metadata contains the attribute `ipnft` which
+  // contains the CID of the uploaded metadata.
+  const { ipnft } = await uploadToStorage(pet);
+
+  // We want to include the CID to mint to the blockchain,
+  // so we create a new object with all of the pet's
+  // attributes, plus the `cid`.
+  const txId = await mintPet({...pet, cid: ipnft});
+  return txId;
+}
+
+// Don't forget to export the function.
+export default mintToken;
+
+```
+
+Our `mintToken` function is ready to work. We should return to `Form.js`,add a `handleSubmit` handler (right after `setAge` function), and pass to the `onSubmit` prop on the `<form>` element.
+
+```js
+
+// Form.js
+
+// On the top most of the module
+import mintToken from '../flow/transaction/MintToken.tx';
+
+const Form = () => {
+
+  // ... setAge function ...
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await mintToken(pet);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  return (
+    <div style={style}>
+      <form onSubmit={handleSubmit}>
+
+        {/* ... other elements ... */}
+
+      </form>
+    </div>
+
+  );
+
+
+```
+
+
+
+
+
+
+
 
 
 
@@ -1252,4 +1508,6 @@ This module will send the Cadence transaction `MintToken.cdc` similarly to how w
 [nft-storage]: https://nft.storage/
 [dapps]: https://ethereum.org/en/dapps/
 [skeleton-css-download]: https://github.com/dhg/Skeleton/releases/download/2.0.4/Skeleton-2.0.4.zip
+[ipfs-cid]: https://proto.school/anatomy-of-a-cid/01
+[cdc-auth-function]: https://docs.onflow.org/fcl/reference/api/#authorization-function
 <ContentStatus />
