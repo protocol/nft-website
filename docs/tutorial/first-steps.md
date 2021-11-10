@@ -7,7 +7,7 @@ description: A step-by-step guide to getting started as an NFT developer.
 
 Developing apps and experiences for NFTs requires a bit of background knowledge and experience with blockchain smart contracts. This guide will walk through interacting with a simple "hello world" smart contract from JavaScript, just to get acquainted with the tooling and libraries we'll use in later guides.
 
-If you're already familiar with the basics of interacting with smart contracts, you can skip this guide and jump into [developing an end-to-end experience](./end-to-end-experience.md).
+If you're already familiar with the basics of interacting with smart contracts, you can skip this guide and jump into [developing an end-to-end experience](./minting-service.md).
 
 ## Prerequisites
 
@@ -146,7 +146,7 @@ Visiting any of these URLs in your browser will produce the message `Hello, Hard
 
 ## Conclusion
 
-Great work! Now you have an easy route to interacting with smart contracts with JavaScript right in your browser, a Ropsten Testnet account loaded with ETH for fuel, and a general outline for building apps on top of Ethereum. After this crash course, you're ready to start getting into minting NFTs in our [end-to-end tutorial](end-to-end-experience.md).
+Great work! Now you have an easy route to interacting with smart contracts with JavaScript right in your browser, a Ropsten Testnet account loaded with ETH for fuel, and a general outline for building apps on top of Ethereum. After this crash course, you're ready to start getting into minting NFTs in our [end-to-end tutorial](./minting-service.md).
 
 ## More resources
 
