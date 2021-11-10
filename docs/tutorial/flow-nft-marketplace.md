@@ -1004,6 +1004,25 @@ $ flow scripts execute src/flow/script/GetTokenMetadata.cdc <TOKEN_ID>
 
 If we have minted an NFT with the metadata `{"name": "Max", "breed": "Bulldog"}` in the [previous minting step](#minttoken-transaction), then that is what you will get after running the script.
 
+### `GetAllTokenIds` (Bonus)
+
+This script is very short and straightforward, and it will become handy
+when we build a UI to query tokens based on their IDs.
+
+```cadence
+
+// GetAllTokenIds.cdc
+
+import PetStore from 0xPetStore
+
+pub fun main() : [UInt64] {
+    // We basically just return all the UInt64 keys of `owners`
+    // dictionary as an array to get all IDs of all tokens in existence.
+    return PetStore.owners.keys
+}
+
+```
+
 Et voila! You have come very far and dare I say you are ready to start building your own Flow NFT app.
 
 However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you do. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part--building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
@@ -1206,7 +1225,7 @@ If you import `Form.js` component into `App.js` and insert it anywhere inside th
 > test that it works as intended, then if it might be reusable, wrap
 > it in a function. Then I repeat.
 >
-> This makes perfect sense. The more code we write, the harder it is 
+> This makes perfect sense. The more code we write, the harder it is
 > to debug and go back to fix something. It is always better to write > less code in general.
 >
 > Here, I would include `console.log()` in each event handler, then
@@ -1252,6 +1271,15 @@ async function mintPet(metadata) {
 
 ```
 
+> **💡 Where to catch an error?**
+> Asynchronous functions which return a `Promise` are *fallable*. Conventionally, you should prepare for the worst
+> by catching the error. But the question is where to do this?
+> The general rule here is if a function does not know what to do with the error, don't catch it. Delegate this responsibility
+> to the caller who, hopefully, will know better. In the previous `mintToken` function, we didn't
+> handle the error because we wanted the calling function to handle it.
+> This way, you are not making things worse by complicating the code with unnecessary `try-catch` blocks that only obscure
+> the errors. Let the one who knows better deals with it.
+
 Next, we will fill in the body of `uploadToStorage` function. This is where you will need your API key from NFT.Storage:
 
 ```js
@@ -1280,7 +1308,7 @@ async function uploadToStorage(pet) {
 
 ```
 
-The step was simple. `NFTStorage.store(...)` takes an object with arbitrary attributes and two required `image` and `description` attributes. 
+The step was simple. `NFTStorage.store(...)` takes an object with arbitrary attributes and two required `image` and `description` attributes.
 
 Confusingly, `image` attribute does not necessarily take only an image file. It takes a `File` object (which means any type of assets). We used the `File` contructor imported from the library to create the object.
 
@@ -1409,14 +1437,14 @@ Now all that is left to do is to return to the main `mintToken` function to comp
 // This is a fallible function.
 async function mintToken(pet) {
 
-  // The metadata contains the attribute `ipnft` which
-  // contains the CID of the uploaded metadata.
-  const { ipnft } = await uploadToStorage(pet);
+  // The metadata contains the attribute `url` which is an IFPS URL
+  // pointing to the data.json.
+  const { url } = await uploadToStorage(pet);
 
-  // We want to include the CID to mint to the blockchain,
-  // so we create a new object with all of the pet's
-  // attributes, plus the `cid`.
-  const txId = await mintPet({...pet, cid: ipnft});
+  // We want to include the IPFS URL to the blockchain, so we can
+  // "unpack" the token data when we query it later. So we create
+  // a new object with all of the pet's attributes plus `url`.
+  const txId = await mintPet({ ...pet, url });
   return txId;
 }
 
@@ -1461,21 +1489,281 @@ const Form = () => {
 
 ```
 
+And we wrap up the minting step! Here is the [full code][source] if you have lost your track. Test out the UI, select an image file, fill up the metadata on the form, and click the mint button.
+
+Feel free to sit back and appreciate what you have achieved. Now is the time to fill up your coffee and take a wholesome break you deserve.
+We will be back to work on the last bit--Querying a token.
+
+## Querying the token
+
+Now that we have a mean to mint pet tokens, let's build another form UI to query them for metadata and image.
+
+This form should make a good use of the minting form. Once we're done, it will look similar to this:
+
+![Query form to query tokens](./images/flow-nft-marketplace/query-form.png)
+
+I know Mary is obviously *not* a Bulldog, but you will get a chance to add your breed options later.
+
+Let's start by creating `QueryToken.jsx` file inside the `/components` directory.
+
+```js
+
+import { useState, useEffect } from 'react';
 
 
+// QueryForm.jsx
 
+const style = {
+  padding: '1rem',
+  paddingTop: '5rem',
+  background: 'white',
+  maxWidth: 350,
+  margin: 'auto',
+};
 
+const QueryForm = () => {
+  const [selectedId, setSelectedId] = useState(null);
+  const [metadata, setMetadata] = useState(null);
+  const [allTokenIds, setAllTokenIds]  = useState([]);
 
+  useEffect(() => {
+    let getTokens = async () => {
+      // Set mock IDs for now
+      setTokenIds([1, 2, 3]);
+    };
+    getTokens();
+  }, []);
 
+  // Empty handler for now...
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  }
 
+  return (
+    <div style={style}>
+      <form onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="">
+            <label htmlFor="idInput">Pet's ID</label>
+            <select
+              className="u-full-width"
+              type="number"
+              id="idInput"
+              onChange={(event) => setId(parseInt(event.target.value))}
+            >
+              {
+                // We want to display token IDs that are available.
+                allTokenIds.map(i => <option value={i}>{i}</option>)
+              }
+            </select>
+          </div>
+        </div>
+        <input className="button-primary" type="submit" value="Query" />
+      </form>
+      {
+        // We only display the table if there's metadata.
+        metadata ? <MetadataTable metadata={metadata} /> : null 
+      }
+    </div>
+  );
+};
 
+const MetadataTable = ({ metadata }) => (
+  <table className="u-full-width">
+    <thead>
+      <tr>
+        {
+          Object.keys(metadata).map((field,i) => (
+            // Skip the `url` attribute in metadata for the table headings.
+            field === 'url' ? null : <th key={i}>{field}</th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {
+          Object.keys(metadata).map((field, i) => {
+            switch (field) {
+              // Skip displaying the url.
+              case 'url':
+                return null;
+              // Display the image as <img> tag.
+              case 'image':
+                return (
+                  <td key={i}>
+                    <img src={metadata[field]} width="60px" />
+                  </td>
+                );
+              // Default is to display data as text.
+              default:
+                return <td key={i}>{metadata[field]}</td>;
+            }
+          })
+        }
+      </tr>
+    </tbody>
+  </table>
+);
 
+export default QueryForm;
 
+```
 
+Ok, I did promise this to be simpler, but you will soon see that in fact, it is.
 
+As usual, we need to create JavaScript "bindings" to two Cadence scripts `GetTokenMetadata.cdc` and `GetAllTokenIds.cdc`. We will start with `GetAllTokenIds.sc.js`.
 
+```js
 
-## WIP
+// GetAllTokenIds.sc.js
+
+import * as fcl from '@onflow/fcl';
+import raw from './GetAllTokenIds.cdc';
+
+async function getAllTokenIds() {
+
+  // Fetch the `GetAllTokenIds.cdc` script as text.
+  let cdc = await(await fetch(raw)).text();
+
+  // Read the script, send it, and wait for the response.
+  const encoded = await fcl.send([fcl.script(cdc)]);
+
+  // Decode the response into a JavaScript array of IDs.
+  const tokenIds = await fcl.decode(encoded);
+
+  // Sort the IDs in ascending order and return the array.
+  return tokenIds.sort((a, b) => a - b);
+}
+
+export default getAllTokenIds;
+
+```
+
+Hopefully, by now you are an expect at this. You can follow the comments to see what went on in each step. It's worth switching back and take a look at `GetAllTokenIds.cdc` to see how they both interact.
+
+Next up, we create `GetTokenMetadata.sc.js` that will take care of executing `GetTokenMetadata.cdc` script.
+
+```js
+
+// GetTokenMetadata.sc.js
+
+import * as fcl from '@onflow/fcl';
+import * as t from '@onflow/types';
+import raw from './GetTokenMetadata.cdc';
+
+async function getTokenMetadata(id) {
+    let script = await(await fetch(raw)).text();
+    const encoded = await fcl.send([
+        fcl.script(script),
+        fcl.args([fcl.arg(id, t.UInt64)]),
+    ]);
+    const data = await fcl.decode(encoded);
+    return data;
+}
+
+export default getTokenMetadata;
+
+```
+
+I'll leave you to figure out what this did (Again, check out `GetTokenMetadata.cdc` to see what kind of interface it offers).
+
+Now we are ready to return to `QueryForm.jsx`.  Import the functions we worked on as the following:
+
+```js
+
+// QueryForm.js
+
+import { useState, useEffect } from 'react';
+
+// Import these functions
+import getAllTokenIds from '../flow/script/GetAllTokenIds.sc';
+import getTokenMetadata from '../flow/script/GetTokenMetadata.sc';
+import { toGatewayURL } from 'nft.storage';
+
+const QueryForm = () => {
+  const [allTokenIds, setAllTokenIds] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [metadata, setMetadata] = useState(null);
+
+  useEffect(() => {
+    let getTokens = async () => {
+      // Instead of dummy token IDs, we call `getAllTokenIds`
+      // to get real IDs of all existing tokens.
+      const ids = await getAllTokenIds();
+      setTokenIds(ids);
+    };
+    getTokens();
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Add this block to the submit handler.
+    try {
+      // Call the `getTokenMetadata` function and extract the
+      // IPFS URL from the data returned.
+      let metadata = await getTokenMetadata(selectedId);
+      let dataURL = toGatewayURL(metadata.url);
+
+      // Fetch the URL to get a JSON response, which contains
+      // an `image` attribute.
+      // create a new metadata object and set the metadata to the value.
+      let { image } = await (await fetch(dataURL)).json();
+      let newdata = { ...metadata, image: toGatewayURL(image) };
+      setMetadata(newdata);
+    } catch(err) {
+      window.alert('Token ID does not exist!');
+    }
+  }
+
+  // ...The component code unchanged...
+}
+
+```
+
+In the `useEffect` callback, we replaced the stubbed ID array with the call to
+`getAllTokenIds` function, which executed `GetAllTokenIds.cdc` and returned an
+array of existing token IDs. We then call `setTokenIds` to set `allTokenIds` to
+the array. This is used to fill up the `<option>` element with the IDs and act as
+the UI guard to make sure users can only choose the available tokens to query.
+
+In the "empty" `handleSubmit` handler function, which is called everytime the query button
+is clicked, we added a `try-catch` block which called `getTokenMetadata` with the ID user
+selected in `selectedId`, and return the metadata of the selected NFT.
+
+We recall that as part of metadata in minting, we included the `url` attribute from the
+NFT.storage upload. This `url` is an IPFS URL in the form of `ipfs://<CID>/data.json`.
+We are interested in this URL because it points to the JSON data containing the URL to
+the pet image we uploaded to IPFS. To fetch it using JavaScript, we had to convert the IPFS
+URL to the HTTP gateway URL with [`toGatewayURL`](https://nftstorage.github.io/nft.storage/client/modules.html#toGatewayURL). Once we fetched the JSON and convert to an object, we access the
+`image` attribute, convert it to HTTP URL, and include it along with other data in the new metadata 
+object we set the state with `setMetadata`. It is then ready for the `MetadataTable` component
+to display.
+
+Note that in the case of error, `handleSubmit` would call `window.alert` and display a simple popup
+window to notify the user.
+
+There was no change needed for the component code.
+
+Now, try to mint an NFT with the mint form, and query it with the query form! Hopefully, it should all work as intended.
+
+Congratulations! You have single-handedly built a NFT minting and querying marketplace on Flow. This has been a great achievement!
+
+## Next steps
+
+Flow's focus on developer's experience and the accessibility of its smart contract language Cadence, plus its low gas fee and high throughput make it an extremely promising blockchain to build NFT-related apps on.
+
+Because NFTs have assets that need to be stored off-chain permanently, using NFT.Storage to store them on the Filecoin network is a natural way to go as the first step to launch your NFT app on Flow quickly.
+
+If you are still hungry to learn more about Flow and NFT.Storage, here is a non-exhaustive list of the resources to tackle next:
+
+- Dive into the [Cadence Language Reference][cdc-reference].
+- Explore [Flow Client Library][cdc-fcl], especially the authorization.
+- Familiarize with [NFT.storage documentation][nft-storage-doc].
+
+Last but not least, this tutorial is not perfect, so I apologize if you stumbled onto any rough edges. Please do not hesitate to make it better by creating a pull request. No contribution is too small!
+
 
 [vscode]: https://code.visualstudio.com/
 [vscode-cdc-ext]: https://docs.onflow.org/vscode-extension/
@@ -1510,4 +1798,7 @@ const Form = () => {
 [skeleton-css-download]: https://github.com/dhg/Skeleton/releases/download/2.0.4/Skeleton-2.0.4.zip
 [ipfs-cid]: https://proto.school/anatomy-of-a-cid/01
 [cdc-auth-function]: https://docs.onflow.org/fcl/reference/api/#authorization-function
+[cdc-reference]: https://docs.onflow.org/cadence/language/
+[cdc-fcl]: https://docs.onflow.org/fcl/
+[nft-storage-doc]: https://nftstorage.github.io/nft.storage/client/
 <ContentStatus />
