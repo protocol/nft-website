@@ -9,7 +9,7 @@ related:
 
 # Building an NFT Marketplace on Flow
 
-This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] from scratch and deploying it on the testnet.
+This tutorial will teach you to create a simple NFT marketplace on the [Flow][flow] blockchain from scratch and deploy it on the testnet.
 
 ## Table of content (WIP)
 
@@ -23,11 +23,11 @@ This tutorial will teach you to create a simple NFT marketplace on [Flow][flow] 
 
 ## Prerequisites
 
-Although this tutorial is built specifically for Flow, it will build up a general understanding of smart contract and NFTs. Therefore, you are expected to have a working JavaScript and [React.js][react] knowledge and a basic familiarity with blockchains, web3, and NFTs.
+Although this tutorial is built specifically for Flow, it will build up a general understanding of smart contract and NFTs. Therefore, you are expected to have a working JavaScript and [React.js][React] knowledge and a basic familiarity with blockchains, web3, and NFTs.
 
 You will need to install [Node.js][nodejs] and npm (comes with Node.js), [Flow command line tool][flow-cli], and [Docker compose][docker-compose] to follow this tutorial.
 
-You can use any code editor of your choice, but I recommend [VSCode][vscode] with [Cadence Language support][vscode-cdc-ext] for smooth sailing experience.
+You can use any code editor of your choice. [VSCode][vscode] with [Cadence Language support][vscode-cdc-ext] is one option that provides a smooth sailing experience.
 
 > **💡 Why React?**    
 > React.js was chosen for this tutorial because it is the most widely-used UI library that
@@ -40,14 +40,13 @@ If you are not familiar with the concept of smart contracts and NFTs, it is wort
 
 ## What you will learn
 
-You will learn the basic NFT building blocks from the ground up, such as:
+As we build a minimal version of the [Flowwow NFT pet store][flowwow] together, you will learn the basic NFT building blocks from the ground up. Topics include:
 
  - Smart contracts and the [Cadence language][cadence]
  - User authentication
- - Minting and storing tokens' metadata on [Filecoin/IPFS][nft-storage]
+ - Minting tokens and storing metadata on [Filecoin/IPFS][nft-storage]
  - Transferring tokens
 
-As we build a minimal version of the [Flowwow NFT pet store][flowwow] together.
 
 If you would like to go through a structured, step-by-step tutorial, the chapter-by-chapter project is available on [Github][mini-petstore].
 
@@ -60,7 +59,7 @@ Let's get a leveled understanding here. A blockchain, or distributed ledger, is 
 3. The [contract](contract) or rule to govern them.
 
 ### Resource
-The resource can be any *thing*--from money to crop to digital monster--as long as the type of resource is agreed upon by all accounts.
+The resource can be any *thing* — from money to crop to digital monster — as long as the type of resource is agreed upon by all accounts.
 
 ### Accounts
 Each account owns a ledger of its own to keep track of the spending (transferring) and imbursing (receiving) of the resource.
@@ -83,7 +82,7 @@ What is novel about blockchain is the distributed part. Because the ledger is *d
 
 ## Cadence
 
-Like Solidity for Ethereum, we use [Cadence][cadence] to code smart contracts, transactions, and scripts for Flow. Cadence's design is inspired by [Rust][rust] and the *move semantic*. Basically, the runtime tracks when a resource is being *moved* from a variable to another variable and makes sure it can never be used twice in the program.
+Like Solidity for Ethereum, we use the [Cadence][cadence] language to code smart contracts, transactions, and scripts for Flow. Cadence's design is inspired by the [Rust][rust] and [Move][move] languages. In Cadence, the runtime tracks when a resource is being *moved* from a variable to another variable and makes sure it can never be used twice in the program.
 
 The three types of Cadence program you will be writing are [contracts](contract), [transactions][transaction], and [scripts][script].
 
@@ -91,7 +90,7 @@ The three types of Cadence program you will be writing are [contracts](contract)
 
 A contract is an initial program that gets deployed to the blockchain, initiating the logic for your app and allowing access to resources you create and the capabilities that come with them.
 
-Two most common constructs in a contract are resources and interfaces.
+Two of the most common constructs in a contract are resources and interfaces.
 
 #### Resources
 
@@ -104,7 +103,7 @@ Resources can only be in one place at a time, and they are said to be *moved* ra
 
 Interfaces define the behaviors or capabilities of resources. They are akin to interfaces in some languages. They are usually implemented by resources.
 
-Here is an example of an `NFT` resource and a `Ownable` interface (ala [ERC721][erc-721]) in the `PetStore` contract:
+Here is an example of an `NFT` resource and an `Ownable` interface (à la [ERC721][erc-721]) in the `PetStore` contract:
 
 ```cadence
 
@@ -119,7 +118,7 @@ pub contract PetStore {
         // Unique id for each NFT.
         pub let id: UInt64
 
-        // Constructor method.
+        // Constructor method
         init(initId: UInt64) {
             self.id = initId
         }
@@ -146,7 +145,7 @@ Note the access modifier `pub` before the definition of `contract`, `resource`, 
 
 ### Transaction
 
-Transactions tell the on-chain contract to change the state of the chain. Because the change is synchronized throughout the peers and cannot be undone, like Ethereum, a transaction is considered a *write* operation that incurs a network gas fee. They also require one or more accounts to sign and authorize.
+Transactions tell the on-chain contract to change the state of the chain. Like Ethereum, the change is synchronized throughout the peers and cannot be undone. Therefore, a transaction is considered a *write* operation that incurs a network gas fee. Transactions require one or more accounts to sign and authorize.
 Minting and transferring tokens are transactions.
 
 Here is an example of a transaction, requiring a current account who owns the `NFT` resource to authorize a certain action (in this case, just logging `"Hello, transaction"`).
@@ -282,7 +281,7 @@ The structure of the `src` directory should now look like this:
 > However, for this tutorial, we want to focus on understanding the basics. So, we will be building
 > our own version of things from the ground up.
 
-We will be taking some time to write the contract while also learn Cadence. Once you have grasped it, writing transactions and scripts will be relatively easy.
+Now, we will write our first contract.
 
 First, create the contract structure and define an `NFT` resource:
 
@@ -311,7 +310,7 @@ pub contract PetStore {
 
 ```
 
-Note that we have declared a [Dictionary][cdc-dict-type] and store in a variable named `owners`. This dictionary has the type `{UInt64: Address}` which maps [unsigned 64-bit integers][cdc-integer-type] to users' [Addresses][cdc-address-type]. We will use `owners` to keep track of all the current owners of NFTs globally.
+Note that we have declared a [Dictionary][cdc-dict-type] and stored it in a variable named `owners`. This dictionary has the type `{UInt64: Address}` which maps [unsigned 64-bit integers][cdc-integer-type] to users' [Addresses][cdc-address-type]. We will use `owners` to keep track of all the current owners of NFTs globally.
 
 Next, we instantialize the array with a `nil` stored as the first element in the `init()` constructor method. In Cadence, it is an error
 
@@ -359,17 +358,17 @@ pub contract PetStore {
 
 Let's not get over ourselves and go through the `NFTReceiver` interface line-by-line.
 
-The `withdraw(id: UInt64): @NFT` method takes an NFT's `id`, withdraws a token, or an *instance* of `NFT` resource, which is prepended with a `@` to mean reference to a resource.
+The `withdraw(id: UInt64): @NFT` method takes an NFT's `id`, withdraws a token, or an *instance* of `NFT` resource, which is prepended with a `@` to indicate a reference to a resource.
 
 The `deposit(token: @NFT, metadata: {String : String})` method takes a token reference type and the metadata dictionary with a `String` key and `String` value, and deposits or transfers the `@NFT` to the current instance of `NFTReceiver`.
 
-The `getTokenIds(): [UInt64]` method access all tokens' IDs owned by the instance of the `NFTReceiver`.
+The `getTokenIds(): [UInt64]` method accesses all tokens IDs owned by the instance of the `NFTReceiver`.
 
-The `getTokenMetadata(id: UInt64) : {String : String}` method takes an ID of an `NFT`, read the metadata, and return the it as a dictionary.
+The `getTokenMetadata(id: UInt64) : {String : String}` method takes an ID of an `NFT`, reads the metadata, and returns it as a dictionary.
 
 ### `NFTCollection`
 
-Now let's create an `NFTCollection` resource to implement the `NFTReceiver` interface. Think of this as a "vault" where NFTs are deposited to and withdrawn from.
+Now let's create an `NFTCollection` resource to implement the `NFTReceiver` interface. Think of this as a "vault" where NFTs can be deposited or withdrawn.
 
 ```cadence
 
@@ -449,7 +448,7 @@ In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty
 
 The `withdraw(id: UInt64): @NFT` method remove an NFT from the collection's `ownedNFTs` array and return it.
 
-The left-pointing arrow character is knowned as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
+The left-pointing arrow `<-` is known as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
 
 Note the `!` symbol after the `token` variable. It [force-unwraps][cdc-force-unwrap] the `Optional` value. If the value turns out to be `nil`, the program panics and crashes.
 
@@ -457,7 +456,7 @@ Because resources are core to Cadence, their types are annotated with a `@` to m
 
 The `deposit(token: @NFT)` function takes the `@NFT` resource as a parameter and store it in the `ownedNFTs` array in this `@NFTCollection` instance.
 
-The `!` symbol reappears here, but now it's after the move arrow `<-!`. This is called a [force-move or force-assign][cdc-force-assign] operator, which only move a resource to a variable if the variable is `nil`. Otherwise, the program panics.
+The `!` symbol reappears here, but now it's after the move arrow `<-!`. This is called a [force-move or force-assign][cdc-force-assign] operator, which only moves a resource to a variable if the variable is `nil`. Otherwise, the program panics.
 
 The `getTokenIds(): [UInt64]` method simply reads all the `UInt64` keys of the `ownedNFTs` dictionary and returns them as an array.
 
@@ -479,7 +478,7 @@ We have successfully implemented the `@NFTReceiver` interface for the `@NFTColle
 
 ### `NFTMinter`
 
-The last and very important component for our `PetStore` contract is `@NFTMinter` resource, which will contain an exclusive code for the contract owner to mint all the tokens. Without it, our store will not be able to mint any pet for the users. It is very simplistic though, since we have already blaze through the more complex components. Its only `mint(): @NFT` method creates an `@NFT` resource, give it an ID, save the address of the first owner to the contract (which is the address of the contract owner, although you could change it to mint and transfer to the creator's address in one step), increment the universal ID counter, and return the new token.
+The last and very important component for our `PetStore` contract is `@NFTMinter` resource, which will contain an exclusive code for the contract owner to mint all the tokens. Without it, our store will not be able to mint any pet tokens. It is very simplistic though, since we have already blaze through the more complex components. Its only `mint(): @NFT` method creates an `@NFT` resource, give it an ID, save the address of the first owner to the contract (which is the address of the contract owner, although you could change it to mint and transfer to the creator's address in one step), increment the universal ID counter, and return the new token.
 
 
 ```cadence
@@ -520,7 +519,7 @@ pub contract PetStore {
 
 ```
 
-By now, we have all the bolts and nuts we need for the contract. The only thing that is missing is a way to initialize this contract once during the deployment. Let's create a constructor method to create an empty `@NFTCollection` instance for the deployer of the contract (you) so it is possible for the contract owner to mint and store NFTs from the contract. As we go over this last hurdle, we will also learn about the last important concept Cadence: [Storage and domains][cdc-domain].
+By now, we have all the bolts and nuts we need for the contract. The only thing that is missing is a way to initialize this contract once during the deployment. Let's create a constructor method to create an empty `@NFTCollection` instance for the deployer of the contract (you) so it is possible for the contract owner to mint and store NFTs from the contract. As we go over this last hurdle, we will also learn about the last important concept of Cadence: [Storage and domains][cdc-domain].
 
 
 ```cadence
@@ -533,7 +532,7 @@ pub contract PetStore {
 
     // ... @NFTCollection code ...
 
-    // This contract constructor is called once when the  contract is deployed.
+    // This contract constructor is called once when the contract is deployed.
     // It does the following:
     //
     // - Creating an empty Collection for the deployer of the collection so
@@ -713,13 +712,13 @@ Authorizers	[f8d6e0586b0a20c7]
 
 Note the transaction ID returned from the transaction. Every transaction returns an ID no matter if it succeeds or not.
 
-Congratulations on minting your first NFT pet on Flow! It does not have a face yet besides just a name and breed, but we will touch on uploading static images (and even videos) onto the IPFS/Filecoin network using [nft.storage][nft-storage] later.
+Congratulations on minting your first NFT pet on Flow! It does not have a face yet besides just a name and breed. Later in this tutorial, we will upload static images (and even videos) for your pets onto the IPFS/Filecoin networks using [nft.storage][nft-storage].
 
 ### `TransferToken` transaction
 
-As we, the contract owner, are able to mint Flow NFTs. The next natural step is to learn how to transfer them to different users. Since this transfer action writes to the blockchain and mutates the state, it is also a transaction.
+Now that we know how to mint Flow NFTs, the next natural step is to learn how to transfer them to different users. Since this transfer action writes to the blockchain and mutates the state, it is also a transaction.
 
-Before we can transfer a token to another user's account, we need another receiving account to deposit a token to (We could transfer a token to *our* address, but that wouldn't be very interesting, would it?). At the moment, we have been working with only our emulator account so far. So, let's create an account through the Flow CLI.
+Before we can transfer a token to another user's account, we need another receiving account to deposit a token to. (We could transfer a token to *our* address, but that wouldn't be very interesting, would it?) At the moment, we have been working with only our emulator account so far. So, let's create an account through the Flow CLI.
 
 First, create a public-private key pair by typing `flow keys generate`. The output should look similar to the following, while **the keys will be different**:
 
@@ -742,7 +741,7 @@ For convenience, let's create a JSON file named `.keys.json` in the root directo
 
 ```
 
-After you have taken down the keys, type this command, replacing `<PUBLIC_KEY>` with the public key you generated to create a new account:
+Next, type this command, replacing `<PUBLIC_KEY>` with the public key you generated to create a new account:
 
 ```shell
 
@@ -792,7 +791,7 @@ With this new account created, we are ready to move on to the next step.
 
 Before we can deposit a token to the new account, we need it to "initialize" its collection. We can do this by creating a transaction for every user to initialize an `NFTCollection` in order to receive NFTs.
 
-Inside `/transactions` directory next to `MintToken.cdc`, create a new Cadence file named `InitCollection.cdc` with the follow code:
+Inside `/transactions` directory next to `MintToken.cdc`, create a new Cadence file named `InitCollection.cdc`:
 
 ```cadence
 
@@ -906,7 +905,7 @@ Authorizers	[f8d6e0586b0a20c7]
 
 ```
 
-Well done! You have just withdrawn and deposited your an NFT to another account!
+Well done! You have just withdrawn and deposited your NFT to another account!
 
 ### `GetTokenOwner` script
 
@@ -914,7 +913,7 @@ We have learned to write and send transactions. Now, we will learn how to create
 
 There are many things we can query using a script, but since we have just transferred a token to `test-account`, it would be nice to confirm that the token was actually transferred.
 
-Let's create a script file named `GetTokenOwner.cdc` under the `script` directory. As you can see it is quite straightforward:
+Let's create a script file named `GetTokenOwner.cdc` under the `script` directory:
 
 ```cadence
 
@@ -938,11 +937,11 @@ pub fun main(id: UInt64): Address {
 
 All scripts have an entry function called `main`, which can take any number of arguments and return any data type.
 
-This script simply accesses the `owners` dictionary in the `PetStore` contract using the token ID and returns the address of the token's owner, or fail if the value is `nil`.
+In this script, the `main` function accesses the `owners` dictionary in the `PetStore` contract using the token ID and returns the address of the token's owner, or fails if the value is `nil`.
 
-It's worth repeating myself this: Scripts do not require any gas fee and authorization. They are just programs that reads public data on the blockchain.
+As a reminder, scripts do not require any gas fee or authorization because they only read public data on the blockchain rather than writing to it.
 
-Executing a script with Flow CLI is also pretty straightforward:
+Here's how to execute a script with the Flow CLI:
 
 ```shell
 
@@ -956,7 +955,7 @@ $ flow scripts execute src/flow/script/GetTokenOwner.cdc <TOKEN_ID>
 
 From `GetTokenOwner.cdc` script, it takes only a few more steps to create a script that returns a token's metadata.
 
-We will work on `GetTokenMetadata.cdc` which, as the name suggests, get the metadata of an NFT based on the given ID.
+We will work on `GetTokenMetadata.cdc` which, as the name suggests, gets the metadata of an NFT based on the given ID.
 
 Recall that there is a `metadata` variable in the `NFT` resource definition in the contract which stores a `{String: String}` dictionary of that `NFT`'s metadata. Our script will have to query the right `NFT` and read the variable.
 
@@ -1025,7 +1024,7 @@ pub fun main() : [UInt64] {
 
 Et voila! You have come very far and dare I say you are ready to start building your own Flow NFT app.
 
-However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you do. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part--building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
+However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you do. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part: building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
 
 ### Front-end app
 
@@ -1242,12 +1241,12 @@ Here I create a JavaScript module that interacts with each Cadence transaction o
 
 Since there will be quite a lot going on, we will go slowly on this one. We will create a `mintToken` function that takes a `pet` object and does the following:
 
-1. Upload the metadata and image asset to NFT.storage, and retrieve the returned metadata that includes the [CID][ipfs-cid] of the data.
-2. Send a minting transaction with the metadata to Flow (in this case, the name, age, breed, and the CID of the data stored on IPFS).
-3. If successful, return the Flow transaction ID.
+1. **Upload to NFT.storage.** This uploads the metadata and image asset to NFT.storage, and retrieves the returned metadata that includes the [CID][ipfs-cid] of the data.
+2. **Send a minting transaction** with the metadata to Flow (in this case, the name, age, breed, and the CID of the data stored on IPFS).
+3. **Return the Flow transaction ID** if successful.
 
 
-Here we sketch up some placeholder functions to reflect the steps:
+First, let's sketch up some placeholder functions to outline the steps:
 
 ```js
 
@@ -1259,7 +1258,7 @@ async function mintToken(pet) {
   return txId;
 }
 
-/* We will fill in these functions next */
+// We will fill in these functions next
 
 async function uploadToStorage(pet) {
     return {};
@@ -1280,16 +1279,16 @@ async function mintPet(metadata) {
 > This way, you are not making things worse by complicating the code with unnecessary `try-catch` blocks that only obscure
 > the errors. Let the one who knows better deals with it.
 
-Next, we will fill in the body of `uploadToStorage` function. This is where you will need your API key from NFT.Storage:
+Next, fill in the body of `uploadToStorage` function. You will need your API key from NFT.Storage:
 
 ```js
 
-// Import these modules from nft.storage on top of the file.
+// Import required modules from nft.storage
 import { NFTStorage, File } from 'nft.storage';
 
 const API_KEY = "DROP_YOUR_API_KEY_HERE";
 
-// Initialize the NFTStorage client.
+// Initialize the NFTStorage client
 const storage = new NFTStorage({ token: API_KEY });
 
 async function uploadToStorage(pet) {
@@ -1308,13 +1307,16 @@ async function uploadToStorage(pet) {
 
 ```
 
-The step was simple. `NFTStorage.store(...)` takes an object with arbitrary attributes and two required `image` and `description` attributes.
+### 1. Upload to NFT.Storage
 
-Confusingly, `image` attribute does not necessarily take only an image file. It takes a `File` object (which means any type of assets). We used the `File` contructor imported from the library to create the object.
+`NFTStorage.store(...)` takes an object with arbitrary attributes and two required attributes, `image` and `description`. (Contrary to its name, the `image` attribute does not require an image file. It takes a `File` object which can contain any type of asset.)
 
-The `description` attribute can obvious be any arbitrary text you want.
+
+The `description` attribute can be any arbitrary text up to $MAXLENGTH.
 
 Then, we return the metadata returned from the call to the caller.
+
+### 2. Send a minting transaction
 
 Once we have the metadata from uploading to NFT.storage, we will have to send a transaction to mint the token on Flow with the metadata. Let's fill up the `mintPet` function.
 
@@ -1377,7 +1379,7 @@ function toCadenceDict(pet) {
 
 As you can see, our `mintPet` function is a little involved.
 
-The first step we took was to convert the `pet` data to a type our Cadence contract understand, which a dictionary of type `{String: String}`. Basically, if the object looks like this:
+The first step we took was to convert the `pet` data to a type our Cadence contract understands, which a dictionary of type `{String: String}`. Basically, if the object looks like this:
 
 ```js
 
@@ -1428,7 +1430,9 @@ There is a few ways to send a transaction, but `fcl.send([...])` is the most exp
 
 We pass the Cadence `code` to `fcl.transaction`, and any integer from 0 - 999 to `fcl.limit` for the gas fee limit we are happy with. The `payload` is the metadata we converted previously.
 
-The `payer`, `proposer`, and `authorizations` are a little complicate. While we won't dig deep into them, they accept a function known as *authorization function* that decides the account (and effectively the keys) used to authorize the transaction. (If you're interested in deep-diving, check out [Authorization Function][cdc-auth-function]). Here, `fcl` provided an `authz` default authorization function to makes signing with the emulator account easier.
+The `payer`, `proposer`, and `authorizations` accept a function known as *authorization function* that decides the account (and effectively the keys) used to authorize the transaction. (If you're interested in deep-diving, check out [Authorization Function][cdc-auth-function]). Here, `fcl` provided an `authz` default authorization function to makes signing with the emulator account easier.
+
+### 3. Return the Flow transaction ID
 
 Now all that is left to do is to return to the main `mintToken` function to complete it:
 
@@ -1453,7 +1457,7 @@ export default mintToken;
 
 ```
 
-Our `mintToken` function is ready to work. We should return to `Form.js`,add a `handleSubmit` handler (right after `setAge` function), and pass to the `onSubmit` prop on the `<form>` element.
+Our `mintToken` function is ready to work. We should return to `Form.js`, add a `handleSubmit` handler (right after `setAge` function), and pass to the `onSubmit` prop on the `<form>` element.
 
 ```js
 
@@ -1489,14 +1493,13 @@ const Form = () => {
 
 ```
 
-And we wrap up the minting step! Here is the [full code][source] if you have lost your track. Test out the UI, select an image file, fill up the metadata on the form, and click the mint button.
+This wraps up the minting step! Here is the [full code][source] for a handy reference. Now you can test the UI, select an image file, fill up the metadata on the form, and click the mint button.
 
-Feel free to sit back and appreciate what you have achieved. Now is the time to fill up your coffee and take a wholesome break you deserve.
-We will be back to work on the last bit--Querying a token.
+Feel free to sit back and appreciate what you have achieved. Now is the time to fill up your coffee and take a well -deserved break before we move on to the last bit: querying a token.
 
 ## Querying the token
 
-Now that we have a mean to mint pet tokens, let's build another form UI to query them for metadata and image.
+Now that we can mint pet tokens, let's build another form UI to query them for metadata and image.
 
 This form should make a good use of the minting form. Once we're done, it will look similar to this:
 
@@ -1610,7 +1613,6 @@ export default QueryForm;
 
 ```
 
-Ok, I did promise this to be simpler, but you will soon see that in fact, it is.
 
 As usual, we need to create JavaScript "bindings" to two Cadence scripts `GetTokenMetadata.cdc` and `GetAllTokenIds.cdc`. We will start with `GetAllTokenIds.sc.js`.
 
@@ -1640,9 +1642,9 @@ export default getAllTokenIds;
 
 ```
 
-Hopefully, by now you are an expect at this. You can follow the comments to see what went on in each step. It's worth switching back and take a look at `GetAllTokenIds.cdc` to see how they both interact.
+Hopefully, by now you are an expert at this. It's worth switching back and taking a look at `GetAllTokenIds.cdc` to see how the Javascript bindings and Cadence scripts interact.
 
-Next up, we create `GetTokenMetadata.sc.js` that will take care of executing `GetTokenMetadata.cdc` script.
+Next up, we create `GetTokenMetadata.sc.js` to execute the `GetTokenMetadata.cdc` script.
 
 ```js
 
@@ -1666,9 +1668,9 @@ export default getTokenMetadata;
 
 ```
 
-I'll leave you to figure out what this did (Again, check out `GetTokenMetadata.cdc` to see what kind of interface it offers).
+Again, you can review `GetTokenMetadata.cdc` to see the relationships between the interfaces offered and how we used them in this function.
 
-Now we are ready to return to `QueryForm.jsx`.  Import the functions we worked on as the following:
+Now we are ready to return to `QueryForm.jsx`.  Import the functions we worked on:
 
 ```js
 
@@ -1728,11 +1730,11 @@ array of existing token IDs. We then call `setTokenIds` to set `allTokenIds` to
 the array. This is used to fill up the `<option>` element with the IDs and act as
 the UI guard to make sure users can only choose the available tokens to query.
 
-In the "empty" `handleSubmit` handler function, which is called everytime the query button
+In the "empty" `handleSubmit` handler function, which is called each time the query button
 is clicked, we added a `try-catch` block which called `getTokenMetadata` with the ID user
 selected in `selectedId`, and return the metadata of the selected NFT.
 
-We recall that as part of metadata in minting, we included the `url` attribute from the
+Remember that as part of metadata in minting, we included the `url` attribute from the
 NFT.storage upload. This `url` is an IPFS URL in the form of `ipfs://<CID>/data.json`.
 We are interested in this URL because it points to the JSON data containing the URL to
 the pet image we uploaded to IPFS. To fetch it using JavaScript, we had to convert the IPFS
@@ -1752,7 +1754,7 @@ Congratulations! You have single-handedly built a NFT minting and querying marke
 
 ## Next steps
 
-Flow's focus on developer's experience and the accessibility of its smart contract language Cadence, plus its low gas fee and high throughput make it an extremely promising blockchain to build NFT-related apps on.
+Flow's focus on developer's experience and the accessibility of its smart contract language Cadence, plus its low gas fee and high throughput, make it an extremely promising blockchain to build NFT-related apps on.
 
 Because NFTs have assets that need to be stored off-chain permanently, using NFT.Storage to store them on the Filecoin network is a natural way to go as the first step to launch your NFT app on Flow quickly.
 
