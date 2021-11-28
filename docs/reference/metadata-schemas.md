@@ -103,4 +103,4 @@ The ERC-1155 metadata schema is very similar to the one proposed in ERC-721. Sin
 
 The most generally useful field is the `properties` object, which allows you to extend the schema with your own arbitrary properties without adding fields to the top-level namespace.
 
-The other additional field, `decimals`, allows ERC-1155 tokens to be either fungible or non-fungible, depending on the developer's needs. For fungible tokens, you can set use the `decimals` field to indicate how to display the quantity of a fungible token in a user interface.
+The other additional field, `decimals`, allows ERC-1155 tokens to be either fungible or non-fungible, depending on the developer's needs. For fungible tokens, you can set the `decimals` field to indicate how to display the quantity of a fungible token in a user interface.
