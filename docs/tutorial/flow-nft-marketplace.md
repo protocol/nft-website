@@ -9,7 +9,7 @@ related:
 
 # Building a Flow NFT pet store
 
-This tutorial will teach you to create a simple NFT marketplace on the [Flow][flow] blockchain from scratch and deploy it on testnet. Although we will be building a pet store using pet images, you are free to use your own images and change the metadata.
+This tutorial will teach you to create a simple NFT marketplace on the [Flow][flow] blockchain from scratch, using the Flow blockchain and IPFS/Filecoin storage via [nft.storage][nft-storage]. Although we will be building a pet store using pet images, you are free to use your own images and change the metadata.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ A good analogy is an umpire-less tennis game where any dispute (like determining
 
 ## Quick tour of Cadence
 
-Like Solidity language for Ethereum, we use [Cadence][cadence] language to code smart contracts, transactions, and scripts on Flow. Cadence's design is inspired by the [Rust][rust] and [Move][move] languages. In Cadence, the runtime tracks when a resource is being *moved* from a variable to the next and makes sure it can never be mutually accessible in the program.
+Like Solidity language for Ethereum, Flow uses [Cadence][cadence] language to code smart contracts, transactions, and scripts on Flow. Cadence's design is inspired by the [Rust][rust] and [Move][move] languages. In Cadence, the runtime tracks when a resource is being *moved* from a variable to the next and makes sure it can never be mutually accessible in the program.
 
 The three types of Cadence program you will be writing are [contracts](contract), [transactions][transaction], and [scripts][script].
 
