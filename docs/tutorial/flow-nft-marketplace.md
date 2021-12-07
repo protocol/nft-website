@@ -1,11 +1,11 @@
-—-
+---
 title: Building a Flow NFT pet store
 description: A step-by-step guide to build an NFT pet marketplace on Flow.
 issueUrl: https://github.com/protocol/nft-website/issues/146
 related:
   'How to Create NFTs Like NBA Top Shot With Flow and IPFS': https://medium.com/pinata/how-to-create-nfts-like-nba-top-shot-with-flow-and-ipfs-701296944bf
   'Mint an NFT with IPFS': https://docs.ipfs.io/how-to/mint-nfts-with-ipfs/#a-short-introduction-to-nfts
-—-
+---
 
 # Building a Flow NFT pet store
 
@@ -391,12 +391,12 @@ First we declare a mutable dictionary and store it in a variable named `ownedNFT
 
 This dictionary stores the NFTs for this collection by mapping the ID to NFT resource. Note that because the dictionary stores `@NFT` resources, we prepend the type with `@`, making itself a resource too.
 
-In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty dictionary. A resource also need a `destroy()` destructor method to make sure it is being freed.
+In the contructor method, `init()`, we instantiate the `ownedNFTs` with an empty dictionary. A resource also needs a `destroy()` destructor method to make sure it is being freed.
 
 > **💡 Nested Resource**
 > A [composite structure][cdc-comp-type] including a dictionary can store resources, but when they do they will be treated as resources. Which means they need to be *moved* rather than *assigned* and their type will be annotated with `@`.
 
-The `withdraw(id: UInt64): @NFT` method remove an NFT from the collection's `ownedNFTs` array and return it.
+The `withdraw(id: UInt64): @NFT` method removes an NFT from the collection's `ownedNFTs` array and return it.
 
 The left-pointing arrow `<-` is known as a *move* symbol, and we use it to move a resource around. Once a resource has been moved, it can no longer be used from the old variable.
 
@@ -404,7 +404,7 @@ Note the `!` symbol after the `token` variable. It [force-unwraps][cdc-force-unw
 
 Because resources are core to Cadence, their types are annotated with a `@` to make them explicit. For instance, `@NFT` and `@NFTCollection` are two resource types.
 
-The `deposit(token: @NFT)` function takes the `@NFT` resource as a parameter and store it in the `ownedNFTs` array in this `@NFTCollection` instance.
+The `deposit(token: @NFT)` function takes the `@NFT` resource as a parameter and stores it in the `ownedNFTs` array in this `@NFTCollection` instance.
 
 The `!` symbol reappears here, but now it's after the move arrow `<-!`. This is called a [force-move or force-assign][cdc-force-assign] operator, which only moves a resource to a variable if the variable is `nil`. Otherwise, the program panics.
 
@@ -426,7 +426,7 @@ We have successfully implemented the `@NFTReceiver` interface for the `@NFTColle
 
 ### `NFTMinter`
 
-The last and very important component for our `PetStore` contract is `@NFTMinter` resource, which will contain an exclusive code for the contract owner to mint all the tokens. Without it, our store will not be able to mint any pet tokens. It is very simplistic though, since we have already blaze through the more complex components. Its only `mint(): @NFT` method creates an `@NFT` resource, give it an ID, save the address of the first owner to the contract (which is the address of the contract owner, although you could change it to mint and transfer to the creator's address in one step), increment the universal ID counter, and return the new token.
+The last and very important component for our `PetStore` contract is `@NFTMinter` resource, which will contain an exclusive code for the contract owner to mint all the tokens. Without it, our store will not be able to mint any pet tokens. It is very simplistic though, since we have already blazed through the more complex components. Its only `mint(): @NFT` method creates an `@NFT` resource, gives it an ID, saves the address of the first owner to the contract (which is the address of the contract owner, although you could change it to mint and transfer to the creator's address in one step), increments the universal ID counter, and returns the new token.
 
 ```rust
 pub contract PetStore {
@@ -505,7 +505,7 @@ pub contract PetStore {
 }
 ```
 
-Hopefully, the high-level steps are clear to you after you have followed through the comments. We will talk about domains briefly here. Domains are general-purpose storages accessible to Flow accounts common used for storing resources. Intuitively, they are similar to common filesystems. There are three domain namespaces in Cadence:
+Hopefully, the high-level steps are clear to you after you have followed through the comments. We will talk about domains briefly here. Domains are general-purpose storages accessible to Flow accounts commonly used for storing resources. Intuitively, they are similar to common filesystems. There are three domain namespaces in Cadence:
 
 #### /storage
 
@@ -794,7 +794,7 @@ Recall that in the last steps of our `MintToken.cdc` code, we were saving the mi
 
 Here in `TransferToken.cdc`, we are basically creating a sequel of the minting process. The overall goal is to move the token stored in the sending source account's `NFTCollection` to the receiving destination account's `NFTCollection` by calling `withdraw(id: UInt64)` and `deposit(token: @NFT)` on the sending and receiving collections, respectively. Hopefully, by now it shouldn't be too difficult for you to follow along with the comments as you type down each line.
 
-Two new things that are worth noting are the first line of the `execute` block where we call a special built-in function `getAccount(_ addr: Address)`, which return an `AuthAccount` instance from an address passed as an argument to this transaction, and the last line, where we update the `owners` dictionary on the `PetStore` contract with the new address entry to keep track of the current NFT owners.
+Two new things that are worth noting are the first line of the `execute` block where we call a special built-in function `getAccount(_ addr: Address)`, which returns an `AuthAccount` instance from an address passed as an argument to this transaction, and the last line, where we update the `owners` dictionary on the `PetStore` contract with the new address entry to keep track of the current NFT owners.
 
 Now, let's test out `TransferToken.cdc` by typing the command:
 
@@ -811,7 +811,7 @@ flow transactions send src/flow/transaction/TransferToken.cdc 1 0xf3fcd2c1a78f5e
 > ...
 ```
 
-Recall that the `transaction` block of `TransferToken.cdc` accepts two arguments—A token ID and the recipient's address—which we passed as a list of arguments to the command. Some of you might wonder why we left out `--signer` flag for this transaction command, but not the other. Without passing the signing account's name to `--signer` flag, the contract owner's account is the signer by default (a.k.a the `AuthAccount` argument in the `prepare` block).
+Recall that the `transaction` block of `TransferToken.cdc` accepts two arguments — A token ID and the recipient's address — which we passed as a list of arguments to the command. Some of you might wonder why we left out `--signer` flag for this transaction command, but not the other. Without passing the signing account's name to `--signer` flag, the contract owner's account is the signer by default (a.k.a the `AuthAccount` argument in the `prepare` block).
 
 Well done! You have just withdrawn and deposited your NFT to another account!
 
@@ -922,7 +922,7 @@ pub fun main() : [UInt64] {
 
 Et voila! You have come very far and dare I say you are ready to start building your own Flow NFT app.
 
-However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you do. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part: building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
+However, user experience is a crucial part in any app. It is more than likely that your users won't be as proficient at the command line as you are. Moreover, it is a bit boring for an NFT store to have faceless NFTs. In the next section, we will start tackling the fun part: building the UI on top and using [nft.storage][nft-storage] service to upload and store images of our NFTs.
 
 ### Front-end app
 
@@ -935,7 +935,7 @@ Very often, especially for [decentralized applications][dapps] whose back-ends r
 
 In this section, we will be working on the UI for the pet store app in React.js. While you're expected to have some familiarity with the library, I will do my best to use common features instead of trotting into advanced ones.
 
-After we are done, we will end up with a simple marketplace app that users can mint and query their NFTs that is similar to this:
+After we are done, we will end up with a simple marketplace app that users can mint and query their NFTs. It will be similar to this:
 
 ![finished-marketplace](./images/flow-nft-marketplace/flow-nft-marketplace-finish.png)
 
@@ -1286,7 +1286,7 @@ const encoded = await fcl.send([
 ]);
 ```
 
-There is a few ways to send a transaction, but `fcl.send([...])` is the most explicit way.
+There are a few ways to send a transaction, but `fcl.send([...])` is the most explicit way.
 
 We pass the Cadence `code` to `fcl.transaction`, and any integer from 0 - 999 to `fcl.limit` for the gas fee limit we are happy with. The `payload` is the metadata we converted previously.
 
@@ -1349,7 +1349,7 @@ const Form = () => {
 
 This wraps up the minting step! Here is the [full code][source] for a handy reference. Now you can test the UI, select an image file, fill up the metadata on the form, and click the mint button.
 
-Feel free to sit back and appreciate what you have achieved. Now is the time to fill up your coffee and take a well -deserved break before we move on to the last bit: querying a token.
+Feel free to sit back and appreciate what you have achieved. Now is the time to fill up your coffee and take a well-deserved break before we move on to the last bit: querying a token.
 
 ## Querying the token
 
