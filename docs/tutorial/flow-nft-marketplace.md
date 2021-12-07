@@ -66,7 +66,7 @@ A good analogy is an umpire-less tennis game where any dispute (like determining
 
 Like Solidity language for Ethereum, Flow uses [Cadence][cadence] language to code smart contracts, transactions, and scripts on Flow. Cadence's design is inspired by the [Rust][rust] and [Move][move] languages. In Cadence, the runtime tracks when a resource is being *moved* from a variable to the next and makes sure it can never be mutually accessible in the program.
 
-The three types of Cadence program you will be writing are [contracts](contract), [transactions][transaction], and [scripts][script].
+The three types of Cadence program you will be writing are [contracts][contract], [transactions][transaction], and [scripts][script].
 
 ### Contract
 
@@ -1619,6 +1619,10 @@ Last but not least, this tutorial is not perfect, and it can be improved with yo
 [nft-basic]: ../concepts/non-fungible-tokens.md
 [nodejs]: https://nodejs.org/
 [cadence]: https://docs.onflow.org/cadence/language/
+[move]: https://move-book.com/
+[contract]: https://docs.onflow.org/cadence/language/contracts/#gatsby-focus-wrapper
+[transaction]: https://docs.onflow.org/cadence/language/transactions/#gatsby-focus-wrapper
+[script]: https://docs.onflow.org/fcl/reference/scripts/
 [nft-storage]: https://nft.storage/
 [flowwow]: https://github.com/jochasinga/flowwow/
 [react]: https://reactjs.org/
