@@ -271,8 +271,6 @@ pub contract PetStore {
 
 Note that we have declared a [Dictionary][cdc-dict-type] and stored it in a variable named `owners`. This dictionary has the type `{UInt64: Address}` which maps [unsigned 64-bit integers][cdc-integer-type] to users' [Addresses][cdc-address-type]. We will use `owners` to keep track of all the current owners of NFTs globally.
 
-Next, we instantialize the array with a `nil` stored as the first element in the `init()` constructor method. In Cadence, it is an error
-
 Also note that the `owners` variable is prepended by a `var` keyword, while the `id` variable is prepended by a `let` keyword. In Cadence, a mutable variable is defined using `var` while an immutable one is defined with `let`.
 
 > **💡 Immutable vs mutable**
