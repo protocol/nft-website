@@ -313,11 +313,13 @@ Let's not get over ourselves and go through the `NFTReceiver` interface line-by-
 
 The `withdraw(id: UInt64): @NFT` method takes an NFT's `id`, withdraws a token, or an *instance* of `NFT` resource, which is prepended with a `@` to indicate a reference to a resource.
 
-The `deposit(token: @NFT, metadata: {String : String})` method takes a token reference type and the metadata dictionary with a `String` key and `String` value, and deposits or transfers the `@NFT` to the current instance of `NFTReceiver`.
+The `deposit(token: @NFT)` method takes a token reference type `@NFT` and deposits or transfers it to the current instance of `NFTReceiver`.
 
 The `getTokenIds(): [UInt64]` method accesses all tokens IDs owned by the instance of the `NFTReceiver`.
 
 The `getTokenMetadata(id: UInt64) : {String : String}` method takes an ID of an `NFT`, reads the metadata, and returns it as a dictionary.
+
+The `updateTokenMetadata(id: UInt64, metadata: {String: String})` method takes an ID of an `NFT` and a metadata dictionary to update the target NFT's metadata.
 
 ### `NFTCollection`
 
@@ -949,7 +951,7 @@ The Flow packages will help in connecting our React app to the Cadence code. The
 
 ![Screenshot of NFT.Storage API Keys page](./images/flow-nft-marketplace/nft-storage-api-keys.png)
 
-Take down the key as we will need it later on when we work on the [minting logic](#minting-logic).
+Copy and save the key as we will need it later on when we work on the [minting logic](#minting-logic).
 
 Also, to get styling out of the way, please download [Skeleton CSS][skeleton-css-download] and unzip all the CSS files into the `src` directory. Then, in the `App.css` stylesheet, after the last line, import all the stylesheets you just unzipped with:
 
@@ -1101,12 +1103,6 @@ If you import `Form.js` component into `App.js` and insert it anywhere inside th
 
 ![Screenshot of form component](./images/flow-nft-marketplace/form.png)
 
-
-> **💡 How I write code**
-> The way I write code is to write very small unit at a time, then test that it works as intended, then if it might be reusable, wrap
-> it in a function. Then I repeat. This makes perfect sense. The more code we write, the harder it is to debug and go back to fix something. It is always better to write less code in general.
-> Here, I would include `console.log()` in each event handler, then test clicking the form to make sure the logged values are what I expected before moving on.
-
 ## Minting logic
 
 Here comes the interesting part. We will hook up the `Mint` button to actually mint a token based on user's input!
@@ -1120,7 +1116,6 @@ Since there will be quite a lot going on, we will go slowly on this one. We will
 1. **Upload to NFT.storage.** This uploads the metadata and image asset to NFT.storage, and retrieves the returned metadata that includes the [CID][ipfs-cid] of the data.
 2. **Send a minting transaction** with the metadata to Flow (in this case, the name, age, breed, and the CID of the data stored on IPFS).
 3. **Return the Flow transaction ID** if successful.
-
 
 First, let's sketch up some placeholder functions to outline the steps:
 
@@ -1184,7 +1179,7 @@ Then, we return the metadata returned from the call to the caller.
 
 ### 2. Send a minting transaction
 
-Once we have the metadata from uploading to NFT.storage, we will have to send a transaction to mint the token on Flow with the metadata. Let's fill up the `mintPet` function.
+Once we have the metadata from uploading to NFT.storage, we will have to send a transaction to mint the token on Flow with the metadata. Let's fill in the `mintPet` function.
 
 ```js
 import * as fcl from '@onflow/fcl';
