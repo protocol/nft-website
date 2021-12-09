@@ -16,6 +16,7 @@ Below you'll find a basic list of some of the most active NFT marketplaces today
 - [OpenSea](https://opensea.io/)
 - [Rarible](https://rarible.com/)
 - [SuperRare](https://superrare.co/)
+- [Zora](https://zora.co/)
 
 ### Music
 
