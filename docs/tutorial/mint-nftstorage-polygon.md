@@ -5,7 +5,7 @@ description: Learn how to mint your NFT using NFT.storage and Polygon
 
 # Mint with NFT.storage and Polygon
 
-This tutorial will teach you to mint a NFT using the Polygon blockchain and IPFS/Filecoin storage via NFT.Storage. Polygon, a Layer 2 scaling solution for Ethereum, is often chosen by developers for its speed and lower transaction costs while maintaining full compatibility with Ethereum's EVM. The tutorial will walk you through the creation and deployment of a standardized smart contract, storing metadata and assets on IPFS and Filecoin via the NFT.Storage API and minting the NFT to your own wallet on Polygon.
+This tutorial will teach you to mint an NFT using the Polygon blockchain and IPFS/Filecoin storage via NFT.Storage. Polygon, a Layer 2 scaling solution for Ethereum, is often chosen by developers for its speed and lower transaction costs while maintaining full compatibility with Ethereum's EVM. The tutorial will walk you through the creation and deployment of a standardized smart contract, storing metadata and assets on IPFS and Filecoin via the NFT.Storage API and minting the NFT to your own wallet on Polygon.
 
 ## Introduction
 
@@ -15,9 +15,9 @@ In this tutorial we will aim to fulfill three characteristics with our minting p
 2. *Durability* of the NFT, as assets can be long-lived and therefore need to remain usable during their full lifetime.
 3. *Immutability* of the NFT and the asset it represents to prevent unwanted changes and malicious actors from changing the digital asset the NFT represents.
 
-[Polygon](https://polygon.technology) addresses the *scalability* characteristic with their protocol and framework. They are also compatible to Ethereum and its virtual machine, enabling developers to move their code freely between the two blockchains. Likewise, [NFT.Storage](https://nft.storage) guarantees *durability* with the power of the underlying [Filecoin](https://filecoin.io) network and *immutability* by using IPFS' [content addressing](../../concepts/content-addressing/).
+[Polygon](https://polygon.technology) addresses the *scalability* characteristic with their protocol and framework. They are also compatible with Ethereum and its virtual machine, enabling developers to move their code freely between the two blockchains. Likewise, [NFT.Storage](https://nft.storage) guarantees *durability* with the power of the underlying [Filecoin](https://filecoin.io) network and *immutability* by using IPFS' [content addressing](../../concepts/content-addressing/).
 
-Now in this tutorial you will get an overview of the NFT minting process, you learn how to store a digital asset with NFT.Storage and then using this digital asset to mint your NFT on Polygon.
+In this tutorial you will get an overview of the NFT minting process, learn how to store a digital asset with NFT.Storage and use this digital asset to mint your NFT on Polygon.
 
 ## Prerequisites
 
@@ -235,7 +235,7 @@ Finally, we have our method `mintNFT` that allows us to actually mint the NFT. T
 
 `string memory tokenURI` is a URL that should resolve to a JSON document that describes the NFT's metadata. In our case it's already stored on NFT.Storage. We can use the returned IPFS link to the metadata JSON file during the execution of the method.
 
-Inside the method, we increment the counter to receive a new unique identifier for our NFT. Then we call the methods provided by the base contract from OpenZepellin to mint the NFT to the recipient with the newly created identifier and setting the URI of the metadata. The method returns the unique identifier after execution.
+Inside the method, we increment the counter to receive a new unique identifier for our NFT. Then we call the methods provided by the base contract from OpenZeppelin to mint the NFT to the recipient with the newly created identifier and setting the URI of the metadata. The method returns the unique identifier after execution.
 
 #### Deploy the smart contract to Polygon
 
@@ -320,4 +320,4 @@ We deployed a custom smart contract to mint our NFT specific to our needs. For t
 
 Successful minting can be seen as the start of the valuable phase of the NFT. The NFT can then be used to prove ownership and can be transferred to other users. Reasons to transfer a NFT might include a successful sale on one of the NFT marketplaces like [OpenSea](https://opensea.io), or a different type of event such as acquiring an item in a NFT based game. Exploring the rich possibilities for NFTs is definitely an exciting next step.
 
-If you\'d like help building your NFT project with NFT.storage, we encourage you to join the `#nftstorage` channel on [Discord](https://discord.gg/Z4H6tdECb9) and [Slack](https://filecoinproject.slack.com/archives/C021JJRH26B).
+If you\'d like help building your NFT project with NFT.storage, we encourage you to join the `#nft-storage` channel on [Discord](https://discord.gg/Z4H6tdECb9) and [Slack](https://filecoinproject.slack.com/archives/C021JJRH26B).
