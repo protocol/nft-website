@@ -95,6 +95,9 @@ In the `hello-eth` folder, next to `ethers-5.1.esm.min.js`, create a file called
   <script type="module">
       import { ethers } from "./ethers-5.1.esm.min.js";
       //const ethers = require('ethers')
+      
+      //Create a constant to maniputale the DOM:
+      const contractReturn = document.querySelector('.output');
 
       const GREETER_ADDRESS = '0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd'
       const GREETER_ABI = `[{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"greet","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}]`
@@ -110,13 +113,14 @@ In the `hello-eth` folder, next to `ethers-5.1.esm.min.js`, create a file called
         const greeting = await greeterContract.greet();
 
         // Write the greeting result to the DOM.
-        document.getElementById('output').innerHTML = greeting;
+        contractReturn.textContent = greeting;
       }
       getGreeting();
   </script>
   </head>
   <body>
-    <div id="output" />
+    <div class="output"> 
+    </div>
   </body>
 </html>
 ```
