@@ -90,7 +90,7 @@ module.exports = {
     }
   },
   solidity: {
-    version: "0.8.0",
+    version: "0.8.12",
     settings: {
       optimizer: {
         enabled: true,
@@ -185,7 +185,7 @@ First, we will create a smart contract that will be used to mint the NFT. Since 
 ```solidity
 // Contract based on https://docs.openzeppelin.com/contracts/4.x/erc721
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
