@@ -303,7 +303,7 @@ Edit the first two lines to insert your **contract address** from the earlier de
 Next, run the script:
 
 ```bash
-npx hardhat run scripts/mint-nft.mjs \--network matic
+npx hardhat run scripts/mint-nft.mjs \--network PolygonMumbai
 ```
 
 You can expect to see the following output:
