@@ -84,7 +84,7 @@ module.exports = {
   networks: {
     hardhat: {
     },
-    matic: {
+     PolygonMumbai: {
       url: "https://rpc-mumbai.maticvigil.com",
       accounts: [PRIVATE_KEY]
     }
@@ -104,8 +104,8 @@ module.exports = {
 Create a new file called `.env` which will hold your API key for NFT.Storage and your Polygon wallet. The content of the `.env` file should look like the listing below:
 
 ```bash
-PRIVATE_KEY="{your private key}"
-NFT_STORAGE_API_KEY="{your api key}"
+PRIVATE_KEY="Your private key"
+NFT_STORAGE_API_KEY="Your api key"
 ```
 
 Replace the placeholders with the API key you created during preparation and your Polygon wallet private key.
@@ -138,10 +138,10 @@ import fs from 'fs'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const { NFT_STORAGE_API_KEY } = process.env
+const API_KEY = process.env.NFT_STORAGE_API_KEY
 
 async function storeAsset() {
-   const client = new NFTStorage({ token: NFT_STORAGE_API_KEY })
+   const client = new NFTStorage({ token: API_KEY })
    const metadata = await client.store({
        name: 'ExampleNFT',
        description: 'My ExampleNFT is an awesome artwork!',
@@ -264,7 +264,7 @@ deployContract()
 Deploying the contract is done with the helper functions provided by the hardhat library. First, we get the smart contract we created in the previous step with the provided factory. Then we deploy it by calling the respective method and wait for the deployment to be completed. There are a few more lines below the described code to get the correct address in the testnet environment. Save the `mjs` file Execute the script with the following command:
 
 ```bash
-npx hardhat run scripts/deploy-contract.mjs --network matic
+npx hardhat run scripts/deploy-contract.mjs --network PolygonMumbai
 ```
 
 If everything is correct, you will see the following output:
@@ -303,7 +303,7 @@ Edit the first two lines to insert your **contract address** from the earlier de
 Next, run the script:
 
 ```bash
-npx hardhat run scripts/mint-nft.mjs \--network matic
+npx hardhat run scripts/mint-nft.mjs \--network PolygonMumbai
 ```
 
 You can expect to see the following output:
