@@ -146,7 +146,7 @@ async function storeAsset() {
        name: 'ExampleNFT',
        description: 'My ExampleNFT is an awesome artwork!',
        image: new File(
-           [await fs.promises.readFile('assets/MyExampleNFT.png)],
+           [await fs.promises.readFile('assets/MyExampleNFT.png')],
            'MyExampleNFT.png',
            { type: 'image/png' }
        ),
