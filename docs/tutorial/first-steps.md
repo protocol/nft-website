@@ -73,7 +73,7 @@ On [the getting started page for Ethers](https://docs.ethers.io/v5/getting-start
 
 ### Gather the needed details
 
-For this tutorial, we're going to connect to a smart contract called `Greeter` that's included with a new [Hardhat](https://hardhat.io) project. It's been deployed to the Ropsten testnet at the address `0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd`, and you can find details about it on the [EtherScan Ropsten block explorer](https://ropsten.etherscan.io) by searching for that address, which should take you to [the address detail view](https://ropsten.etherscan.io/address/0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd).
+For this tutorial, we're going to connect to a smart contract called `Greeter` that's included with a new [Hardhat](https://hardhat.org/) project. It's been deployed to the Ropsten testnet at the address `0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd`, and you can find details about it on the [EtherScan Ropsten block explorer](https://ropsten.etherscan.io) by searching for that address, which should take you to [the address detail view](https://ropsten.etherscan.io/address/0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd).
 
 Ethers has a [Contract API](https://docs.ethers.io/v5/api/contract/contract/) that abstracts over the details of the blockchain and lets us interact with smart contracts as if they were regular JavaScript objects named `Contract`.
 
@@ -95,6 +95,9 @@ In the `hello-eth` folder, next to `ethers-5.1.esm.min.js`, create a file called
   <script type="module">
       import { ethers } from "./ethers-5.1.esm.min.js";
       //const ethers = require('ethers')
+      
+      //Create a constant to maniputale the DOM:
+      const contractReturn = document.querySelector('.output');
 
       const GREETER_ADDRESS = '0xE0282e76237B8eB19A5D08e1741b8b3e2691Dadd'
       const GREETER_ABI = `[{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"greet","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}]`
@@ -110,13 +113,14 @@ In the `hello-eth` folder, next to `ethers-5.1.esm.min.js`, create a file called
         const greeting = await greeterContract.greet();
 
         // Write the greeting result to the DOM.
-        document.getElementById('output').innerHTML = greeting;
+        contractReturn.textContent = greeting;
       }
       getGreeting();
   </script>
   </head>
   <body>
-    <div id="output" />
+    <div class="output"> 
+    </div>
   </body>
 </html>
 ```
