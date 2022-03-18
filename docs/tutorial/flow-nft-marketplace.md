@@ -7,41 +7,54 @@ related:
   'Mint an NFT with IPFS': https://docs.ipfs.io/how-to/mint-nfts-with-ipfs/#a-short-introduction-to-nfts
 ---
 
-# Building a Flow NFT pet store
+# Build an NFT pet store on Flow
 
-This tutorial will teach you to create a simple NFT marketplace on the [Flow][flow] blockchain from scratch, using the Flow blockchain and IPFS/Filecoin storage via [nft.storage][nft-storage]. Although we will be building a pet store using pet images, you are free to use your own images and change the metadata.
+This tutorial will teach you to create a simple NFT marketplace on the [Flow][flow] blockchain from scratch, using the Flow blockchain and IPFS/Filecoin storage via [NFT.storage][nft-storage]. The end project is a React app that lets you mint pet NFTs and query on-chain metadata and photo of the pets, as shown below:
 
-## Prerequisites
+![finished-marketplace](./images/flow-nft-marketplace/flow-nft-marketplace-finish.png)
 
-Although this tutorial is built for Flow, it focuses on building up a basic understanding of smart contract and NFTs. You are expected to bring a working JavaScript and basic [React.js][React] skills to the table, but a passing familiarity with blockchains, web3, and NFTs will be just fine if you are happy to catch up.
+This tutorial is quite longer than others, as it takes a different approach and tries to teach anyone with a React and JavaScript skill with very little to no blockchain knowledge to begin with. Because of this, it is broken into 3 following parts for convenience:
 
-You will need to install [Node.js][nodejs] and npm (comes with Node.js), [Flow command line tool][flow-cli], and [Docker compose][docker-compose] to follow this tutorial. You're free to use any code editor, but [VSCode][vscode] with [Cadence Language support][vscode-cdc-ext] is a great option.
+1. Basic understanding of blockchains and NFTs
+2. Basic of Flow and the Cadence language
+3. Building a browser app with React and FCL library
 
-> **💡 Using React**
-> React.js is the most widely-used UI library that arguably takes away the tediousness of setting up a JavaScript app. You are welcome to work with another library/framework if you are happy to take on the additional work of taking the [road less travelled][robert-frost-poem] approach.
+The first part tries to lay down the understanding of blockchains in a way that complements Flow and Cadence. If you already have some familiarity with blockchains and NFTs, and you breeze through [this reading][nft-basic], you can skip this part, although it is still recommended. The second and the third parts are contiguous and should be read back-to-back.
 
-If you are very new to the concept of smart contracts and NFTs, it is worth checking out [blockchain][blockchain-basic] and [NFT][nft-basic] basics before diving in.
+## Who this is for
+
+Although this tutorial is built for the Flow blockchain, as mentioned before, it also focuses on building up a basic understanding of smart contracts and Non-fungible tokens (NFTs) for non-blockchain developers. You are expected to bring a working JavaScript and basic [React.js][React] skills to the table. Although a passing familiarity with blockchains, cryptocurrency, and NFTs does help, you will be just fine catching up without one.
+
+## Set up
+
+Before we begin, please make sure you have these installed:
+
+- [Node.js][nodejs] and npm (comes with Node.js)
+- [Flow CLI][flow-cli]
+- [Docker and Docker Compose][docker-compose]
+
+You're free to use any code editor, but [VSCode][vscode] with [Cadence Language support][vscode-cdc-ext] is a great option.
 
 ## What you will learn
 
-As we build a minimal version of the [Flowwow NFT pet store][flowwow] together, you will learn the basic NFT building blocks from the ground up, including:
+As we build a minimal version of [this NFT pet store][flowwow] together, you will learn the basic NFT building blocks from the ground up, including:
 
 - Smart contracts and the [Cadence language][cadence]
 - User authentication
 - Minting tokens and storing metadata on Filecoin/IPFS via [NFT.storage][nft-storage]
 - Transferring tokens
 
-## Understanding ownership and resource
+## 1. Understanding ownership and resource
 
-A blockchain is a digital distributed ledger that tracks an *ownership* of some *resource*. There is nothing new about the ledger part—Your bank account is a ledger that keeps track of how much money you *own* and how much is spent (change of ownership) at any time. The key components to a ledger are:
+A blockchain is a digital distributed ledger that tracks an ownership of some type of resource. There is nothing new about the ledger part—Your bank account is a ledger that keeps track of how much money you own and how much is spent (change of ownership) at any time. The key components to a ledger are:
 
 - [Resource](resource) at play. In this case a currency.
-- [Accounts](accounts) to own the resource, or the access to it.
-- [Contract](contract) or a ruleset to govern the economy.
+- [Accounts](accounts) to own, transfer, receive, and in some cases, destroy the resource.
+- [Contract](contract), or a certain set of rules to govern the economy.
 
 ### Resource
 
-A resource can be any *thing* — from currency, crop, to digital monster — as long as the type of resource is agreed upon commonly by all accounts.
+A resource can be any *thing* — from currency, crop, real estate, to digital monster — as long as the type of resource is agreed upon commonly by all accounts. This is the basis of any trade economy.
 
 ### Accounts
 
@@ -49,20 +62,20 @@ Each account owns a ledger of its own to keep track of the spending (transferrin
 
 ### Contract
 
-A contract is a ruleset governing how the "game" is played. Accounts that break the ruleset may be punished in some way. Normally, it is a central authority like a bank who creates this contract for all accounts.
+A contract is a ruleset governing how the "game" is played. Accounts that break this may be punished in some way. Normally, it is a central authority like a bank who creates this contract for all accounts.
 
-Because the conventional ledgers are owned and managed by a trusted authority like your bank, when you transfer the ownership of a few dollars (`-$4.00`) to buy a cup of coffee from Mr. Peet, the bank needs to be consistent and update the ledgers on both sides to reflect the ownership change (Peet has `+$4.00` and you have `-$4.00`). Because both ledgers are not openly visible to both of Peet and you and the the currency is likely digital, there is no guarantee that the bank won't mistakenly or intentionally update either ledger with the incorrect value.
+Because the conventional ledgers are owned and managed by a trusted authority like your bank, when you transfer the ownership of a few dollars (`-$4.00`) to buy a cup of coffee from Mr. Peet, the bank needs to be consistent and update the ledgers on both sides to reflect the ownership change (Peet has `+$4.00` and you have `-$4.00`). Because either ledger is not openly visible to both Peet and you (Peet only sees their ledger, and you only sees your ledger), there is no guarantee that the bank won't mistakenly or intentionally update either ledger with the incorrect value, in the process making either Peet or you richer or poorer than what's supposed to be.
 
-> **💡 Do you know your bank owes you?**
-> If you have a saving account with some money in it, you might be loaning your money to your bank. You are trusting your bank to have your money when you want to withdraw. Meanwhile, your money is just part of the stream of your bank is free to do anything with. If you had a billion dollars in your bank and you want to withdraw tomorrow, your teller might freak out.
+> **💡 Your bank probably owes you**  
+> If you have a saving account with some money in it, you might be loaning your money to your bank. You are trusting your bank to have your money when you want to withdraw. Meanwhile, your money is just part of the stream of money your bank is free to do anything with, like investing or lending to others. This is why, as you might have seen in some heist films, if you tell the bank you want to withdraw millions of dollars tomorrow, your teller might just freak out.
 
-What is interesting about a blockchain is the distributed part. Because there is only a single *decentralized* ledger that's open to everyone, there is no central authority like a bank for you to trust with bookkeeping. In fact, there is no need for you to trust anyone at all. You only need to trust the copy of the common ledger software run by other people in the network to uphold the bookkeeping, and it is very hard for someone to run an altered version of that software and attempt to break the rule.
+Effectively, what is interesting and innovative here is the distributed part. Because practically, there is only a single ledger acting as a single source of truth open to everyone, there are no longer central authorities like a bank to bookkeep transactions. In fact, there is no need for you to trust anyone at all except the software running the blockchain itself to uphold the bookkeeping, and it is very, very hard for someone to run an altered version of that software and attempt to break the rule.
 
-A good analogy is an umpire-less tennis game where any dispute (like determining if the ball lands in the court) is distributed to all the audience to judge. Meanwhile, these audience members are also participating in the game, with the stake that makes them lose if they judge wrongly. This way, any small inconsistencies are likely caught and rejected fair and square. You are no longer trusting your bank. The eternal flow of ownerships hence becomes *trustless* because everyone is doing what's best for themselves.
+A good analogy is an umpire-less tennis game where any dispute (like determining if the ball lands in the court) is distributed to all the audience to judge, and it would take at least half of the audience to cheat and challenge the result. Meanwhile, these audience members are also participating in the game, with the kind of stake that makes their life extremely difficult if they judge falsely. The eternal flow of ownerships hence becomes *trustless* because [everyone is doing what's best for themselves](https://www.investopedia.com/updates/adam-smith-wealth-of-nations/).
 
-"Why such emphasis on ownership?" you may ask. This is because Flow has the concept of resource ownership baked right into the smart contract core. Learning to visualize resource will help in understanding concepts in Flow, as you shall see very soon.
+"Why such emphasis on ownership?" you may ask. This is because Flow has the concept of resource ownership baked right into the smart contract core. Learning to visualize resource will help you in understanding concepts in Flow, as you shall see very soon.
 
-## Quick tour of Cadence
+## 2. Tour of Cadence
 
 Like Solidity language for Ethereum, Flow uses [Cadence][cadence] language to code smart contracts, transactions, and scripts on Flow. Cadence's design is inspired by the [Rust][rust] and [Move][move] languages. In Cadence, the runtime tracks when a resource is being *moved* from a variable to the next and makes sure it can never be mutually accessible in the program.
 
@@ -935,9 +948,7 @@ Very often, especially for [decentralized applications][dapps] whose back-ends r
 
 In this section, we will be working on the UI for the pet store app in React.js. While you're expected to have some familiarity with the library, I will do my best to use common features instead of trotting into advanced ones.
 
-After we are done, we will end up with a simple marketplace app that users can mint and query their NFTs. It will be similar to this:
-
-![finished-marketplace](./images/flow-nft-marketplace/flow-nft-marketplace-finish.png)
+After we are done, we will end up with a simple marketplace app that users can mint and query their NFTs.
 
 ### Setting up
 
