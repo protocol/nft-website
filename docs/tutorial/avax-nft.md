@@ -6,36 +6,43 @@ issueUrl: https://github.com/protocol/nft-website/issues/224
 
 # Mint NFTs on Avalanche
 
-## Basic
+This short tutorial will quickly guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/). This is also useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your smart contract code.
 
-Avalanche is a network of 3 subnets, X-chain, P-chain, and C-chain. 
+## Avalanche vs Ethereum
+
+Avalanche is a network of multi-blockchains, one of which runs a fork of Ethereum Virtual Machine (EVM).
+
+Avalanche consists of 3 subnets, X-chain, P-chain, and C-chain.
+
 - **X-chain**: Deals with exchanges of value and runs AVM (namespaced `avm`)
-- **P-chain**: Deals with platform/protocol (core) and able to create new blockchains (namespaced `platform`)
-- **C-chain**: the smart contract / dapps and run EVM
+- **P-chain**: Deals with platform/protocol (core) and able to create new arbitrary blockchains (namespaced `platform`)
+- **C-chain**: the EVM-compatible chain capable of running Solidity smart contract / dapps
 
-Most beginner's confusion will be from these different subnets. 
-
-Note that only C-chain runs EVM and has Ethereum-compatible addresses. and most of dapps will interact with this chain.
+Most beginner's confusion will be from these different subnets. Note that only the C-chain is EVM-compatible and has Ethereum-compatible addresses. and most of dapps will be interacting with this chain.
 
 ![Avalanche's subnets](https://docs.avax.network/assets/images/image(21)-3c5cb7f1f21926b05ae3631f453ed49d.png)
 
-## Requirements
+## Setting up
 
-- [Install Go](https://go.dev/dl/). Make sure to set `$GOPATH` variable to where you keep Go code (i.e. `$HOME/go`)
+The quickest way to start is to run a group of simulator nodes locally. To do that, follow these steps:
+
+### Install and download
+
+- [Install Go](https://go.dev/dl/). Make sure to set `$GOPATH` variable to where you keep Go code (i.e. `$HOME/go`).
 
 - [Clone Avalanchego](https://github.com/ava-labs/avalanchego) (Avalanche node) and [Avalanch local simulator](https://github.com/ava-labs/ava-sim#readme). Make sure they are inside `$GOPATH/src/github.com/ava-labs`.
 
-## General steps
+- Make sure you have [Node.js](https://nodejs.org/en/) on your system to create the NFT app.
 
 ### Run local simulator nodes
 
-- Build both repositories with `./scripts/build.sh`
+- Build both projects with `./scripts/build.sh` included in the downloaded repositories.
 
-- Run the simulator with `./scripts/run.sh`. The simulator runs a local network of 5 nodes. We will be using a node listening on port **9650**.
+- In `ava-sim`, run the simulator with `./scripts/run.sh`, which relies on `avalanchego` being in the right place. The simulator runs a local network of 5 nodes listening on different ports. We will be using a node listening on port 9650.
 
 ### Create a keystore user
 
-Create a keystore user and store the credential on the target node (here, the node running on port 3650). Send a request to this API:
+Create a keystore user and store the credential on the target node (here, the node running on port 3650). Send a request to this API endpoint:
 
 ```shell
 curl -X POST --data '{
@@ -46,17 +53,20 @@ curl -X POST --data '{
         "username":"myUsername",
         "password":"myPassword"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
+}' -H 'Content-Type: application/json' 127.0.0.1:9650/ext/keystore
 ```
+
+**Don't forget to replace "myUsername" and "myPassword" with your own.**
 
 > **Important**: You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.
 
-- Note the pre-funded "ewoq" private key
-```
+Note the pre-funded "ewoq" private key, which is a test private key for getting some test AVAX in your account.
+
+```shell
 PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
 ```
 
-- Import the private key to a C-chain address:
+Import the private key to a C-chain address:
 
 ```shell
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
@@ -75,10 +85,9 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 
 Be thorough on the URL paths and the method namespace (again because of the subnets you might be running queries against the wrong one).
 
-Read more: [Fund a Local Network](https://docs.avax.network/build/tutorials/platform/fund-a-local-test-network)
+Read more: [Funding a Local Network](https://docs.avax.network/build/tutorials/platform/fund-a-local-test-network)
 
-
-### Integrate Metamask
+### Integrate with Metamask
 
 Set up Metamask to connect to a custom RPC address of the local network:
 
@@ -119,4 +128,12 @@ If all went well, you should have a funded Metamask AVAX wallet for building app
 - Clone [Avalanche smart contract quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart). Install deps with `yarn`,
 
 ### Public API node
-Avalanche maintains a [public API gateway](https://docs.avax.network/build/tools/public-api) so we don't have to run our own node.
+
+Avalanche maintains a [public API gateway](https://docs.avax.network/build/tools/public-api), which you can use in quick development without having to run your own node.
+
+## Create an NFT app
+
+With Node.js already installed, run `npm init` to create an app directory, then `cd` into your new directory and run `npm install hardhat --save-dev` to install [Hard Hat](https://hardhat.org/getting-started/).
+
+
+
