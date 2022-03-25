@@ -40,7 +40,7 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 - In `ava-sim`, run the simulator with `./scripts/run.sh`, which relies on `avalanchego` being in the right place. The simulator runs a local network of 5 nodes listening on different ports. We will be using a node listening on port 9650.
 
-### Create a keystore user
+### Create a keystore user and add test fund
 
 Create a keystore user and store the credential on the target node (here, the node running on port 3650). Send a request to this API endpoint:
 
@@ -133,7 +133,187 @@ Avalanche maintains a [public API gateway](https://docs.avax.network/build/tools
 
 ## Create an NFT app
 
-With Node.js already installed, run `npm init` to create an app directory, then `cd` into your new directory and run `npm install hardhat --save-dev` to install [Hard Hat](https://hardhat.org/getting-started/).
+With Node.js already installed, run `npm init` to create a new app project, then `cd` into your new directory and run the following:
+
+```shell
+npm install hardhat ethers @nomiclabs/hardhat-ethers --save-dev
+```
+Then, you can check if the installation was successful by typing `npx hardhat --version`. The Hard Hat CLI should print out the version number (yours may be different):
+
+```shell
+npx hardhat --version
+> 2.6.1
+```
+
+Now, with the local simulator nodes still running, run the following commands:
+
+```shell
+npx hardhat accounts --network local
+> 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+> 0x9632a79656af553F58738B0FB750320158495942
+> 0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430
+> ...
+```
+
+Hopefully you should see a few addresses printed. Next, check the balances with:
+
+```shell
+npx hardhat balances --network local
+> 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC has balance 50000000000000000000000000
+> 0x9632a79656af553F58738B0FB750320158495942 has balance 0
+> 0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430 has balance 0
+> ...
+```
+
+If you had correctly [created a keystore user and added test fund](#create-a-keystore-user-and-add-test-fund), you should see one of wealthy addresses shown.
+
+
+## Develop an NFT smart contract
+
+If you already have an existing smart contract, you may skip this section.
+
+We will create [ERC721](https://eips.ethereum.org/EIPS/eip-721) non-fungible tokens with their own attributes. To keep this simple, any account will be able to call a method `mintTo` to mint items.
+
+We will be using the standard [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract from Open Zeppelin. Install it in your project with `npm install @openzeppelin/contract`.
+
+Create a directory named `/contracts` within the project root. Create a smart contract file named `Filet.sol` with the following code:
+
+```js
+// contracts/Filet.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+contract Filet is ERC721URIStorage {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+
+    constructor() ERC721("Filet", "FIT") {}
+
+    function mintTo(address player, string memory tokenURI)
+        public
+        returns (uint256)
+    {
+        _tokenIds.increment();
+        uint256 newItemId = _tokenIds.current();
+        _mint(player, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+
+        return newItemId;
+    }
+}
+
+```
+
+You can come up with your own contract's name, token's name, and token's ticker. I'm naming mine `Filet` here.
+
+Now compile the contract `Filet.sol` using this hardhat command:
+
+```shell
+npx hardhat compile
+> Compiling 1 file with 0.8.0
+> Compilation finished successfully
+```
+
+Once the contract is compiled, create another directory named `script` and add `deploy.js` with the following code:
+
+```js
+import {
+  Contract,
+  ContractFactory 
+} from "ethers"
+import { ethers } from "hardhat"
+
+const deploy = async (contractName) => {
+  const Contract = await ethers.getContractFactory(contractName)
+  const contract = await Contract.deploy()
+
+  await contract.deployed()
+  console.log(`${contractName} deployed to: ${contract.address}`)
+}
+
+const main = async () => {
+  await deploy("Filet")
+}
+
+main()
+.then(() => process.exit(0))
+.catch(error => {
+  console.error(error)
+  process.exit(1)
+})
+```
+
+This script uses [Ethers](https://docs.ethers.io/v5/) library to deploy the contract to the local Avalanche node(s). Now, deploy the contract with:
+
+```shell
+npx hardhat run scripts/deploy.js --network local
+> Filet deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+We now have a token contrat deployed at `0x5FbDB2315678afecb367f032d93F642f64180aa3`.
+
+Note that up until now, the steps are the same for both Ethereum and Avalanche.
+
+Now let's spin up Hardhat's [developer console](https://hardhat.org/guides/hardhat-console.html) to start interacting with our `Filet` contract:
+
+```shell
+npx hardhat console --network local
+> Welcome to Node.js v14.18.1.
+> Type ".help" for more information.
+> >
+```
+
+Now, type the following into the prompt to instantialize the contract object:
+
+```js
+>> const Filet = await ethers.getContractFactory("Filet")
+>> const filet = await Filet.attach("0x5FbDB2315678afecb367f032d93F642f64180aa3")
+```
+
+Next, we inspect the accounts and the balances:
+
+```js
+>> const accounts = await ethers.provider.listAccounts()
+>> accounts
+> [
+>   '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+>   '0x9632a79656af553F58738B0FB750320158495942',
+>   '0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430',
+>   // ...
+> ]
+```
+
+The array, unsurprisingly, should contain all the addresses listed with the previous `npx hardhat accounts` command. Select one of the addresses to inspect the balance (In this case, we are choosing the second account listed)
+
+```js
+>> const balance = (await filet.balanceOf(accounts[1])).toString()
+> 0
+```
+
+Obviously `0x9632a79656af553F58738B0FB750320158495942` does not own any FIT token yet. Let's mint some and send to the address with:
+
+```js
+>> const tx = await filet.mintTo(accounts[1], "ipfs://bafkreigaymo3qz73w4nit2matfs7dugczda5wuwzq4g3o2chz4f6nugtaq/1.json")
+>> const bal = (await filet.balanceOf(account[1])).toString()
+>> bal
+> '1'
+```
+
+The receiving address now owns 1 FIT. By the default `ethers` use the first address as the signer of the transaction, therefore it is `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` signing off the minting.
+
+Note the `ipfs://...` provided as the token metadata URI. `ERC721URIStorage` is a special implementation of the IERC721 interface with extra capability of setting and getting metadata URI for the token. This token URI will be retrieved by uploading the intial metadata to [nft.storage](https://nft.storage).
+
+## Uploading NFT metadata
+
+
+
+
+
+
 
 
 
