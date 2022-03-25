@@ -309,11 +309,62 @@ Note the `ipfs://...` provided as the token metadata URI. `ERC721URIStorage` is 
 
 ## Uploading NFT metadata
 
+Before we can continue, install `nft.storage` and `mime` libraries with `npm install nft.storage mime --save`.
 
+Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code:
 
+```js
+import { NFTStorage, File } from 'nft.storage'
 
+import mime from 'mime'
 
+import fs from 'fs'
 
+import path from 'path'
 
+const NFT_STORAGE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM5YzIyMUUzOTFiNDMwMzQ4NDc2NzdmMmVGZTc1ODRGNTM2ZjM4OWEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0NDU0MjMwNTQ1MSwibmFtZSI6IkF2YWxhbmNoZSJ9.koIFwWwDdhjcBZp2U8OHDiKsfPhXu5aHGXHBQfPVlno'
 
+async function storeNFT(imagePath, name, description) {
+    const image = await fileFromPath(imagePath)
+
+    const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
+
+    return nftstorage.store({
+        image,
+        name,
+        description,
+    })
+}
+
+async function fileFromPath(filePath) {
+    const content = await fs.promises.readFile(filePath)
+    const type = mime.getType(filePath)
+    return new File([content], path.basename(filePath), { type })
+}
+
+async function upload(imagePath, name, description) {
+    const result = await storeNFT(imagePath, name, description)
+    return result
+}
+
+export { upload }
+```
+
+Return to the Node REPL and import the `upload` function from the script. Copy an image file of your choice into the root directory to use as the NFT image.
+
+```js
+>> const { upload } = await import("./scripts/upload.mjs")
+>> const result = await upload("./pickleheart.png", "Pickleheart", "Image of Pickleheart Filet")
+>> result
+> Token {
+>   ipnft: 'bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue',
+>   url: 'ipfs://bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue/metadata.json'
+> }
+```
+
+Then we can use this new URI in minting:
+
+```js
+>> const tx = await filet.mintTo(accounts[2], result.url)
+```
 
