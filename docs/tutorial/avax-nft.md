@@ -6,21 +6,21 @@ issueUrl: https://github.com/protocol/nft-website/issues/224
 
 # Mint NFTs on Avalanche
 
-This short tutorial will quickly guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/). This is also useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your smart contract code.
+This short tutorial will quickly guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/)using Node.js REPL. This is quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your code.
 
 ## Avalanche vs Ethereum
 
-Avalanche is a network of multi-blockchains, one of which runs a fork of Ethereum Virtual Machine (EVM).
+Unlike Ethereum, Avalanche is a network of multi-blockchains, one of which runs a fork of Ethereum Virtual Machine (EVM) and compatible with Ethereum.
 
 Avalanche consists of 3 subnets, X-chain, P-chain, and C-chain.
 
 - **X-chain**: Deals with exchanges of value and runs AVM (namespaced `avm`)
 - **P-chain**: Deals with platform/protocol (core) and able to create new arbitrary blockchains (namespaced `platform`)
-- **C-chain**: the EVM-compatible chain capable of running Solidity smart contract / dapps
+- **C-chain**: the EVM-compatible chain capable of running Solidity smart contract / dapps. It has Ethereum-compatible addresses (hexadecimal strings prefixed with "0x" concatenated with the rightmost 20 bytes of the Keccak-256 hash ECDSA public key)
 
-Most beginner's confusion will be from these different subnets. Note that only the C-chain is EVM-compatible and has Ethereum-compatible addresses. and most of dapps will be interacting with this chain.
+Most beginner's confusion will be from distinguishing these different subnets. Note that only the C-chain is EVM-compatible and has Ethereum-compatible addresses. and most of dapps will be interacting with this chain.
 
-![Avalanche's subnets](https://docs.avax.network/assets/images/image(21)-3c5cb7f1f21926b05ae3631f453ed49d.png)
+![Avalanche's diagram of subnets](https://docs.avax.network/assets/images/image(21)-3c5cb7f1f21926b05ae3631f453ed49d.png)
 
 ## Setting up
 
@@ -131,7 +131,7 @@ If all went well, you should have a funded Metamask AVAX wallet for building app
 
 Avalanche maintains a [public API gateway](https://docs.avax.network/build/tools/public-api), which you can use in quick development without having to run your own node.
 
-## Create an NFT app
+## Create a Node project
 
 With Node.js already installed, run `npm init` to create a new app project, then `cd` into your new directory and run the following:
 
@@ -223,7 +223,7 @@ Once the contract is compiled, create another directory named `script` and add `
 ```js
 import {
   Contract,
-  ContractFactory 
+  ContractFactory
 } from "ethers"
 import { ethers } from "hardhat"
 
@@ -297,11 +297,18 @@ The array, unsurprisingly, should contain all the addresses listed with the prev
 Obviously `0x9632a79656af553F58738B0FB750320158495942` does not own any FIT token yet. Let's mint some and send to the address with:
 
 ```js
->> const tx = await filet.mintTo(accounts[1], "ipfs://bafkreigaymo3qz73w4nit2matfs7dugczda5wuwzq4g3o2chz4f6nugtaq/1.json")
+>> const tokenId = await filet.callStatic.mintTo(accounts[1], "ipfs://bafkreigaymo3qz73w4nit2matfs7dugczda5wuwzq4g3o2chz4f6nugtaq/metadata.json")
+>> tokenId.toString()
+> '1'
 >> const bal = (await filet.balanceOf(account[1])).toString()
 >> bal
 > '1'
 ```
+
+>> 💡 **Why calling `callStatic`?**
+>> The return value of a non-pure or -view Solidity function is available only when the function is called on-chain (from the same contract or another contract).  
+>> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
+>> To learn more, read [View and Pure Functions](https://solidity-by-example.org/view-and-pure-functions/), this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
 
 The receiving address now owns 1 FIT. By the default `ethers` use the first address as the signer of the transaction, therefore it is `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` signing off the minting.
 
@@ -311,7 +318,7 @@ Note the `ipfs://...` provided as the token metadata URI. `ERC721URIStorage` is 
 
 Before we can continue, install `nft.storage` and `mime` libraries with `npm install nft.storage mime --save`.
 
-Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code:
+Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code (replacing `NFT_STORAGE_KEY` variable with **your own API key**).
 
 ```js
 import { NFTStorage, File } from 'nft.storage'
@@ -322,7 +329,7 @@ import fs from 'fs'
 
 import path from 'path'
 
-const NFT_STORAGE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM5YzIyMUUzOTFiNDMwMzQ4NDc2NzdmMmVGZTc1ODRGNTM2ZjM4OWEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0NDU0MjMwNTQ1MSwibmFtZSI6IkF2YWxhbmNoZSJ9.koIFwWwDdhjcBZp2U8OHDiKsfPhXu5aHGXHBQfPVlno'
+const NFT_STORAGE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM5YzIyMUUzOTFiNDMwMzQ4NDc2NzdmMmVGZTc1ODRGNTM2ZjM4OWEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTN0NDU0MjMwNTQ1MSwibmFtZSI6IkF2YWxhbmNoZSJ9.koIFwWwDdhjcBZp2U8OHCiKsfPhXu5aHGXHBQfPXlno'
 
 async function storeNFT(imagePath, name, description) {
     const image = await fileFromPath(imagePath)
@@ -365,6 +372,28 @@ Return to the Node REPL and import the `upload` function from the script. Copy a
 Then we can use this new URI in minting:
 
 ```js
->> const tx = await filet.mintTo(accounts[2], result.url)
+>> const tokenId = await filet.callStatic.mintTo(accounts[3], result.url)
+>> tokenId.toNumber()
+> 2
 ```
 
+## Retrieving a token's metadata
+
+The final step here is to retrieve the metadata URI for each token from nft.storage so you can display its image, name, and description, which we can do so using [ERC721URIStorage.tokenURI(uint256 tokenId)](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol#L20).
+
+```js
+>> let ipfsURI = await filet.tokenURI(tokenId.toNumber())
+>> ipfsURI
+> 'ipfs://bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue/metadata.json'
+```
+
+To convert this IPFS URI into an HTTPS version so it's easy to use in HTML or fetch API, you can import a helper function `toGatewayURL` from nft.storage:
+
+```js
+>> const { toGatewayURL } = await import("nft.storage")
+>> const { href } = await toGatewayURL(ipfsURI)
+>> href
+> 'https://nftstorage.link/ipfs/bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue/metadata.json'
+```
+
+Now you are ready to build an NFT store on Avalanche with little to no change to your Ethereum work flow.
