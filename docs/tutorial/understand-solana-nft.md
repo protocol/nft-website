@@ -72,7 +72,65 @@ node --experimental-repl-await
 > '1.8.2'
 ```
 
-If the version was printed out on the prompt for you, you are successfully connected!
+If the version was printed out on the prompt for you, you are successfully connected.
+
+## Create an account
+
+Next, are going to create a keypair that will serves as our "wallet"<sup>1</sup>. Still on the Node REPL, import `Keypair` class from `web3.js` module and create a new keypair:
+
+```shell
+>> const { Keypair } = await import("@solana/web3.js")
+>> const address = keypair.publicKey.toString()
+>> const secret = JSON.stringify(Array.from(keypair.secretKey))
+>> address
+> '6xnUqt2DXQjqN6ub3ZeT2gAqhtZzA7EMwztx5LhjmJB9'
+>> secret
+> '...'
+```
+
+Your address is a ED25519 publickey and is supposed to be shared in the open to receive tokens. The secret, however, should be kept in a secret place known only to you.
+
+Take note of the address and the secret, as we will be using them for the rest of the tutorial.
+
+## Fund the account
+
+Let's get some (test) SOL airdropped to our account so we can start making transactions. On Solana localnet and devnet, you can request these airdrops for free since the fund can't be used on the mainnet. Make sure you instantiated a `Connection` previously, then proceed to request 1 SOL or 1,000,000,000 Lamports (the value of the constant `LAMPORTS_PER_SOL`) and check the account's balance at the end:
+
+```shell
+>> const { PublicKey, LAMPORTS_PER_SOL } = await import("@solana/web3.js")
+>> const publicKey = new PublicKey(address)
+>> const txhash = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL)
+>> await connection.confirmTransaction(txhash)
+>> const balance = await connection.getBalance(publicKey)
+>> balance
+> '1000000000'
+```
+
+Now let's practice transferring some Lamports to another address. To do that, we will have to create a new keypair with a new address to receive the fund. Can you figure this out? (Hint: Repeat [creating an account](#create-an-account))
+
+After you have created a new account and take note of the address and secret, save the address to `recipientAddress` and use the `SystemProgram` and `Transaction` classes to construct a transaction for the transfer:
+
+```shell
+>> const recipientAddress = 'NEW_ACCOUNT_ADDRESS'
+>> const { SystemProgram, Transaction, sendAndConfirmTransaction } = await import("@solana/web3.js")
+
+>> const fromPubkey = new PublicKey(address)
+>> const toPubkey = new PublicKey(recipientAddress)
+>> const secretKey = Uint8Array.from(JSON.parse(secret as string))
+>> const instructions = SystemProgram.transfer({
+    fromPubkey,
+    toPubkey,
+    lamports,
+})
+>> const signers = [
+  {
+    publicKey: fromPubkey,
+    secretKey,
+  },
+]
+>> const transaction = new Transaction().add(instructions)
+>> const hash = await sendAndConfirmTransaction(connection, transaction, signers)
+```
 
 ## Creating an NFT program
 
