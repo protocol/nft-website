@@ -5,8 +5,10 @@ description: Learn the basic of NFTs on Solana and how to work with Metaplex
 
 # Understanding NFTs on Solana
 
-This guide will help you to learn the basic of tokens on Solana through building a simple token program on the Solana network and interact with it using the JavaScript client. It does not assume prior knowledge of Solana, but it does require some basic programming in [Rust](https://rustlang.org). Although it will briefly explain Solana, you are encourage to learn more by reading [How Solana Works](https://docs.solana.com/cluster/overview) and  [Programming on Solana - An Introduction
+This guide will help you to learn the basic of tokens on Solana through building a decentralized NFT marketplace on the Solana network and interact with it using the JavaScript client and briefly segue into [launching NFT marketplace on Metaplex](#launch-on-metaplex) for non-developers or those who prefer to Ship Fast<sup>™</sup>. It does not assume prior knowledge of Solana, although it does assume some basic programming in [Rust](https://rustlang.org). For some seasoned developers--be warned--A good chunk of theory will be missing in favor of practical hacking spirit. You're encouraged to dive deeper by reading [How Solana Works](https://docs.solana.com/cluster/overview) and  [Programming on Solana - An Introduction
 ](https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/), and the [whitepaper](http://solana.com/solana-whitepaper.pdf).
+
+As a result, after you've completed this tutorial, you will have built a decentralized NFT marketplace that will you to mint and transfer your own NFTs to accounts in exchange of SOL payments without relying on any central exchange and learned to faster way of launching your NFTs on Metaplex.
 
 ## The basic of Solana
 
@@ -132,9 +134,25 @@ After you have created a new account and take note of the address and secret, sa
 >> const hash = await sendAndConfirmTransaction(connection, transaction, signers)
 ```
 
+Now you are ready to interact with the on-chain program on the client.
+
+## SPL Token Program
+
+In Solana, the predefined token program takes care of the minting, transferring, and burning of all fungible and non-fungible tokens. Unlike Ethereum, there is no need to deploy a smart contract to define a token. All we have to do is create an account that can mint a certain type of tokens (e.g. the token owner), and more accounts that can receive them.
+
+Think of the Token Program as an API to which we can send an [instruction](#anatomy-of-an-instruction) to mint, transfer, or burn tokens. Think of an instruction as a payload in a transaction request to the Token Program API.
+
+Because of this, there are several excellent resources on creating tokens using `spl-cli` command line tool which wraps the Token Program API such as [this one](https://pencilflip.medium.com/solanas-token-program-explained-de0ddce29714) (which is highly recommended). However, in this tutorial, we will be interacting with the Token Program in Rust to get you familiar with building a Solana program and integrating NFTs with it.
+
+## Anatomy of an instruction
+
+Solana is heavily inspired by low-level system programming and focused on performance. Therefore, instruction format is in a form of contiguous byte arrays instead of a more readable format like JSON. However, we will make this easier with the help of the `borsh` crate in Rust, which helps in serializing and deserializing binary instructions to and from Rust data structures. For Rustaceans, the crate will be familiar to you because of its similarities to the `serde` crate.
+
+
+
 ## Creating an NFT program
 
-Start a project with `cargo new filet --lib`. Then open the project's manifest file `filet/Cargo.toml` and add:
+Start a project with `cargo new filet --lib` (Feel free to name your project anything, but in this tutorial we will use "filet") Then open the project's manifest file `filet/Cargo.toml` and add:
 
 ```toml
 [features]
@@ -142,6 +160,8 @@ no-entrypoint = []
 
 [dependencies]
 solana-program = "=1.10.2"
+borsh = "=0.9.4"
+spl-token = { version = "3.3.0", features = ["no-entrypoint"] }
 
 [dev-dependencies]
 solana-sdk = "=1.10.2"
@@ -150,7 +170,9 @@ solana-sdk = "=1.10.2"
 crate-type = ["cdylib", "lib"]
 ```
 
-Pay special attention to the `[features]` and `[lib]` attributes. Run `cargo update` within the project directory to update the dependencies.
+Pay special attention to the `[features]` and `[lib]` attributes. Solana programs aren't allowed to have a normal `main` entrypoint and should be created as a library with `--lib` instead of a standalone binary app.
+
+Run `cargo update` within the project directory to update the dependencies.
 
 Use an editor to open your project and navigate to the `/src/lib.rs`, remove all the existing code, and add the following to the file:
 
@@ -168,3 +190,7 @@ fn process_instruction(
   todo!("Not yet know what I'm doing");
 }
 ```
+
+## Launch on Metaplex
+
+> 🚧 Under contruction 🚧
