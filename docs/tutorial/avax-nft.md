@@ -10,17 +10,19 @@ This tutorial will guide you through getting started with an EVM-compatible NFT 
 
 ## Avalanche vs Ethereum
 
-Unlike Ethereum, Avalanche is a network of multi-blockchains, one of which runs a fork of Ethereum Virtual Machine (EVM) and compatible with Ethereum.
+Unlike Ethereum, Avalanche is a network of multi-blockchains, one of which runs a fork of the Ethereum Virtual Machine (EVM) and is compatible with Ethereum.
 
-Avalanche consists of 3 subnets, X-chain, P-chain, and C-chain.
+Avalanche consists of 3 subnets: The X-chain, P-chain, and C-chain.
 
-- **X-chain**: Deals with exchanges of value and runs AVM (namespaced `avm`)
-- **P-chain**: Deals with platform/protocol (core) and able to create new arbitrary blockchains (namespaced `platform`)
-- **C-chain**: the EVM-compatible chain capable of running Solidity smart contract / dapps. It has Ethereum-compatible addresses (hexadecimal strings prefixed with "0x" concatenated with the rightmost 20 bytes of the Keccak-256 hash ECDSA public key)
+- **X-chain**: Deals with exchanges of value and runs the [Avalanche Virtual Machine](https://docs.avax.network/build/references/cryptographic-primitives/#cryptography-in-the-avalanche-virtual-machine) (namespaced `avm`)
+- **P-chain**: Deals with platform/protocol (core) and is able to create new arbitrary blockchains (namespaced `platform`)
+- **C-chain**: the EVM-compatible chain capable of running Solidity smart contracts and dapps. It has Ethereum-compatible addresses (hexadecimal strings prefixed with "0x" concatenated with the rightmost 20 bytes of the Keccak-256 hash ECDSA public key)
 
-Most beginner's confusion will be from distinguishing these different subnets. Note that only the C-chain is EVM-compatible and has Ethereum-compatible addresses. and most of dapps will be interacting with this chain.
+Most confusion happens for beginners when trying to distinguish between these different subnets. It's important to note that only the C-chain has EVM-compatibility and Ethereum-compatible addresses. The majority of dapps will be interacting with this chain.
 
 ![Avalanche's diagram of subnets](https://docs.avax.network/assets/images/image(21)-3c5cb7f1f21926b05ae3631f453ed49d.png)
+
+Now that we have learned about Avalanche's infrastructure, let's gear up to build!
 
 ## Setting up
 
@@ -32,7 +34,7 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 - [Clone Avalanchego](https://github.com/ava-labs/avalanchego) (Avalanche node) and [Avalanch local simulator](https://github.com/ava-labs/ava-sim#readme). Make sure they are inside `$GOPATH/src/github.com/ava-labs`.
 
-- Make sure you have [Node.js](https://nodejs.org/en/) on your system to create the NFT app.
+- Make sure you have Node.js on your system by downloading it from the [Node.js page](https://node.js.org/en/). We'll need this to create the NFT.
 
 ### Run local simulator nodes
 
@@ -42,7 +44,7 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 ### Create a keystore user and add test fund
 
-Create a keystore user and store the credential on the target node (here, the node running on port 3650). Send a request to this API endpoint:
+In order to get some test fund in AVAX, we have to create a keystore user using a username and password on the target node (here, it's the node running on port 3650). With your own username and password, send a request to this endpoint:
 
 ```shell
 curl -X POST --data '{
@@ -50,23 +52,21 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"keystore.createUser",
     "params" :{
-        "username":"myUsername",
-        "password":"myPassword"
+        "username":"MYUSERNAME",
+        "password":"MYPASSWORD"
     }
 }' -H 'Content-Type: application/json' 127.0.0.1:9650/ext/keystore
 ```
 
-**Don't forget to replace "myUsername" and "myPassword" with your own.**
+Replace `MYUSERNAME` and `MYPASSWORD` with your own username and password, respectively.
 
-> **Important**: You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.
+> **Important**: You should only create a keystore user on a node that you operate, as the node operator can access your plaintext password.
 
-Note the pre-funded "ewoq" private key, which is a test private key for getting some test AVAX in your account.
+Note the following pre-funded private key (called the "ewoq" key in Avalanche doc), which is a provided private key for getting your local account funded convenient. We will import this private key to a C-chain address:
 
 ```shell
 PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
 ```
-
-Import the private key to a C-chain address:
 
 ```shell
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
@@ -74,8 +74,8 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 --data-raw '{
     "method": "avax.importKey",
     "params": {
-        "username":"username",
-        "password":"password",
+        "username":"MYUSERNAME",
+        "password":"MYPASSWORD",
         "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
     },
     "jsonrpc": "2.0",
@@ -83,28 +83,11 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 }'
 ```
 
-Be thorough on the URL paths and the method namespace (again because of the subnets you might be running queries against the wrong one).
-
 Read more: [Funding a Local Network](https://docs.avax.network/build/tutorials/platform/fund-a-local-test-network)
 
 ### Integrate with Metamask
 
 Set up Metamask to connect to a custom RPC address of the local network:
-
-#### Avalanche Mainnet Settings
-
-Network Name: Avalanche Mainnet C-Chain
-New RPC URL: https://api.avax.network/ext/bc/C/rpc
-ChainID: 43114
-Symbol: AVAX
-Explorer: https://snowtrace.io/
-
-#### FUJI Testnet Settings
-Network Name: Avalanche FUJI C-Chain
-New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
-ChainID: 43113
-Symbol: AVAX
-Explorer: https://testnet.snowtrace.io/
 
 #### Local Testnet (Avalanche Local Simulator) Settings
 Network Name: Avalanche Local
@@ -113,9 +96,11 @@ ChainID: 43112
 Symbol: AVAX
 Explorer: N/A
 
+You can check out settings for the testnet and mainnet [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask/#avalanche-mainnet-settings).
+
 > **Local testnet**: Listening port might not be 9650 depending on if you run an example program in `avalanchego` node or `avalanche-simulator` run script. The latter is recommended for quick start and will have a listening node on port 9650.
 
-Create a new Metamask account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask
+Create a new Metamask account by importing this provided private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask, which is a test account for local test only.
 
 ![adding new account on metamask](https://docs.avax.network/assets/images/Metamask-Import-Account-17b4d3c6e167ebf8709ace5bc30001f6.png)
 
@@ -123,21 +108,25 @@ If all went well, you should have a funded Metamask AVAX wallet for building app
 
 ![Metamask with AVAX funded](https://i.imgur.com/fkLXV17.png)
 
-### Optional
-
-- Clone [Avalanche smart contract quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart). Install deps with `yarn`,
-
 ### Public API node
 
 Avalanche maintains a [public API gateway](https://docs.avax.network/build/tools/public-api), which you can use in quick development without having to run your own node.
 
 ## Create a Node project
 
-With Node.js already installed, run `npm init` to create a new app project, then `cd` into your new directory and run the following:
+With Node.js already installed, type the following on the command line to create a project directory:
+
+```shell
+mkdir hello-avax && cd hello-avax
+npm init --yes
+```
+
+Then in `hello-avax` directory, install some packages with:
 
 ```shell
 npm install hardhat ethers @nomiclabs/hardhat-ethers --save-dev
 ```
+
 Then, you can check if the installation was successful by typing `npx hardhat --version`. The Hard Hat CLI should print out the version number (yours may be different):
 
 ```shell
@@ -165,12 +154,11 @@ npx hardhat balances --network local
 > ...
 ```
 
-If you had correctly [created a keystore user and added test fund](#create-a-keystore-user-and-add-test-fund), you should see one of wealthy addresses shown.
-
+If you have correctly [created a keystore user and added test fund](#create-a-keystore-user-and-add-test-fund), you should see one of wealthy addresses pictured above.
 
 ## Develop an NFT smart contract
 
-If you already have an existing smart contract, you may skip this section.
+If you already have an existing EVM-compatible smart contract for minting NFTs, you may want to skip this section.
 
 We will create [ERC721](https://eips.ethereum.org/EIPS/eip-721) non-fungible tokens with their own attributes. To keep this simple, any account will be able to call a method `mintTo` to mint items.
 
@@ -191,7 +179,7 @@ contract Filet is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("Filet", "FIT") {}
+    constructor() ERC721("Filet", "FILET") {}
 
     function mintTo(address player, string memory tokenURI)
         public
@@ -208,7 +196,7 @@ contract Filet is ERC721URIStorage {
 
 ```
 
-You can come up with your own contract's name, token's name, and token's ticker. I'm naming mine `Filet` here.
+You can come up with your own contract name, token name, and token symbol instead of "Filet".
 
 Now compile the contract `Filet.sol` using this hardhat command:
 
@@ -267,7 +255,7 @@ npx hardhat console --network local
 > >
 ```
 
-Now, type the following into the prompt to instantialize the contract object:
+Now, type the following into the prompt to initialize the contract object:
 
 ```js
 >> const Filet = await ethers.getContractFactory("Filet")
@@ -294,7 +282,7 @@ The array, unsurprisingly, should contain all the addresses listed with the prev
 > 0
 ```
 
-Obviously `0x9632a79656af553F58738B0FB750320158495942` does not own any FIT token yet. Let's mint some and send to the address with:
+Obviously the address `0x9632a79656af553F58738B0FB750320158495942` belonging to the second account we accessed with `accounts[1]` does not own any FILET token. Let's mint one to the address with:
 
 ```js
 >> const tokenId = await filet.callStatic.mintTo(accounts[1], "ipfs://bafkreigaymo3qz73w4nit2matfs7dugczda5wuwzq4g3o2chz4f6nugtaq/metadata.json")
@@ -310,13 +298,13 @@ Obviously `0x9632a79656af553F58738B0FB750320158495942` does not own any FIT toke
 >> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
 >> To learn more, read [View and Pure Functions](https://solidity-by-example.org/view-and-pure-functions/), this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
 
-The receiving address now owns 1 FIT. By the default `ethers` use the first address as the signer of the transaction, therefore it is `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` signing off the minting.
+The receiving address now owns 1 FIT. By default `ethers` uses the first address as the signer of the transaction, therefore it is `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` signing off on the minting.
 
-Note the `ipfs://...` provided as the token metadata URI. `ERC721URIStorage` is a special implementation of the IERC721 interface with extra capability of setting and getting metadata URI for the token. This token URI will be retrieved by uploading the intial metadata to [nft.storage](https://nft.storage).
+Note the `ipfs://...` provided as the token metadata URI. [`ERC721URIStorage`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc721#ERC721URIStorage) is a special implementation of the IERC721 interface with extra capabilities of setting and getting metadata URI for each token. This token URI will be retrieved by uploading the intial metadata to [nft.storage](https://nft.storage).
 
 ## Uploading NFT metadata
 
-Before we can continue, install `nft.storage` and `mime` libraries with `npm install nft.storage mime --save`.
+Before we can continue, install `nft.storage` and `mime` libraries at the project's root level with `npm install nft.storage mime --save`.
 
 Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the resulting IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code (replacing `NFT_STORAGE_KEY` variable with **your own API key**).
 
@@ -396,4 +384,4 @@ To convert this IPFS URI into an HTTPS version so it's easy to use in HTML or fe
 > 'https://nftstorage.link/ipfs/bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue/metadata.json'
 ```
 
-Now you are ready to build an NFT store on Avalanche with little to no change to your Ethereum work flow.
+🎉  Congratulations! You have learned to build an NFT store on Avalanche. Now go on and take on the world!
