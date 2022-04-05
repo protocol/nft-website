@@ -6,7 +6,7 @@ issueUrl: https://github.com/protocol/nft-website/issues/224
 
 # Mint NFTs on Avalanche
 
-This short tutorial will quickly guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/)using Node.js REPL. This is quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your code.
+This tutorial will guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/) using [Node.js REPL](https://nodejs.dev/learn/how-to-use-the-nodejs-repl). This is quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your code.
 
 ## Avalanche vs Ethereum
 
