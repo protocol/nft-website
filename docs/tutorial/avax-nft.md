@@ -28,7 +28,7 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 ### Install and download
 
-- [Install Go](https://go.dev/dl/). Make sure to set `$GOPATH` variable to where you keep Go code (i.e. `$HOME/go`).
+- [Install Go](https://go.dev/dl/). Make sure to set the `$GOPATH` variable to where you keep Go code (i.e. `$HOME/go`).
 
 - [Clone Avalanchego](https://github.com/ava-labs/avalanchego) (Avalanche node) and [Avalanch local simulator](https://github.com/ava-labs/ava-sim#readme). Make sure they are inside `$GOPATH/src/github.com/ava-labs`.
 
@@ -318,7 +318,7 @@ Note the `ipfs://...` provided as the token metadata URI. `ERC721URIStorage` is 
 
 Before we can continue, install `nft.storage` and `mime` libraries with `npm install nft.storage mime --save`.
 
-Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code (replacing `NFT_STORAGE_KEY` variable with **your own API key**).
+Now we will upload an NFT's metadata -- image, name, and description -- to nft.storage and use the resulting IPFS URI in the `mintTo`. To write a script that can be imported and run on Hardhat Node REPL, create a file called `upload.mjs` inside the `/scripts` directory with the following code (replacing `NFT_STORAGE_KEY` variable with **your own API key**).
 
 ```js
 import { NFTStorage, File } from 'nft.storage'
