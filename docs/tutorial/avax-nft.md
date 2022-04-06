@@ -6,7 +6,16 @@ issueUrl: https://github.com/protocol/nft-website/issues/224
 
 # Mint NFTs on Avalanche
 
-This tutorial will guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/) using [Node.js REPL](https://nodejs.dev/learn/how-to-use-the-nodejs-repl). This is quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your code.
+This tutorial will guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/) using Node.js REPL.
+
+Here is an overview of what we're going to learn:
+
+- [Avalanche vs Ethereum](#avalanche-vs-ethereum)
+- [Setting up local Avalanche nodes](#setting-up)
+- [Funding a test account with AVAX](#create-a-keystore-user-and-add-test-fund)
+- [Minting Avalanche ERC-721 tokens](#create-a-node-project)
+
+You'll find this quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your NFT smart contract.
 
 ## Avalanche vs Ethereum
 
@@ -38,9 +47,30 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 ### Run local simulator nodes
 
-- Build both projects with `./scripts/build.sh` included in the downloaded repositories.
+- Build each Go repository you've downloaded previously (`avalanchego` and `ava-sim`) by executing the included shell script within each repository with `./scripts/build.sh`.
 
-- In `ava-sim`, run the simulator with `./scripts/run.sh`, which relies on `avalanchego` being in the right place. The simulator runs a local network of 5 nodes listening on different ports. We will be using a node listening on port 9650.
+- Then, in the `ava-sim` repository, run the simulator with `./scripts/run.sh`. This script runs the executables in `avalanchego`, so make sure it is in the `$GOPATH` sitting next to `ava-sim`. The simulator runs a local network of 5 nodes listening on different ports. **We will be using the one listening on port 9650 in this tutorial**.
+
+If the simulator ran successfully, you should see it prints to the stdout similar to the one shown below:
+
+```shell
+...
+
+INFO [04-06|13:45:41] node/node.go#1051: node version is: avalanche/1.7.1
+INFO [04-06|13:45:41] node/node.go#1052: node ID is: NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5
+INFO [04-06|13:45:41] node/node.go#1053: current database version: v1.4.5
+INFO [04-06|13:45:41] node/node.go#1051: node version is: avalanche/1.7.1
+INFO [04-06|13:45:41] node/node.go#1052: node ID is: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg
+INFO [04-06|13:45:41] node/node.go#1053: current database version: v1.4.5
+INFO [04-06|13:45:41] node/node.go#489: initializing API server
+INFO [04-06|13:45:41] node/node.go#489: initializing API server
+INFO [04-06|13:45:41] api/server/server.go#82: API created with allowed origins: [*]
+INFO [04-06|13:45:41] api/server/server.go#82: API created with allowed origins: [*]
+
+...
+```
+
+The simulator runs as a foreground process, so please open a new terminal to continue.
 
 ### Create a keystore user and add test fund
 
@@ -104,7 +134,7 @@ Create a new Metamask account by importing this provided private key `0x56289e99
 
 ![adding new account on metamask](https://docs.avax.network/assets/images/Metamask-Import-Account-17b4d3c6e167ebf8709ace5bc30001f6.png)
 
-If all went well, you should have a funded Metamask AVAX wallet for building app locally:
+If all went well, you should have a funded Metamask AVAX wallet for building your app locally:
 
 ![Metamask with AVAX funded](https://i.imgur.com/fkLXV17.png)
 
@@ -124,14 +154,115 @@ npm init --yes
 Then in `hello-avax` directory, install some packages with:
 
 ```shell
-npm install hardhat ethers @nomiclabs/hardhat-ethers --save-dev
+npm install --save-dev hardhat
 ```
 
-Then, you can check if the installation was successful by typing `npx hardhat --version`. The Hard Hat CLI should print out the version number (yours may be different):
+Then type `npx hardhat` in the root directory. The Hard Hat CLI should print out a few options to set up the project:
 
 ```shell
-npx hardhat --version
-> 2.6.1
+npx hardhat
+
+> 888    888                      888 888               888
+> 888    888                      888 888               888
+> 888    888                      888 888               888
+> 8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
+> 888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
+> 888    888 .d888888 888    888  888 888  888 .d888888 888
+> 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
+> 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
+>
+> 👷 Welcome to Hardhat v2.9.3 👷‍
+>
+> ? What do you want to do? …
+> ❯ Create a basic sample project
+>   Create an advanced sample project
+>   Create an advanced sample project that uses TypeScript
+>   Create an empty hardhat.config.js
+>   Quit
+```
+
+Select the first option "Create a basic sample project" and choose "Y" for all questions. Hardhat will install all the necessary dependencies and create some directories for you, such as `/contracts` and `/scripts`.
+
+Next, copy this configuration and paste it in `hardhat.config.js` at the root level and save it:
+
+```js
+// hardhat.config.js
+import { task } from "hardhat/config"
+import { BigNumber } from "ethers"
+import "@nomiclabs/hardhat-waffle"
+
+const FORK_FUJI = false
+const FORK_MAINNET = false
+const forkingData = FORK_FUJI ? {
+  url: 'https://api.avax-test.network/ext/bc/C/rpc',
+} : FORK_MAINNET ? {
+  url: 'https://api.avax.network/ext/bc/C/rpc'
+} : undefined
+
+task("accounts", "Prints the list of accounts", async (args, hre) => {
+  const accounts = await hre.ethers.getSigners()
+  accounts.forEach((account) => {
+    console.log(account.address)
+  })
+})
+
+task("balances", "Prints the list of AVAX account balances", async (args, hre) => {
+  const accounts = await hre.ethers.getSigners()
+  for (const account of accounts){
+    const balance = await hre.ethers.provider.getBalance(
+      account.address
+    );
+    console.log(`${account.address} has balance ${balance.toString()}`);
+  }
+})
+
+export default {
+  solidity: {
+    compilers: [
+      {
+        version: "0.5.16"
+      },
+      {
+        version: "0.6.2"
+      },
+      {
+        version: "0.6.4"
+      },
+      {
+        version: "0.7.0"
+      },
+      {
+        version: "0.8.0"
+      },
+      {
+        version: "0.8.1"
+      }
+    ]
+  },
+  networks: {
+    hardhat: {
+      gasPrice: 225000000000,
+      chainId: !forkingData ? 43112 : undefined,
+    },
+    local: {
+      url: 'http://localhost:9650/ext/bc/C/rpc',
+      gasPrice: 225000000000,
+      chainId: 43112,
+      accounts: [
+        "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+        "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
+        "0x15614556be13730e9e8d6eacc1603143e7b96987429df8726384c2ec4502ef6e",
+        "0x31b571bf6894a248831ff937bb49f7754509fe93bbd2517c9c73c4144c0e97dc",
+        "0x6934bef917e01692b789da754a0eae31a8536eb465e7bff752ea291dad88c675",
+        "0xe700bdbdbc279b808b1ec45f8c2370e4616d3a02c336e68d85d4668e08f53cff",
+        "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
+        "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
+        "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
+        "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a"
+      ]
+    }
+  }
+}
 ```
 
 Now, with the local simulator nodes still running, run the following commands:
@@ -158,13 +289,13 @@ If you have correctly [created a keystore user and added test fund](#create-a-ke
 
 ## Develop an NFT smart contract
 
-If you already have an existing EVM-compatible smart contract for minting NFTs, you may want to skip this section.
+If you already have an existing EVM-compatible smart contract for minting NFTs, you may want to skip this section. However, it is pretty fun to follow along!
 
 We will create [ERC721](https://eips.ethereum.org/EIPS/eip-721) non-fungible tokens with their own attributes. To keep this simple, any account will be able to call a method `mintTo` to mint items.
 
 We will be using the standard [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract from Open Zeppelin. Install it in your project with `npm install @openzeppelin/contract`.
 
-Create a directory named `/contracts` within the project root. Create a smart contract file named `Filet.sol` with the following code:
+In the `/contracts` directory, remove the generated file `Greeter.sol` and create a new file named `Filet.sol` and type the following code down (optionally you can copy and paste it, but you will miss [flexing your programming muscle](https://i.imgur.com/fawRchq.jpeg)):
 
 ```js
 // contracts/Filet.sol
@@ -196,9 +327,11 @@ contract Filet is ERC721URIStorage {
 
 ```
 
-You can come up with your own contract name, token name, and token symbol instead of "Filet".
+Since we're implementing [`ERC721URIStorage`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc721#ERC721URIStorage) for our NFT contract, we get the special method `_setTokenURI(tokenId, tokenURI)` for free on top of the regular `ERC721` interface. `ERC721URIStorage` is an extension of the IERC721 interface with a convenient capability of setting and getting metadata URI for each token. We'll get this URI by [uploading the asset to nft.storage](#uploading-the-asset-and-minting-the-token).
 
-Now compile the contract `Filet.sol` using this hardhat command:
+You can come up with your own contract name, token name, and token symbol instead of "Filet", but make sure to use the name consistently.
+
+Now compile the contract `Filet.sol` using this hardhat command at your root level:
 
 ```shell
 npx hardhat compile
@@ -206,7 +339,7 @@ npx hardhat compile
 > Compilation finished successfully
 ```
 
-Once the contract is compiled, create another directory named `script` and add `deploy.js` with the following code:
+Next, create a script file named `deploy.js` in the `scripts` directory and type the following code down before saving it:
 
 ```js
 import {
@@ -235,18 +368,18 @@ main()
 })
 ```
 
-This script uses [Ethers](https://docs.ethers.io/v5/) library to deploy the contract to the local Avalanche node(s). Now, deploy the contract with:
+This script uses [Ethers](https://docs.ethers.io/v5/) library to deploy the contract to the local Avalanche node(s). Now, we can deploy the contract with this hardhat command:
 
 ```shell
 npx hardhat run scripts/deploy.js --network local
 > Filet deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 ```
 
-We now have a token contrat deployed at `0x5FbDB2315678afecb367f032d93F642f64180aa3`.
+We now have a token contract deployed at `0x5FbDB2315678afecb367f032d93F642f64180aa3`. Take note of this address output, since yours will likely be different.
 
-Note that up until now, the steps are the same for both Ethereum and Avalanche.
+## Interacting with the contract
 
-Now let's spin up Hardhat's [developer console](https://hardhat.org/guides/hardhat-console.html) to start interacting with our `Filet` contract:
+Now let's spin up Hardhat's developer console to start playing with our `Filet` contract interactively:
 
 ```shell
 npx hardhat console --network local
@@ -255,7 +388,9 @@ npx hardhat console --network local
 > >
 ```
 
-Now, type the following into the prompt to initialize the contract object:
+By interacting with the console prompt, we are learning each step in a discrete way without getting distracted by the UI.
+
+Now, type the following into the prompt to initialize the contract object (remember to use your contract address instead of the one shown below):
 
 ```js
 >> const Filet = await ethers.getContractFactory("Filet")
@@ -282,27 +417,9 @@ The array, unsurprisingly, should contain all the addresses listed with the prev
 > 0
 ```
 
-Obviously the address `0x9632a79656af553F58738B0FB750320158495942` belonging to the second account we accessed with `accounts[1]` does not own any FILET token. Let's mint one to the address with:
+Obviously the address `0x9632a79656af553F58738B0FB750320158495942` belonging to the second account we accessed with `accounts[1]` does not own any FILET token. Before we can mint a token to the address, we'll have to upload the metadata such as the image, name, and description we want to link to the token to [nft.storage](https://nft.storage).
 
-```js
->> const tokenId = await filet.callStatic.mintTo(accounts[1], "ipfs://bafkreigaymo3qz73w4nit2matfs7dugczda5wuwzq4g3o2chz4f6nugtaq/metadata.json")
->> tokenId.toString()
-> '1'
->> const bal = (await filet.balanceOf(account[1])).toString()
->> bal
-> '1'
-```
-
->> 💡 **Why calling `callStatic`?**
->> The return value of a non-pure or -view Solidity function is available only when the function is called on-chain (from the same contract or another contract).  
->> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
->> To learn more, read [View and Pure Functions](https://solidity-by-example.org/view-and-pure-functions/), this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
-
-The receiving address now owns 1 FIT. By default `ethers` uses the first address as the signer of the transaction, therefore it is `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` signing off on the minting.
-
-Note the `ipfs://...` provided as the token metadata URI. [`ERC721URIStorage`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc721#ERC721URIStorage) is a special implementation of the IERC721 interface with extra capabilities of setting and getting metadata URI for each token. This token URI will be retrieved by uploading the intial metadata to [nft.storage](https://nft.storage).
-
-## Uploading NFT metadata
+## Uploading the asset and minting the token
 
 Before we can continue, install `nft.storage` and `mime` libraries at the project's root level with `npm install nft.storage mime --save`.
 
@@ -317,7 +434,7 @@ import fs from 'fs'
 
 import path from 'path'
 
-const NFT_STORAGE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM5YzIyMUUzOTFiNDMwMzQ4NDc2NzdmMmVGZTc1ODRGNTM2ZjM4OWEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTN0NDU0MjMwNTQ1MSwibmFtZSI6IkF2YWxhbmNoZSJ9.koIFwWwDdhjcBZp2U8OHCiKsfPhXu5aHGXHBQfPXlno'
+const NFT_STORAGE_KEY = 'YOUR_OWN_API_KEY'
 
 async function storeNFT(imagePath, name, description) {
     const image = await fileFromPath(imagePath)
@@ -357,17 +474,43 @@ Return to the Node REPL and import the `upload` function from the script. Copy a
 > }
 ```
 
-Then we can use this new URI in minting:
+Note we've received the response as a `Token` object with the `url` property. We can use this given URI to mint our first NFT to another account:
 
 ```js
->> const tokenId = await filet.callStatic.mintTo(accounts[3], result.url)
+>> const tokenId = await filet.callStatic.mintTo(accounts[1], result.url)
 >> tokenId.toNumber()
-> 2
+> 1
 ```
+
+Then check the balance of the receiving account:
+
+```js
+>> const balance = (await filet.balanceOf(account[1])).toString()
+>> balance
+> 1
+```
+
+Additionally, we can check the current owner of the NFT by calling `ownerOf(tokenId)`:
+
+```js
+>> const ownerAddress = (await filet.ownerOf(tokenId))
+>> ownerAddress === account[1].address
+> true
+```
+
+The receiving address now owns 1 FILET. We also confirmed that it is the owner of the first NFT.
+
+By default `ethers` uses the first address as the signer of the transaction, therefore it is `account[0]` signing off on the minting when we call `mintTo(recipientAddress, tokenURI)`.
+
+>> 💡 **Why did we call `callStatic`?**
+>> The return value of a non-pure or -view Solidity function is available only when the function is called on-chain (from the same contract or another contract).  
+>> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
+>> To learn more, read [View and Pure Functions](https://solidity-by-example.org/view-and-pure-functions/), this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
+
 
 ## Retrieving a token's metadata
 
-The final step here is to retrieve the metadata URI for each token from nft.storage so you can display its image, name, and description, which we can do so using [ERC721URIStorage.tokenURI(uint256 tokenId)](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol#L20).
+The final step is to retrieve the metadata for each token from IPFS so you can display the token's image, name, and description on the web. With ERC721Storage, we can call [`tokenURI(uint256 tokenId)`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol#L20) to retrieve the tokenURI stored on-chain:
 
 ```js
 >> let ipfsURI = await filet.tokenURI(tokenId.toNumber())
@@ -375,7 +518,7 @@ The final step here is to retrieve the metadata URI for each token from nft.stor
 > 'ipfs://bafyreicb3ewk33keh77mwxhmhdafxsjlkflichr2mjnyim6tbq3qjkwcue/metadata.json'
 ```
 
-To convert this IPFS URI into an HTTPS version so it's easy to use in HTML or fetch API, you can import a helper function `toGatewayURL` from nft.storage:
+Because there are browsers which do not yet support IPFS URLs natively, as well as the standard `fetch` API, nft.storage Javascript client includes a helper function that converts this IPFS URI into an HTTPS version via the nftstorage.link gateway. On the console, you can import this function `toGatewayURL` from `nft.storage`:
 
 ```js
 >> const { toGatewayURL } = await import("nft.storage")
