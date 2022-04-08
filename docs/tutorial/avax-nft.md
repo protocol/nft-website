@@ -51,7 +51,7 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 - Then, in the `ava-sim` repository, run the simulator with `./scripts/run.sh`. This script runs the executables in `avalanchego`, so make sure it is in the `$GOPATH` sitting next to `ava-sim`. The simulator runs a local network of 5 nodes listening on different ports. **We will be using the one listening on port 9650 in this tutorial**.
 
-If the simulator ran successfully, you should see it prints to the stdout similar to the one shown below:
+If the simulator ran successfully, you should see it print to the stdout similar to the one shown below:
 
 ```shell
 ...
@@ -72,7 +72,7 @@ INFO [04-06|13:45:41] api/server/server.go#82: API created with allowed origins:
 
 The simulator runs as a foreground process, so please open a new terminal to continue.
 
-### Create a keystore user and add test fund
+### Create a keystore user and add test funds
 
 In order to get some test fund in AVAX, we have to create a keystore user using a username and password on the target node (here, it's the node running on port 3650). With your own username and password, send a request to this endpoint:
 
@@ -92,7 +92,7 @@ Replace `MYUSERNAME` and `MYPASSWORD` with your own username and password, respe
 
 > **Important**: You should only create a keystore user on a node that you operate, as the node operator can access your plaintext password.
 
-Note the following pre-funded private key (called the "ewoq" key in Avalanche doc), which is a provided private key for getting your local account funded convenient. We will import this private key to a C-chain address:
+Note the following pre-funded private key (called the "ewoq" key in Avalanche doc), which is a provided private key for getting your local account funded conveniently. We will import this private key to a C-chain address:
 
 ```shell
 PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN
@@ -368,7 +368,7 @@ main()
 })
 ```
 
-This script uses [Ethers](https://docs.ethers.io/v5/) library to deploy the contract to the local Avalanche node(s). Now, we can deploy the contract with this hardhat command:
+This script uses the [Ethers](https://docs.ethers.io/v5/) library to deploy the contract to the local Avalanche node(s). Now, we can deploy the contract with this hardhat command:
 
 ```shell
 npx hardhat run scripts/deploy.js --network local
