@@ -505,7 +505,7 @@ By default `ethers` uses the first address as the signer of the transaction, the
 >> 💡 **Why did we call `callStatic`?**
 >> The return value of a non-pure or -view Solidity function is available only when the function is called on-chain (from the same contract or another contract).  
 >> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
->> To learn more, read [View and Pure Functions](https://solidity-by-example.org/view-and-pure-functions/), this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
+>> Learn more about [view and pure functions](https://solidity-by-example.org/view-and-pure-functions/), read this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and read this [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
 
 
 ## Retrieving a token's metadata
