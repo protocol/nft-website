@@ -1,12 +1,12 @@
 ---
-title: Mint NFTs on Avalanche 🚧
-description: Learn how to start minting NFTs on Avalanche.
+title: Mint ERC721 NFTs on Avalanche
+description: Learn how to mint ERC721 tokens on Avalanche.
 issueUrl: https://github.com/protocol/nft-website/issues/224
 ---
 
-# Mint NFTs on Avalanche
+# Mint ERC721 NFTs on Avalanche
 
-This tutorial will guide you through getting started with an EVM-compatible NFT minting work flow on [Avalanche](https://www.avax.network/) using Node.js REPL.
+This tutorial will guide you through getting started with an EVM-compatible ERC721 tokens minting work flow on [Avalanche](https://www.avax.network/) using Node.js REPL.
 
 Here is an overview of what we're going to learn:
 
@@ -91,6 +91,8 @@ INFO [04-06|13:45:41] api/server/server.go#82: API created with allowed origins:
 
 The simulator runs as a foreground process, so please open a new terminal to continue.
 
+Well done! You're running Avalanche nodes consisting of all subnets on your local machine. 
+
 ### Create a keystore user and add test funds
 
 In order to get some test fund in AVAX, we have to create a keystore user using a username and password on the target node (here, it's the node running on port 3650). With your own username and password, send a request to this endpoint:
@@ -132,6 +134,8 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 }'
 ```
 
+Note the `C` in the route URI indicating the chain we wanted to interact with? We only care about the C-chain because we are minting an ERC721 NFT. However, in the future you can and will be working with other chains by using the [public API](https://docs.avax.network/build/tools/public-api).
+
 Read more: [Funding a Local Network](https://docs.avax.network/build/tutorials/platform/fund-a-local-test-network)
 
 ### Integrate with Metamask
@@ -140,7 +144,7 @@ Set up Metamask to connect to a custom RPC address of the local network:
 
 #### Local Testnet (Avalanche Local Simulator) Settings
 Network Name: Avalanche Local
-New RPC URL: http://localhost:9650/ext/bc/C/rpc
+New RPC URL: http://localhost:9650/ext/bc/C/rpc (for C-chain)
 ChainID: 43112
 Symbol: AVAX
 Explorer: N/A
@@ -436,7 +440,7 @@ The array, unsurprisingly, should contain all the addresses listed with the prev
 > 0
 ```
 
-Obviously the address `0x9632a79656af553F58738B0FB750320158495942` belonging to the second account we accessed with `accounts[1]` does not own any FILET token. Before we can mint a token to the address, we'll have to upload the metadata such as the image, name, and description we want to link to the token to [nft.storage](https://nft.storage).
+Obviously the address `0x9632a79656af553F58738B0FB750320158495942` belonging to the second account whom we accessed with `accounts[1]` does not own any FILET token. Before we can mint a token to the address, we'll have to upload the metadata such as the image, name, and description we want to link to the token to [nft.storage](https://nft.storage).
 
 ## Uploading the asset and minting the token
 
