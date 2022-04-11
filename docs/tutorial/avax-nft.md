@@ -17,6 +17,10 @@ Here is an overview of what we're going to learn:
 
 You'll find this quite useful if you are migrating from Ethereum or other EVM-compatible blockchain and wish to reuse your NFT smart contract.
 
+## Requirements
+
+This tutorial assumes you have some familiarity with Javascript, Unix terminal, and Solidity.
+
 ## Avalanche vs Ethereum
 
 Unlike Ethereum, Avalanche is a network of multi-blockchains, one of which runs a fork of the Ethereum Virtual Machine (EVM) and is compatible with Ethereum.
@@ -41,15 +45,30 @@ The quickest way to start is to run a group of simulator nodes locally. To do th
 
 - [Install Go](https://go.dev/dl/). Make sure to set the `$GOPATH` variable to where you keep Go code (i.e. `$HOME/go`).
 
-- [Clone Avalanchego](https://github.com/ava-labs/avalanchego) (Avalanche node) and [Avalanch local simulator](https://github.com/ava-labs/ava-sim#readme). Make sure they are inside `$GOPATH/src/github.com/ava-labs`.
+- [Clone Avalanchego](https://github.com/ava-labs/avalanchego) (Avalanche node) and [Avalanche local simulator](https://github.com/ava-labs/ava-sim#readme). Make sure they are under `$GOPATH/src/github.com/ava-labs` for the [next step](#run-local-simulator-nodes) to work. For example, if my `$GOPATH` is currently set to `~/mycode/go`, `avalanchego` and `ava-sim` should be located at `~/mycode/go/src/github.com/ava-labs/avalanchego` and `~/mycode/go/src/github.com/ava-labs/ava-sim`, respectively.
 
 - Make sure you have Node.js on your system by downloading it from the [Node.js page](https://node.js.org/en/). We'll need this to create the NFT.
 
 ### Run local simulator nodes
 
-- Build each Go repository you've downloaded previously (`avalanchego` and `ava-sim`) by executing the included shell script within each repository with `./scripts/build.sh`.
+In order to interact with the blockchain locally, we'll have to run some nodes locally. Avalanche provides a simple way of doing this with a simulator script that runs 5 nodes on your local machine.
 
-- Then, in the `ava-sim` repository, run the simulator with `./scripts/run.sh`. This script runs the executables in `avalanchego`, so make sure it is in the `$GOPATH` sitting next to `ava-sim`. The simulator runs a local network of 5 nodes listening on different ports. **We will be using the one listening on port 9650 in this tutorial**.
+First, build the `avalanchego` and `ava-sim` programs in the downloaded repositories. They are Go projects that need to be compiled to executable programs. Both projects include a handy shell script that automatically builds the project located within its root directory at `/scripts/build.sh` as shown below (you can find the build script in the same location under `ava-sim`):
+
+```shell
+avalancego/
+├── ...
+└──scripts
+   ├── ansible
+   ├── aws
+   ├── build.sh
+   ├── ...
+   └── versions.sh
+```
+
+Build each Go repository by executing the included shell script within each repository by typing `./scripts/build.sh` in your terminal at the root level. The first `.` is Unix's way of executing an executable. If you get an error from your shell mentioning denied permission, type `chmod +x scripts/build.sh` to turn the script into an executable.
+
+Next, change into the `ava-sim` repository, run the simulator with `./scripts/run.sh`. This script runs the executables in `avalanchego`, so make sure it is in the `$GOPATH` sitting next to `ava-sim`. The simulator runs a local network of 5 nodes listening on different ports. **We will be using the one listening on port 9650 in this tutorial**.
 
 If the simulator ran successfully, you should see it print to the stdout similar to the one shown below:
 
@@ -410,7 +429,7 @@ Next, we inspect the accounts and the balances:
 > ]
 ```
 
-The array, unsurprisingly, should contain all the addresses listed with the previous `npx hardhat accounts` command. Select one of the addresses to inspect the balance (In this case, we are choosing the second account listed)
+The array, unsurprisingly, should contain all the addresses listed with the previous `npx hardhat accounts` command. Let's select one of the addresses to inspect the balance of the FILET token (we are choosing the second account)
 
 ```js
 >> const balance = (await filet.balanceOf(accounts[1])).toString()
@@ -477,9 +496,7 @@ Return to the Node REPL and import the `upload` function from the script. Copy a
 Note we've received the response as a `Token` object with the `url` property. We can use this given URI to mint our first NFT to another account:
 
 ```js
->> const tokenId = await filet.callStatic.mintTo(accounts[1], result.url)
->> tokenId.toNumber()
-> 1
+>> const _tx = await filet.mintTo(accounts[1], result.url)
 ```
 
 Then check the balance of the receiving account:
@@ -490,9 +507,10 @@ Then check the balance of the receiving account:
 > 1
 ```
 
-Additionally, we can check the current owner of the NFT by calling `ownerOf(tokenId)`:
+Additionally, we can check the current owner of the NFT by calling `ownerOf(tokenId)`. Since we've minted only the first token, the `tokenId` is 1:
 
 ```js
+>> const tokenId = 1
 >> const ownerAddress = (await filet.ownerOf(tokenId))
 >> ownerAddress === account[1].address
 > true
@@ -502,10 +520,11 @@ The receiving address now owns 1 FILET. We also confirmed that it is the owner o
 
 By default `ethers` uses the first address as the signer of the transaction, therefore it is `account[0]` signing off on the minting when we call `mintTo(recipientAddress, tokenURI)`.
 
->> 💡 **Why did we call `callStatic`?**
->> The return value of a non-pure or -view Solidity function is available only when the function is called on-chain (from the same contract or another contract).  
->> When such function is called off-chain (i.e. from ethers.js as we are), the return value is the hash of that transaction. If we called `mintTo` directly, we would receive in return the transaction object, not the token ID we expect from the actual `mintTo` method in the contract.  
->> Learn more about [view and pure functions](https://solidity-by-example.org/view-and-pure-functions/), read this [Stack Exchange post](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js), and read this [ethers.js doc for `callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic).
+>> 💡 **What was returned from `mintTo(...)`?**   
+>> You might wonder why, when we called `mintTo(...)` previously, we assigned the returned value to an unused variable called `_tx`, instead of using the expected returned `UInt256` token's ID in the next call to `ownerOf(tokenId)` to inspect the token's owner.   
+>> That's because the return value of a non-pure or non-view Solidity function is available only when the function is called *on-chain* (from the same contract or another contract). In our case, our little hardhat prompt is an *off-chain* client. For example, the method [`balanceOf(...)`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/7392d8373873bed5da9ac9a97811d709f8c5ffbb/contracts/token/ERC721/ERC721.sol#L62) is a view function because it only reads from the chain.   
+>> When a non-pure or non-view function is called off-chain, the return value is always the hash of the transaction, not the intended return value from the function. So when we called `mintTo(...)`, we received the transaction object, not the token ID we expected. We assigned it to `_tx` to emphasize that it was a transaction (tx) object, and preceded it with an underscore to emphasize that we weren't using it.   
+>> Learn more about [view and pure functions](https://solidity-by-example.org/view-and-pure-functions/) and [subscribing to an event to get the returned value](https://ethereum.stackexchange.com/questions/88119/i-see-no-way-to-obtain-the-return-value-of-a-non-view-function-ethers-js). Additionally, check out [`callStatic`](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract/-%23-contract-callStatic) method which is helpful in testing your calls and returned values.
 
 
 ## Retrieving a token's metadata
