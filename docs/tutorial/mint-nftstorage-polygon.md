@@ -176,6 +176,27 @@ Your output should look like the listing below, where `HASH` is the CID to the a
 Metadata stored on Filecoin/IPFS at URL: ipfs://HASH/metadata.json
 ```
 
+I wrote this to store all images from one directory into a folder 
+My images were numbered 1 - 5000 (.png), so I looped through and loaded them into an  array
+then upload them all at once, this creates one CID on Filecoin/IPFS and each image can be access by
+its owen URL: ipfs://metadata/1.png
+
+async function storeDir() {
+  let images = []; 
+
+  for(let i=1; i < 5001; i++){ 
+    images.push(new File( [await fs.promises.readFile('assets/images/' + i.toString() + '.png')], 
+                      i.toString() + '.png' , { type: 'image/png'})) 
+  }
+ 
+    const client = new NFTStorage({ token: API_KEY })
+    const metadata = await client.storeDirectory(images); 
+
+    console.log( metadata) 
+} 
+
+
+
 ### Creating your NFT on Polygon
 
 #### Create the smart contract for minting
