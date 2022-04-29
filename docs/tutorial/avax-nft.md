@@ -316,7 +316,7 @@ If you already have an existing EVM-compatible smart contract for minting NFTs, 
 
 We will create [ERC721](https://eips.ethereum.org/EIPS/eip-721) non-fungible tokens with their own attributes. To keep this simple, any account will be able to call a method `mintTo` to mint items.
 
-We will be using the standard [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract from Open Zeppelin. Install it in your project with `npm install @openzeppelin/contract`.
+We will be using the standard [ERC721](https://docs.openzeppelin.com/contracts/4.x/erc721) smart contract from Open Zeppelin. Install it in your project with `npm install @openzeppelin/contracts`.
 
 In the `/contracts` directory, remove the generated file `Greeter.sol` and create a new file named `Filet.sol` and type the following code down (optionally you can copy and paste it, but you will miss [flexing your programming muscle](https://i.imgur.com/fawRchq.jpeg)):
 
