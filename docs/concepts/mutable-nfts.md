@@ -1,6 +1,6 @@
 ---
 title: Mutable NFTs
-description: Understand how to create NFTs that can safely change over time.
+description: Understand how to create and manage NFTs that can safely change over time.
 ---
 
 # **Guide to Mutable NFTs**
