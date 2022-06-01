@@ -37,7 +37,7 @@ For questions and discussion, file an issue on [Github](https://github.com/web3-
 
 [Ceramic](https://ceramic.network/) is an IPFS-based system for decentralized data streams. A Ceramic stream consists of an append-only log of commits where updates are signed by a decentralized identifier (DID), validated against a set of state transition rules, then anchored on a blockchain. 
 
-With this approach, each NFT would get a new stream and a stream identifier (streamID). StreamIDs are a type of uniform resource locator (URI) formatted like \`ceramic://kjzl6fddub9hxf2q312a5qjt9ra3oyzb7lthsrtwhne0wu54iuvj852bw9wxfvs\`). The smart contract would be created as normal, using the streamID to represent your asset.
+With this approach, each NFT would get a new stream and a stream identifier (streamID). StreamIDs are a type of uniform resource locator (URI) formatted like `ceramic://kjzl6fddub9hxf2q312a5qjt9ra3oyzb7lthsrtwhne0wu54iuvj852bw9wxfvs`). The smart contract would be created as normal, using the streamID to represent your asset.
 
 Updating the NFT metadata is as simple as writing new data to the stream. To render or use the NFT, you would fetch the streamID and process the commit log to get the latest state of the asset. As of now, Ceramic supports JSON data, so this would be a good way to manage mutable NFT properties and metadata as opposed to editable images or video. This approach might be best suited for NFTs that must be updated extremely frequently.
 
