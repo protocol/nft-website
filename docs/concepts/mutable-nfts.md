@@ -1,3 +1,8 @@
+---
+title: Mutable NFTs
+description: Understand how to create NFTs that can safely change over time.
+---
+
 # **Guide to Mutable NFTs**
 
 Original use cases for NFTs, such as collectibles, relied on the immutability of NFT images and metadata to preserve rarity, a key element in establishing the value of these tokens. Using IPFS’s cryptographic hashes (CIDs), you can create tamper-proof NFTs.
