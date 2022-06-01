@@ -74,6 +74,7 @@ module.exports = {
               '/concepts/content-addressing',
               '/concepts/content-persistence',
               '/concepts/minting-app',
+              '/concepts/mutable-nfts',
               '/concepts/managing-nfts',
               '/concepts/auditing-nfts',
             ]
