@@ -40,7 +40,7 @@ Lastly, you will need a text or code editor. For more convenience, choose an edi
 
 To use NFT.Storage you need an API key. First, [head over to NFT.Storage to log in with your email address](https://nft.storage/login/). You will receive an email with a magic link that signs you in -- no password needed. After you successfully logged in, go to API Keys via the navigation bar. You will find a button to create a **New Key**. When prompted for an API key name, you can freely choose one or use “polygon + NFT.Storage”. You can copy the content of the key column now or reference it back to NFT.Storage later in the tutorial.
 
-Keen to try the scripts quickly? Clone this sample code repo [here](https://github.com/jenks-guo-filecoin/nftschoo.dev-demo).
+Keen to try the scripts quickly? Clone this sample code repo [here](https://github.com/jenks-guo-filecoin/nftschool.dev-demo).
 
 ### Set up your workspace
 
@@ -328,4 +328,4 @@ We deployed a custom smart contract to mint our NFT specific to our needs. For t
 
 Successful minting can be seen as the start of the valuable phase of the NFT. The NFT can then be used to prove ownership and can be transferred to other users. Reasons to transfer an NFT might include a successful sale on one of the NFT marketplaces like [OpenSea](https://opensea.io), or a different type of event such as acquiring an item in an NFT based game. Exploring the rich possibilities for NFTs is definitely an exciting next step.
 
-If you\'d like help building your NFT project with NFT.storage, we encourage you to join the `#nft-storage` channel on [Discord](https://discord.gg/Z4H6tdECb9) and [Slack](https://filecoinproject.slack.com/archives/C021JJRH26B).
+If you\'d like help building your NFT project with NFT.storage, we encourage you to join the `#nft-storage` channel on [Discord](https://discord.gg/Z4H6tdECb9) and [Slack](https://filecoin.io/slack).
