@@ -90,7 +90,8 @@ module.exports = {
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games',
               '/tutorial/flow-nft-marketplace',
-              '/tutorial/avax-nft'
+              '/tutorial/avax-nft',
+              '/tutorial/batch-minting',
             ]
           },
           {
