@@ -2,7 +2,8 @@
 title: Batch-minting NFTs on Ethereum 🚧
 description: This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via nft.storage.
 issueUrl: https://github.com/protocol/nft-website/issues/253
-related: 'Lazy minting': https://nftschool.dev/tutorial/lazy-minting/
+related: 
+  'Lazy minting': https://nftschool.dev/tutorial/lazy-minting/
 ---
  # Batch-minting NFTs on Ethereum
 
