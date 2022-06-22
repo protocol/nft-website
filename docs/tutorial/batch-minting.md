@@ -29,6 +29,8 @@ In all these scenarios, NFTs are being treated closer to commodities than in the
 
 ## Storage
 
+Here's an overview of several strategies to upload to NFT.storage in bulk.
+
 ### Upload files iteratively
 
 The most straightforward way to upload files and metadata to nft.storage is by iterating over all of them and calling [`NFTStorage.store`]() one-by-one. Being simple as it is, that means you are responsible for properly handling errors that might occur for each successive request and synchronize it with the minting process.
@@ -83,6 +85,8 @@ async function readAndUploadDir() {
 ```
 
 ## Smart contracts
+
+Now that you've learned how to upload the assets, let's explore a few tactics to mint tokens.
 
 ### Using ERC-1155 for batch-minting
 
