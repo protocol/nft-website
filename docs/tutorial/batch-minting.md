@@ -1,6 +1,6 @@
 ---
 title: Batch-minting NFTs on Ethereum 🚧
-description: This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via nft.storage.
+description: This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via NFT.storage.
 issueUrl: https://github.com/protocol/nft-website/issues/253
 related: 
   'Lazy minting': https://nftschool.dev/tutorial/lazy-minting/
@@ -9,23 +9,17 @@ related:
 
  > TODO: Add missing links
 
- This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via nft.storage.
+ This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via NFT.storage.
 
 See also: [Lazy minting](./lazy-minting.md)
 
 Quite often,  NFT projects consist of hundreds if not thousands of files and metadata starting their lives out on a computer file system, waiting nervously to be part of a mint.
 
-There are many cases in which instead of minting NFTs just in time (or lazily) once the buyer has concluded a purchase, it is desirable to mint several all at once. Some common ones are:
+There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](./lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, and etc.
 
-- Event tickets
-- Packs
-- Game items
+> TODO: Do some more research and add a few more sentences to solidify the use case.
 
-In all these scenarios, NFTs are being treated closer to commodities than in the case in which collectors collect them as discrete artworks. Some challenges that lie in minting a batch of many tokens include exceedingly high gas fees on the Ethereum network, atomically synchronizing between mint and upload failures, and performance of uploading files to nft.storage, etc.
-
-## Pre-processing and project structure
-
-> TODO: Add content here
+Some challenges that lie in minting a bulk of NFTs include high gas fees on the Ethereum network, synchronizing between mint and upload failures and recovering from them, and performance of uploading files to NFT.storage, etc.
 
 ## Storage
 
@@ -33,7 +27,7 @@ Here's an overview of several strategies to upload to NFT.storage in bulk.
 
 ### Upload files iteratively
 
-The most straightforward way to upload files and metadata to nft.storage is by iterating over all of them and calling [`NFTStorage.store`]() one-by-one. Being simple as it is, that means you are responsible for properly handling errors that might occur for each successive request and synchronize it with the minting process.
+The most straightforward way to upload files and metadata to NFT.storage is by iterating over all of them and calling [`NFTStorage.store`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#store) one-by-one. Being simple as it is, that means you are responsible for properly handling errors that might occur for each successive request and synchronize it with the minting process.
 
 ```javascript
 
@@ -62,7 +56,7 @@ async function readAndUpload() {
 
 ### Upload directory of files
 
-A straightforward way is to employ the [NFTStorage.storeDirectory]() method to upload all the files stored in a local directory. This method handles many things under the hood for you, including rate-limiting for each request.
+A straightforward way is to use the [NFTStorage.storeDirectory](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storeDirectory) method to upload all the files stored in a local directory. This method handles many things under the hood for you, including rate-limiting for each request.
 
 ```javascript
 
@@ -83,6 +77,32 @@ async function readAndUploadDir() {
 }
 
 ```
+
+### Performance and Tradeoffs
+
+Both `store` and `storeDirectory` methods calls [`storeCar`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storecar) under the hood, which encode the payload to [CAR]() file(s) and upload to the `/upload` HTTP endpoint.
+
+> A naive benchmark using 12 threads and 400 connections to `/upload` API endpoint (`store` and `storeDirectory` methods), ignoring errors and rate limits:
+
+|  Thread Stats  |   Avg   |   Stdev   |   Max    |  +/- Stdev   |
+|----------------|---------|-----------|----------|--------------|
+|    Latency     | 52.44ms | 219.48ms  | 2.00s    | 95.86%       |
+|    Req/Sec     | 6.44    |  8.60     | 60.00    | 89.44%       | -->
+
+Comparing between two approaches, one can arrive at several comparisons.
+
+#### Iterative upload with `store`
+- Take on average around 60% faster than `storeDirectory` on a single call to `store` with a single file.
+- Require sending multiple HTTP requests to `/upload` (1,000 files == 1,000 requests) which is prone to errors and triggering rate limit
+- End up with multiple CIDs to maintain for all the uploaded files
+
+#### Directory upload with `storeDirectory`
+
+- Slower than `store` on a single call to `storeDirectory` with a single file.
+- returning a single, versatile CID of the root directory that can be used to query other files under that directory
+- Single atomic request and error handling
+
+In practice, except for some special cases, we recommend using `storeDirectory` for more reliability and maintainability when uploading bulk NFT files.
 
 ## Smart contracts
 
