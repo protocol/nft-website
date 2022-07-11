@@ -5,9 +5,8 @@ issueUrl: https://github.com/protocol/nft-website/issues/253
 related: 
   'Lazy minting': https://nftschool.dev/tutorial/lazy-minting/
 ---
- # Batch-minting NFTs on Ethereum
 
- > TODO: Add missing links
+ # Batch-minting NFTs on Ethereum
 
  This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common idioms of uploading files and metadata on to IPFS/Filecoin via NFT.storage.
 
@@ -17,17 +16,15 @@ Quite often,  NFT projects consist of hundreds if not thousands of files and met
 
 There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](./lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, and etc.
 
-> TODO: Do some more research and add a few more sentences to solidify the use case.
-
 Some challenges that lie in minting a bulk of NFTs include high gas fees on the Ethereum network, synchronizing between mint and upload failures and recovering from them, and performance of uploading files to NFT.storage, etc.
 
-## Storage
+## Batch-uploading NFT assets
 
-Here's an overview of several strategies to upload to NFT.storage in bulk.
+Here is an overview of strategies to upload to NFT.storage in bulk.
 
 ### Upload files iteratively
 
-The most straightforward way to upload files and metadata to NFT.storage is by iterating over all of them and calling [`NFTStorage.store`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#store) one-by-one. Being simple as it is, that means you are responsible for properly handling errors that might occur for each successive request and synchronize it with the minting process.
+The most straightforward, yet more involved way to upload files and metadata to NFT.storage is by iterating over all of them and calling [`NFTStorage.store`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#store) one-by-one. Being simple as it is, that means you are responsible for properly handling errors that might occur for each successive request and synchronize it with the minting process.
 
 ```javascript
 
@@ -56,7 +53,7 @@ async function readAndUpload() {
 
 ### Upload directory of files
 
-A straightforward way is to use the [NFTStorage.storeDirectory](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storeDirectory) method to upload all the files stored in a local directory. This method handles many things under the hood for you, including rate-limiting for each request.
+A simpler way is to use the [NFTStorage.storeDirectory](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storeDirectory) method to upload all the files stored in a local directory. This method handles many things under the hood for you, including rate-limiting for each request.
 
 ```javascript
 
@@ -80,7 +77,7 @@ async function readAndUploadDir() {
 
 ### Performance and Tradeoffs
 
-Both `store` and `storeDirectory` methods calls [`storeCar`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storecar) under the hood, which encode the payload to [CAR]() file(s) and upload to the `/upload` HTTP endpoint.
+Both `store` and `storeDirectory` methods calls [`storeCar`](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html#storecar) under the hood, which encode the payload to [CAR format (Content Addressable aRchives)](https://ipld.io/specs/transport/car/carv1/#summary) and upload to the `/upload` HTTP endpoint.
 
 > A naive benchmark using 12 threads and 400 connections to `/upload` API endpoint (`store` and `storeDirectory` methods), ignoring errors and rate limits:
 
@@ -92,6 +89,7 @@ Both `store` and `storeDirectory` methods calls [`storeCar`](https://nftstorage.
 Comparing between two approaches, one can arrive at several comparisons.
 
 #### Iterative upload with `store`
+
 - Take on average around 60% faster than `storeDirectory` on a single call to `store` with a single file.
 - Require sending multiple HTTP requests to `/upload` (1,000 files == 1,000 requests) which is prone to errors and triggering rate limit
 - End up with multiple CIDs to maintain for all the uploaded files
@@ -104,17 +102,19 @@ Comparing between two approaches, one can arrive at several comparisons.
 
 In practice, except for some special cases, we recommend using `storeDirectory` for more reliability and maintainability when uploading bulk NFT files.
 
-## Smart contracts
+## Batch-minting in smart contracts
 
-Now that you've learned how to upload the assets, let's explore a few tactics to mint tokens.
+Now that you've learned how to upload bulk assets, let's explore a few tactics to batch-mint NFTs on the Ethereum blockchain.
 
 ### Using ERC-1155 for batch-minting
 
-ERC-1155 is a new multi-token standard that can handle fungible-agnostic tokens in a single contract without resorting to ERC-20 for fungible and ERC-721 for non-fungible tokens.
+The best way to go about this if you are starting from scratch is to bite the bullet and learn to build with [ERC-1155 token standard](https://docs.openzeppelin.com/contracts/3.x/erc1155). ERC-1155 is a multi-token standard that can handle *fungible-agnostic** tokens in a single contract without resorting to ERC-20 for fungible and ERC-721 for non-fungible tokens.
 
-ERC-1155’s `balanceOf` method differs from ERC20’s and ERC777’s—it has an additional `id` argument [`balanceOf(address account, uint256 id) -> uint256`](). This `id` is not a conventional “token ID” of an NFT but a type ID.
+> *Note: Fungible-agnostic means the quality to be both fungible (breakable into small units and thus interchangeable) and non-fungible (atomic, non-breakable a.k.a NFTs)
 
-Unlike ERC-721, whose [`balanceOf(address account)`]() only counts the amount of a single token type represent by a single contract, ERC-1155 contract can holds many types of tokens, each with its own `id`. Non-fungible tokens are then implemented by simply minting a single one of them (one `id` for one NFT, thus unique).
+ERC-1155’s `balanceOf` method differs from ERC20’s and ERC777’s—it has an additional `id` argument [`balanceOf(address account, uint256 id) -> uint256`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc1155#IERC1155-balanceOf-address-uint256-). This `id` is not a conventional “token ID” of an NFT but a type ID.
+
+Unlike ERC-721, whose [`balanceOf(address account)`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#IERC721-balanceOf-address-) only counts the amount of a single token type represent by a single contract, ERC-1155 contract can holds many types of tokens, each with its own `id`. Non-fungible tokens are then implemented by simply minting a single one of them (one `id` for one NFT, thus unique).
 
 ### Batch operators
 
@@ -167,11 +167,11 @@ _mintBatch(msg.sender, [GENERAL, VIP, RSVP], [10**2, 1, 20], "");
 
 ```
 
-## Batch-minting for ERC-721
+## Piggyback-minting for ERC-721 with Chainlink gas price feed
 
-For those who are stuck with ERC-721 contracts, batch-minting means going through an often tedious process of iterating minting calls, often blind to the gas penalties. To ease on the gas fee, one idea is to run a cron-like process that poll the current Ethereum gas price (gWei) using Chainlink Fast Gas price feed and use the windows of opportunity when the gas prices are low to mint in an asynchronous manner.
+For those who are stuck with ERC-721 contracts, batch-minting means going through an often tedious process of iterating minting calls, often blind to the gas penalties. To ease on the gas fee, one idea is to run a cron-like process that poll the current Ethereum gas price (gWei) using [Chainlink Fast Gas](https://data.chain.link/ethereum/mainnet/gas/fast-gas-gwei) price feed and use the windows of opportunity when the gas prices are low to mint in an asynchronous manner.
 
-Here is an example of enquiring the gas price from the Chainlink’s [`EACAggregatorProxy`]() contract within an ERC-721 contract, using a “Piggyback” minting technique to mint the backlogs when the gas is cheap.
+Here is an example of enquiring the gas price from the Chainlink’s [`EACAggregatorProxy` contract](https://etherscan.io/address/0x169e633a2d1e6c10dd91238ba11c4a708dfef37c#code#L1) within your own ERC-721 contract, using a “Piggyback” method to mint the backlogged mints when the gas is cheap (a.k.a the "Tide-is-high" method).
 
 ```solidity
 
@@ -189,6 +189,7 @@ contract GameItem is ERC721URIStorage {
   uint256 const MAX_GAS_PRICE = 20000000000;
 
   // Record of an unminted item and the player/recipient.
+  // You can use a map instead of a struct.
   struct Unminted {
     address player;
     string tokenURI;
@@ -217,10 +218,10 @@ contract GameItem is ERC721URIStorage {
       // to the backlogs array for to be minted later.
       if (getLatestGasPrice() <= MAX_GAS_PRICE) {
         _mint(player, newItemId);
-        _setTokenURI(newItemId, tokenURI);					
+        _setTokenURI(newItemId, tokenURI);
         _tokenIds.increment();
 
-        // Piggyback-mint the backlogs when the gas price is cheap.
+        // Tide is high! Let's mint the backlogs while the gas price is low.
         if (backlogs.length > 0) {
           for (uint i=0; i<backlogs.length; i++) {
             _mint(backlogs[i].player, backlogs[i].tokenURI);
@@ -244,9 +245,7 @@ contract GameItem is ERC721URIStorage {
 
 ```
 
-> TODO: Walkthrough code here
-
-And to deploy the contract, just pass the Chainlink’s aggregator contract address into deploy function of the contract factory:
+To deploy the contract, don't forget to pass the Chainlink’s aggregator contract address into deploy function of the contract factory:
 
 ```javascript
 
@@ -258,14 +257,12 @@ console.log(`GameItem deployed to: ${gameItem.address}`)
 
 ```
 
-## Performance
-
-> TODO: Add performance considerations for each method
-
 ### ERC-721A: An Alternative
 
-[ERC-721A]() is an alternative ERC-721 implementation by the Azuki NFT development team. It was designed primarily for batch-minting with very low gas fees compared to conventional ERC-721 and ERC-1155. According to the developers, the new algorithm enables minting multiple NFTs for essentially the same cost as minting a single NFT at the expense of more complexity by means of several optimization tactics, such as removal of duplicate storage from OpenZeppelin’s ERC721Enumerable and updating the owner’s balance and other data once per batch mint request instead of per minted NFT.
+[ERC-721A](https://www.erc721a.org/) is an alternative ERC-721 implementation by the Azuki NFT development team. It was designed primarily for batch-minting with very low gas fees compared to conventional ERC-721 and ERC-1155. According to the developers, the new algorithm enables minting multiple NFTs for essentially the same cost as minting a single NFT at the expense of more complexity by means of several optimization tactics, such as removal of duplicate storage from OpenZeppelin’s ERC721Enumerable and updating the owner’s balance and other data once per batch mint request instead of per minted NFT.
 
-> TODO: Wrap here
+## Conclusion
+
+There is a few ways to approach batch-upload and -minting hundreds or thousands of your NFTs and their assets on NFT.storage and Ethereum. However, the most recommended way is to employ `uploadDirectory` to upload files on NFT.storage and `ERC-1155` for batch-minting on Ethereum.
 
 <ContentStatus />
