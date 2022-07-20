@@ -97,7 +97,7 @@ Comparing between two approaches, one can arrive at several comparisons.
 
 - For a single file, it is about 60% faster to `store` a single file than to use `storeDirectory`.
 - Requires sending multiple HTTP requests to `/upload` (1,000 files == 1,000 requests) which is prone to errors and triggering rate limit.
-- Can be used to upload [ERC-721 and ERC-1155 standard metadata] that is linked with the NFT asset in a single CID.
+- Can be used to upload ERC-721 and ERC-1155 standard metadata that is linked with the NFT asset in a single CID.
 - Multiple CIDs to maintain for all the uploaded files.
 
 #### Directory upload with `storeDirectory`
@@ -127,7 +127,7 @@ Unlike ERC-721, whose [`balanceOf(address account)`](https://docs.openzeppelin.c
 
 ### Batch operators
 
-The ERC-1155 standard provides two methods,`balanceOfBatch` and `safeBatchTransferFrom` that make querying multiple balances and transferring multiple tokens simpler and less gas-intensive. Especially the standard provided the function _mintBatch which allows batch minting of several token ids of any amount. For example, to batch-mint 100 NFTs, you would call it with an array of ids and amounts:
+The ERC-1155 standard provides two methods,`balanceOfBatch` and `safeBatchTransferFrom` that mae querying multiple balances and transferring multiple tokens simpler and less gas-intensive. Especially the standard provided the function _mintBatch which allows batch minting of several token ids of any amount. For example, to batch-mint 100 NFTs, you would call it with an array of ids and amounts:
 
 ```solidity
 
@@ -272,6 +272,6 @@ console.log(`GameItem deployed to: ${gameItem.address}`)
 
 ## Conclusion
 
-There are multiple ways to approach batch-upload and -minting hundreds or thousands of your NFTs and their assets on NFT.storage and Ethereum. However, the most recommended way is to employ `uploadDirectory` or NFTUp to upload files on NFT.storage, and `ERC-1155` for batch-minting on Ethereum.
+There are multiple ways to approach batch-upload and -minting hundreds or thousands of your NFTs and their assets on NFT.storage and Ethereum. However, the most recommended way is to employ `storeDirectory` or NFTUp to upload files on NFT.storage, and `ERC-1155` for batch-minting on Ethereum.
 
 <ContentStatus />
