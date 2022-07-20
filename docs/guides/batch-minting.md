@@ -1,5 +1,5 @@
 ---
-title: Batch-minting NFTs on Ethereum 🚧
+title: Batch-minting NFTs on Ethereum
 description: This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common patterns for uploading files and metadata to IPFS and Filecoin via NFT.storage.
 issueUrl: https://github.com/protocol/nft-website/issues/253
 related: 
@@ -10,11 +10,11 @@ related:
 
 This tutorial addresses some techniques in batch-minting big numbers of Ethereum non-fungible tokens (NFTs) as well as common patterns for uploading files and metadata to IPFS and Filecoin via NFT.storage.
 
-See also: [Lazy minting](./lazy-minting.md)
+See also: [Lazy minting](../tutorial/lazy-minting.md)
 
 Quite often,  NFT projects consist of hundreds if not thousands of files and metadata starting their lives out on a computer file system, waiting nervously to be part of a mint.
 
-There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](./lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, and etc.
+There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](../tutorial/lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, and etc.
 
 Some challenges that lie in minting a bulk of NFTs include high gas fees on the Ethereum network, synchronizing between mint and upload failures and recovering from them, and performance of uploading files to NFT.storage, etc.
 
@@ -273,5 +273,3 @@ console.log(`GameItem deployed to: ${gameItem.address}`)
 ## Conclusion
 
 There are multiple ways to approach batch-upload and -minting hundreds or thousands of your NFTs and their assets on NFT.storage and Ethereum. However, the most recommended way is to employ `storeDirectory` or NFTUp to upload files on NFT.storage, and `ERC-1155` for batch-minting on Ethereum.
-
-<ContentStatus />
