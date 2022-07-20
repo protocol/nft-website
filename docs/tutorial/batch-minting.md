@@ -44,11 +44,10 @@ async function readAndUpload() {
       })
 
   const client = new NFTStorage({ token })
-  const results = await Promise.all(ps)
+  const results = await Promise.all(promises)
 
-  await Promise.all(results.forEach((result) => {
-    const metadata = await client.store(nft)
-    console.log('NFT data stored!')
+  await Promise.all(results.forEach(result => {
+    const metadata = await client.store(resuilt)
     console.log('Metadata URI: ', metadata.url)
   }))
 }
@@ -97,16 +96,20 @@ Comparing between two approaches, one can arrive at several comparisons.
 #### Iterative upload with `store`
 
 - For a single file, it is about 60% faster to `store` a single file than to use `storeDirectory`.
-- Requires sending multiple HTTP requests to `/upload` (1,000 files == 1,000 requests) which is prone to errors and triggering rate limit
-- End up with multiple CIDs to maintain for all the uploaded files
+- Requires sending multiple HTTP requests to `/upload` (1,000 files == 1,000 requests) which is prone to errors and triggering rate limit.
+- Can be used to upload [ERC-721 and ERC-1155 standard metadata] that is linked with the NFT asset in a single CID.
+- Multiple CIDs to maintain for all the uploaded files.
 
 #### Directory upload with `storeDirectory`
 
 - Slower than `store` on a single call to `storeDirectory` with a single file.
-- Returns a single, versatile CID of the root directory that can be used to query other files under that directory
-- Single atomic request and error handling
+- Returns a single, versatile CID of the root directory that can be used to query other asset files under that directory.
+- Single atomic request and error handling.
+- Only upload a directory of raw asset data, which will require uploading metadata separately and link it to each asset.
 
 In practice, except for some special cases, we recommend using `storeDirectory` for more reliability and maintainability when uploading bulk NFT files.
+
+> See also: [Store and mint NFTs using ERC-1155 metadata standards](https://nft.storage/docs/how-to/mint-erc-1155/#uploading-your-images-assets-and-metadata).
 
 ## Batch-minting in smart contracts
 
