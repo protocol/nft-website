@@ -20,6 +20,8 @@ Below you'll find a basic list of some of the most active NFT marketplaces today
 ### Music
 
 - [Rocki](https://www.rocki.app/)
+- [Audius](https://audius.co/)
+- [Nina](https://www.ninaprotocol.com/)
 
 ### Collectibles
 
