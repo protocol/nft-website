@@ -97,7 +97,7 @@ module.exports = {
             collapsable: false,
             children: [
               '/guides/batch-minting.md',
-              '/concepts/mutable-nfts',
+              '/guides/mutable-nfts',
             ]
           },
           {
