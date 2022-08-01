@@ -74,7 +74,6 @@ module.exports = {
               '/concepts/content-addressing',
               '/concepts/content-persistence',
               '/concepts/minting-app',
-              '/concepts/mutable-nfts',
               '/concepts/managing-nfts',
               '/concepts/auditing-nfts',
             ]
@@ -98,6 +97,7 @@ module.exports = {
             collapsable: false,
             children: [
               '/guides/batch-minting.md',
+              '/guides/mutable-nfts',
             ]
           },
           {
