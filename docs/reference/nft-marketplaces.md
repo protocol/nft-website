@@ -10,6 +10,7 @@ Below you'll find a basic list of some of the most active NFT marketplaces today
 
 ### Visual artwork
 
+- [Coinbase NFT](https://nft.coinbase.com)
 - [Foundation](https://foundation.app/)
 - [KodaDot](https://nft.kodadot.xyz/)
 - [Nifty Gateway](https://niftygateway.com/)
