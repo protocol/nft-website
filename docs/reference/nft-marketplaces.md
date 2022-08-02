@@ -10,16 +10,20 @@ Below you'll find a basic list of some of the most active NFT marketplaces today
 
 ### Visual artwork
 
+- [Coinbase NFT](https://nft.coinbase.com)
 - [Foundation](https://foundation.app/)
 - [KodaDot](https://nft.kodadot.xyz/)
 - [Nifty Gateway](https://niftygateway.com/)
 - [OpenSea](https://opensea.io/)
 - [Rarible](https://rarible.com/)
 - [SuperRare](https://superrare.co/)
+- [Zora](https://zora.co/)
 
 ### Music
 
 - [Rocki](https://www.rocki.app/)
+- [Audius](https://audius.co/)
+- [Nina](https://www.ninaprotocol.com/)
 
 ### Collectibles
 

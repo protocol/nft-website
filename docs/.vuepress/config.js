@@ -74,7 +74,6 @@ module.exports = {
               '/concepts/content-addressing',
               '/concepts/content-persistence',
               '/concepts/minting-app',
-              '/concepts/mutable-nfts',
               '/concepts/managing-nfts',
               '/concepts/auditing-nfts',
             ]
@@ -90,7 +89,15 @@ module.exports = {
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games',
               '/tutorial/flow-nft-marketplace',
-              '/tutorial/avax-nft'
+              '/tutorial/avax-nft',
+            ]
+          },
+          {
+            title: 'Guides',
+            collapsable: false,
+            children: [
+              '/guides/batch-minting.md',
+              '/guides/mutable-nfts',
             ]
           },
           {

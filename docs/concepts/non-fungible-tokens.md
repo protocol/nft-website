@@ -12,6 +12,7 @@ First, let's break down the name. Before we get into "non-fungible," what do we 
 
 The most famous blockchain is the one that coined the term. Bitcoin's [whitepaper](https://bitcoin.org/bitcoin.pdf) introduced a "chain of blocks" to track and secure the history of the system over time, and the term "blockchain" caught on as new networks built on the idea. The Bitcoin network has a single token, named "bitcoin." 
 
+
 Like traditional cash, bitcoin is _fungible_, meaning you can replace one bitcoin with another bitcoin without changing the value of either. In fact, at a technical level, there's not really such a thing as "a single bitcoin" with its own identity. Whereas cash at least might have a serial number to distinguish one bill from another, the Bitcoin network doesn't track coins individually and assign them each an identifier. Instead, the system just keeps track of the quantity in each account, crediting one account and debiting another with each transaction.
 
 Bitcoin inspired a host of other blockchains that iterated on the same basic idea and introduced new capabilities. The most significant for NFTs was Ethereum, where the concept of NFTs was first developed. Ethereum added general-purpose computation to the blockchain consensus model pioneered by Bitcoin, positioning itself as a "world computer" enabling "programmable money." 
