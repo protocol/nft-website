@@ -88,7 +88,16 @@ module.exports = {
               '/tutorial/mint-nftstorage-polygon',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games',
-              '/tutorial/flow-nft-marketplace'
+              '/tutorial/flow-nft-marketplace',
+              '/tutorial/avax-nft',
+            ]
+          },
+          {
+            title: 'Guides',
+            collapsable: false,
+            children: [
+              '/guides/batch-minting.md',
+              '/guides/mutable-nfts',
             ]
           },
           {
