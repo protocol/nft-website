@@ -281,7 +281,8 @@ Note that you will need the printed contract address in the minting step. You ca
 
 Minting the NFT is now merely calling the contract we just deployed to Polygon. Create a new file called `mint-nft.mjs` inside the `scripts` directory and copy this code from the listing below:
 
-```bash
+
+```js
 const CONTRACT_ADDRESS = "0x00xxx"
 const META_DATA_URL = "ipfs://XXX/metadata.json"
 
