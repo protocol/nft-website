@@ -1354,12 +1354,12 @@ This form should make a good use of the minting form. Once we're done, it will l
 
 I know Mary is obviously *not* a Bulldog, but you will get a chance to add your breed options later.
 
-Let's start by creating `QueryToken.jsx` file inside the `/components` directory.
+Let's start by creating `QueryForm.js` file inside the `/components` directory.
 
 ```js
 import { useState, useEffect } from 'react';
 
-// QueryForm.jsx
+// QueryForm.js
 
 const style = {
   padding: '1rem',
@@ -1377,7 +1377,7 @@ const QueryForm = () => {
   useEffect(() => {
     let getTokens = async () => {
       // Set mock IDs for now
-      setTokenIds([1, 2, 3]);
+      setAllTokenIds([1, 2, 3]);
     };
     getTokens();
   }, []);
@@ -1397,7 +1397,7 @@ const QueryForm = () => {
               className="u-full-width"
               type="number"
               id="idInput"
-              onChange={(event) => setId(parseInt(event.target.value))}
+              onChange={(event) => setSelectedId(parseInt(event.target.value))}
             >
               {
                 // We want to display token IDs that are available.
@@ -1531,7 +1531,7 @@ const QueryForm = () => {
       // Instead of dummy token IDs, we call `getAllTokenIds`
       // to get real IDs of all existing tokens.
       const ids = await getAllTokenIds();
-      setTokenIds(ids);
+      setAllTokenIds(ids);
     };
     getTokens();
   }, []);
@@ -1563,7 +1563,7 @@ const QueryForm = () => {
 
 In the `useEffect` callback, we replaced the stubbed ID array with the call to
 `getAllTokenIds` function, which executed `GetAllTokenIds.cdc` and returned an
-array of existing token IDs. We then call `setTokenIds` to set `allTokenIds` to
+array of existing token IDs. We then call `setAllTokenIds` to set `allTokenIds` to
 the array. This is used to fill up the `<option>` element with the IDs and act as
 the UI guard to make sure users can only choose the available tokens to query.
 
