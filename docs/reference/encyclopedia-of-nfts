@@ -1,0 +1,346 @@
+# Introduction
+
+Ever since Non-Fungible Tokens (NFTs) entered into the cultural zeitgeist back in March of 2021, they have been plagued by confusion and misunderstanding. Particular types of NFTs such as the well-known (and well-critiqued) Bored Ape Yacht Club have unintentionally led many people to develop a narrow and distorted view of what is actually a very broad and interesting piece of technology. 
+
+The uses cases and methods of implementing NFTs are endless, but the cultural understanding is currently stuck. Furthermore, if a person is curious enough to look beyond the surface level, they might be hard pressed to navigate what’s underneath. Because of this, we have created the Encyclopedia of NFTs — it is our hope that the following article will help interested explorers begin to grasp what NFTs as a technology have to offer. 
+
+---
+
+# Part 1: Terms & Definitions
+
+The first part of this guide will explain the major terminology associated with NFTs as well as give a broad overview of the landscape and industry. After reading Part 1, you’ll have a basic understanding of all the different ways you could interact with the world of NFTs. From there, Part 2 will help you actually navigate decision making if you’re considering collecting or making NFTs yourself.
+
+## What is an NFT?
+
+Before going any further, it’s important to understand what a Non-Fungible Token is at a high level. Technically speaking, **an NFT is not a picture of an ape or a pixelated punk rocker; it’s actually a unique numerical identifier governed by a smart contract that can have other data and information (such as a picture of an ape or pixelated punk rocker) associated with it.** 
+
+If that sounds a little fuzzy, take a moment to ask yourself, “what is a computer file?”. Most people interact with files on their laptops or smart phones every single day, but they’d be hard-pressed to articulate what exactly makes up those files. Trying to understand a non-fungible token is quite similar. In some ways, a non-fungible token is like a computer file but the file isn’t stored on a single device… it’s stored on a decentralized virtual computer that thousands of people all over the world help operate. 
+
+In a similar fashion to how computer files come in several formats such as .jpg or .txt, NFTs also can come in several different formats called **Standards**.
+
+## Standards
+
+<aside>
+❓ A **token standard** is a clearly defined and widely agreed upon method for structuring and creating the technical underpinnings of an NFT. Using accepted token standards will ensure your NFTs are widely compatible and more easily trusted. Within the Ethereum ecosystem, there are two primary token standards: ERC-721 and ERC-1155.
+
+</aside>
+
+**ERC-721** - Originally proposed in 2017 via [Ethereum Improvement Proposal number 721](https://eips.ethereum.org/EIPS/eip-721) (EIP-721 for short), the ERC-721 token standard was created in 2018 to allow for non-fungible assets to be generated on the Ethereum blockchain. The summary for EIP-721 described itself as “a standard interface for non-fungible tokens, also known as deeds.” The creation and success of early NFTs like CryptoPunks and CryptoKitties were part of the inspiration for developing more formal standard to support the early burgeoning ecosystem that sprung up around them. Today, the ERC-721 standard is the most widely used and supported type of NFT, and it undergirds a multi-billion dollar market.
+
+**ERC-721A** - Originally created by the Azuki team for its NFT launch in January 2022, [ERC-721A](https://www.erc721a.org/) is an emerging contract standard that is built off of the ERC-721 standard but includes some improvements. According to its creators, “ERC721A is an improved implementation of the IERC721 standard that supports minting multiple tokens for close to the cost of one.” Since successfully launching with this new implementation, several other high-profile NFT projects have gone on to utilize it as well.
+
+**ERC-1155** - Created half a year after the ERC-721 standard, the ERC-1155 standard was proposed in [Ethereum Improvement Proposal number 1155](https://eips.ethereum.org/EIPS/eip-1155) (EIP-1155 for short). According to the EIP’s summary, ERC-1155 is “a standard interface for contracts that manage multiple token types. A single deployed contract may include any combination of fungible tokens, non-fungible tokens or other configurations (e.g. semi-fungible tokens).” In comparison to ERC-721 tokens, ERC-1155 tokens are much more flexible and have a wider range of features.
+
+## Types
+
+<aside>
+❓ A **type** is a particular quality, attribute, or trait of an NFT. An NFT can have multiple **types**. For instance, an NFT could be a mutable multi-edition generative art piece that is stored off-chain but was not pre-minted. Think of types as different flavors that can be mixed and combined together to achieve different results.
+
+</aside>
+
+**Purpose Types** - On the highest level, NFTs can be categorized as either utility-focused or art-focused. This is an NFT’s designed “purpose”. An NFT can be both utilitarian and decorative, but there’s often an emphasis on one more than the other. It may be helpful to think of it as a spectrum.
+
+**Utilitarian** - An NFT that enables a practical use case in the lives of its users or owners. Possession of a utilitarian NFT might grant the holder access to exclusive content, benefits, or even rewards. A common example of a utilitarian NFT would be an event ticket or a membership card. A graphic or artistic visual might be used to represent the NFT, but the visual component would typically be secondary in nature.
+
+**Art, Decorative, or Collectible** - An NFT that represents a work of art or some other thing that is primarily appreciated for its aesthetic or conceptual qualities. An art NFT could also enable or bestow utilitarian benefits upon the owner if the creator so desired, but the utility would typically be secondary in nature.
+
+**Quantity & Supply Types** - While the purest definition of an NFT implies complete uniqueness of each item, the reality is a lot more nuanced. Fungibility is actually a spectrum, and NFTs are flexible enough to be used in a variety of ways to implement quantities and supply sizes.
+
+**One-of-one** - Perhaps the most basic of NFT types, a one-of-one refers to completely unique and distinct objects or art pieces. There is only one NFT of it, and typically no other versions exist.
+
+**Multi-edition** - ****In contrast to a one-of-one, a multi-edition NFT is when there are multiples of the same object or piece of art. There are several ways of implementing multi-edition NFTs, but the most common approach is to either use an ERC-721 contract or an ERC-1155 contract. Depending on which you choose, the outcome will be slightly different. When you use an ERC-721 contract, each NFT within an edition has a distinct identifier and could be numbered like so: “Artwork B 1/10”, “Artwork B 2/10”, “Artwork B 3/10”, etc. In this scenario, the owner of “Artwork B 5/10” is the only person who owns “Number 5”. This method would be comparable to a photographer or screen printer creating a limited run of 10 signed and numbered prints in the physical world. 
+
+When you use an ERC-1155 contract on the other hand, you are able to create semi-fungible quantities of each object or work of art. In the example of “Artwork B”, the ERC-1155 version would not have distinct identifiers or numbers for each piece within the edition. There would simply be 10 editions of “Artwork B”, but there would be no specific “Number 5” or “Number 3”. All of the items within the edition would be identical and interchangeable for any of the other items within that edition. This method would be comparable to a photographer or screen printer creating a limited run of 10 signed prints in the physical world, but each print would not be numbered.
+
+![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/16713147-fcd1-458d-b9ac-8bcebfaa5bbd/Untitled.png)
+
+GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC
+
+**Open-edition** - An open-edition is a multi-edition where someone creates an uncapped supply of a particular object or work of art. The number of editions created will match the number of editions sold. Often times, an artist will choose to create an edition that remains open until a fixed point in time or until a certain criteria has been met. A basic example of this would be a work of art being sold as an open edition for 48 hours. Within this set time frame, there is no limit on the number of editions that can be sold.
+
+**Limited-edition** - A limited-edition is the more traditional form of an edition. This type would be comparable to our earlier example of a photographer or screen printer creating a limited run of 10 signed and numbered prints in the physical world. The limit creates scarcity which can have an impact on market dynamics such as pricing and demand.
+
+**Collection** - Most NFT platforms and protocols will categorize all the NFTs made from a single smart contract as being a part of one “collection”. There are many ways to organize and structure a collection, including using metadata called properties/traits, and it often will have an impact on supply & quantity dynamics. If the way your NFTs are displayed, organized, and perceived by the general public on various web3 platforms matters, then it will be important to think about your NFTs within the framework of “collections”.  
+
+**Open collection size** - Similar to the concept of editions, a collection can be “open” when it comes to the number of NFTs within it. With an open collection, generally there is no declared limited on the number of NFTs within the collection. Fine artists have been known to create a single smart contract that they regularly mint their new work on rather than having multiple different contracts. In this scenario, they may choose to organize the collection further by specific series using metadata.
+
+**Fixed collection size** - A fixed collection means that either A) the creator has promised not to create more than a certain number of NFTs within the collection, or B) the smart contract itself dictates a limited supply size. The CryptoPunks collection is an example of a fixed collection size, as it has a maximum number of 10,000 NFTs within it. Alternatively, the fixed nature of a collection might be time-bound instead of quantity bound.
+
+**Properties/Traits** - While not necessary or present in all projects, many NFTs have metadata that define properties or traits within a collection. For instance, the CryptoPunks collection has dozens of traits and combinations that help make each CryptoPunk different: alien, beanie, red mohawk, nerd glasses, etc. Traits can come in many different forms, but the important thing to remember is how they can impact the perception of rarity, quantity, and supply. The CryptoPunks collection is 10,000 different pixelated punks (no two are identical), but the total supply of alien punks is limited to just 9.
+
+![An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef7cff1c-2e20-4d29-baa2-ab53be05327e/Untitled.png)
+
+An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))
+
+**Data Storage Types** - When it comes to storing the media associated with an NFT, there are a lot of options and each one has different upsides and downsides. Many people have thought about NFT media as being stored either “on-chain” or “off-chain”, but the reality is a lot more complicated. “On-chain” and “Off-chain” looks more like a spectrum, with most NFTs not falling entirely on either extreme. For the purposes of this guide, we’ll stick to defining the two terms on a high level. Lastly, storage choice for NFT media has many technical implications, but it can also have cultural implications. For instance, different people and communities can have different preferences when it comes to data storage.
+
+**On-chain** - An “on-chain” NFT refers to an NFT which has a significant amount of its data encoded directly onto the blockchain. In the case of the Ethereum blockchain, data storage and processing costs can be extremely high due to the security and permanence of Ethereum records. This dynamic creates lots of limitations with the amount of data that can be stored. For this reason, many NFTs store only a minimal amount of their data on-chain. “On-chain” NFTs in general are often perceived as being more censorship resistant, permanent, and secure when compared to “off-chain” alternatives. That being said, the vast majority of NFTs are more “off-chain” than they are “on-chain”.
+
+**Off-chain** - An “off-chain” NFT refers to an NFT which has a significant amount of its data stored outside of the blockchain itself. In many cases, an NFT might have a minimal amount of metadata stored on-chain that then links back to the rest that is stored “off-chain” in more flexible or cost efficient locations such as IPFS or Filecoin.
+
+![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f7cba6a-97c8-4449-96ac-25756481e620/Untitled.png)
+
+[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin. 
+
+**Change/State Types** - The vast majority of NFTs and traditional media in the world are relatively fixed and static, meaning they’re not really supposed to change over time after the point of creation. That being said, there are many different types of “states” and an NFT doesn’t have to be unchangeable.
+
+**Interactive** - An interactive NFT is one that can be changed or manipulated by some person, group, or entity. For example, an NFT could be a character in a game that can be upgradeable or customized by the owner or user.
+
+**Non-interactive** - A non-interactive NFT is one that cannot be changed or manipulated. For example, most traditional fine-art NFTs are meant for viewing pleasure and have no ability to “do” anything.
+
+**Immutable** - An immutable NFT is one in which the media or functionality is intended to stay the same over time and is considered “fixed”.
+
+**Mutable** - A mutable NFT is one in which the media or functionality is intended to change over time.
+
+![The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7bb13593-88a4-49aa-b1b8-00c0fdda8c50/Untitled.png)
+
+The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))
+
+**Representation Types** - An NFT might just seem like a digital record or item, but it could also represent many different things if the right system is in place. For instance, an NFT could represent a real-world physical object such as a t-shirt or a book. It could also represent another NFT.
+
+**Redeemable** - A redeemable NFT is one that can be exchanged for another item, whether physical or digital. 
+
+**Unredeemable** - An unredeemable NFT is one that is not meant to be exchanged for something else.
+
+**Backed** - An NFT that is “backed” by something implies that there is an underlying asset that helps secure or give value to the NFT. This is similar to how the United States Dollar used to be backed by physical gold many decades ago. An NFT that is “backed” may or may not be redeemable.
+
+**Unbacked** - An “unbacked” NFT is any NFT that has no underlying asset.
+
+![In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8dfd0a95-6fd7-42a9-bc95-7d8e565079fe/Untitled.png)
+
+In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))
+
+**Method of Creation Types** - In general, there are two broad categories of NFTs when it comes to how the media associated with them were created: generative and non-generative. On a broad level, these two terms refer to whether or not the final media was created “by hand” or if it was generated randomly with a computer script based on multiple pieces.
+
+**Generative** - A generative NFT is one which had its final form composited together randomly using a computer script that pulls from a pool of different media pieces. The individual pieces that make up the whole may have been created “by hand”, but the assembly was done through an automated process.
+
+**Non-generative** - A non-generative NFT is one that was made entirely “by hand”, and did not rely upon a computer script and a library of media assets.
+
+![The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1d51c078-8581-4a70-abde-a7981b3dc7b0/Untitled.png)
+
+The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))
+
+**Point of Minting Types** - The point at which an NFT is actually generated on the blockchain might not coincide with when it is sold or released. There are a variety of methods to choose from when it comes to distributing and creating NFTs in relationship to selling or releasing them.
+
+**Mintable** - A mintable NFT is one which is not actually created on the blockchain until a collector or buyer initiates its creation. With this type of NFT, the purchaser is the one responsible for the action and the associated transaction costs rather than the artist or creator.
+
+**Pre-minted** - A pre-minted NFT is one which is created on the blockchain before it is sold or released. With this type of NFT, the artist or creator is the one responsible for the action and its associated transaction costs.
+
+**Lazy Minting** - A lazy-minted NFT is similar to a mintable NFT in that it is only officially finalized on the blockchain at the point of sale. From a user experience perspective, it will look and feel like an actual NFT, but under the surface it will only be created when someone chooses to purchase it. The difference between mintable NFTs and lazy minted NFTs is subtle and has more to do with perception.
+
+## Use Cases
+
+<aside>
+❓ The use cases listed below are some of the more common, popular, or well known applications for NFTs that exist currently. This list is not exhaustive, and new/niche use cases are regularly emerging. Each of these use cases could utilize any combination of the **types** discussed earlier.
+
+</aside>
+
+**Fine Art** - Fine art encompasses a wide range of mediums and disciplines such as painting, drawing, photography, sculpture, and more. When it comes to fine art, NFTs act sort of like a certificate of authenticity and the artist’s cryptographic signature that is paired with a visual media file. That being said, there are many examples of NFTs themselves being either a part of or the entire work of art itself (with no accompanying visual that is being pointed to). Fine art NFTs have become a relatively solidified part of even mainstream culture, having received full adoption by traditional institutions such as Sotheby’s, Christie’s, and more. One of the most promising aspects of fine art NFTs are in their ability to automatically track and permanently preserve the provenance of an artwork.
+
+- [SuperRare](https://superrare.com/)
+- [CryptoPunk’s for sale at Christie’s](https://www.christies.com/lot/lot--6316969/)
+- [Jen Stark on Foundation](https://whitewall.art/art/jen-stark-sets-records-with-first-nft)
+
+![One of the 10,000 pieces from Damien Hirst’s first art project utilizing NFTs. ([Source](https://opensea.io/assets/ethereum/0xaadc2d4261199ce24a4b0a57370c4fcf43bb60aa/9831))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6870f020-e3b3-481d-9090-0fbc768b1c39/Untitled.png)
+
+One of the 10,000 pieces from Damien Hirst’s first art project utilizing NFTs. ([Source](https://opensea.io/assets/ethereum/0xaadc2d4261199ce24a4b0a57370c4fcf43bb60aa/9831))
+
+**Music** - Music NFTs are an emerging domain of tokens that aim to provide musicians with a more viable method of revenue creation by tapping into an artist’s most passionate fans. In some ways, it’s a more effective evolution of mp3 purchases that introduces real scarcity and ownership tracking. Unlike in the old days of iTunes and CD burning, a musician could release their songs on all the major streaming platforms for anyone to listen to, while also releasing an exclusive set of 50 NFTs of the music that are aimed at collectors and super fans. The NFTs could even grant access to exclusive insider access, merch, or discounts.
+
+- [sound.xyz](https://sound.xyz)
+- [catalog.works](https://catalog.works/)
+- [Songcamp’s “Chaos Festival”](https://www.fwb.help/wip/chaos-reigns-songcamp-music-web3)
+
+![Well-known musical artist Pussy Riot has used a platform called [sound.xyz](http://sound.xyz) to release limited edition NFTs of her music that her fans can collect and trade. ([Source](https://www.sound.xyz/pussyriot/laugh-it-off))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3a9faa3c-ac1b-40ea-9e94-83809f5c564e/Untitled.png)
+
+Well-known musical artist Pussy Riot has used a platform called [sound.xyz](http://sound.xyz) to release limited edition NFTs of her music that her fans can collect and trade. ([Source](https://www.sound.xyz/pussyriot/laugh-it-off))
+
+**PFP** - Profile pictures (often called PFPs) are a type of artwork NFT that are designed specifically to be used as a person’s display avatar on a social media site like Twitter or Facebook. A few well-known examples of these types of NFTs would be Bored Ape Yacht Club, CryptoPunks, World of Women, and Doodles. Instead of using a headshot or a selfie of oneself, many members of the emerging “Web3” ecosystem choose to represent themselves as an illustrated character instead. Some people do this because they prefer to remain pseudonymous online. The trend of repping PFP NFTs became so popular in 2021 that some social networking sites like Twitter added native support for them as a full fledged feature. A PFP NFT project typically has a community and avid fan base surrounding it in addition to also sometimes having dedicated storytelling, games, merch, live events, etc. While it may seem strange to outsiders, the PFP NFT phenomenon is somewhat similar to movie fandoms, sports teams, or band fan bases. The cultural dynamics found within these groups are just common forms of human social bonding.
+
+- [CryptoPunks](https://www.larvalabs.com/cryptopunks)
+- [Doodles](https://doodles.app/)
+- [World of Women](https://worldofwomen.art/)
+
+![Cool Cats is a popular 10,000 supply PFP project with an avid fanbase, live events, and even a game. ([Source](https://www.coolcatsnft.com/))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1879995a-d3d7-42c5-b311-5d05dcbbd94d/Untitled.png)
+
+Cool Cats is a popular 10,000 supply PFP project with an avid fanbase, live events, and even a game. ([Source](https://www.coolcatsnft.com/))
+
+**Memes** - Internet culture has a rich history of meme generation and propagation, but it hasn’t been easy for the creator or spreaders of a meme to materially benefit from a meme’s success. Memes are often shared unattributed and right-clicked-saved, but with the advent of NFTs, memes can finally be owned, tracked, collected, bought, and sold in a verifiable way. In 2021, there were numerous examples of early-internet memes being minted as NFTs by their creators and then being sold for high dollar amounts at auction for profit or charity. 
+
+- NyanCat
+
+![The owner and photographer of the Doge meme auctioned off 1/1 NFTs for charity in 2021. ([Source](https://very.auction/))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4ff9cfa-f336-48e7-bd13-028db53203e3/Untitled.png)
+
+The owner and photographer of the Doge meme auctioned off 1/1 NFTs for charity in 2021. ([Source](https://very.auction/))
+
+**Writing** - While many people think of visual media when they think of NFTs, there are plenty of non-visual applications for them such as the written word. Essayists, story-tellers, poets, and more can mint their works as NFTs and put them up for auction or sale so that collectors and patrons may support their craft financially. Web3 blogging platforms like Mirror have emerged that make NFTs a native publishing experience, allowing readers of a publication to “collect” each new written post as an editioned NFT. These editions can then be bought, sold, used or traded by fans and collectors. NFTs of written works often come in the form of a visual representation of the work (a cover image), raw text stored directly on-chain, and/or a text file held on a decentralized storage solution like IPFS.
+
+- [mirror.xyz](https://mirror.xyz)
+- [$NOVEL crowdfund](https://emily.mirror.xyz/0AFENlMKv9amUC1OJIZY26udpISw_raXkoEcvelPvzg)
+- [theVERSEverse](https://theverseverse.com/)
+
+![Web3 writer Chase Chapman uses Mirror to publish her work. Readers can collect some of her posts as NFTs and support her work. ([Source](https://chase.mirror.xyz/PjnfkklAMUcEIBQuZ-An5xlBheQchsLwkRx6GHPfGzw?wnft=true))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/56c0f19a-d4e2-4c46-a7cc-b74e45ef2be6/Untitled.png)
+
+Web3 writer Chase Chapman uses Mirror to publish her work. Readers can collect some of her posts as NFTs and support her work. ([Source](https://chase.mirror.xyz/PjnfkklAMUcEIBQuZ-An5xlBheQchsLwkRx6GHPfGzw?wnft=true))
+
+**Social Media** - On a fundamental level, an NFT is simply a unique and verifiable representation of something else. This makes them extremely powerful for experimental concepts. Emerging Web3 social media platforms like Lens Protocols are actually using NFTs to represent all of the different actions and components of a social experience so that the platform can be built upon by anyone and accessed in a permissionless fashion. In the case of Lens Protocol, every “follow” is an NFT. If “Person A” follows “Person B”, an NFT is generated and sent to Person A’s wallet that represents the relationship.
+
+- [Farcaster](https://www.farcaster.xyz/)
+- [Lens](https://lens.xyz)
+- [Interface](https://www.interface.social/)
+
+![Lens Protocol is an emerging social ecosystem based on decentralized on-chain data. ([Source](https://lens.xyz))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e27bdd41-de23-49f2-8aa5-f9226730d05a/Untitled.png)
+
+Lens Protocol is an emerging social ecosystem based on decentralized on-chain data. ([Source](https://lens.xyz))
+
+**Domains** - Domain names have been around for a long time and are a pre-web3 example of a piece of digital property. NFT and blockchain technology can be applied to domains to make them more own-able and less centralized. Whereas with traditional domains you have to always interact and go through an intermediary, domains as NFTs and blockchain records allow for greater user control and autonomy. 
+
+- [ENS Domains](https://ens.domains/)
+- [Unstoppable Domains](https://unstoppabledomains.com/)
+
+![Example of ENS Domain NFTs.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/75d971d7-5244-469e-98c8-cd8f13965135/Untitled.png)
+
+Example of ENS Domain NFTs.
+
+**Events** - Perhaps one of the most promising and practical applications for NFTs is in the realm of events and live shows such as concerts, movies, and sports. On the simplest level, a ticket to an event can be an NFT that lives in a person’s wallet. Once the event is over, they’re able to keep the digital ticket as a collectible item. NFT event tickets can be managed by smart contracts on the blockchain that automatically enforce certain agreements and even resale limitations. Event goods such as merchandise and posters can even be offered in the form of NFTs to coincide with the digital experience around ticketing.
+
+- [Gatekeeper](https://gatekeep.it/)
+- [Unlock Protocol](https://unlock-protocol.com/)
+
+![An example of ticketing an event using Unlock Protocol. ([Source](https://unlock-protocol.com/blog/ethcc5-2022-ticketing))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/81af1b3b-c504-4a87-b0b5-3456e0600caa/Untitled.png)
+
+An example of ticketing an event using Unlock Protocol. ([Source](https://unlock-protocol.com/blog/ethcc5-2022-ticketing))
+
+**Memberships** - An NFT can also be used to represent membership in a group, club, or entity. While NFTs are permanent digital objects, their utility or benefits do not have to last permanently. An expiration date or criteria could be hardcoded into the smart contract that governs the NFT. 
+
+![Poolsuite is a luxury lifestyle brand that utilizes NFTs to grant access to its events, products, and perks. ([Source](https://members.poolsuite.net/))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b3711dc2-8da5-4beb-b1dc-76ff612fee22/Untitled.png)
+
+Poolsuite is a luxury lifestyle brand that utilizes NFTs to grant access to its events, products, and perks. ([Source](https://members.poolsuite.net/))
+
+**Gaming** - Perhaps one of the most promising and multi-faceted use cases, gaming NFTs have the potential to change the ways in which people interact with video games at almost every touch point. Not only can individual in-game assets be ownable NFTs, but the games themselves can be too. A character could be an NFT that possesses certain ability NFTs that then interact with item NFTs. An even more experimental and innovative use-case for NFTs in gaming can be seen with [Loot Project](https://www.lootproject.com/). In the universe of Loot, there is a base layer of underlying game items without any game attached so that people can build numerous games and projects around the same thing.
+
+- [Dark Forest](https://zkga.me/)
+- [Parallel](https://parallel.life/)
+
+![A blockchain-based game called Dark Forest utilizes NFTs in a variety of ways such as in-game items and prizes. ([Source](https://gitcoin.co/grants/2323/dark-forest))](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9c6ea2ca-058b-48ce-bbf9-d70375c195cd/Untitled.png)
+
+A blockchain-based game called Dark Forest utilizes NFTs in a variety of ways such as in-game items and prizes. ([Source](https://gitcoin.co/grants/2323/dark-forest))
+
+**Financial Assets** - In the world of decentralized finance, NFTs can be used to represent many different financial assets like a person’s stake in a fund or asset, their liquidity position on an exchange like Uniswap, or even things like loans. 
+
+![Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/94599f15-6f7e-46c8-94fc-b3d53c083b19/Untitled.png)
+
+Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.
+
+## Components
+
+<aside>
+❓ A component is one of the different elements that make up the technical underpinnings of an NFT.
+
+</aside>
+
+**Smart Contract** - A piece of software with rules, data, and functions that is deployed permanently on the blockchain. A smart contract is used to generate NFTs, and it dictates how the NFTs created with the contract will function and exist.
+
+**Token ID** - Each NFT minted on a contract will have a unique token ID number that distinguishes it from all the other NFTs in the collection. Often token IDs will start at 0 or 1 and count upwards, but they can also be configured in many other ways. With ERC-1155 NFTs, each single edition of an NFT won’t have a distinct token ID, but each batch of editions will. For instance, you could own 2 editions of Token ID #4, but your two editions won’t have unique IDs; you would merely own 2 copies of Token ID #4. 
+
+**Metadata** - On a basic level, metadata defines and controls a large portion of how most NFTs work. Metadata for an NFT is typically a simple string of text formatted in a special way, and it defines things like the image URL, the name, the creator, the description, the traits, etc. 
+
+**Media** - If an NFT has a media component such as an image or a song, that asset must be hosted somewhere and referenced within the metadata. Due to the expectation for permanence and censorship-resistance from the NFT market, self-hosting an NFT’s media component or hosting with a centralized entity like AWS is considered a very bad practice. Hosting with a decentralized storage solution like IPFS, Filecoin, and NFT Storage is the best way to go.
+
+**Owner** - The wallet address that currently possesses the NFT, as shown on the blockchain itself.
+
+**Creator/Minter** - The wallet address responsible for minting the NFT from the smart contract.
+
+Below is an example of what the metadata for Token ID 1 from the Blitmap collection actually looks, followed by how the Token is displayed on Etherscan.
+
+`{"image":"https://api.blitmap.com/v1/png/1","name":"#1 - Rose","description":"Blitmap is a community crafted art collection and universe. All data is completely on chain.\n\n[blitmap.com](https://www.blitmap.com)","attributes":[{"trait_type":"Type","value":"Original"},{"trait_type":"Composition","value":"Rose (#1)"},{"trait_type":"Palette","value":"Rose (#1)"},{"trait_type":"Affinity","value":"Fire III"},{"trait_type":"Slabs","value":"◢ ◢ ◢ ◥"},{"trait_type":"Attunement","value":"Attuned"}]}`
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b534c389-2216-4ed3-bce5-62894083717a/Untitled.png)
+
+---
+
+# Part 2: Choosing & Navigating Your Options
+
+Now that you have a broad understanding of the NFT ecosystem and its terminology, you probably have a lot of questions or even concerns about which direction you should head in if you’re thinking about making or collecting NFTs. Part 2 of this guide will help you navigate the options.
+
+## Choosing a Standard
+
+*What to consider when choosing between the ERC-721 standard or the ERC-1155 standard.*
+
+![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/90e9f1f1-452c-47d7-b638-b89f01770c41/Untitled.png)
+
+GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC
+
+### Editions
+
+Let’s say you are a fine artist who wants to release editions of your work. You could use either token standard, but the ERC-1155 standard is much more suitable to a collection of items that have quantities, both for efficiency and display reasons. An exception to this would be if you really want each NFT to have a unique edition number.
+
+![An example of a multi-edition NFT that utilizes the ERC-721 standard. In cases like this, each NFT has a unique number and is separated from one another. One downside to this is that it can be difficult to navigate or sort through when you own a lot of the same edition.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2833a376-c8d1-48f8-aef5-b9740816d459/Untitled.png)
+
+An example of a multi-edition NFT that utilizes the ERC-721 standard. In cases like this, each NFT has a unique number and is separated from one another. One downside to this is that it can be difficult to navigate or sort through when you own a lot of the same edition.
+
+![An example of a multi-edition NFT that utilizes the ERC-1155 standard. In cases like this, each NFT is stackable and has a quantity instead of individual unique numbers. There are 30 NFTs in the screenshot above, but because they use the ERC-1155 standard they are both stackable and more efficient to use.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/173fc9c5-8db4-48e9-97ed-1e11956d02f0/Untitled.png)
+
+An example of a multi-edition NFT that utilizes the ERC-1155 standard. In cases like this, each NFT is stackable and has a quantity instead of individual unique numbers. There are 30 NFTs in the screenshot above, but because they use the ERC-1155 standard they are both stackable and more efficient to use.
+
+### Compatibility
+
+While the ERC-1155 standard offers some significant features beyond ERC-721, the downside is it’s not as widely supported yet by various platforms. The ERC-721 standard is older and has had longer to establish itself as the go-to standard for NFTs, whereas the 1155 standard is still working to get a foothold in some places despite its superior feature set. 
+
+Why is this important to note? Well, if there is a specific tool, platform, or community that you or your NFT owners will need to use, it’s important to make sure that it supports whichever NFT standard you’re thinking of using. For example, marketplaces like Zora and Foundation currently only support the ERC-721 standard. Furthermore, some token-gating tools that allow creators to limit access to content based on NFT ownership only support the ERC-721 standard as well.
+
+### Use Cases
+
+In general, almost all of the use cases we covered in Part 1 could theoretically be done with both token standards. That being said, there are a few use cases that are best suited to a particular standard. Profile Picture (PFP) NFTs almost always utilize the ERC-721 standard due to cultural dynamics and platform compatibility. Gaming NFTs usually benefit from the enhanced and more flexible feature set of the ERC-1155 standard. If you’re exploring a use case that is already well explored, it could be helpful to take a look at popular examples from that genre to see if there’s a consensus.
+
+### Perception/Desirability
+
+As has been mentioned several times already, the better feature set provided by the ERC-1155 standard doesn’t always make it the clear choice, at least not yet. Not only is this due to compatibility issues, but it also can be because audiences, collectors, or potential buyers might have ingrained preferences that could impact your project’s success. Just because a standard looks better on paper doesn’t mean it will be accepted by every target market or community. Consider looking at other projects within your niche for examples of what you’re thinking about doing to ensure the decision won’t create hurdles for you.
+
+### Feature Comparison
+
+## Choosing Types
+
+*Things to think about when choosing which types you want to use.*
+
+Due to the abundance of NFT types and combination of types, it would be impossible to cover every potential scenario, but below you will find a few key dynamics to keep in mind that relate to a variety of NFT types.
+
+### Collection Supply Sizes
+
+When deciding how many editions to issue or how many total NFTs to have in a collection (or whether there should be a supply cap at all), it’s important to consider your target market, existing audience, goals, and cultural expectations. Each of these things might lead you in one direction or another depending on what is most and least important. If your NFT project is for-profit and you have certain budgetary needs or constraints, be sure to document and understand how your revenue needs relate to the supply size.
+
+Lastly, If you don’t have the luxury of being able to experiment and make early work to get some experience before launching a significant project, it can be helpful to study existing projects or collections that are similar in nature… both good examples and bad examples.
+
+### Off-chain vs On-chain
+
+On-chain NFTs can be quite popular within certain niches and sub-cultures, but they likely account for only a small fraction of the entire market. They’re much more difficult to create, the production costs are higher, and there are severe limitations. Within all of these constraints though there is a giant world of creativity… but it might not be for everyone. If you’re just getting started with NFTs, it might be better to tackle something a bit more manageable first. 
+
+Off-chain NFTs are much more prevalent, and nearly all of the most widely known NFT projects fall on the off-chain side of the spectrum (BAYC, Doodles, Cool Cats, etc) because the technical limitations prevent higher resolution artwork from being stored on-chain. If you’re approaching NFTs with a pre-existing concept in mind, it’s likely that off-chain is the way to go based purely on what is and isn’t possible.
+
+[NFT.storage](http://NFT.storage) is an easy and free way to store your NFT data via IPFS and Filecoin.
+
+### More types, more complexity
+
+While looking through the long list of NFT types in Part 1, you may be excited by the number of possibilities there are. You might even be tempted to combine lots of them together at once. Before you do though, it’s important to note that the more features and types you add together, the greater your costs will be… both in terms of time and money. Additionally, the more parts an NFT project has, the more ways for something to go wrong or differently there are. Be wary of “feature bloat”.
+
+## Configuring Your Components
+
+*Things to think about*
+
+### Smart contract permanence
+
+For the most part, a smart contract can’t be changed once it has been deployed on the blockchain. This is why it is important to either use a test network like Goerli or a no-code editor to preview what you’ve made before it goes live. Pay special attention to the name of the contract and the token symbol to make sure they are exactly what you want them to be. If you make a mistake or need to change something about the contract, you’ll likely have to re-deploy it completely (which can be difficult if people have already bought or collected NFTs created on it). You could theoretically migrate contracts or create additional contracts that connect to the main one in the future, but these things can create many issues and may require planning far in advance.
+
+### Metadata flexibility
+
+Unlike smart contracts, the metadata of NFTs can typically be updated after the fact relatively easily… but not without a cost. To update things, you’d likely have to submit additional blockchain transactions that would have varying financial costs associated with them. Still, this ability is helpful in situations where there may have been an error in the artwork or a typo in the description. It’s especially helpful because it allows for projects to be mutable, interactive, and more dynamic.
+
+On the other hand, the fact that metadata can be updated also means that there is an inherent level of trust involved between an NFT creator and an NFT collector. In the world of NFTs there is a concept called “rugging” where a project creator will change an NFTs artwork and metadata to be something different than what was promised and then run away never to be heard from again. It’s important for creators to be upfront and honest with potential collectors so that trust can be established.
+
+### License & copyright
+
+Contrary to popular belief, a smart contract or an NFT does not grant usage license or copyright ownership from a legal perspective. Just because you own an NFT, doesn’t mean you also can use the artwork however you want. While not necessary, it can be a good idea as a creator to have an informational page on your website that provides the terms of the agreement so that collectors aren’t left wondering. This can be a totally separate thing apart from the NFT or the smart contract itself though.
+
+### Data storage and preservation
+
+(IPFS & [NFT.Storage](http://NFT.Storage) plug)
