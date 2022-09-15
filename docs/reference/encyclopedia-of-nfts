@@ -1,14 +1,44 @@
+# The Encyclopedia of NFTs
+
+from [NFT.Storage](http://NFT.storage) and [NFTschool.dev](http://NFTschool.dev)
+
+![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/207d7b72-71c9-4be6-810d-f3ca4973115a/Untitled.png)
+
+GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC
+
+# Table of Contents
+
+**Introduction**
+
+**Part 1 — Terms & Definitions**
+
+- Standards
+- Types
+- Use Cases
+- Components
+- Examples
+
+**Part 2 — Choosing & Navigating Your Options**
+
+- How to Choose a Standard
+- How to Choose Types
+- How to Configure Your Components
+
+---
+
 # Introduction
 
-Ever since Non-Fungible Tokens (NFTs) entered into the cultural zeitgeist back in March of 2021, they have been plagued by confusion and misunderstanding. Particular types of NFTs such as the well-known (and well-critiqued) Bored Ape Yacht Club have unintentionally led many people to develop a narrow and distorted view of what is actually a very broad and interesting piece of technology. 
+Ever since Non-Fungible Tokens (NFTs) entered onto the cultural scene back in March of 2021, they have been plagued by confusion and misunderstanding. Particular types of NFTs such as the well-known (and well-critiqued) Bored Ape Yacht Club have unintentionally led many people to develop a narrow and distorted view of what is actually a very broad and interesting piece of technology. 
 
-The uses cases and methods of implementing NFTs are endless, but the cultural understanding is currently stuck. Furthermore, if a person is curious enough to look beyond the surface level, they might be hard pressed to navigate what’s underneath. Because of this, we have created the Encyclopedia of NFTs — it is our hope that the following article will help interested explorers begin to grasp what NFTs as a technology have to offer. 
+The uses cases and methods of implementing NFTs are endless, but the cultural understanding is currently stuck. Furthermore, if a person is curious enough to look beyond the surface level, they might be hard pressed to navigate what’s underneath. Because of this, we have created the Encyclopedia of NFTs — it is our hope that the following resource will help interested explorers begin to grasp what NFTs as a technology actually have to offer. 
+
+Let’s dive right in!
 
 ---
 
 # Part 1: Terms & Definitions
 
-The first part of this guide will explain the major terminology associated with NFTs as well as give a broad overview of the landscape and industry. After reading Part 1, you’ll have a basic understanding of all the different ways you could interact with the world of NFTs. From there, Part 2 will help you actually navigate decision making if you’re considering collecting or making NFTs yourself.
+The first part of this guide will explain the major pieces of jargon associated with NFTs as well as give a broad overview of the landscape and industry. After reading Part 1, you’ll have a basic understanding of the different ways you could interact with the world of NFTs. From there, Part 2 will help you actually begin to navigate decision making if you’re considering collecting or making NFTs yourself. This guide is not exhaustive by any means, but it should provide you with a robust foundation to build upon.
 
 ## What is an NFT?
 
@@ -78,7 +108,7 @@ An example of what a collection page looks like on the NFT marketplace OpenSea. 
 
 **Off-chain** - An “off-chain” NFT refers to an NFT which has a significant amount of its data stored outside of the blockchain itself. In many cases, an NFT might have a minimal amount of metadata stored on-chain that then links back to the rest that is stored “off-chain” in more flexible or cost efficient locations such as IPFS or Filecoin.
 
-![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f7cba6a-97c8-4449-96ac-25756481e620/Untitled.png)
+![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin. ](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f7cba6a-97c8-4449-96ac-25756481e620/Untitled.png)
 
 [NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin. 
 
@@ -337,10 +367,12 @@ Unlike smart contracts, the metadata of NFTs can typically be updated after the 
 
 On the other hand, the fact that metadata can be updated also means that there is an inherent level of trust involved between an NFT creator and an NFT collector. In the world of NFTs there is a concept called “rugging” where a project creator will change an NFTs artwork and metadata to be something different than what was promised and then run away never to be heard from again. It’s important for creators to be upfront and honest with potential collectors so that trust can be established.
 
-### License & copyright
+### Licenses & copyright
 
-Contrary to popular belief, a smart contract or an NFT does not grant usage license or copyright ownership from a legal perspective. Just because you own an NFT, doesn’t mean you also can use the artwork however you want. While not necessary, it can be a good idea as a creator to have an informational page on your website that provides the terms of the agreement so that collectors aren’t left wondering. This can be a totally separate thing apart from the NFT or the smart contract itself though.
+Contrary to popular belief, a smart contract or an NFT does not grant a usage license or copyright ownership from a legal perspective. Just because you own an NFT, doesn’t mean you also can use the artwork however you want. While not necessary, it can be a good idea as a creator to have an informational page on your website that provides the terms of the agreement so that collectors aren’t left wondering. This can be a totally separate thing apart from the NFT or the smart contract itself though.
 
-### Data storage and preservation
+### Data storage & preservation
 
-(IPFS & [NFT.Storage](http://NFT.Storage) plug)
+If you plan to store the data and media files associated with your NFT somewhere off-chain (the place most NFTs store their data), then you’ll need a decentralized storage provider that is secure, trustworthy, and who can handle the unique needs of NFTs. This is where [NFT.storage](http://NFT.storage) comes in! Through the power of IPFS, Filecoin, and content addressing, NFT.storage has already been used to store over 80 million NFTs and 200 terabytes of data. The best part of all is that it’s a public good and is completely free. 
+
+When you’re ready begin storing NFT data, you can easily get started over on [NFT.storage](http://NFT.storage)
