@@ -42,9 +42,9 @@ The first part of this guide will explain the major pieces of jargon associated 
 
 ## What is an NFT?
 
-Before going any further, it’s important to understand what a Non-Fungible Token is at a high level. Technically speaking, **an NFT is not a picture of an ape or a pixelated punk rocker; it’s actually a unique numerical identifier governed by a smart contract that can have other data and information (such as a picture of an ape or pixelated punk rocker) associated with it.** 
+Before going any further, it’s important to understand what a Non-Fungible Token is at a high level. Technically speaking, **an NFT is not a picture of an ape or a pixelated punk rocker; it’s actually a unique numerical identifier governed by a smart contract that can have other data and information associated with it (such as a picture of an ape or pixelated punk rocker).** 
 
-If that sounds a little fuzzy, take a moment to ask yourself, “what is a computer file?”. Most people interact with files on their laptops or smart phones every single day, but they’d be hard-pressed to articulate what exactly makes up those files. Trying to understand a non-fungible token is quite similar. In some ways, a non-fungible token is like a computer file but the file isn’t stored on a single device… it’s stored on a decentralized virtual computer that thousands of people all over the world help operate. 
+If that sounds a little fuzzy, take a moment to ask yourself, “what is a computer file?”. Most people interact with files on their laptops or smart phones every single day, but they’d be hard-pressed to articulate what exactly those files are made of. Trying to understand a non-fungible token is quite similar. In some ways, a non-fungible token is like a computer file but the file isn’t stored on a single device… it’s stored on a decentralized virtual computer that thousands of people all over the world help operate. 
 
 In a similar fashion to how computer files come in several formats such as .jpg or .txt, NFTs also can come in several different formats called **Standards**.
 
@@ -55,7 +55,7 @@ In a similar fashion to how computer files come in several formats such as .jpg 
 
 </aside>
 
-**ERC-721** - Originally proposed in 2017 via [Ethereum Improvement Proposal number 721](https://eips.ethereum.org/EIPS/eip-721) (EIP-721 for short), the ERC-721 token standard was created in 2018 to allow for non-fungible assets to be generated on the Ethereum blockchain. The summary for EIP-721 described itself as “a standard interface for non-fungible tokens, also known as deeds.” The creation and success of early NFTs like CryptoPunks and CryptoKitties were part of the inspiration for developing more formal standard to support the early burgeoning ecosystem that sprung up around them. Today, the ERC-721 standard is the most widely used and supported type of NFT, and it undergirds a multi-billion dollar market.
+**ERC-721** - Originally proposed in 2017 via [Ethereum Improvement Proposal number 721](https://eips.ethereum.org/EIPS/eip-721) (EIP-721 for short), the ERC-721 token standard was created in 2018 to allow for non-fungible assets to be generated on the Ethereum blockchain. The summary for EIP-721 described itself as “a standard interface for non-fungible tokens, also known as deeds.” The creation and success of early NFTs like CryptoPunks and CryptoKitties were part of the inspiration for developing the ERC-721 standard; it allowed the burgeoning ecosystem to begin building on a solid foundation. Today, the ERC-721 standard is the most widely used and supported type of NFT, and it undergirds a multi-billion dollar market.
 
 **ERC-721A** - Originally created by the Azuki team for its NFT launch in January 2022, [ERC-721A](https://www.erc721a.org/) is an emerging contract standard that is built off of the ERC-721 standard but includes some improvements. According to its creators, “ERC721A is an improved implementation of the IERC721 standard that supports minting multiple tokens for close to the cost of one.” Since successfully launching with this new implementation, several other high-profile NFT projects have gone on to utilize it as well.
 
@@ -68,9 +68,9 @@ In a similar fashion to how computer files come in several formats such as .jpg 
 
 </aside>
 
-**Purpose Types** - On the highest level, NFTs can be categorized as either utility-focused or art-focused. This is an NFT’s designed “purpose”. An NFT can be both utilitarian and decorative, but there’s often an emphasis on one more than the other. It may be helpful to think of it as a spectrum.
+**Purpose Types** - On the highest level, NFTs can be categorized as either utility-focused or art-focused. This is an NFT’s designed “purpose”. An NFT can be both utilitarian and decorative, but there’s often an emphasis on one more than the other. Furthermore, an art-focused NFT could have utility added to it after the fact. It may be helpful to think of purpose types as a fluid spectrum.
 
-**Utilitarian** - An NFT that enables a practical use case in the lives of its users or owners. Possession of a utilitarian NFT might grant the holder access to exclusive content, benefits, or even rewards. A common example of a utilitarian NFT would be an event ticket or a membership card. A graphic or artistic visual might be used to represent the NFT, but the visual component would typically be secondary in nature.
+**Utilitarian** - An NFT that enables a practical use case in the lives of its users or owners. Possession of a utilitarian NFT might grant the holder access to exclusive content, benefits, or even rewards. A common example of a utilitarian NFT would be an event ticket or a membership card. A graphic or artistic visual is often used to represent a utilitarian NFT, but the visual component would typically be secondary in nature.
 
 **Art, Decorative, or Collectible** - An NFT that represents a work of art or some other thing that is primarily appreciated for its aesthetic or conceptual qualities. An art NFT could also enable or bestow utilitarian benefits upon the owner if the creator so desired, but the utility would typically be secondary in nature.
 
@@ -90,9 +90,9 @@ GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC
 
 **Limited-edition** - A limited-edition is the more traditional form of an edition. This type would be comparable to our earlier example of a photographer or screen printer creating a limited run of 10 signed and numbered prints in the physical world. The limit creates scarcity which can have an impact on market dynamics such as pricing and demand.
 
-**Collection** - Most NFT platforms and protocols will categorize all the NFTs made from a single smart contract as being a part of one “collection”. There are many ways to organize and structure a collection, including using metadata called properties/traits, and it often will have an impact on supply & quantity dynamics. If the way your NFTs are displayed, organized, and perceived by the general public on various web3 platforms matters, then it will be important to think about your NFTs within the framework of “collections”.  
+**Collection** - Most NFT platforms, protocols, and markets will categorize all the NFTs made from a single smart contract as being a part of one “collection”. There are many ways to organize and structure a collection, including using metadata called properties/traits, and it often will have an impact on supply & quantity dynamics. If the way your NFTs are perceived by the general public on various web3 platforms matters to you, then it will be important to think about your NFTs within the framework of “collections”.  
 
-**Open collection size** - Similar to the concept of editions, a collection can be “open” when it comes to the number of NFTs within it. With an open collection, generally there is no declared limited on the number of NFTs within the collection. Fine artists have been known to create a single smart contract that they regularly mint their new work on rather than having multiple different contracts. In this scenario, they may choose to organize the collection further by specific series using metadata.
+**Open collection size** - Similar to the concept of editions, a collection can be “open” when it comes to the number of NFTs within it. With an open collection, generally there is no declared limited on the number of NFTs within the collection. Fine artists have been known to create a single smart contract that they regularly mint their new work on rather than having multiple different contracts. In this scenario, they may choose to organize the collection further by using metadata (i.e. sorting a photography collection by focal length or camera body used).
 
 **Fixed collection size** - A fixed collection means that either A) the creator has promised not to create more than a certain number of NFTs within the collection, or B) the smart contract itself dictates a limited supply size. The CryptoPunks collection is an example of a fixed collection size, as it has a maximum number of 10,000 NFTs within it. Alternatively, the fixed nature of a collection might be time-bound instead of quantity bound.
 
@@ -106,7 +106,7 @@ An example of what a collection page looks like on the NFT marketplace OpenSea. 
 
 **On-chain** - An “on-chain” NFT refers to an NFT which has a significant amount of its data encoded directly onto the blockchain. In the case of the Ethereum blockchain, data storage and processing costs can be extremely high due to the security and permanence of Ethereum records. This dynamic creates lots of limitations with the amount of data that can be stored. For this reason, many NFTs store only a minimal amount of their data on-chain. “On-chain” NFTs in general are often perceived as being more censorship resistant, permanent, and secure when compared to “off-chain” alternatives. That being said, the vast majority of NFTs are more “off-chain” than they are “on-chain”.
 
-**Off-chain** - An “off-chain” NFT refers to an NFT which has a significant amount of its data stored outside of the blockchain itself. In many cases, an NFT might have a minimal amount of metadata stored on-chain that then links back to the rest that is stored “off-chain” in more flexible or cost efficient locations such as IPFS or Filecoin.
+**Off-chain** - An “off-chain” NFT refers to an NFT which has a significant amount of its data stored outside of the blockchain itself. In many cases, an NFT might have a minimal amount of metadata stored on-chain that then links back to the rest of the data which is stored “off-chain” in a more flexible or cost efficient location such as IPFS or Filecoin.
 
 ![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin. ](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f7cba6a-97c8-4449-96ac-25756481e620/Untitled.png)
 
@@ -126,7 +126,7 @@ An example of what a collection page looks like on the NFT marketplace OpenSea. 
 
 The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))
 
-**Representation Types** - An NFT might just seem like a digital record or item, but it could also represent many different things if the right system is in place. For instance, an NFT could represent a real-world physical object such as a t-shirt or a book. It could also represent another NFT.
+**Representation Types** - An NFT might just seem like a digital record or item, but it could also represent many different things if the right systems are in place. For instance, an NFT could represent a real-world physical object such as a t-shirt or a book. An NFT could even represent another NFT (often called a “wrapped” NFT).
 
 **Redeemable** - A redeemable NFT is one that can be exchanged for another item, whether physical or digital. 
 
@@ -140,7 +140,7 @@ The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://
 
 In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))
 
-**Method of Creation Types** - In general, there are two broad categories of NFTs when it comes to how the media associated with them were created: generative and non-generative. On a broad level, these two terms refer to whether or not the final media was created “by hand” or if it was generated randomly with a computer script based on multiple pieces.
+**Method of Creation Types** - In general, there are two broad categories of NFTs when it comes to how the media associated with them were created: generative and non-generative. On a broad level, these two terms refer to whether or not the final media was created “by hand” or if it was generated randomly with a computer script based on multiple pieces or elements.
 
 **Generative** - A generative NFT is one which had its final form composited together randomly using a computer script that pulls from a pool of different media pieces. The individual pieces that make up the whole may have been created “by hand”, but the assembly was done through an automated process.
 
@@ -152,9 +152,9 @@ The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a 
 
 **Point of Minting Types** - The point at which an NFT is actually generated on the blockchain might not coincide with when it is sold or released. There are a variety of methods to choose from when it comes to distributing and creating NFTs in relationship to selling or releasing them.
 
-**Mintable** - A mintable NFT is one which is not actually created on the blockchain until a collector or buyer initiates its creation. With this type of NFT, the purchaser is the one responsible for the action and the associated transaction costs rather than the artist or creator.
+**Mintable** - A mintable NFT is one which is not actually created on the blockchain until a collector or buyer initiates its creation. With this type of NFT, the purchaser is the one responsible for the action and the associated transaction costs rather than the artist or creator. A mintable NFT would be somewhat similar to the dynamic seen in print-on-demand operations where a t-shirt isn’t made until someone actually buys it.
 
-**Pre-minted** - A pre-minted NFT is one which is created on the blockchain before it is sold or released. With this type of NFT, the artist or creator is the one responsible for the action and its associated transaction costs.
+**Pre-minted** - A pre-minted NFT is one which is created on the blockchain before it is sold or released. With this type of NFT, the artist or creator is the one responsible for the action and its associated transaction costs. A pre-minted NFT would be somewhat similar to a company making a batch of t-shirts and then selling them after they’ve already been made rather than being printed on-demand.
 
 **Lazy Minting** - A lazy-minted NFT is similar to a mintable NFT in that it is only officially finalized on the blockchain at the point of sale. From a user experience perspective, it will look and feel like an actual NFT, but under the surface it will only be created when someone chooses to purchase it. The difference between mintable NFTs and lazy minted NFTs is subtle and has more to do with perception.
 
