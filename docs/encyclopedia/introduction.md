@@ -1,4 +1,4 @@
-![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/207d7b72-71c9-4be6-810d-f3ca4973115a/Untitled.png)
+![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](/docs/images/encyclopedia/main.png)
 
 # The Encyclopedia of NFTs
 
