@@ -14,6 +14,7 @@ Let’s dive right in!
 
 **Part 1 — Terms & Definitions**
 
+- What is an NFT?
 - Standards
 - Types
 - Use Cases
