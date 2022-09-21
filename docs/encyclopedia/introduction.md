@@ -23,6 +23,6 @@ Let’s dive right in!
 
 **Part 2 — Choosing & Navigating Your Options**
 
-- How to Choose a Standard
-- How to Choose Types
-- How to Configure Your Components
+- Choosing Standards
+- Choosing Types
+- Configuring Components
