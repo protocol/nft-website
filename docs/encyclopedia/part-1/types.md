@@ -1,14 +1,16 @@
-## Types
+# Types
 
 > A **type** is a particular quality, attribute, or trait of an NFT. An NFT can have multiple **types**. For instance, an NFT could be a mutable multi-edition generative art piece that is stored off-chain but was not pre-minted. Think of types as different flavors that can be mixed and combined together to achieve different results.
 
-**Purpose Types** - On the highest level, NFTs can be categorized as either utility-focused or art-focused. This is an NFT’s designed “purpose”. An NFT can be both utilitarian and decorative, but there’s often an emphasis on one more than the other. Furthermore, an art-focused NFT could have utility added to it after the fact. It may be helpful to think of purpose types as a fluid spectrum.
+## Purpose Types
+On the highest level, NFTs can be categorized as either utility-focused or art-focused. This is an NFT’s designed “purpose”. An NFT can be both utilitarian and decorative, but there’s often an emphasis on one more than the other. Furthermore, an art-focused NFT could have utility added to it after the fact. It may be helpful to think of purpose types as a fluid spectrum.
 
 - **Utilitarian** - An NFT that enables a practical use case in the lives of its users or owners. Possession of a utilitarian NFT might grant the holder access to exclusive content, benefits, or even rewards. A common example of a utilitarian NFT would be an event ticket or a membership card. A graphic or artistic visual is often used to represent a utilitarian NFT, but the visual component would typically be secondary in nature.
 
 - **Art, Decorative, or Collectible** - An NFT that represents a work of art or some other thing that is primarily appreciated for its aesthetic or conceptual qualities. An art NFT could also enable or bestow utilitarian benefits upon the owner if the creator so desired, but the utility would typically be secondary in nature.
 
-**Quantity & Supply Types** - While the purest definition of an NFT implies complete uniqueness of each item, the reality is a lot more nuanced. Fungibility is actually a spectrum, and NFTs are flexible enough to be used in a variety of ways to implement quantities and supply sizes.
+## Quantity & Supply Types
+While the purest definition of an NFT implies complete uniqueness of each item, the reality is a lot more nuanced. Fungibility is actually a spectrum, and NFTs are flexible enough to be used in a variety of ways to implement quantities and supply sizes.
 
 - **One-of-one** - Perhaps the most basic of NFT types, a one-of-one refers to completely unique and distinct objects or art pieces. There is only one NFT of it, and typically no other versions exist.
 
@@ -33,7 +35,8 @@
   ![An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))](/docs/images/encyclopedia/collection.png)
   *An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))*
 
-**Data Storage Types** - When it comes to storing the media associated with an NFT, there are a lot of options and each one has different upsides and downsides. Many people have thought about NFT media as being stored either “on-chain” or “off-chain”, but the reality is a lot more complicated. “On-chain” and “Off-chain” looks more like a spectrum, with most NFTs not falling entirely on either extreme. For the purposes of this guide, we’ll stick to defining the two terms on a high level. Lastly, storage choice for NFT media has many technical implications, but it can also have cultural implications. For instance, different people and communities can have different preferences when it comes to data storage.
+## Data Storage Types
+When it comes to storing the media associated with an NFT, there are a lot of options and each one has different upsides and downsides. Many people have thought about NFT media as being stored either “on-chain” or “off-chain”, but the reality is a lot more complicated. “On-chain” and “Off-chain” looks more like a spectrum, with most NFTs not falling entirely on either extreme. For the purposes of this guide, we’ll stick to defining the two terms on a high level. Lastly, storage choice for NFT media has many technical implications, but it can also have cultural implications. For instance, different people and communities can have different preferences when it comes to data storage.
 
 - **On-chain** - An “on-chain” NFT refers to an NFT which has a significant amount of its data encoded directly onto the blockchain. In the case of the Ethereum blockchain, data storage and processing costs can be extremely high due to the security and permanence of Ethereum records. This dynamic creates lots of limitations with the amount of data that can be stored. For this reason, many NFTs store only a minimal amount of their data on-chain. “On-chain” NFTs in general are often perceived as being more censorship resistant, permanent, and secure when compared to “off-chain” alternatives. That being said, the vast majority of NFTs are more “off-chain” than they are “on-chain”.
 
@@ -42,7 +45,8 @@
   ![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.](/docs/images/encyclopedia/nftstorage.png)
   *[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.*
 
-**Change/State Types** - The vast majority of NFTs and traditional media in the world are relatively fixed and static, meaning they’re not really supposed to change over time after the point of creation. That being said, there are many different types of “states” and an NFT doesn’t have to be unchangeable.
+## Change/State Types
+The vast majority of NFTs and traditional media in the world are relatively fixed and static, meaning they’re not really supposed to change over time after the point of creation. That being said, there are many different types of “states” and an NFT doesn’t have to be unchangeable.
 
 - **Interactive** - An interactive NFT is one that can be changed or manipulated by some person, group, or entity. For example, an NFT could be a character in a game that can be upgradeable or customized by the owner or user.
 
@@ -55,7 +59,8 @@
   ![The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))](/docs/images/encyclopedia/mutant.png)
   *The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))*
 
-**Representation Types** - An NFT might just seem like a digital record or item, but it could also represent many different things if the right systems are in place. For instance, an NFT could represent a real-world physical object such as a t-shirt or a book. An NFT could even represent another NFT (often called a “wrapped” NFT).
+## Representation Types
+An NFT might just seem like a digital record or item, but it could also represent many different things if the right systems are in place. For instance, an NFT could represent a real-world physical object such as a t-shirt or a book. An NFT could even represent another NFT (often called a “wrapped” NFT).
 
 - **Redeemable** - A redeemable NFT is one that can be exchanged for another item, whether physical or digital. 
 
@@ -68,7 +73,8 @@
   ![In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))](/docs/images/encyclopedia/backed.png)
   *In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))*
 
-**Method of Creation Types** - In general, there are two broad categories of NFTs when it comes to how the media associated with them were created: generative and non-generative. On a broad level, these two terms refer to whether or not the final media was created “by hand” or if it was generated randomly with a computer script based on multiple pieces or elements.
+## Method of Creation Types
+In general, there are two broad categories of NFTs when it comes to how the media associated with them were created: generative and non-generative. On a broad level, these two terms refer to whether or not the final media was created “by hand” or if it was generated randomly with a computer script based on multiple pieces or elements.
 
 - **Generative** - A generative NFT is one which had its final form composited together randomly using a computer script that pulls from a pool of different media pieces. The individual pieces that make up the whole may have been created “by hand”, but the assembly was done through an automated process.
 
@@ -77,7 +83,8 @@
   ![The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))](/docs/images/encyclopedia/bueno.png)
   *The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))*
 
-**Point of Minting Types** - The point at which an NFT is actually generated on the blockchain might not coincide with when it is sold or released. There are a variety of methods to choose from when it comes to distributing and creating NFTs in relationship to selling or releasing them.
+## Point of Minting Types
+The point at which an NFT is actually generated on the blockchain might not coincide with when it is sold or released. There are a variety of methods to choose from when it comes to distributing and creating NFTs in relationship to selling or releasing them.
 
 - **Mintable** - A mintable NFT is one which is not actually created on the blockchain until a collector or buyer initiates its creation. With this type of NFT, the purchaser is the one responsible for the action and the associated transaction costs rather than the artist or creator. A mintable NFT would be somewhat similar to the dynamic seen in print-on-demand operations where a t-shirt isn’t made until someone actually buys it.
 
