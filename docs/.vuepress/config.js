@@ -79,7 +79,7 @@ module.exports = {
             ]
           },
           {
-            title: 'Enyclopedia',
+            title: 'Encyclopedia',
             collapsable: false,
             children: [
               '/encyclopedia/introduction',
