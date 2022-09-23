@@ -10,3 +10,5 @@ Originally proposed in 2017 via [Ethereum Improvement Proposal number 721](https
 
 ## ERC-1155
 Created half a year after the ERC-721 standard, the ERC-1155 standard was proposed in [Ethereum Improvement Proposal number 1155](https://eips.ethereum.org/EIPS/eip-1155) (EIP-1155 for short). According to the EIP’s summary, ERC-1155 is “a standard interface for contracts that manage multiple token types. A single deployed contract may include any combination of fungible tokens, non-fungible tokens or other configurations (e.g. semi-fungible tokens).” In comparison to ERC-721 tokens, ERC-1155 tokens are much more flexible and have a wider range of features.
+
+[Continue to **Types** section](/docs/encyclopedia/part-1/types)
