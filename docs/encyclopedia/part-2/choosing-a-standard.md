@@ -37,4 +37,4 @@ As has been mentioned several times already, the better feature set provided by 
 | Widely supported  | Not supported everywhere yet              |
 | Single transfers  | Batch transfers                           |
 
-[Continue to next section](/docs/encyclopedia/part-2/choosing-types)
+[Continue to next section](/encyclopedia/part-2/choosing-types)
