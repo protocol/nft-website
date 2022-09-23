@@ -26,4 +26,4 @@ Below is an example of what the metadata for Token ID 1 from the Blitmap collect
 
 ![Blitmap Rose Metadata](/docs/images/encyclopedia/rose.png)
 
-[Continue to next section](/docs/encyclopedia/part-2/choosing-a-type)
+[Continue to next section](/docs/encyclopedia/part-2/choosing-a-standard)
