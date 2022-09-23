@@ -97,4 +97,4 @@ In the world of decentralized finance, NFTs can be used to represent many differ
 ![Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.](/docs/images/encyclopedia/financial.png)
 *Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.*
 
-[Continue to **Components** section](/docs/encyclopedia/part-1/components)
+[Continue to **Components** section](/encyclopedia/part-1/components)
