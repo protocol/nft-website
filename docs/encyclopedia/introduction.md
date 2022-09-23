@@ -18,4 +18,4 @@ If that sounds a little fuzzy, take a moment to ask yourself, “what is a compu
 
 In a similar fashion to how computer files come in several formats such as .jpg or .txt, NFTs also can come in several different formats called **Standards**.
 
-[Continue to Standards section](/docs/encyclopedia/part-1/standards)
+[Continue to Standards section](/encyclopedia/part-1/standards)
