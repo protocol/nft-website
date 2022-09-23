@@ -83,7 +83,6 @@ module.exports = {
             collapsable: false,
             children: [
               '/encyclopedia/introduction',
-              '/encyclopedia/part-1/what-is-an-nft',
               '/encyclopedia/part-1/standards',
               '/encyclopedia/part-1/types',
               '/encyclopedia/part-1/use-cases',
