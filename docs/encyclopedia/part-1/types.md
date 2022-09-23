@@ -92,4 +92,4 @@ The point at which an NFT is actually generated on the blockchain might not coin
 
 - **Lazy Minting** - A lazy-minted NFT is similar to a mintable NFT in that it is only officially finalized on the blockchain at the point of sale. From a user experience perspective, it will look and feel like an actual NFT, but under the surface it will only be created when someone chooses to purchase it. The difference between mintable NFTs and lazy minted NFTs is subtle and has more to do with perception.
 
-[Continue to **Use Cases** section](/docs/encyclopedia/part-1/use-cases)
+[Continue to **Use Cases** section](/encyclopedia/part-1/use-cases)
