@@ -22,4 +22,4 @@ Off-chain NFTs are much more prevalent, and nearly all of the most widely known 
 
 While looking through the long list of NFT types in Part 1, you may be excited by the number of possibilities out there. You might even be tempted to combine lots of them together at once. Before you do though, it’s important to note that the more features and types you add together, the greater your costs will be… both in terms of time and money. Additionally, the more parts an NFT project has, the more ways something could go wrong or differently there are. Be wary of “feature bloat”.
 
-[Continue to next section](/docs/encyclopedia/part-2/configuring-components)
+[Continue to next section](/encyclopedia/part-2/configuring-components)
