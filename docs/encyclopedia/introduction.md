@@ -14,15 +14,14 @@ Let’s dive right in!
 
 **Part 1 — Terms & Definitions**
 
-- What is an NFT?
-- Standards
-- Types
-- Use Cases
-- Components
-- Examples
+- [What is an NFT?](/docs/encyclopedia/part-1/what-is-an-nft)
+- [Standards](/docs/encyclopedia/part-1/standards)
+- [Types](/docs/encyclopedia/part-1/types)
+- [Use Cases](/docs/encyclopedia/part-1/use-cases)
+- [Components](/docs/encyclopedia/part-1/components)
 
 **Part 2 — Choosing & Navigating Your Options**
 
-- Choosing Standards
-- Choosing Types
-- Configuring Components
+- [Choosing a Standard](/docs/encyclopedia/part-2/choosing-a-standard)
+- [Choosing Types](/docs/encyclopedia/part-2/choosing-types)
+- [Configuring Components](/docs/encyclopedia/part-2/configuring-components)
