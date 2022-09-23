@@ -6,22 +6,16 @@ Ever since Non-Fungible Tokens (NFTs) entered onto the cultural scene back in Ma
 
 The uses cases and methods of implementing NFTs are endless, but the cultural understanding is currently stuck. Furthermore, if a person is curious enough to look beyond the surface level, they might be hard pressed to navigate what’s underneath. Because of this, we have created the Encyclopedia of NFTs — it is our hope that the following resource will help interested explorers begin to grasp what NFTs as a technology actually have to offer. 
 
+The first half of this guide will explain the major pieces of jargon associated with NFTs as well as give a broad overview of the landscape and industry. After reading Part 1, you’ll have a basic understanding of the different ways you could interact with the world of NFTs. From there, the second half will help you actually begin to navigate decision making if you’re considering collecting or making NFTs yourself. This guide is not exhaustive by any means, but it should provide you with a robust foundation to build upon.
+
 Let’s dive right in!
 
-## Table of Contents
+## What is an NFT?
 
-**Introduction** (You are here)
+To begin, it’s important to understand what a Non-Fungible Token is at a high level. Technically speaking, **an NFT is not a picture of an ape or a pixelated punk rocker; it’s actually a unique numerical identifier governed by a smart contract that can have other data and information associated with it (such as a picture of an ape or pixelated punk rocker).** 
 
-**Part 1 — Terms & Definitions**
+If that sounds a little fuzzy, take a moment to ask yourself, “what is a computer file?”. Most people interact with files on their laptops or smart phones every single day, but they’d be hard-pressed to articulate what exactly those files are made of. Trying to understand a non-fungible token is quite similar. In some ways, a non-fungible token is like a computer file but the file isn’t stored on a single device… it’s stored on a decentralized virtual computer that thousands of people all over the world help operate. 
 
-- [What is an NFT?](/docs/encyclopedia/part-1/what-is-an-nft)
-- [Standards](/docs/encyclopedia/part-1/standards)
-- [Types](/docs/encyclopedia/part-1/types)
-- [Use Cases](/docs/encyclopedia/part-1/use-cases)
-- [Components](/docs/encyclopedia/part-1/components)
+In a similar fashion to how computer files come in several formats such as .jpg or .txt, NFTs also can come in several different formats called **Standards**.
 
-**Part 2 — Choosing & Navigating Your Options**
-
-- [Choosing a Standard](/docs/encyclopedia/part-2/choosing-a-standard)
-- [Choosing Types](/docs/encyclopedia/part-2/choosing-types)
-- [Configuring Components](/docs/encyclopedia/part-2/configuring-components)
+[Continue to Standards section](/docs/encyclopedia/part-1/standards)
