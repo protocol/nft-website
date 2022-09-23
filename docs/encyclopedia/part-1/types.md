@@ -91,3 +91,5 @@ The point at which an NFT is actually generated on the blockchain might not coin
 - **Pre-minted** - A pre-minted NFT is one which is created on the blockchain before it is sold or released. With this type of NFT, the artist or creator is the one responsible for the action and its associated transaction costs. A pre-minted NFT would be somewhat similar to a company making a batch of t-shirts and then selling them after they’ve already been made rather than being printed on-demand.
 
 - **Lazy Minting** - A lazy-minted NFT is similar to a mintable NFT in that it is only officially finalized on the blockchain at the point of sale. From a user experience perspective, it will look and feel like an actual NFT, but under the surface it will only be created when someone chooses to purchase it. The difference between mintable NFTs and lazy minted NFTs is subtle and has more to do with perception.
+
+[Continue to **Use Cases** section](/docs/encyclopedia/part-1/use-cases)
