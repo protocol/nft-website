@@ -36,3 +36,5 @@ As has been mentioned several times already, the better feature set provided by 
 | Non-fungible only | Fungible, Semi-fungible, and Non-fungible |
 | Widely supported  | Not supported everywhere yet              |
 | Single transfers  | Batch transfers                           |
+
+[Continue to next section](/docs/encyclopedia/part-2/choosing-types)
