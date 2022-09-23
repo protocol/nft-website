@@ -18,4 +18,4 @@ Below is an example of what the metadata for Token ID 1 from the Blitmap collect
 
 `{"image":"https://api.blitmap.com/v1/png/1","name":"#1 - Rose","description":"Blitmap is a community crafted art collection and universe. All data is completely on chain.\n\n[blitmap.com](https://www.blitmap.com)","attributes":[{"trait_type":"Type","value":"Original"},{"trait_type":"Composition","value":"Rose (#1)"},{"trait_type":"Palette","value":"Rose (#1)"},{"trait_type":"Affinity","value":"Fire III"},{"trait_type":"Slabs","value":"◢ ◢ ◢ ◥"},{"trait_type":"Attunement","value":"Attuned"}]}`
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b534c389-2216-4ed3-bce5-62894083717a/Untitled.png)
+![Blitmap Rose Metadata](/docs/images/encyclopedia/rose.png)
