@@ -2,7 +2,7 @@
 
 *Things to consider when choosing between the ERC-721 standard or the ERC-1155 standard.*
 
-![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](/docs/images/encyclopedia/comparison.png)
+![Choosing an NFT Standard](/docs/images/encyclopedia/NFT-Options-nftschool.png)
 
 ## Editions
 
