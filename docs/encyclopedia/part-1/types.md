@@ -18,7 +18,7 @@ While the purest definition of an NFT implies complete uniqueness of each item, 
 
   When you use an ERC-1155 contract on the other hand, you are able to create semi-fungible quantities of each object or work of art. In the example of “Artwork B”, the ERC-1155 version would not have distinct identifiers or numbers for each piece within the edition. There would simply be 10 editions of “Artwork B”, but there would be no specific “Number 5” or “Number 3”. All of the items within the edition would be identical and interchangeable for any of the other items within that edition. This method would be comparable to a photographer or screen printer creating a limited run of 10 signed prints in the physical world, but each print would not be numbered.
 
-  ![GRAPHIC CONCEPT PLACEHOLDER, NOT FINAL GRAPHIC](/docs/images/encyclopedia/editionsdiagram.png)
+  ![Editions and Standards](/docs/images/encyclopedia/Token-Standard-nftschool.png)
 
 - **Open-edition** - An open-edition is a multi-edition where someone creates an uncapped supply of a particular object or work of art. The number of editions created will match the number of editions sold. Often times, an artist will choose to create an edition that remains open until a fixed point in time or until a certain criteria has been met. A basic example of this would be a work of art being sold as an open edition for 48 hours. Within this set time frame, there is no limit on the number of editions that can be sold.
 
