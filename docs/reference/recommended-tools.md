@@ -19,7 +19,7 @@ In-browser tools for experimenting with or developing Ethereum smart contracts.
 
 Some of the more popular frameworks for building on Ethereum.
 
-* [Alchemy](https://www.alchemy.com/build)
+* [Alchemy](https://www.alchemy.com/build/c23c8860e9)
 * [Brownie](https://github.com/eth-brownie/brownie)
 * [Embark](https://framework.embarklabs.io/)
 * [Hardhat](https://hardhat.org/)
@@ -39,7 +39,9 @@ Tooling for running local Ethereum nodes for testing and development purposes.
 
 Tooling for communicating with Ethereum via APIs.
 
-* [Alchemy Web3.js](https://github.com/alchemyplatform/alchemy-web3)
+* [Alchemy SDK_Ethers superset.js](https://github.com/alchemyplatform/alchemy-sdk-js/c23c8860e9)
+* [Alchemy NFT API](https://github.com/alchemyplatform/nft-api-javascript-scripts/c23c8860e9)
+* [Enhanced APIs](https://www.alchemy.com/enhanced-apis/c23c8860e9)
 * [`ethjs`](https://github.com/ethjs/ethjs)
 * [Ethers Project](https://github.com/ethers-io/ethers.js/)
 * [Infura](https://infura.io/)
