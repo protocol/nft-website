@@ -9,7 +9,7 @@ Fine art encompasses a wide range of mediums and disciplines such as painting, d
 - [CryptoPunk’s for sale at Christie’s](https://www.christies.com/lot/lot--6316969/)
 - [Jen Stark on Foundation](https://whitewall.art/art/jen-stark-sets-records-with-first-nft)
 
-![One of the 10,000 pieces from Damien Hirst’s first art project utilizing NFTs. ([Source](https://opensea.io/assets/ethereum/0xaadc2d4261199ce24a4b0a57370c4fcf43bb60aa/9831))](/docs/images/encyclopedia/fine-art.png)
+![One of the 10,000 pieces from Damien Hirst’s first art project utilizing NFTs. ([Source](https://opensea.io/assets/ethereum/0xaadc2d4261199ce24a4b0a57370c4fcf43bb60aa/9831))](../../images/encyclopedia/fine-art.png)
 *One of the 10,000 pieces from Damien Hirst’s first art project utilizing NFTs. ([Source](https://opensea.io/assets/ethereum/0xaadc2d4261199ce24a4b0a57370c4fcf43bb60aa/9831))*
 
 ## Music 
@@ -19,7 +19,7 @@ Music NFTs are an emerging domain of tokens that aim to provide musicians with a
 - [catalog.works](https://catalog.works/)
 - [Songcamp’s “Chaos Festival”](https://www.fwb.help/wip/chaos-reigns-songcamp-music-web3)
 
-![Well-known musical artist Pussy Riot has used a platform called [sound.xyz](http://sound.xyz) to release limited edition NFTs of her music that her fans can collect and trade. ([Source](https://www.sound.xyz/pussyriot/laugh-it-off))](/docs/images/encyclopedia/musicnfts.png)
+![Well-known musical artist Pussy Riot has used a platform called [sound.xyz](http://sound.xyz) to release limited edition NFTs of her music that her fans can collect and trade. ([Source](https://www.sound.xyz/pussyriot/laugh-it-off))](../../images/encyclopedia/musicnfts.png)
 *Well-known musical artist Pussy Riot has used a platform called [sound.xyz](http://sound.xyz) to release limited edition NFTs of her music that her fans can collect and trade. ([Source](https://www.sound.xyz/pussyriot/laugh-it-off))*
 
 ## PFP (Profile Pictures)
@@ -29,13 +29,13 @@ Profile pictures (often called PFPs) are a type of artwork NFT that are designed
 - [Doodles](https://doodles.app/)
 - [World of Women](https://worldofwomen.art/)
 
-![Cool Cats is a popular 10,000 supply PFP project with an avid fanbase, live events, and even a game. ([Source](https://www.coolcatsnft.com/))](/docs/images/encyclopedia/coolcats.png)
+![Cool Cats is a popular 10,000 supply PFP project with an avid fanbase, live events, and even a game. ([Source](https://www.coolcatsnft.com/))](../../images/encyclopedia/coolcats.png)
 *Cool Cats is a popular 10,000 supply PFP project with an avid fanbase, live events, and even a game. ([Source](https://www.coolcatsnft.com/))*
 
 ## Memes
 Internet culture has a rich history of meme generation and propagation, but it hasn’t been easy for the creator or spreaders of a meme to materially benefit from a meme’s success. Memes are often shared unattributed and right-clicked-saved, but with the advent of NFTs, memes can finally be owned, tracked, collected, bought, and sold in a verifiable way. In 2021, there were numerous examples of early-internet memes being minted as NFTs by their creators and then being sold for high dollar amounts at auction for profit or charity.
 
-![The owner and photographer of the Doge meme auctioned off 1/1 NFTs for charity in 2021. ([Source](https://very.auction/))](/docs/images/encyclopedia/memes.png)
+![The owner and photographer of the Doge meme auctioned off 1/1 NFTs for charity in 2021. ([Source](https://very.auction/))](../../images/encyclopedia/memes.png)
 *The owner and photographer of the Doge meme auctioned off 1/1 NFTs for charity in 2021. ([Source](https://very.auction/))*
 
 ## Writing
@@ -45,7 +45,7 @@ While many people think of visual media when they think of NFTs, there are plent
 - [$NOVEL crowdfund](https://emily.mirror.xyz/0AFENlMKv9amUC1OJIZY26udpISw_raXkoEcvelPvzg)
 - [theVERSEverse](https://theverseverse.com/)
 
-![Web3 writer Chase Chapman uses Mirror to publish her work. Readers can collect some of her posts as NFTs and support her work. ([Source](https://chase.mirror.xyz/PjnfkklAMUcEIBQuZ-An5xlBheQchsLwkRx6GHPfGzw?wnft=true))](/docs/images/encyclopedia/writing.png)
+![Web3 writer Chase Chapman uses Mirror to publish her work. Readers can collect some of her posts as NFTs and support her work. ([Source](https://chase.mirror.xyz/PjnfkklAMUcEIBQuZ-An5xlBheQchsLwkRx6GHPfGzw?wnft=true))](../../images/encyclopedia/writing.png)
 *Web3 writer Chase Chapman uses Mirror to publish her work. Readers can collect some of her posts as NFTs and support her work. ([Source](https://chase.mirror.xyz/PjnfkklAMUcEIBQuZ-An5xlBheQchsLwkRx6GHPfGzw?wnft=true))*
 
 ## Social Media
@@ -55,7 +55,7 @@ On a fundamental level, an NFT is simply a unique and verifiable representation 
 - [Lens](https://lens.xyz)
 - [Interface](https://www.interface.social/)
 
-![Lens Protocol is an emerging social ecosystem based on decentralized on-chain data. ([Source](https://lens.xyz))](/docs/images/encyclopedia/lens.png)
+![Lens Protocol is an emerging social ecosystem based on decentralized on-chain data. ([Source](https://lens.xyz))](../../images/encyclopedia/lens.png)
 *Lens Protocol is an emerging social ecosystem based on decentralized on-chain data. ([Source](https://lens.xyz))*
 
 ## Domains
@@ -73,13 +73,13 @@ Perhaps one of the most promising and practical applications for NFTs is in the 
 - [Gatekeeper](https://gatekeep.it/)
 - [Unlock Protocol](https://unlock-protocol.com/)
 
-![An example of ticketing an event using Unlock Protocol. ([Source](https://unlock-protocol.com/blog/ethcc5-2022-ticketing))](/docs/images/encyclopedia/unlock.png)
+![An example of ticketing an event using Unlock Protocol. ([Source](https://unlock-protocol.com/blog/ethcc5-2022-ticketing))](../../images/encyclopedia/unlock.png)
 *An example of ticketing an event using Unlock Protocol. ([Source](https://unlock-protocol.com/blog/ethcc5-2022-ticketing))*
 
 ## Memberships
 An NFT can also be used to represent membership in a group, club, or entity. While NFTs are permanent digital objects, their utility or benefits do not have to last permanently. An expiration date or criteria could be hardcoded into the smart contract that governs the NFT. 
 
-![Poolsuite is a luxury lifestyle brand that utilizes NFTs to grant access to its events, products, and perks. ([Source](https://members.poolsuite.net/))](/docs/images/encyclopedia/membership.png)
+![Poolsuite is a luxury lifestyle brand that utilizes NFTs to grant access to its events, products, and perks. ([Source](https://members.poolsuite.net/))](../../images/encyclopedia/membership.png)
 *Poolsuite is a luxury lifestyle brand that utilizes NFTs to grant access to its events, products, and perks. ([Source](https://members.poolsuite.net/))*
 
 ## Gaming
@@ -88,13 +88,13 @@ Perhaps one of the most promising and multi-faceted use cases for non-fungible t
 - [Dark Forest](https://zkga.me/)
 - [Parallel](https://parallel.life/)
 
-![A blockchain-based game called Dark Forest utilizes NFTs in a variety of ways such as in-game items and prizes. ([Source](https://gitcoin.co/grants/2323/dark-forest))](/docs/images/encyclopedia/gaming.png)
+![A blockchain-based game called Dark Forest utilizes NFTs in a variety of ways such as in-game items and prizes. ([Source](https://gitcoin.co/grants/2323/dark-forest))](../../images/encyclopedia/gaming.png)
 *A blockchain-based game called Dark Forest utilizes NFTs in a variety of ways such as in-game items and prizes. ([Source](https://gitcoin.co/grants/2323/dark-forest))*
 
 ## Financial Assets
 In the world of decentralized finance, NFTs can be used to represent many different financial assets like a person’s stake in a fund or asset, their liquidity position on an exchange like Uniswap, or even things like loans. 
 
-![Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.](/docs/images/encyclopedia/financial.png)
+![Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.](../../images/encyclopedia/financial.png)
 *Examples of Uniswap’s NFTs that represent Liquidity Positions on their decentralized exchange.*
 
 [Continue to **Components** section](/encyclopedia/part-1/components)
