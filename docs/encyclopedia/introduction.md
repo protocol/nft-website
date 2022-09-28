@@ -1,6 +1,6 @@
 # Introduction
 
-![Encyclopedia of NFTs Feature Graphic](../../images/encyclopedia/main-graphic-nftschool.png)
+![Encyclopedia of NFTs Feature Graphic](../images/encyclopedia/main-graphic-nftschool.png)
 
 Ever since Non-Fungible Tokens (NFTs) entered onto the cultural scene back in March of 2021, they have been plagued by confusion and misunderstanding. Particular types of NFTs—such as the well-known (and well-critiqued) Bored Ape Yacht Club—led many people to develop a narrow and distorted view of what is actually a very broad and interesting piece of technology. 
 
