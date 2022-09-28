@@ -18,7 +18,7 @@ While the purest definition of an NFT implies complete uniqueness of each item, 
 
   When you use an ERC-1155 contract on the other hand, you are able to create semi-fungible quantities of each object or work of art. In the example of “Artwork B”, the ERC-1155 version would not have distinct identifiers or numbers for each piece within the edition. There would simply be 10 editions of “Artwork B”, but there would be no specific “Number 5” or “Number 3”. All of the items within the edition would be identical and interchangeable for any of the other items within that edition. This method would be comparable to a photographer or screen printer creating a limited run of 10 signed prints in the physical world, but each print would not be numbered.
 
-  ![Editions and Standards](/docs/images/encyclopedia/Token-Standard-nftschool.png)
+  ![Editions and Standards](../../images/encyclopedia/Token-Standard-nftschool.png)
 
 - **Open-edition** - An open-edition is a multi-edition where someone creates an uncapped supply of a particular object or work of art. The number of editions created will match the number of editions sold. Often times, an artist will choose to create an edition that remains open until a fixed point in time or until a certain criteria has been met. A basic example of this would be a work of art being sold as an open edition for 48 hours. Within this set time frame, there is no limit on the number of editions that can be sold.
 
@@ -32,7 +32,7 @@ While the purest definition of an NFT implies complete uniqueness of each item, 
 
   - **Properties/Traits** - While not necessary or present in all projects, many NFTs have metadata that define properties or traits within a collection. For instance, the CryptoPunks collection has dozens of traits and combinations that help make each CryptoPunk different: alien, beanie, red mohawk, nerd glasses, etc. Traits can come in many different forms, but the important thing to remember is how they can impact the perception of rarity, quantity, and supply. The CryptoPunks collection is 10,000 different pixelated punks (no two are identical), but the total supply of alien punks is limited to just 9.
 
-  ![An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))](/docs/images/encyclopedia/collection.png)
+  ![An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))](../../images/encyclopedia/collection.png)
   *An example of what a collection page looks like on the NFT marketplace OpenSea. ([Source](https://opensea.io/collection/fidenza-by-tyler-hobbs))*
 
 ## Data Storage Types
@@ -42,7 +42,7 @@ When it comes to storing the media associated with an NFT, there are a lot of op
 
 - **Off-chain** - An “off-chain” NFT refers to an NFT which has a significant amount of its data stored outside of the blockchain itself. In many cases, an NFT might have a minimal amount of metadata stored on-chain that then links back to the rest of the data which is stored “off-chain” in a more flexible or cost efficient location such as IPFS or Filecoin.
 
-  ![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.](/docs/images/encyclopedia/nftstorage.png)
+  ![[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.](../../images/encyclopedia/nftstorage.png)
   *[NFT.Storage](http://NFT.Storage) offers free decentralized storage for NFTs via IPFS and Filecoin.*
 
 ## Change/State Types
@@ -56,7 +56,7 @@ The vast majority of NFTs and traditional media in the world are relatively fixe
 
 - **Mutable** - A mutable NFT is one in which the media or functionality is intended to change over time.
 
-  ![The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))](/docs/images/encyclopedia/mutant.png)
+  ![The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))](../../images/encyclopedia/mutant.png)
   *The project “Mutant Garden Seeders” by artist [Harm van den Dorpel](https://harm.work/) features generative works of art that mutate over time based on a mutation frequency trait. ([Source](https://seeder.mutant.garden/about))*
 
 ## Representation Types
@@ -70,7 +70,7 @@ An NFT might just seem like a digital record or item, but it could also represen
 
 - **Unbacked** - An “unbacked” NFT is any NFT that has no underlying asset.
 
-  ![In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))](/docs/images/encyclopedia/backed.png)
+  ![In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))](../../images/encyclopedia/backed.png)
   *In 2022, a beverage company called Taika collaborated with Friends With Benefits DAO to create a unique Yerba Mate. The drinks were initially sold via NFT passes that could be redeemed for the drinks. Once the NFT was redeemed, the visual and metadata would update to indicate it had been used. ([Source](https://mate.taika.co/))*
 
 ## Method of Creation Types
@@ -80,7 +80,7 @@ In general, there are two broad categories of NFTs when it comes to how the medi
 
 - **Non-generative** - A non-generative NFT is one that was made entirely “by hand”, and did not rely upon a computer script and a library of media assets.
 
-  ![The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))](/docs/images/encyclopedia/bueno.png)
+  ![The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))](../../images/encyclopedia/bueno.png)
   *The no-code tool called [Bueno.art](http://Bueno.art) allows anyone to create a generative NFT project with relative ease. Data is stored securely using IPFS. ([Source](https://bueno.art))*
 
 ## Point of Minting Types
