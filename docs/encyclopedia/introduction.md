@@ -6,7 +6,7 @@ Ever since Non-Fungible Tokens (NFTs) entered onto the cultural scene back in Ma
 
 The uses cases and methods of implementing NFTs are endless, but the cultural understanding is currently stuck. Furthermore, if a person is curious enough to look beyond the surface, they might be hard-pressed to navigate what’s underneath. Because of this, we have created the Encyclopedia of NFTs — it is our hope that the following resource will help interested explorers begin to grasp what NFTs as a technology actually has to offer. 
 
-The first half of this guide will explain the major pieces of jargon associated with NFTs as well as give a broad overview of the landscape and industry. After reading Part 1, you’ll have a basic understanding of the different ways you could interact with the world of NFTs. From there, the second half will help you actually begin to navigate decision making if you’re considering collecting or making NFTs yourself. This guide is not exhaustive by any means, but it should provide you with a robust foundation to build upon.
+The first half of this guide explains the jargon associated with NFTs as well as gives a broad overview of the landscape and industry. After reading Part One, you’ll have a basic understanding of the different ways you could interact with the world of NFTs. From there, Part Two will help you actually begin to navigate decision-making if you’re considering collecting or making NFTs yourself. This guide is not exhaustive by any means, but it should provide you with a robust foundation to build upon.
 
 Let’s dive right in!
 
