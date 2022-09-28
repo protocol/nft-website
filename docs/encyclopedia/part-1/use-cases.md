@@ -64,7 +64,7 @@ Domain names have been around for a long time and are a pre-web3 example of a pi
 - [ENS Domains](https://ens.domains/)
 - [Unstoppable Domains](https://unstoppabledomains.com/)
 
-![Example of ENS Domain NFTs.](/docs/images/encyclopedia/domains.png)
+![Example of ENS Domain NFTs.](../../images/encyclopedia/domains.png)
 *Example of ENS Domain NFTs.*
 
 ## Events
