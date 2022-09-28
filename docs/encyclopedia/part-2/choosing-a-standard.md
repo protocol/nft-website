@@ -8,10 +8,10 @@
 
 Let’s say you are a fine artist who wants to release editions of your work. You could use either token standard, but the ERC-1155 standard is much more suitable to a collection of items that have quantities, both for efficiency and display reasons. An exception to this would be if you really want each NFT to have a unique edition number.
 
-![An example of a multi-edition NFT that utilizes the ERC-721 standard. In cases like this, each NFT has a unique number and is separated from one another. One downside to this is that it can be difficult to navigate or sort through when you own a lot of the same edition.](/docs/images/encyclopedia/editions721.png)
+![An example of a multi-edition NFT that utilizes the ERC-721 standard. In cases like this, each NFT has a unique number and is separated from one another. One downside to this is that it can be difficult to navigate or sort through when you own a lot of the same edition.](../../images/encyclopedia/editions721.png)
 *An example of a multi-edition NFT that utilizes the ERC-721 standard. In cases like this, each NFT has a unique number and is separated from one another. One downside to this is that it can be difficult to navigate or sort through when you own a lot of the same edition.*
 
-![An example of a multi-edition NFT that utilizes the ERC-1155 standard. In cases like this, each NFT is stackable and has a quantity listed in the top left instead of individual unique numbers. There are 30 NFTs in the screenshot above, but because they use the ERC-1155 standard they are both stackable and more efficient to use.](/docs/images/encyclopedia/editions1155.png)
+![An example of a multi-edition NFT that utilizes the ERC-1155 standard. In cases like this, each NFT is stackable and has a quantity listed in the top left instead of individual unique numbers. There are 30 NFTs in the screenshot above, but because they use the ERC-1155 standard they are both stackable and more efficient to use.](../../images/encyclopedia/editions1155.png)
 *An example of a multi-edition NFT that utilizes the ERC-1155 standard. In cases like this, each NFT is stackable and has a quantity listed in the top left instead of individual unique numbers. There are 30 NFTs in the screenshot above, but because they use the ERC-1155 standard they are both stackable and more efficient to use.*
 
 ## Compatibility
