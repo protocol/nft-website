@@ -79,6 +79,20 @@ module.exports = {
             ]
           },
           {
+            title: 'Encyclopedia',
+            collapsable: false,
+            children: [
+              '/encyclopedia/introduction',
+              '/encyclopedia/part-1/standards',
+              '/encyclopedia/part-1/types',
+              '/encyclopedia/part-1/use-cases',
+              '/encyclopedia/part-1/components',
+              '/encyclopedia/part-2/choosing-a-standard',
+              '/encyclopedia/part-2/choosing-types',
+              '/encyclopedia/part-2/configuring-components',
+            ]
+          },
+          {
             title: 'Tutorials',
             collapsable: false,
             children: [
