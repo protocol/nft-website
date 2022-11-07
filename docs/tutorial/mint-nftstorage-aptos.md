@@ -63,6 +63,16 @@ Then, create a `tsconfig.json` to define the TypeScript compiler options:
   --module commonjs --allowJs true --noImplicitAny true
 ```
 
+Add this following clause to the `package.json` file under "scripts" to easily run the app:
+
+```json
+{
+  "scripts": {
+    "start": "ts-node src/first_nft.ts"
+  }
+}
+```
+
 Next, create a `.env` file with the following variables:
 
 ```yaml
@@ -86,7 +96,7 @@ Then, create a new directory named `metadata` and add the following files to the
 }
 ```
 
-`blazeddragon.json` will contain some arbitrary metadata about the NFT we Alice is minting. It can look like this:
+`blazeddragon.json` will contain some arbitrary metadata about the NFT Alice is minting. It can look like this:
 
 ```json
 {
@@ -97,9 +107,9 @@ Then, create a new directory named `metadata` and add the following files to the
 }
 ```
 
-`blazeddragon.jpg` is of course an image/artwork representing the NFT.
+`blazeddragon.jpg` is an image/artwork representing the NFT of your choosing.
 
-Then, start another TypeScript module named `upload.ts` in the root directory with the following code:
+Then, start another TypeScript module named `upload.ts` in the root directory. This module takes care of uploading metadata and image to NFT.Storage via its Javascript client.
 
 ```typescript
 import { NFTStorage }  from "nft.storage"
@@ -123,19 +133,18 @@ async function upload(directoryPath: string) {
 export default upload
 ```
 
-
-Now, start another file named `first_nft.ts` in the root directory with the following code:
+Now, start another file named `first_nft.ts` in the root directory, which is the main application for creating/minting an NFT. Follow the comments for the instruction.
 
 ```typescript
 import dotenv from "dotenv"
 dotenv.config()
 
 import upload from "upload"
-import { 
-  AptosClient, AptosAccount, FaucetClient, TokenClient, CoinClient } from "aptos"
-
+import { AptosClient, AptosAccount, FaucetClient, TokenClient, CoinClient } from "aptos"
 
 (async () => {
+
+  // Create some client objects.
   const client = new AptosClient(NODE_URL)
   const faucetClient = new FaucetClient(NODE_URL, FAUCET_URL)
 
@@ -143,14 +152,15 @@ import {
 
   const coinClient = new CoinClient(client)
 
-  // Create accounts.
+  // Create Alice's and Bob's accounts.
   const alice = new AptosAccount()
   const bob = new AptosAccount()
 
-  // Fund accounts with Aptos coins
+  // Fund accounts with Aptos coins.
   await faucetClient.fundAccount(alice.address(), 20_000)
   await faucetClient.fundAccount(bob.address(), 20_000)
 
+  // Define metadata for the NFT.
   const collectionName = "Alice's Collection"
   const tokenName = "Magic Mushroom"
   const tokenPropertyVersion = 0
@@ -166,12 +176,12 @@ import {
 
   let cid = ""
   try {
-    cid = await upload("/path/to/metadata/")
+    cid = await upload("./metadata/")
   } catch (err) {
     throw err
   }
 
-  // Create the collection for Alice.
+  // Create Alice's collection. An NFT needs to live inside a collection.
   const txnHash1 = await tokenClient.createCollection(
     alice,
     collectionName,
@@ -179,9 +189,10 @@ import {
     `ipfs://${cid}/collection.json`,
   )
 
+  // Wait for the transaction to complete.
   await client.waitForTransaction(txnHash1, { checkSuccess: true })
 
-  // Create a token in Alice's collection. The supply is 1 (distinct) for an NFT.
+  // Create an NFT in Alice's collection. The supply is always 1 (distinct) for NFTs.
   const txnHash2 = await tokenClient.createToken(
     alice,
     collectionName,
@@ -191,20 +202,23 @@ import {
     `ipfs://${cid}/blazedragon.jpg`,
   )
 
+  // Wait for the transaction to complete.
   await client.waitForTransaction(txnHash2, { checkSuccess: true })
 
+  // Retrieve the collection data and print it out.
   const collectionData = await tokenClient.getCollectionData(alice.address(), collectionName)
   console.log(`Alice's collection: ${JSON.stringify(collectionData, null, 4)}`)
 
+  // Get Alice's NFT balance and print it out, which should be 1.
   const aliceBalance1 = await tokenClient.getToken(
     alice.address(),
     collectionName,
     tokenName,
     ${tokenPropertyVersion},
   )
-
   console.log(`Alice's token balance: ${aliceBalance1["amount"]}`)
 
+  // Alice offers the NFT to Bob.
   const txnHash3 = await tokenClient.offerToken(
     alice,
     bob.address(),
@@ -214,9 +228,10 @@ import {
     1,
     tokenPropertyVersion,
   )
-
+  // Wait for the transaction to complete.
   await client.waitForTransaction(txnHash3, { checkSuccess: true })
 
+  // Bob claims the NFT.
   const txnHash4 = await tokenClient.claimToken(
     bob,
     alice.address(),
@@ -225,34 +240,25 @@ import {
     tokenName,
     tokenPropertyVersion,
   )
-
+  // Wait for the transaction to complete.
   await client.waitForTransaction(txnHash4, { checkSuccess: true })
 
+  // Get Alice's balance, which should now be 0.
   const aliceBalance2 = await tokenClient.getToken(
     alice.address(),
     collectionName,
     tokenName,
     `${tokenPropertyVersion}`,
   )
+  console.log(`Alice's final token balance: ${aliceBalance2["amount"]}`)
 
+  // Get Bob's balance, which should now be 1.
   const bobBalance2 = await tokenClient.getTokenForAccount(bob.address(), tokenId)
-
-  
+  console.log(`Bob's final token balance: ${bobBalance2["amount"]}`)
 })
-
-
-
 
 ```
 
-
-
-
-
-
-
-
-
-
+Run the app with `npm run start` to create Alice's first NFT and transfer it to Bob!
 
 <ContentStatus />
