@@ -6,7 +6,7 @@
   "license": "MIT",
   "devDependencies": {
     "@centerforopenscience/markdown-it-video": "^1.0.0",
-    "@vuepress/plugin-active-header-links": "^1.8.2",
+    "@vuepress/plugin-active-header-links": "^1.9.8",
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@vuepress/plugin-html-redirect": "^0.1.4",
     "@vuepress/plugin-last-updated": "^1.8.2",
