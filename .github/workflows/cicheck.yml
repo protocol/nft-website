@@ -19,6 +19,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
       # Runs a set of commands using the runners shell
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
         run: |
           sudo apt-get update -y
