@@ -204,6 +204,15 @@ module.exports = {
       }
     ],
     [
+      '@vuepress/last-updated',
+      // workaround for https://github.com/ekoeryanto/vuepress-plugin-sitemap/issues/16      
+      {
+        transformer: (timestamp) => {
+          return new Date(timestamp).toUTCString()
+        }
+      }
+    ],
+    [
       'vuepress-plugin-sitemap',
       {
         hostname: DEPLOY_DOMAIN,
