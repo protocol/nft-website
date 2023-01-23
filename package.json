@@ -59,7 +59,10 @@
     "start": "npm run docs:dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:styles": "stylus-supremacy format ./docs/.vuepress/**/*.styl --replace",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:dev": "NODE_OPTIONS=--openssl-legacy-provider vuepress dev docs",
+    "docs:build": "NODE_OPTIONS=--openssl-legacy-provider vuepress build docs"
+  },
+  "dependencies": {
+    "vuepress-plugin-plausible": "^0.0.4"
   }
 }

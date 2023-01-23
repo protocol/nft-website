@@ -24,8 +24,8 @@ module.exports = {
       md.use(require('markdown-it-video'))
       md.use(require('markdown-it-footnote'))
       md.use(require('markdown-it-task-lists'))
-      md.use(require('markdown-it-deflist')),
-      md.use(require('markdown-it-imsize')),
+      md.use(require('markdown-it-deflist'))
+      md.use(require('markdown-it-imsize'))
       md.use(require('markdown-it-image-lazy-loading'))
     }
   },
@@ -117,13 +117,13 @@ module.exports = {
           {
             title: 'Reference',
             collapsable: false,
-            children: 
-            [
-              '/reference/metadata-schemas',
-              '/reference/nft-marketplaces',
-              '/reference/recommended-tools',
-              '/reference/featured-sites'
-            ]
+            children:
+              [
+                '/reference/metadata-schemas',
+                '/reference/nft-marketplaces',
+                '/reference/recommended-tools',
+                '/reference/featured-sites'
+              ]
           },
           {
             title: 'Contribute',
@@ -146,6 +146,12 @@ module.exports = {
       domain: DEPLOY_DOMAIN,
       key: COUNTLY_KEY
     }],
+    [
+      'plausible', {
+        domain: 'nftschool.dev',
+        outboundLinkTracking: true
+      }
+    ],
     [
       'vuepress-plugin-clean-urls',
       {
@@ -195,6 +201,15 @@ module.exports = {
         // add <link rel="canonical" header (https://tools.ietf.org/html/rfc6596)
         // to deduplicate SEO across all copies loaded from various public gateways
         baseURL: DEPLOY_DOMAIN
+      }
+    ],
+    [
+      '@vuepress/last-updated',
+      // workaround for https://github.com/ekoeryanto/vuepress-plugin-sitemap/issues/16      
+      {
+        transformer: (timestamp) => {
+          return new Date(timestamp).toUTCString()
+        }
       }
     ],
     [
