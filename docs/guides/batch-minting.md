@@ -14,7 +14,7 @@ See also: [Lazy minting](../tutorial/lazy-minting.md)
 
 Quite often,  NFT projects consist of hundreds if not thousands of files and metadata starting their lives out on a computer file system, waiting nervously to be part of a mint.
 
-There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](../tutorial/lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, and etc.
+There are cases in which it is desirable to mint many NFTs all at once instead of doing each of them in a [just-in-time](../tutorial/lazy-minting.md) fashion. Large single drops are often for more than just art, including scenarios like large PFP (profile picture) drops, event tickets, game packs, etc.
 
 Some challenges that lie in minting a bulk of NFTs include high gas fees on the Ethereum network, synchronizing between mint and upload failures and recovering from them, and performance of uploading files to NFT.storage, etc.
 
@@ -127,7 +127,7 @@ Unlike ERC-721, whose [`balanceOf(address account)`](https://docs.openzeppelin.c
 
 ### Batch operators
 
-The ERC-1155 standard provides two methods,`balanceOfBatch` and `safeBatchTransferFrom` that mae querying multiple balances and transferring multiple tokens simpler and less gas-intensive. Especially the standard provided the function _mintBatch which allows batch minting of several token ids of any amount. For example, to batch-mint 100 NFTs, you would call it with an array of ids and amounts:
+The ERC-1155 standard provides two methods,`balanceOfBatch` and `safeBatchTransferFrom` that make querying multiple balances and transferring multiple tokens simpler and less gas-intensive. Especially the standard provided the function _mintBatch which allows batch minting of several token ids of any amount. For example, to batch-mint 100 NFTs, you would call it with an array of ids and amounts:
 
 ```solidity
 
@@ -211,7 +211,7 @@ contract GameItem is ERC721URIStorage {
   // Declare the feed contract.
   EACAggregatorProxy public gasfeed;
 
-  // Pass the EACAggregatorProxy contract address to the contructor
+  // Pass the EACAggregatorProxy contract address to the constructor
   // in order to initialize the gasfeed contract.
   constructor(address feed) ERC721("GameItem", "ITM") {
     gasfeed = address
