@@ -20,7 +20,7 @@ While the purest definition of an NFT implies complete uniqueness of each item, 
 
   ![Editions and Standards](../../images/encyclopedia/Token-Standard-nftschool.png)
 
-- **Open-edition** - An open-edition is a multi-edition where someone creates an uncapped supply of a particular object or work of art. The number of editions created will match the number of editions sold. Often times, an artist will choose to create an edition that remains open until a fixed point in time or until a certain criteria has been met. A basic example of this would be a work of art being sold as an open edition for 48 hours. Within this set time frame, there is no limit on the number of editions that can be sold.
+- **Open-edition** - An open-edition is a multi-edition where someone creates an uncapped supply of a particular object or work of art. The number of editions created will match the number of editions sold. Oftentimes, an artist will choose to create an edition that remains open until a fixed point in time or until a certain criteria has been met. A basic example of this would be a work of art being sold as an open edition for 48 hours. Within this set time frame, there is no limit on the number of editions that can be sold.
 
 - **Limited-edition** - A limited-edition is the more traditional form of an edition. This type would be comparable to our earlier example of a photographer or screen printer creating a limited run of 10 signed and numbered prints in the physical world. The limit creates scarcity which can have an impact on market dynamics such as pricing and demand.
 
