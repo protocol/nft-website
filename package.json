@@ -20,7 +20,7 @@
     "markdown-it-video": "^0.6.3",
     "prettier": "^2.3.2",
     "stylus-supremacy": "^2.15.0",
-    "vuepress": "^1.8.2",
+    "vuepress": "^1.9.9",
     "vuepress-plugin-canonical": "^1.0.0",
     "vuepress-plugin-chunkload-redirect": "^1.0.3",
     "vuepress-plugin-clean-urls": "^1.1.2",
