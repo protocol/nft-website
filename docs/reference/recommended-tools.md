@@ -39,6 +39,8 @@ Tooling for running local Ethereum nodes for testing and development purposes.
 
 Tooling for communicating with Ethereum via APIs.
 
+* [Alchemy SDK](https://github.com/alchemyplatform/alchemy-sdk-js))
+* [Alchemy NFT APIs](https://docs.alchemy.com/reference/nft-api-quickstart) 
 * [Alchemy Web3.js](https://github.com/alchemyplatform/alchemy-web3)
 * [`ethjs`](https://github.com/ethjs/ethjs)
 * [Ethers Project](https://github.com/ethers-io/ethers.js/)
@@ -47,3 +49,10 @@ Tooling for communicating with Ethereum via APIs.
 * [Rust `Web3`](https://github.com/tomusdrw/rust-web3)
 * [Web3.js](https://github.com/ChainSafe/web3.js)
 * [Web3.py](https://github.com/ethereum/web3.py)
+
+## Testnet Faucets
+
+Testnets are an important step in developing applications on any blockchain networks. You need testnet tokens to deploy on testnets.
+
+* [Goerli Faucet for Ethereum (free)](https://goerlifaucet.com/)
+* [Mumbai Faucet for Polygon (free)](https://mumbaifaucet.com/)
