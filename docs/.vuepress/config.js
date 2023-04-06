@@ -100,6 +100,7 @@ module.exports = {
               '/tutorial/minting-service',
               '/tutorial/lazy-minting',
               '/tutorial/mint-nftstorage-polygon',
+              '/tutorial/mint-nftstorage-aptos',
               '/tutorial/gallery-app',
               '/tutorial/using-nfts-in-games',
               '/tutorial/flow-nft-marketplace',
