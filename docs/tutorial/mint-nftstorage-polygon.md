@@ -112,6 +112,8 @@ NFT_STORAGE_API_KEY="Your api key"
 
 Replace the placeholders with the API key you created during preparation and your Polygon wallet private key.
 
+> Note: using public endpoints like the one above often run into rate–limiting constraints. For any production-level development, it's common practice to use a RPC endpoint through a free blockchain provider like [Alchemy](https://docs.alchemy.com/docs/how-to-add-alchemy-rpc-endpoint-for-local-development/).
+
 To keep our project organized, we'll create three new folders:
 
 1. `contracts`, for the Polygon contracts written in Solidity.
@@ -239,9 +241,15 @@ Finally, we have our method `mintNFT` that allows us to actually mint the NFT. T
 
 Inside the method, we increment the counter to receive a new unique identifier for our NFT. Then we call the methods provided by the base contract from OpenZeppelin to mint the NFT to the recipient with the newly created identifier and set the URI of the metadata. The method returns the unique identifier after execution.
 
+#### Deploy the smart contract to the Mumbai testnet
+
+Not only does it cost money (e.g., gas fees) to deploy a smart contract on Polygon, but also, the contract is immutable once deployed. Therefore, it's best to first deploy your smart contract to Mumbai, which is Polygon's testnet. You can deploy to Mumbai through a blockchain provider like [Alchemy](https://docs.alchemy.com/reference/polygon-api-quickstart) or [Quicknode](https://quicknode.com). 
+
+In order to deploy on Mumbai, you'll need Mumbai test tokens. You can get these from free faucets like the [Mumbai Faucet](https://mumbaifaucet.com). 
+
 #### Deploy the smart contract to Polygon
 
-Now, it's time to deploy our smart contract to Polygon. Create a new file called `deploy-contract.mjs` within the `scripts` directory. Copy the contents of the listing below into that file and save it.
+Once you've tested your contract in the Mumbai testnet, it's time to deploy our smart contract to Polygon. Create a new file called `deploy-contract.mjs` within the `scripts` directory. Copy the contents of the listing below into that file and save it.
 
 ```js
 async function deployContract() {
