@@ -183,7 +183,7 @@ For this guide, we'll just look at the heart of the minting process. First, we g
 
 #### Uploading to IPFS with nft.storage
 
-Getting our data into IPFS is simple, thanks to the nft.storage [client library][nft-storage-js-client]. All we need to do is create a new client and call the [`store` method](https://ipfs-shipyard.github.io/nft.storage/client/classes/lib.nftstorage.html#store):
+Getting our data into IPFS is simple, thanks to the nft.storage [client library][nft-storage-js-client]. All we need to do is create a new client and call the [`store` method](https://nftstorage.github.io/nft.storage/client/classes/NFTStorage.html#store):
 
 ```javascript
   const client = new NFTStorage({ token: NFT_STORAGE_KEY });
@@ -238,7 +238,7 @@ You can view an NFT after it's been minted by switching to the "NFT Viewer" tab 
 
 That was quite a lot to cover! We've seen how to add assets to IPFS and create NFT metadata, and how to link our metadata to a new NFT on Ethereum.
 
-So far, we've been playing in a local development "sandbox," so our NFTs are pretty ephemeral. As a next step, try deploying the contract to a testnet, and update the front end to connect to it! The [`scaffold-eth` deploy docs](https://github.com/austintgriffith/scaffold-eth#-deploy) can get you started. The Ethereum docs have a page about the different [networks](https://ethereum.org/en/developers/docs/networks/) that can help you choose the right testnet, and you can get some test ETH to play with from one of the public [testnet faucets](https://ethereum.org/en/developers/docs/networks/#testnet-faucets). Have fun!
+So far, we've been playing in a local development "sandbox," so our NFTs are pretty ephemeral. As a next step, try deploying the contract to a testnet, and update the front end to connect to it! The [`scaffold-eth` deploy docs](https://docs.scaffoldeth.io/scaffold-eth/getting-started/deploying-your-contracts) can get you started. The Ethereum docs have a page about the different [networks](https://ethereum.org/en/developers/docs/networks/) that can help you choose the right testnet, and you can get some test ETH to play with from one of the public [testnet faucets](https://ethereum.org/en/developers/docs/networks/#testnet-faucets). Have fun!
 
 
 [nft-school-examples-repo]: https://github.com/ipfs-shipyard/nft-school-examples
