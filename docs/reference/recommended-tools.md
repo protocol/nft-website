@@ -12,7 +12,7 @@ Below, you'll find a variety of tools intended to make NFT development quicker a
 
 In-browser tools for experimenting with or developing Ethereum smart contracts.
 
-* [EthFiddle](https://ethfiddle.com/)
+* [Coddy Solidity Playground](https://coddy.tech/playground/solidity)
 * [Remix IDE](https://remix-project.org/)
 
 ## Ethereum development frameworks
